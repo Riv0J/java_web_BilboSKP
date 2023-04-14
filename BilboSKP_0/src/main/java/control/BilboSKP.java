@@ -27,10 +27,10 @@ public class BilboSKP extends DBC {
 	}
 
 	// conectarse a la BD y obtener todas las salas online
-	public static Vector<Sala> getSalasOnline() throws Throwable {
+	public static Vector<SalaOnline> getSalasOnline() throws Throwable {
 		try {
 			// crear el vector que vamos a devolver
-			Vector<Sala> vectorSalasOnline = new Vector<Sala>();
+			Vector<SalaOnline> vectorSalasOnline = new Vector<SalaOnline>();
 			// hacer sentencia sql select todas las salas
 			String sentenciaSQL = "select * from salaonline order by idSala;";
 			// hacer una conexion
@@ -73,22 +73,21 @@ public class BilboSKP extends DBC {
 	}
 
 	// actualizar las salas en una coleccion clave-valor en el hashmap de la clase
-	// Sala
 	public static boolean cargarSalasOnline() throws Throwable {
 		try {
 			// limpiar todas las salas cargadas anteriormente
 			SalaOnline.clearSalasCargadas();
 
 			// obtener las salas de la bd
-			Vector<Sala> vectorSalasOnline = BilboSKP.getSalasOnline();
+			Vector<SalaOnline> vectorSalasOnline = BilboSKP.getSalasOnline();
 
 			// crear un nuevo hashmap(coleccion clave-valor)
-			HashMap<String, Sala> salasPorCargar = new HashMap<String, Sala>();
+			HashMap<String, SalaOnline> salasPorCargar = new HashMap<String, SalaOnline>();
 
 			// si hay un vector de salas
 			if (vectorSalasOnline != null) {
 				// por cada sala la agregamos al hashmap
-				for (Sala sala : vectorSalasOnline) {
+				for (SalaOnline sala : vectorSalasOnline) {
 					// clave: el codigo de sala, valor: la sala
 					salasPorCargar.put(sala.getIdSala(), sala);
 				}
@@ -115,10 +114,10 @@ public class BilboSKP extends DBC {
 	}
 
 	// conectarse a la BD y obtener todas las salas fisicas
-	public static Vector<Sala> getSalasFisicas() throws Throwable {
+	public static Vector<SalaFisica> getSalasFisicas() throws Throwable {
 		try {
 			// crear el vector que vamos a devolver
-			Vector<Sala> vectorSalasFisicas = new Vector<Sala>();
+			Vector<SalaFisica> vectorSalasFisicas = new Vector<SalaFisica>();
 			// hacer sentencia sql select todas las salas
 			String sentenciaSQL = "select * from salafisica order by idSala;";
 			// hacer una conexion
@@ -163,22 +162,21 @@ public class BilboSKP extends DBC {
 	}
 
 	// actualizar las salas en una coleccion clave-valor en el hashmap de la clase
-	// Sala
 	public static boolean cargarSalasFisicas() throws Throwable {
 		try {
 			// limpiar todas las salas cargadas anteriormente
 			SalaFisica.clearSalasCargadas();
 
 			// obtener las salas de la bd
-			Vector<Sala> vectorSalasFisicas = BilboSKP.getSalasFisicas();
+			Vector<SalaFisica> vectorSalasFisicas = BilboSKP.getSalasFisicas();
 
 			// crear un nuevo hashmap(coleccion clave-valor)
-			HashMap<String, Sala> salasPorCargar = new HashMap<String, Sala>();
+			HashMap<String, SalaFisica> salasPorCargar = new HashMap<String, SalaFisica>();
 
 			// si hay un vector de salas
 			if (vectorSalasFisicas != null) {
 				// por cada sala la agregamos al hashmap
-				for (Sala sala : vectorSalasFisicas) {
+				for (SalaFisica sala : vectorSalasFisicas) {
 					// clave: el codigo de sala, valor: la sala
 					salasPorCargar.put(sala.getIdSala(), sala);
 				}
@@ -188,7 +186,7 @@ public class BilboSKP extends DBC {
 					BilboSKP.sysoError("No se encontraron salas que cargar");
 				}
 				// hacer un set a las salas cargadas
-				SalaOnline.setSalasCargadas(salasPorCargar);
+				SalaFisica.setSalasCargadas(salasPorCargar);
 				return true;
 			}
 
@@ -201,7 +199,6 @@ public class BilboSKP extends DBC {
 	}
 
 	// conectarse a la BD y obtener todos los horarios de la sala fisica que
-	// introduzcas
 	public static Vector<Horario> obtenerFechasFisica(String idSala) throws Throwable {
 		try {
 			// crear el vector que vamos a devolver
