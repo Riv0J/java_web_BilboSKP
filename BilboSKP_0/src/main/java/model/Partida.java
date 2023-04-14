@@ -3,57 +3,41 @@ package model;
 import java.util.Date;
 
 public class Partida {
-	private int idPartida, idAnfitrion, puntos, numJugadores;
-	
-
-	private String idSala, nombreGrupo,idReserva;
+	private Suscriptor anfitrion;
+	private Sala sala;
+	private int idPartida, puntaje, numJugadores;
+	private String nombreGrupo;
 	Date fechaInicio, fechaFin;
-	
-	public Partida(int idPartida, int idAnfitrion, String idReserva, int puntos, int numJugadores, String idSala,
-			String nombreGrupo, Date fechaInicio, Date fechaFin) {
-		super();
-		this.idPartida = idPartida;
-		this.idAnfitrion = idAnfitrion;
-		this.idReserva= idReserva;
-		this.puntos = puntos;
+
+	// el sistema usará este constructor para el inicio de una partida
+	public Partida(Sala sala, Suscriptor anfitrion, int numJugadores, String nombreGrupo) {
+		this.sala = sala;
+		this.anfitrion = anfitrion;
 		this.numJugadores = numJugadores;
-		this.idSala = idSala;
+		this.nombreGrupo = nombreGrupo;
+	}
+
+	// el sistema usará este constructor para cargar una partida guardada en la base
+	// de datos
+	public Partida(Sala sala, Suscriptor anfitrion, int idPartida, int puntaje, int numJugadores, String nombreGrupo,
+			Date fechaInicio, Date fechaFin) {
+		super();
+		this.sala = sala;
+		this.anfitrion = anfitrion;
+		this.idPartida = idPartida;
+		this.puntaje = puntaje;
+		this.numJugadores = numJugadores;
 		this.nombreGrupo = nombreGrupo;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 	}
 
-	
-	public int getIdPartida() {
-		return idPartida;
-	}
-
-	public void setIdPartida(int idPartida) {
-		this.idPartida = idPartida;
-	}
-
-	public int getIdAnfitrion() {
-		return idAnfitrion;
-	}
-
-	public void setIdAnfitrion(int idAnfitrion) {
-		this.idAnfitrion = idAnfitrion;
-	}
-
-	public String getIdReserva() {
-		return idReserva;
-	}
-
-	public void setIdReserva(String idReserva) {
-		this.idReserva = idReserva;
-	}
-
 	public int getPuntos() {
-		return puntos;
+		return puntaje;
 	}
 
 	public void setPuntos(int puntos) {
-		this.puntos = puntos;
+		this.puntaje = puntos;
 	}
 
 	public int getNumJugadores() {
@@ -64,12 +48,12 @@ public class Partida {
 		this.numJugadores = numJugadores;
 	}
 
-	public String getIdSala() {
-		return idSala;
+	public Sala getSala() {
+		return sala;
 	}
 
-	public void setIdSala(String idSala) {
-		this.idSala = idSala;
+	public void setSala(Sala sala) {
+		this.sala = sala;
 	}
 
 	public String getNombreGrupo() {
@@ -95,5 +79,5 @@ public class Partida {
 	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
 	}
-	
+
 }
