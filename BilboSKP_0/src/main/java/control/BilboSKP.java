@@ -455,8 +455,7 @@ public class BilboSKP extends DBC {
 				Timestamp fechaInicio = resultado.getTimestamp("fechaInicio");
 				Timestamp fechaFin = resultado.getTimestamp("fechaFin");
 
-				Partida partida = new Partida(idPartida, idAnfitrion, idReserva, puntaje, numeroJugadores, idSalaFisica,
-						nombreGrupo, fechaInicio, fechaFin);
+				Partida partida = new Partida(SalaFisica.datosSalaFisica(idSalaFisica), getDatosSuscriptor(idAnfitrion), idPartida, puntaje, numeroJugadores,nombreGrupo, fechaInicio, fechaFin);
 				vectorPartidas.add(partida);
 			}
 
