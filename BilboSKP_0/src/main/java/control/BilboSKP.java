@@ -244,8 +244,12 @@ public class BilboSKP extends DBC {
 		}
 		return null;
 	}
-
-	// TODO FALTA HACER CLASE CUPON
+	
+	public void RecibirCuponBienvenida(int idSuscriptor) {
+		String sentenciaSQL = "INSERT INTO cupon( idSuscrioptor, fechaCaducidad, estado) VALUES ('"+idSuscriptor+"'2070-12-31','ACTIVO' );";
+		
+	}
+	
 	public static Vector<Cupon> getCuponesSuscriptor(int idSuscriptor) throws Throwable {
 		Vector<Cupon> vectorCupones = new Vector<Cupon>();
 		// hacer sentencia sql select todas las salas
