@@ -383,10 +383,11 @@ public class BilboSKP extends DBC {
 		}
 	}
 	//obtener ranking dado un id sala online
-	public static Vector<Partida> obtenerRankingSalaOnline(String idSala) throws Throwable {
+	//obtener ranking dado un id sala online
+	public static Vector<PartidaOnline> obtenerRankingSalaOnline(String idSala) throws Throwable {
 		try {
 			// crear el vector que vamos a devolver
-			Vector<Partida> vectorPartidas = new Vector<Partida>();
+			Vector<PartidaOnline> vectorPartidas = new Vector<PartidaOnline>();
 			// hacer sentencia sql para crear el ranking
 			String sentenciaSQL = "SELECT * FROM `partidaonline` where idSalaOnline='" + idSala
 					+ "' order by puntaje desc limit 10;";
@@ -398,7 +399,7 @@ public class BilboSKP extends DBC {
 				// obtener los campos de cada columna para esta fila
 				int idPartida = resultado.getInt("idPartida");
 				String idSalaOnline = resultado.getString("idSalaOnline");
-				String idReserva = "0";
+				//String idReserva = "0";
 				int idAnfitrion = resultado.getInt("idAnfitrion");
 				int puntaje = resultado.getInt("puntaje");
 				int numeroJugadores = resultado.getInt("numeroJugadores");
@@ -407,8 +408,7 @@ public class BilboSKP extends DBC {
 				Timestamp fechaInicio = resultado.getTimestamp("fechaInicio");
 				Timestamp fechaFin = resultado.getTimestamp("fechaFin");
 
-				Partida partida = new Partida(idPartida, idAnfitrion, idReserva, puntaje, numeroJugadores, idSalaOnline,
-						nombreGrupo, fechaInicio, fechaFin);
+				PartidaOnline partida = new PartidaOnline(SalaOnline.getSalaPorId(idSalaOnline), getDatosSuscriptor(idAnfitrion), idPartida, puntaje, numeroJugadores, nombreGrupo, fechaInicio, fechaFin);
 				vectorPartidas.add(partida);
 			}
 
