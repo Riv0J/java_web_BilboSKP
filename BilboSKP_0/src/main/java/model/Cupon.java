@@ -5,22 +5,23 @@ import java.time.LocalDate;
 import java.time.Month;
 
 public class Cupon {
-	static String id, estado, idSuscriptor;
+	static int idCupon, idSuscriptor;
+	String estado;
 	static Date fechaCaducidad;
 
-	public Cupon(String id, String estado,  Date fechaCaducidad) {
+	public Cupon(int idCupon, String estado,  Date fechaCaducidad) {
 		super();
-		this.id = id;
+		this.idCupon = idCupon;
 		this.estado = estado;
 		this.fechaCaducidad = fechaCaducidad;
 	}
 
-	public String getId() {
-		return id;
+	public int getId() {
+		return idCupon;
 	}
 
 	public void setId(String id) {
-		this.id = id;
+		this.idCupon = idCupon;
 	}
 
 	public String getEstado() {
@@ -39,14 +40,12 @@ public class Cupon {
 		this.fechaCaducidad = fechaCaducidad;
 	}
 
-
-
-	public static String getIdJugador() {
+	public static int getIdSuscriptor() {
 		return idSuscriptor;
 	}
 
-	public static void setIdJugador(String idJugador) {
-		idSuscriptor = idJugador;
+	public static void setIdSuscriptor(int idSuscriptor) {
+		idSuscriptor = idSuscriptor;
 	}
 }
 
