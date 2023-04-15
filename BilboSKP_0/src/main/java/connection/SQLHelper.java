@@ -4,9 +4,14 @@ public class SQLHelper {
 	
     //convertir de java.util.Date a java.sql.Date
     public static java.sql.Date convertirFechaUtilASql(java.util.Date fechaUtil) {
-        long tiempoEnMilis = fechaUtil.getTime();
-        java.sql.Date fechaSql = new java.sql.Date(tiempoEnMilis);
-        return fechaSql;
+    	try {
+            long tiempoEnMilis = fechaUtil.getTime();
+            java.sql.Date fechaSql = new java.sql.Date(tiempoEnMilis);
+            return fechaSql;
+		} catch (Exception e) {
+			return null;
+		}
+
     }
     
 	// obtener la sentencia sql dados la tabla indicada y el vector de columnas y de valores
