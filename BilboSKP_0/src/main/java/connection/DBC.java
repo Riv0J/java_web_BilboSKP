@@ -93,7 +93,7 @@ public class DBC {
 			abrirFlujo();
 			// 4. se instancia el resultset con un statement, el cual necesita un string con
 			// la sentencia sql
-			rs = st.executeQuery(query);
+			rs = st.executeQuery(sentenciaSQL);
 			return rs;
 		} catch (SQLException e) {
 			System.out.println("DBC: SQL QUERY ERROR");
@@ -107,7 +107,7 @@ public class DBC {
 		int filasAfectadas = 0;
 		try {
 			abrirFlujo();
-			filasAfectadas = st.executeUpdate(sentencia);
+			filasAfectadas = st.executeUpdate(sentenciaSQL);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("DBC: SQL UPDATE ERROR");
