@@ -30,7 +30,13 @@ public class BilboSKP extends DBC {
 	public BilboSKP() throws Throwable {
 		super(DBC.DRIVER_MYSQL, dbUrl, user, pass);
 	}
-
+	
+	protected static void setEstadoRanking(boolean nuevoEstado) {
+		estadoRanking = nuevoEstado;
+	}
+	protected static boolean getEstadoRanking() {
+		return estadoRanking;
+	}
 	// conectarse a la BD y obtener todas las salas online @Rivo
 	public static Vector<SalaOnline> getSalasOnline() throws Throwable {
 		try {
@@ -279,7 +285,7 @@ public class BilboSKP extends DBC {
 	public static Suscriptor loginSuscriptor(String email, String pass) throws Throwable {
 
 		// hacer sentencia sql select todas las salas
-		String sentenciaSQL = "select * from suscriptor where email = '" + email + "' and pass='" + pass + "';";
+		String sentenciaSQL = "select * from suscriptor where email = '" + email + "' and pass='" + Security.encriptarPass(pass) + "';";
 		// hacer una conexion
 		BilboSKP conexion = new BilboSKP();
 		// se hace una consulta sql con la conexion y se guarda en el resultset
@@ -301,7 +307,7 @@ public class BilboSKP extends DBC {
 			System.out.println("Bienvenido, tu email es: " + suscriptor.getEmail());
 			return suscriptor;
 		} else {
-			System.out.println("Usuario o pass incorrecto");
+			System.out.println("USUARIO O PASS INCORRECTO EN LOGIN");
 		}
 		return null;
 	}
@@ -317,7 +323,7 @@ public class BilboSKP extends DBC {
 		 * apellidos + "', '" + fech_nac + "', '" + telefono + "');";
 		 */
 		String[] arrayColumnas = { "email", "pass", "alias", "nombre", "apellidos", "fech_nac", "telefono" };
-		Object[] arrayValores = { email, pass, alias, nombre, apellidos, fech_nac, telefono };
+		Object[] arrayValores = { email, Security.encriptarPass(pass), alias, nombre, apellidos, fech_nac, telefono };
 		String sentenciaSQL = SQLHelper.obtenerSentenciaSQLInsert("suscriptor", arrayColumnas, arrayValores);
 		System.out.println(sentenciaSQL);
 		// hacer una conexion
@@ -465,7 +471,8 @@ public class BilboSKP extends DBC {
 	// guardar una partida online en la bd @Rivo
 	public static boolean guardarPartidaOnline(PartidaOnline PO) {
 		try {
-			if (estadoRanking == false) {
+			if (getEstadoRanking() == false) {
+				System.out.println("Error guardando Partida Online. El ranking está cerrado.");
 				return false;
 			}
 			// hacer una sentencia sql
@@ -476,7 +483,12 @@ public class BilboSKP extends DBC {
 			String NG = PO.getNombreGrupo();
 			java.sql.Date fechaSQLInicio = SQLHelper.convertirFechaUtilASql(PO.getFechaInicio());
 			java.sql.Date fechaSQLFin = SQLHelper.convertirFechaUtilASql(PO.getFechaFin());
-
+			
+			if (fechaSQLFin == null || fechaSQLInicio == null) {
+				System.out.println("Error guardando Partida Online. Fechas no asignadas correctamente.");
+				return false;
+			}
+			
 			/*
 			 * String sentenciaSQL =
 			 * "INSERT INTO partidasonline (idSalaOnline, idAnfitrion, puntaje, numeroJugadores, nombreGrupo, fechaInicio, fechaFin) "
