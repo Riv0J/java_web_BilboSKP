@@ -2,15 +2,19 @@ package control;
 
 import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Vector;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 import connection.DBC;
+import connection.SQLHelper;
 import model.Cupon;
 import model.Horario;
 import model.Partida;
+import model.PartidaOnline;
 import model.Reserva;
 import model.Sala;
 import model.SalaFisica;
@@ -21,12 +25,13 @@ public class BilboSKP extends DBC {
 	private static final String dbUrl = "localhost:3306/bilboskpdb";
 	private static final String user = "bilboskp";
 	private static final String pass = "bilboskp";
+	private static boolean estadoRanking = true;
 
 	public BilboSKP() throws Throwable {
 		super(DBC.DRIVER_MYSQL, dbUrl, user, pass);
 	}
 
-	// conectarse a la BD y obtener todas las salas online
+	// conectarse a la BD y obtener todas las salas online @Rivo
 	public static Vector<SalaOnline> getSalasOnline() throws Throwable {
 		try {
 			// crear el vector que vamos a devolver
@@ -39,7 +44,7 @@ public class BilboSKP extends DBC {
 			// hacer un bucle de cada fila que tiene el resultset
 			while (resultado.next()) {
 				// obtener los campos de cada columna para esta fila
-				String idSala = resultado.getString("idSala");
+				int idSala = resultado.getInt("idSala");
 				String nombre = resultado.getString("nombre");
 				String dificultad = resultado.getString("dificultad");
 				String tematica = resultado.getString("tematica");
@@ -73,6 +78,7 @@ public class BilboSKP extends DBC {
 	}
 
 	// actualizar las salas en una coleccion clave-valor en el hashmap de la clase
+	// @Rivo
 	public static boolean cargarSalasOnline() throws Throwable {
 		try {
 			// limpiar todas las salas cargadas anteriormente
@@ -82,7 +88,7 @@ public class BilboSKP extends DBC {
 			Vector<SalaOnline> vectorSalasOnline = BilboSKP.getSalasOnline();
 
 			// crear un nuevo hashmap(coleccion clave-valor)
-			HashMap<String, SalaOnline> salasPorCargar = new HashMap<String, SalaOnline>();
+			HashMap<Integer, SalaOnline> salasPorCargar = new HashMap<Integer, SalaOnline>();
 
 			// si hay un vector de salas
 			if (vectorSalasOnline != null) {
@@ -113,7 +119,7 @@ public class BilboSKP extends DBC {
 		System.out.println("DBC_BilboSKP: " + mensaje);
 	}
 
-	// conectarse a la BD y obtener todas las salas fisicas
+	// conectarse a la BD y obtener todas las salas fisicas @Urko
 	public static Vector<SalaFisica> getSalasFisicas() throws Throwable {
 		try {
 			// crear el vector que vamos a devolver
@@ -126,7 +132,7 @@ public class BilboSKP extends DBC {
 			// hacer un bucle de cada fila que tiene el resultset
 			while (resultado.next()) {
 				// obtener los campos de cada columna para esta fila
-				String idSala = resultado.getString("idSala");
+				int idSala = resultado.getInt("idSala");
 				String nombre = resultado.getString("nombre");
 				String dificultad = resultado.getString("dificultad");
 				String tematica = resultado.getString("tematica");
@@ -162,6 +168,7 @@ public class BilboSKP extends DBC {
 	}
 
 	// actualizar las salas en una coleccion clave-valor en el hashmap de la clase
+	// @Urko
 	public static boolean cargarSalasFisicas() throws Throwable {
 		try {
 			// limpiar todas las salas cargadas anteriormente
@@ -171,7 +178,7 @@ public class BilboSKP extends DBC {
 			Vector<SalaFisica> vectorSalasFisicas = BilboSKP.getSalasFisicas();
 
 			// crear un nuevo hashmap(coleccion clave-valor)
-			HashMap<String, SalaFisica> salasPorCargar = new HashMap<String, SalaFisica>();
+			HashMap<Integer, SalaFisica> salasPorCargar = new HashMap<Integer, SalaFisica>();
 
 			// si hay un vector de salas
 			if (vectorSalasFisicas != null) {
@@ -195,10 +202,9 @@ public class BilboSKP extends DBC {
 			e.printStackTrace();
 		}
 		return false;
-
 	}
 
-	// conectarse a la BD y obtener todos los horarios de la sala fisica que
+	// conectarse a la BD y obtener todos los horarios de la sala fisica @Urko
 	public static Vector<Horario> obtenerFechasFisica(String idSala) throws Throwable {
 		try {
 			// crear el vector que vamos a devolver
@@ -241,99 +247,14 @@ public class BilboSKP extends DBC {
 		}
 		return null;
 	}
-	//CUPONES
-	//Cambiar el estado del cupon de Activo / En uso / Gastado / Caducado
-	public static Cupon CambiarEstado(Cupon cupon) throws Throwable {
-		LocalDate FechaActual =LocalDate.now();
-		LocalDate FechaCaducidad = cupon.getFechaCaducidad().toLocalDate();
-		String disponibilidad=cupon.getEstado();
-		
-		//Si un cupon tiene estado entra en en la condicion
-		if(disponibilidad!=null) {
-			if(disponibilidad.equalsIgnoreCase("ACTIVO")) {
-			
-			//Si esta activo significa que puede estar caducado
-			if(FechaActual.isBefore(FechaCaducidad)) {
-				//Si no esta caducado se cambia el estado a EN USO
-				String sentenciaSQL = "UPDATE cupon SET estado = 'En uso' WHERE idCupon = "+cupon.getId()+";";
-				BilboSKP conexion = new BilboSKP();
-				ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
-				cupon.setEstado("EN USO");
-				
-				//Si no esta caducado se cambia el estado a EN USO
-				}else if(FechaActual.isAfter(FechaCaducidad)) {
-					cupon.setEstado("CADUCADO");
-					String sentenciaSQL = "UPDATE cupon SET estado = 'Caducado' WHERE idCupon = "+cupon.getId()+";";	
-					BilboSKP conexion = new BilboSKP();
-					ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
-					return cupon;
-				}else {
-					System.out.println("Caduca hoy");
-					return cupon;
-				}
-			
-			//Si no esta caducado igual esta en uso
-			}else if(disponibilidad.equalsIgnoreCase("EN USO")){
-				cupon.setEstado("GASTADO");
-				String sentenciaSQL = "UPDATE cupon SET estado = 'Gastado' WHERE idCupon = "+cupon.getId()+";";
-				BilboSKP conexion = new BilboSKP();
-				ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
-				return cupon;
-			}else {
-				System.out.println("Esta inutilizable");
-			}
-			return cupon;
-		}else { 
-			cupon.setEstado("ACTIVO"); 
-			String sentenciaSQL = "UPDATE cupon SET estado = 'Gastado' WHERE idCupon = "+cupon.getId()+";";
-			BilboSKP conexion = new BilboSKP();
-			ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
-		}
-		return cupon;
-	}
-	
-	//Conseguir los cupones de un suscriptor por su id
-	public static Vector<Cupon> getCuponesSuscriptor(int idSuscriptor) throws Throwable {
-		Vector<Cupon> vectorCupones = new Vector<Cupon>();
-		// hacer sentencia sql select todas las salas
-		String sentenciaSQL = "select * from cupon where idSuscriptor = " + idSuscriptor + ";";
-		// hacer una conexion
-		BilboSKP conexion = new BilboSKP();
-		// se hace una consulta sql con la conexion y se guarda en el resultset
-		// resultado
-		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
-		// hacer un bucle de cada fila que tiene el resultset resultado
-		while (resultado.next()) {
-			// obtener los campos de cada columna para esta fila
-			String idCupon = resultado.getString("idCupon");
-			Date fechaCaducidad = resultado.getDate("fechaCaducidad");
-			String Estado = resultado.getString("estado");
-			System.out.println(idCupon);
-			Cupon cupon = new Cupon(idCupon, Estado , (java.sql.Date) fechaCaducidad);
-			// agregar cupon al vector
-			vectorCupones.add(cupon);
-		}
 
-		return vectorCupones;
-	}
-	
-	//Enviar cupon de bienvenida
-	public void RecibirCuponBienvenida(int idSuscriptor) throws Throwable {
-
-	    LocalDate fechaCaducidad = LocalDate.of(2070, 12, 31);
-		String sentenciaSQL = "INSERT INTO cupon( idSuscrioptor, fechaCaducidad, estado) VALUES ('"+idSuscriptor+","+fechaCaducidad+",'ACTIVO' );";
-		BilboSKP conexion = new BilboSKP();
-		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
-	}
-	
+	// obtener los datos de un suscriptor dado su id @Torni
 	public static Suscriptor getDatosSuscriptor(int idSuscriptor) throws Throwable {
-
 		// hacer sentencia sql select todas las salas
 		String sentenciaSQL = "select * from suscriptor where idSuscriptor = " + idSuscriptor + ";";
 		// hacer una conexion
 		BilboSKP conexion = new BilboSKP();
 		// se hace una consulta sql con la conexion y se guarda en el resultset
-		// resultado
 		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
 		// hacer un bucle de cada fila que tiene el resultset resultado
 		resultado.next();
@@ -354,61 +275,7 @@ public class BilboSKP extends DBC {
 		return suscriptor;
 	}
 
-	//obtener las reservas de un suscriptor de la bd
-	public static Vector<Reserva> obtenerReserva(int idSuscriptor) throws Throwable {
-		Vector<Reserva> reservas= new Vector<Reserva>();
-		String sentenciaSQL="SELECT * FROM reserva WHERE idSuscriptor="+idSuscriptor+" order by fechaHora ";
-		BilboSKP conexion = new BilboSKP();
-		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
-	
-		while(resultado.next()) {
-			 //String idSuscriptor= resultado.getString(idSuscriptor);
-			 int idReserva=resultado.getInt("idReserva");
-			 int idSalaFisica= resultado.getInt("idSalaFisica");
-			 int numJugadores= resultado.getInt("numJugadores");
-			 Date fechaHora= resultado.getDate("fechaHora");
-			 int estado= resultado.getInt("estado");
-			 
-			 Reserva reserva= new Reserva(idReserva, idSalaFisica, numJugadores, numJugadores, fechaHora,estado);
-			 reservas.add(reserva);
-		}
-		
-		if(reservas.size()>0){
-			for (int i=0;i<reservas.size(); i++) {
-				Reserva r = reservas.get(i);
-				System.out.println(r.getIdReserva());
-			}
-			return reservas;
-		}
-		else {
-			
-		}
-		return reservas;
-	}
-	//TODO hacer una nueva reserva de una sala física 
-	public void crearReserva() throws Throwable {
-		String sentenciaSQL="";
-		BilboSKP conexion = new BilboSKP();
-		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
-	}
-	
-	
-	//TODO cambiar estado reserva dado su id 
-	public int cambiarEstadoReserva() throws Throwable {
-		try {
-			String sentenciaSQL="UPDATE reserva SET estado=1 WHERE idReserva="+idReserva+";";
-			BilboSKP conexion = new BilboSKP();
-			ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
-			int filasAfectadas= conexion.SQLUpdate(sentenciaSQL);
-			
-			
-		}
-		
-		return 0;
-	}
-
-	// este metodo va a verificar si el email y contraseña son correctos, si son
-	// correctos devuelve el suscriptor.
+	// Verificar si el email y pass son correctos, devuelve el suscriptor. @Torni
 	public static Suscriptor loginSuscriptor(String email, String pass) throws Throwable {
 
 		// hacer sentencia sql select todas las salas
@@ -429,32 +296,36 @@ public class BilboSKP extends DBC {
 			Date fech_nac = resultado.getDate("fech_nac");
 			int idSuscriptor = resultado.getInt("idSuscriptor");
 
-			System.out.println("se ha devuelto al menos una linea");
-
 			Suscriptor suscriptor = new Suscriptor(idSuscriptor, telefono, email, pass, alias, nombre, apellidos,
 					imagen, activo, fech_nac);
-			System.out.println("Bienvenido, tu email es" + suscriptor.getEmail());
+			System.out.println("Bienvenido, tu email es: " + suscriptor.getEmail());
 			return suscriptor;
 		} else {
-			System.out.println("usuario o pass incorrecto");
+			System.out.println("Usuario o pass incorrecto");
 		}
 		return null;
 	}
 
-	// metodo que pide los campos de un suscriptor y crea una suscripcion
+	// metodo que pide los campos de un suscriptor y crea una suscripcion @Torni
 	public static Suscriptor crearSuscripcion(String email, String pass, int telefono, String alias, String nombre,
 			String apellidos, String fech_nac) throws Throwable {
 		// hacer sentencia sql select todas las salas
-		String sentenciaSQL = "INSERT INTO `suscriptor` (`email`, `pass`, `alias`, `nombre`, `apellidos`, `fech_nac`, `telefono`) VALUES ('"
-				+ email + "', '" + pass + "', '" + alias + "', '" + nombre + "', '" + apellidos + "', '" + fech_nac
-				+ "', '" + telefono + "');";
+		/*
+		 * String sentenciaSQL =
+		 * "INSERT INTO `suscriptor` (`email`, `pass`, `alias`, `nombre`, `apellidos`, `fech_nac`, `telefono`) VALUES ('"
+		 * + email + "', '" + pass + "', '" + alias + "', '" + nombre + "', '" +
+		 * apellidos + "', '" + fech_nac + "', '" + telefono + "');";
+		 */
+		String[] arrayColumnas = { "email", "pass", "alias", "nombre", "apellidos", "fech_nac", "telefono" };
+		Object[] arrayValores = { email, pass, alias, nombre, apellidos, fech_nac, telefono };
+		String sentenciaSQL = SQLHelper.obtenerSentenciaSQLInsert("suscriptor", arrayColumnas, arrayValores);
+		System.out.println(sentenciaSQL);
 		// hacer una conexion
 		BilboSKP conexion = new BilboSKP();
 		// se hace una consulta sql con la conexion y se guarda en el resultset
 		// resultado
 		int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
 		if (filasAfectadas == 1) {
-
 			return loginSuscriptor(email, pass);
 
 		} else {
@@ -462,9 +333,39 @@ public class BilboSKP extends DBC {
 			return null;
 		}
 	}
-	//obtener ranking dado un id sala online
-	//obtener ranking dado un id sala online
-	public static Vector<PartidaOnline> obtenerRankingSalaOnline(String idSala) throws Throwable {
+
+	// obtener las reservas de un suscriptor de la bd @Paula
+	public static Vector<Reserva> obtenerReserva(int idSuscriptor) throws Throwable {
+		Vector<Reserva> reservas = new Vector<Reserva>();
+		String sentenciaSQL = "SELECT * FROM reserva WHERE idSuscriptor=" + idSuscriptor + " order by fechaHora ";
+		BilboSKP conexion = new BilboSKP();
+		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
+
+		while (resultado.next()) {
+			// String idSuscriptor= resultado.getString(idSuscriptor);
+			String idReserva = resultado.getString("idReserva");
+			String idSalaFisica = resultado.getString("idSalaFisica");
+			int numJugadores = resultado.getInt("numJugadores");
+			Date fechaHora = resultado.getDate("fechaHora");
+
+			Reserva reserva = new Reserva(idReserva, idSalaFisica, numJugadores, numJugadores, fechaHora);
+			reservas.add(reserva);
+		}
+
+		if (reservas.size() > 0) {
+			for (int i = 0; i < reservas.size(); i++) {
+				Reserva r = reservas.get(i);
+				System.out.println(r.getIdReserva());
+			}
+			return reservas;
+		} else {
+
+		}
+		return reservas;
+	}
+
+	// obtener ranking dado un id sala online @Urko
+	public static Vector<PartidaOnline> obtenerRankingSalaOnline(int idSala) throws Throwable {
 		try {
 			// crear el vector que vamos a devolver
 			Vector<PartidaOnline> vectorPartidas = new Vector<PartidaOnline>();
@@ -478,17 +379,17 @@ public class BilboSKP extends DBC {
 			while (resultado.next()) {
 				// obtener los campos de cada columna para esta fila
 				int idPartida = resultado.getInt("idPartida");
-				String idSalaOnline = resultado.getString("idSalaOnline");
-				//String idReserva = "0";
+				int idSalaOnline = resultado.getInt("idSalaOnline");
 				int idAnfitrion = resultado.getInt("idAnfitrion");
 				int puntaje = resultado.getInt("puntaje");
 				int numeroJugadores = resultado.getInt("numeroJugadores");
-
 				String nombreGrupo = resultado.getString("nombreGrupo");
 				Timestamp fechaInicio = resultado.getTimestamp("fechaInicio");
 				Timestamp fechaFin = resultado.getTimestamp("fechaFin");
 
-				PartidaOnline partida = new PartidaOnline(SalaOnline.getSalaPorId(idSalaOnline), getDatosSuscriptor(idAnfitrion), idPartida, puntaje, numeroJugadores, nombreGrupo, fechaInicio, fechaFin);
+				PartidaOnline partida = new PartidaOnline(SalaOnline.getSalaPorId(idSalaOnline),
+						getDatosSuscriptor(idAnfitrion), idPartida, puntaje, numeroJugadores, nombreGrupo, fechaInicio,
+						fechaFin);
 				vectorPartidas.add(partida);
 			}
 
@@ -504,15 +405,15 @@ public class BilboSKP extends DBC {
 			}
 			conexion.cerrarFlujo();
 			return vectorPartidas;
-
 		} catch (Exception e) {
 			BilboSKP.sysoError("Error en obtenerRankingSalaOnline");
 			e.printStackTrace();
 		}
 		return null;
 	}
-	//obtener ranking dado un id sala fisica
-	public static Vector<Partida> obtenerRankingSalaFisica(String idSala) throws Throwable {
+
+	// obtener ranking dado un id sala fisica @Urko
+	public static Vector<Partida> obtenerRankingSalaFisica(int idSala) throws Throwable {
 		try {
 			// crear el vector que vamos a devolver
 			Vector<Partida> vectorPartidas = new Vector<Partida>();
@@ -535,7 +436,8 @@ public class BilboSKP extends DBC {
 				Timestamp fechaInicio = resultado.getTimestamp("fechaInicio");
 				Timestamp fechaFin = resultado.getTimestamp("fechaFin");
 
-				Partida partida = new Partida(SalaFisica.datosSalaFisica(idSalaFisica), getDatosSuscriptor(idAnfitrion), idPartida, puntaje, numeroJugadores,nombreGrupo, fechaInicio, fechaFin);
+				Partida partida = new Partida(SalaFisica.datosSalaFisica(idSalaFisica), getDatosSuscriptor(idAnfitrion),
+						idPartida, puntaje, numeroJugadores, nombreGrupo, fechaInicio, fechaFin);
 				vectorPartidas.add(partida);
 			}
 
@@ -546,7 +448,7 @@ public class BilboSKP extends DBC {
 					Partida pa = vectorPartidas.get(i);
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 					String fechaHoraString = sdf.format(pa.getFechaInicio());
-					System.out.println(pa.getNombreGrupo() + ", " + pa.getPuntos() + " puntos, " + fechaHoraString);
+					System.out.println(pa.getNombreGrupo() + ", " + pa.getPuntaje() + " puntos, " + fechaHoraString);
 
 				}
 			}
@@ -560,4 +462,134 @@ public class BilboSKP extends DBC {
 		return null;
 	}
 
+	// guardar una partida online en la bd @Rivo
+	public static boolean guardarPartidaOnline(PartidaOnline PO) {
+		try {
+			if (estadoRanking == false) {
+				return false;
+			}
+			// hacer una sentencia sql
+			int idSala = PO.getSala().getIdSala();
+			int idAnfitrion = PO.getAnfitrion().getIdSuscriptor();
+			int puntaje = PO.getPuntaje();
+			int numeroJugadores = PO.getNumJugadores();
+			String NG = PO.getNombreGrupo();
+			java.sql.Date fechaSQLInicio = SQLHelper.convertirFechaUtilASql(PO.getFechaInicio());
+			java.sql.Date fechaSQLFin = SQLHelper.convertirFechaUtilASql(PO.getFechaFin());
+
+			/*
+			 * String sentenciaSQL =
+			 * "INSERT INTO partidasonline (idSalaOnline, idAnfitrion, puntaje, numeroJugadores, nombreGrupo, fechaInicio, fechaFin) "
+			 * + "VALUES (" + idSala + ", " + idAnfitrion + ", " + puntaje + ", " +
+			 * numeroJugadores + ", '" + NG + "', '" + fechaSQLInicio + "', '" + fechaSQLFin
+			 * + "')";
+			 */
+
+			String[] arrayColumnas = { "idSalaOnline", "idAnfitrion", "puntaje", "numeroJugadores", "nombreGrupo",
+					"fechaInicio", "fechaFin" };
+			Object[] arrayValores = { idSala, idAnfitrion, puntaje, numeroJugadores, NG, fechaSQLInicio, fechaSQLFin };
+			String sentenciaSQL = SQLHelper.obtenerSentenciaSQLInsert("partidaonline", arrayColumnas, arrayValores);
+
+			// hacer una consulta sql con la conexion y se guarda en el resultset resultado
+			BilboSKP conexion = new BilboSKP();
+			int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
+			if (filasAfectadas == 1) {
+				return true;
+			} else {
+				System.out.println("No se pudo guardar partida online");
+				return false;
+			}
+		} catch (Throwable e) {
+			System.out.println("Error guardando Partida Online");
+			e.printStackTrace();
+			return false;
+		}
+	}
+/*
+	// CUPONES
+	// Cambiar el estado del cupon de Activo / En uso / Gastado / Caducado
+	public static Cupon CambiarEstado(Cupon cupon) throws Throwable {
+		LocalDate FechaActual = LocalDate.now();
+		LocalDate FechaCaducidad = cupon.getFechaCaducidad().toLocalDate();
+		String disponibilidad = cupon.getEstado();
+
+		// Si un cupon tiene estado entra en en la condicion
+		if (disponibilidad != null) {
+			if (disponibilidad.equalsIgnoreCase("ACTIVO")) {
+
+				// Si esta activo significa que puede estar caducado
+				if (FechaActual.isBefore(FechaCaducidad)) {
+					// Si no esta caducado se cambia el estado a EN USO
+					String sentenciaSQL = "UPDATE cupon SET estado = 'En uso' WHERE idCupon = " + cupon.getId() + ";";
+					BilboSKP conexion = new BilboSKP();
+					ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
+					cupon.setEstado("EN USO");
+
+					// Si no esta caducado se cambia el estado a EN USO
+				} else if (FechaActual.isAfter(FechaCaducidad)) {
+					cupon.setEstado("CADUCADO");
+					String sentenciaSQL = "UPDATE cupon SET estado = 'Caducado' WHERE idCupon = " + cupon.getId() + ";";
+					BilboSKP conexion = new BilboSKP();
+					ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
+					return cupon;
+				} else {
+					System.out.println("Caduca hoy");
+					return cupon;
+				}
+
+				// Si no esta caducado igual esta en uso
+			} else if (disponibilidad.equalsIgnoreCase("EN USO")) {
+				cupon.setEstado("GASTADO");
+				String sentenciaSQL = "UPDATE cupon SET estado = 'Gastado' WHERE idCupon = " + cupon.getId() + ";";
+				BilboSKP conexion = new BilboSKP();
+				ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
+				return cupon;
+			} else {
+				System.out.println("Esta inutilizable");
+			}
+			return cupon;
+		} else {
+			cupon.setEstado("ACTIVO");
+			String sentenciaSQL = "UPDATE cupon SET estado = 'Gastado' WHERE idCupon = " + cupon.getId() + ";";
+			BilboSKP conexion = new BilboSKP();
+			ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
+		}
+		return cupon;
+	}
+
+	// Conseguir los cupones de un suscriptor por su id
+	public static Vector<Cupon> getCuponesSuscriptor(int idSuscriptor) throws Throwable {
+		Vector<Cupon> vectorCupones = new Vector<Cupon>();
+		// hacer sentencia sql select todas las salas
+		String sentenciaSQL = "select * from cupon where idSuscriptor = " + idSuscriptor + ";";
+		// hacer una conexion
+		BilboSKP conexion = new BilboSKP();
+		// se hace una consulta sql con la conexion y se guarda en el resultset
+		// resultado
+		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
+		// hacer un bucle de cada fila que tiene el resultset resultado
+		while (resultado.next()) {
+			// obtener los campos de cada columna para esta fila
+			String idCupon = resultado.getString("idCupon");
+			Date fechaCaducidad = resultado.getDate("fechaCaducidad");
+			String Estado = resultado.getString("estado");
+			System.out.println(idCupon);
+			Cupon cupon = new Cupon(idCupon, Estado, (java.sql.Date) fechaCaducidad);
+			// agregar cupon al vector
+			vectorCupones.add(cupon);
+		}
+
+		return vectorCupones;
+	}
+
+	// Enviar cupon de bienvenida
+	public void RecibirCuponBienvenida(int idSuscriptor) throws Throwable {
+
+		LocalDate fechaCaducidad = LocalDate.of(2070, 12, 31);
+		String sentenciaSQL = "INSERT INTO cupon( idSuscrioptor, fechaCaducidad, estado) VALUES ('" + idSuscriptor + ","
+				+ fechaCaducidad + ",'ACTIVO' );";
+		BilboSKP conexion = new BilboSKP();
+		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
+	}
+	*/
 }
