@@ -241,9 +241,6 @@ public class BilboSKP extends DBC {
 		}
 		return null;
 	}
-
-	
-//CUPONES
 	//CUPONES
 	//Cambiar el estado del cupon de Activo / En uso / Gastado / Caducado
 	public static Cupon CambiarEstado(Cupon cupon) throws Throwable {
@@ -293,7 +290,6 @@ public class BilboSKP extends DBC {
 			ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
 		}
 		return cupon;
-
 	}
 	
 	//Conseguir los cupones de un suscriptor por su id
@@ -479,7 +475,7 @@ public class BilboSKP extends DBC {
 					Partida pa = vectorPartidas.get(i);
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 					String fechaHoraString = sdf.format(pa.getFechaInicio());
-					System.out.println(pa.getNombreGrupo() + ", " + pa.getPuntos() + " puntos, " + fechaHoraString);
+					System.out.println(pa.getNombreGrupo() + ", " + pa.getPuntaje() + " puntos, " + fechaHoraString);
 				}
 			}
 			conexion.cerrarFlujo();
