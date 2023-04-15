@@ -312,35 +312,59 @@ public class BilboSKP extends DBC {
 		return suscriptor;
 	}
 
-	// obtener las reservas de un suscriptor de la bd
+	//obtener las reservas de un suscriptor de la bd
 	public static Vector<Reserva> obtenerReserva(int idSuscriptor) throws Throwable {
-		Vector<Reserva> reservas = new Vector<Reserva>();
-		String sentenciaSQL = "SELECT * FROM reserva WHERE idSuscriptor=" + idSuscriptor + " order by fechaHora ";
+		Vector<Reserva> reservas= new Vector<Reserva>();
+		String sentenciaSQL="SELECT * FROM reserva WHERE idSuscriptor="+idSuscriptor+" order by fechaHora ";
 		BilboSKP conexion = new BilboSKP();
 		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
-
-		while (resultado.next()) {
-			// String idSuscriptor= resultado.getString(idSuscriptor);
-			String idReserva = resultado.getString("idReserva");
-			String idSalaFisica = resultado.getString("idSalaFisica");
-			int numJugadores = resultado.getInt("numJugadores");
-			Date fechaHora = resultado.getDate("fechaHora");
-
-			Reserva reserva = new Reserva(idReserva, idSalaFisica, numJugadores, numJugadores, fechaHora);
-			reservas.add(reserva);
+	
+		while(resultado.next()) {
+			 //String idSuscriptor= resultado.getString(idSuscriptor);
+			 int idReserva=resultado.getInt("idReserva");
+			 int idSalaFisica= resultado.getInt("idSalaFisica");
+			 int numJugadores= resultado.getInt("numJugadores");
+			 Date fechaHora= resultado.getDate("fechaHora");
+			 int estado= resultado.getInt("estado");
+			 
+			 Reserva reserva= new Reserva(idReserva, idSalaFisica, numJugadores, numJugadores, fechaHora,estado);
+			 reservas.add(reserva);
 		}
-
-		if (reservas.size() > 0) {
-			for (int i = 0; i < reservas.size(); i++) {
+		
+		if(reservas.size()>0){
+			for (int i=0;i<reservas.size(); i++) {
 				Reserva r = reservas.get(i);
 				System.out.println(r.getIdReserva());
 			}
 			return reservas;
-		} else {
-
+		}
+		else {
+			
 		}
 		return reservas;
 	}
+	//TODO hacer una nueva reserva de una sala física 
+	public void crearReserva() throws Throwable {
+		String sentenciaSQL="";
+		BilboSKP conexion = new BilboSKP();
+		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
+	}
+	
+	
+	//TODO cambiar estado reserva dado su id 
+	public int cambiarEstadoReserva() throws Throwable {
+		try {
+			String sentenciaSQL="UPDATE reserva SET estado=1 WHERE idReserva="+idReserva+";";
+			BilboSKP conexion = new BilboSKP();
+			ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
+			int filasAfectadas= conexion.SQLUpdate(sentenciaSQL);
+			
+			
+		}
+		
+		return 0;
+	}
+
 	// este metodo va a verificar si el email y contraseña son correctos, si son
 	// correctos devuelve el suscriptor.
 	public static Suscriptor loginSuscriptor(String email, String pass) throws Throwable {
