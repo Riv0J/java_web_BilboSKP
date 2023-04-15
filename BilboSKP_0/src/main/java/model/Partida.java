@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class Partida {
 	private Suscriptor anfitrion;
@@ -8,6 +9,7 @@ public class Partida {
 	private int idPartida, puntaje, numJugadores;
 	private String nombreGrupo;
 	Date fechaInicio, fechaFin;
+	private int tiempoMinutos;
 
 	// el sistema usará este constructor para el inicio de una partida
 	public Partida(Sala sala, Suscriptor anfitrion, int numJugadores, String nombreGrupo) {
@@ -30,13 +32,23 @@ public class Partida {
 		this.nombreGrupo = nombreGrupo;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
+		this.tiempoMinutos = calcularTiempo();
+	}
+	
+	public int calcularTiempo() {
+		return calcularTiempo(this.fechaInicio, this.fechaFin);
 	}
 
-	public int getPuntos() {
+	public static int calcularTiempo(Date fechaInicio, Date fechaFin) {
+	    long tiempoMillis = fechaFin.getTime() - fechaInicio.getTime();
+	    int tiempoMinutos = (int) TimeUnit.MILLISECONDS.toMinutes(tiempoMillis);
+	    return tiempoMinutos;
+	}
+	public int getPuntaje() {
 		return puntaje;
 	}
 
-	public void setPuntos(int puntos) {
+	public void setPuntaje(int puntos) {
 		this.puntaje = puntos;
 	}
 
@@ -79,5 +91,30 @@ public class Partida {
 	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
 	}
+	
+	public int getTiempoMinutos() {
+		return tiempoMinutos;
+	}
+
+	public void setTiempoMinutos(int tiempoMinutos) {
+		this.tiempoMinutos = tiempoMinutos;
+	}
+	
+	public Suscriptor getAnfitrion() {
+		return anfitrion;
+	}
+
+	public void setAnfitrion(Suscriptor anfitrion) {
+		this.anfitrion = anfitrion;
+	}
+
+	public int getIdPartida() {
+		return idPartida;
+	}
+
+	public void setIdPartida(int idPartida) {
+		this.idPartida = idPartida;
+	}
+
 
 }
