@@ -1,8 +1,8 @@
 package model;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Date;
 
 public class Cupon {
 	static int idCupon, idSuscriptor;
