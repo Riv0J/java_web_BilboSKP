@@ -87,8 +87,8 @@ public class DBC {
 		this.st = null;
 	}
 
-	// METODO HACER CONSULTA SQL, DEVUELVE UN RESULTSET
-	public ResultSet SQLQuery(String query) throws Throwable {
+	// HACER SELECT DADO UNA SENTENCIA, DEVUELVE UN RESULTSET
+	public ResultSet SQLQuery(String sentenciaSQL) throws Throwable {
 		try {
 			abrirFlujo();
 			// 4. se instancia el resultset con un statement, el cual necesita un string con
@@ -103,7 +103,7 @@ public class DBC {
 	}
 
 	// HACER UPDATE DADO UNA SENTENCIA, DEVUELVE INT FILAS AFECTADAS
-	public int SQLUpdate(String sentencia) throws Throwable {
+	public int SQLUpdate(String sentenciaSQL) throws Throwable {
 		int filasAfectadas = 0;
 		try {
 			abrirFlujo();
@@ -116,7 +116,7 @@ public class DBC {
 	}
 
 	// HACER SYSO DE UN RESULTSET.
-	public static void sysoResultSet(ResultSet rs) throws Throwable {
+	private static void sysoResultSet(ResultSet rs) throws Throwable {
 		// informacion del paquete o metadata
 		ResultSetMetaData rsmd = rs.getMetaData();
 		int numColumnas = rsmd.getColumnCount();
