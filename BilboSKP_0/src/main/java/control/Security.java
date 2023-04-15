@@ -5,7 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class Security {
 	//visibilidad dentro de solo el paquete
-    protected static String encriptarPassword(String password) {
+    protected static String encriptarPass(String password) {
         String passwordEncriptada = null;
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
