@@ -245,39 +245,10 @@ public class BilboSKP extends DBC {
 	
 //CUPONES
 	//Cambiar el estado del cupon de Activo / En uso / Gastado / Caducado
-	public static Cupon CambiarEstado(Cupon cupon) {
-		LocalDate FechaActual =LocalDate.now();
-		LocalDate FechaCaducidad = cupon.getFechaCaducidad().toLocalDate();
-		String disponibilidad=cupon.getEstado();
-		
-		//Si un cupon tiene estado entra en en la condicion
-		if(disponibilidad!=null) {
-			if(disponibilidad.equalsIgnoreCase("ACTIVO")) {
-			
-			//Si esta activo significa que puede estar caducado
-			if(FechaActual.isBefore(FechaCaducidad)) {
-				//Si no esta caducado se cambia el estado a EN USO
-				cupon.setEstado("EN USO");
-				
-				//Si no esta caducado se cambia el estado a EN USO
-				}else if(FechaActual.isAfter(FechaCaducidad)) {
-					cupon.setEstado("CADUCADO");
-					return cupon;
-				}else {
-					System.out.println("Caduca hoy");
-					return cupon;
-				}
-			
-			//Si no esta caducado igual esta en uso
-			}else if(disponibilidad.equalsIgnoreCase("EN USO")){
-				cupon.setEstado("GASTADO");
-				return cupon;
-			}else {
-				System.out.println("Esta inutilizable");
-			}
-			return cupon;
-		}else cupon.setEstado("ACTIVO");
-		return cupon;
+	public static Cupon CambiarEstado(String EstadoCupon, String idcupon) {
+				String sentenciaSQL = "UPDATE cupon SET estado = "+EstadoCupon+" WHERE idCupon = "+idcupon+";";
+				BilboSKP conexion = new BilboSKP();
+				ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
 	}
 	
 	//Conseguir los cupones de un suscriptor por su id
