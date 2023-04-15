@@ -18,8 +18,8 @@ public class SalaOnline extends Sala{
 	public static HashMap<Integer, SalaOnline> getSalasCargadas() {
 		return salasOnlineCargadas;
 	}
-	public static SalaOnline getSalaPorId(int i) {
-		return salasOnlineCargadas.get(i);
+	public static SalaOnline getSalaPorId(int idSalaOnline) {
+		return salasOnlineCargadas.get(idSalaOnline);
 	}
 	public static void clearSalasCargadas() {
 		salasOnlineCargadas.clear();
