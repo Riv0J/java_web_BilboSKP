@@ -8,12 +8,12 @@ import control.BilboSKP;
 
 public class Reserva {
 	//atributos 
-	private int  idReserva ,idSalaFisica;
+	private int idReserva, idSalaFisica;
 	private int idSuscriptor;
 	private int numJugadores;
 	private Date fechaHora;
 	private int estado; // si es cero cancelada y si es uno confirmada
-	public Reserva(int idReserva, int idSalaFisica, int idSuscriptor, int numJugadores, Date fechaHora, int estado) {
+	public Reserva(int idReserva, int idSalaFisica, int idSuscriptor, int numJugadores, Date fechaHora) {
 		super();
 		this.idReserva = idReserva;
 		this.idSalaFisica = idSalaFisica;
@@ -58,19 +58,4 @@ public class Reserva {
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
