@@ -267,7 +267,6 @@ public class BilboSKP extends DBC {
 		// obtener los campos de cada columna para esta fila
 		int telefono = resultado.getInt("telefono");
 		String email = resultado.getString("email");
-		String pass = resultado.getString("pass");
 		String alias = resultado.getString("alias");
 		String nombre = resultado.getString("nombre");
 		String apellidos = resultado.getString("apellidos");
@@ -275,7 +274,7 @@ public class BilboSKP extends DBC {
 		int activo = resultado.getInt("activo");
 		Date fech_nac = resultado.getDate("fech_nac");
 
-		Suscriptor suscriptor = new Suscriptor(idSuscriptor, telefono, email, pass, alias, nombre, apellidos, imagen,
+		Suscriptor suscriptor = new Suscriptor(idSuscriptor, telefono, email, alias, nombre, apellidos, imagen,
 				activo, fech_nac);
 
 		return suscriptor;
@@ -302,12 +301,12 @@ public class BilboSKP extends DBC {
 			Date fech_nac = resultado.getDate("fech_nac");
 			int idSuscriptor = resultado.getInt("idSuscriptor");
 
-			Suscriptor suscriptor = new Suscriptor(idSuscriptor, telefono, email, pass, alias, nombre, apellidos,
+			Suscriptor suscriptor = new Suscriptor(idSuscriptor, telefono, email, alias, nombre, apellidos,
 					imagen, activo, fech_nac);
 			System.out.println("Bienvenido, tu email es: " + suscriptor.getEmail());
 			return suscriptor;
 		} else {
-			System.out.println("USUARIO O PASS INCORRECTO EN LOGIN");
+			System.out.println("EMAIL O PASS INCORRECTO EN LOGIN");
 		}
 		return null;
 	}
@@ -332,10 +331,16 @@ public class BilboSKP extends DBC {
 		// resultado
 		int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
 		if (filasAfectadas == 1) {
-			return loginSuscriptor(email, pass);
+			Suscriptor sus = loginSuscriptor(email, pass);
+			if (sus!=null) {
+				//TODO crear cupon de bienvenida
+				sus.getIdSuscriptor();
+				return sus;
+			}
+			return null;
 
 		} else {
-			System.out.println("no se pudo crear suscriptor");
+			System.out.println("No se pudo crear nuevo suscriptor");
 			return null;
 		}
 	}
@@ -472,7 +477,7 @@ public class BilboSKP extends DBC {
 	public static boolean guardarPartidaOnline(PartidaOnline PO) {
 		try {
 			if (getEstadoRanking() == false) {
-				System.out.println("Error guardando Partida Online. El ranking está cerrado.");
+				System.out.println("ERROR GUARDANDO PARTIDA ONLINE. El ranking está cerrado.");
 				return false;
 			}
 			// hacer una sentencia sql
@@ -485,7 +490,7 @@ public class BilboSKP extends DBC {
 			java.sql.Date fechaSQLFin = SQLHelper.convertirFechaUtilASql(PO.getFechaFin());
 			
 			if (fechaSQLFin == null || fechaSQLInicio == null) {
-				System.out.println("Error guardando Partida Online. Fechas no asignadas correctamente.");
+				System.out.println("ERROR GUARDANDO PARTIDA ONLINE. Fechas no asignadas correctamente.");
 				return false;
 			}
 			
@@ -508,11 +513,11 @@ public class BilboSKP extends DBC {
 			if (filasAfectadas == 1) {
 				return true;
 			} else {
-				System.out.println("No se pudo guardar partida online");
+				System.out.println("ERROR GUARDANDO PARTIDA ONLINE. No se pudo guardar partida online");
 				return false;
 			}
 		} catch (Throwable e) {
-			System.out.println("Error guardando Partida Online");
+			System.out.println("ERROR GUARDANDO PARTIDA ONLINE");
 			e.printStackTrace();
 			return false;
 		}
