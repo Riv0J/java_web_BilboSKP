@@ -244,8 +244,9 @@ public class BilboSKP extends DBC {
 
 	
 //CUPONES
+	//CUPONES
 	//Cambiar el estado del cupon de Activo / En uso / Gastado / Caducado
-	public static Cupon CambiarEstado(Cupon cupon) {
+	public static Cupon CambiarEstado(Cupon cupon) throws Throwable {
 		LocalDate FechaActual =LocalDate.now();
 		LocalDate FechaCaducidad = cupon.getFechaCaducidad().toLocalDate();
 		String disponibilidad=cupon.getEstado();
@@ -257,11 +258,17 @@ public class BilboSKP extends DBC {
 			//Si esta activo significa que puede estar caducado
 			if(FechaActual.isBefore(FechaCaducidad)) {
 				//Si no esta caducado se cambia el estado a EN USO
+				String sentenciaSQL = "UPDATE cupon SET estado = 'En uso' WHERE idCupon = "+cupon.getId()+";";
+				BilboSKP conexion = new BilboSKP();
+				ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
 				cupon.setEstado("EN USO");
 				
 				//Si no esta caducado se cambia el estado a EN USO
 				}else if(FechaActual.isAfter(FechaCaducidad)) {
 					cupon.setEstado("CADUCADO");
+					String sentenciaSQL = "UPDATE cupon SET estado = 'Caducado' WHERE idCupon = "+cupon.getId()+";";	
+					BilboSKP conexion = new BilboSKP();
+					ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
 					return cupon;
 				}else {
 					System.out.println("Caduca hoy");
@@ -271,13 +278,22 @@ public class BilboSKP extends DBC {
 			//Si no esta caducado igual esta en uso
 			}else if(disponibilidad.equalsIgnoreCase("EN USO")){
 				cupon.setEstado("GASTADO");
+				String sentenciaSQL = "UPDATE cupon SET estado = 'Gastado' WHERE idCupon = "+cupon.getId()+";";
+				BilboSKP conexion = new BilboSKP();
+				ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
 				return cupon;
 			}else {
 				System.out.println("Esta inutilizable");
 			}
 			return cupon;
-		}else cupon.setEstado("ACTIVO");
+		}else { 
+			cupon.setEstado("ACTIVO"); 
+			String sentenciaSQL = "UPDATE cupon SET estado = 'Gastado' WHERE idCupon = "+cupon.getId()+";";
+			BilboSKP conexion = new BilboSKP();
+			ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
+		}
 		return cupon;
+
 	}
 	
 	//Conseguir los cupones de un suscriptor por su id
@@ -309,10 +325,11 @@ public class BilboSKP extends DBC {
 	public void RecibirCuponBienvenida(int idSuscriptor) throws Throwable {
 
 	    LocalDate fechaCaducidad = LocalDate.of(2070, 12, 31);
-	    BilboSKP conexion = new BilboSKP();
 		String sentenciaSQL = "INSERT INTO cupon( idSuscrioptor, fechaCaducidad, estado) VALUES ('"+idSuscriptor+","+fechaCaducidad+",'ACTIVO' );";
+		BilboSKP conexion = new BilboSKP();
+		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
 	}
-
+	
 	public static Suscriptor getDatosSuscriptor(int idSuscriptor) throws Throwable {
 
 		// hacer sentencia sql select todas las salas
