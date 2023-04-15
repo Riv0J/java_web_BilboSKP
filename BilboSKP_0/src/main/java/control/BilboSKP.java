@@ -354,12 +354,13 @@ public class BilboSKP extends DBC {
 
 		while (resultado.next()) {
 			// String idSuscriptor= resultado.getString(idSuscriptor);
-			String idReserva = resultado.getString("idReserva");
-			String idSalaFisica = resultado.getString("idSalaFisica");
+			int idReserva = resultado.getInt("idReserva");
+			int idSalaFisica = resultado.getInt("idSalaFisica");
 			int numJugadores = resultado.getInt("numJugadores");
 			Date fechaHora = resultado.getDate("fechaHora");
-
-			Reserva reserva = new Reserva(idReserva, idSalaFisica, numJugadores, numJugadores, fechaHora);
+			int estado = resultado.getInt("estado");
+			
+			Reserva reserva = new Reserva(idReserva, idSalaFisica, numJugadores, numJugadores, fechaHora, estado);
 			reservas.add(reserva);
 		}
 
