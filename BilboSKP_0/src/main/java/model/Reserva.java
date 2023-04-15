@@ -1,34 +1,37 @@
 package model;
 
+import java.sql.ResultSet;
 import java.util.Date;
 import java.util.Vector;
 
+import control.BilboSKP;
+
 public class Reserva {
 	//atributos 
-	private String idReserva , idSalaFisica;
-	private int idSuscriptor, numJugadores;
+	private int  idReserva ,idSalaFisica;
+	private int idSuscriptor;
+	private int numJugadores;
 	private Date fechaHora;
-	
-	
-	public Reserva(String idReserva, String idSalaFisica, int idSuscriptor, int numJugadores, Date fechaHora) {
+	private int estado; // si es cero cancelada y si es uno confirmada
+	public Reserva(int idReserva, int idSalaFisica, int idSuscriptor, int numJugadores, Date fechaHora, int estado) {
 		super();
 		this.idReserva = idReserva;
 		this.idSalaFisica = idSalaFisica;
 		this.idSuscriptor = idSuscriptor;
 		this.numJugadores = numJugadores;
 		this.fechaHora = fechaHora;
+		this.estado = estado;
 	}
-	
-	public String getIdReserva() {
+	public int getIdReserva() {
 		return idReserva;
 	}
-	public void setIdReserva(String idReserva) {
+	public void setIdReserva(int idReserva) {
 		this.idReserva = idReserva;
 	}
-	public String getIdSalaFisica() {
+	public int getIdSalaFisica() {
 		return idSalaFisica;
 	}
-	public void setIdSalaFisica(String idSalaFisica) {
+	public void setIdSalaFisica(int idSalaFisica) {
 		this.idSalaFisica = idSalaFisica;
 	}
 	public int getIdSuscriptor() {
@@ -49,30 +52,12 @@ public class Reserva {
 	public void setFechaHora(Date fechaHora) {
 		this.fechaHora = fechaHora;
 	}
-
-
-	//metodos 
-    //obtener las reservas de un suscriptor de la bd
-	public static Vector <Reserva> obtenerReserva() throws Throwable {
-		Vector <Reserva> reservas= new Vector<Reserva>();
-		String sentenciaSQL="SELECT * FROM reserva WHERE idSuscriptor is not null";
-		
-		
-		
-		
-		return reservas;
-	
-		
+	public int getEstado() {
+		return estado;
 	}
-	//hacer una nueva reserva de una sala física 
-	public void crearReserva () {
-		
+	public void setEstado(int estado) {
+		this.estado = estado;
 	}
-	//cancelar una reserva dado su id 
-	public void cancelarReserva () {
-		
-	}
-	
 	
 	
 	
