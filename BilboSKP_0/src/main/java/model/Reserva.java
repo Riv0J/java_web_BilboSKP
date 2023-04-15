@@ -8,7 +8,7 @@ import control.BilboSKP;
 
 public class Reserva {
 	//atributos 
-	private int  idReserva ,idSalaFisica;
+	private int idReserva, idSalaFisica;
 	private int idSuscriptor;
 	private int numJugadores;
 	private Date fechaHora;
@@ -58,19 +58,4 @@ public class Reserva {
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
