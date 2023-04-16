@@ -479,7 +479,7 @@ public class BilboSKP extends DBC {
 		return null;
 	}
 
-	// guardar una partida online en la bd @
+	// guardar una partida online en la bd @Rivo
 	public static boolean guardarPartidaOnline(PartidaOnline PO) {
 		try {
 			if (getEstadoRanking() == false) {
