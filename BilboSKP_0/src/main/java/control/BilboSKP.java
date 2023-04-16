@@ -645,4 +645,25 @@ public class BilboSKP extends DBC {
 		
 
 	}
+		public Suscriptor darBajaSuscripcion(Suscriptor suscriptor) throws Throwable {
+
+		suscriptor.setActivo(0);
+		int idSuscriptor = suscriptor.getIdSuscriptor();
+
+		// hacer sentencia sql select todas las salas
+		String sentenciaSQL = "UPDATE suscriptor SET  activo =  0  WHERE idSuscriptor = " + idSuscriptor;
+		// hacer una conexion
+		BilboSKP conexion = new BilboSKP();
+		// se hace una consulta sql con la conexion y se guarda en el resultset
+		// resultado
+		int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
+		if (filasAfectadas == 1) {
+			System.out.println("se pudo dar de baja suscriptor");
+			return suscriptor;
+
+		} else {
+			System.out.println("no se pudo dar de baja suscriptor");
+			return null;
+		}
+	}
 }
