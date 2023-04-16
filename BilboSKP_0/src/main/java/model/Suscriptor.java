@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Suscriptor {
 	private int idSuscriptor, telefono;
-	private String email, alias, nombre, apellidos, imagen;   ;
+	private String email, alias, nombre, apellidos, imagen;
 	private int activo;
 	private Date fech_nac;
 	
@@ -46,6 +46,7 @@ public class Suscriptor {
 		this.email = email;
 	}
 
+
 	public String getAlias() {
 		return alias;
 	}
@@ -78,7 +79,7 @@ public class Suscriptor {
 		this.imagen = imagen;
 	}
 
-	public int isActivo() {
+	public int getActivo() {
 		return activo;
 	}
 
@@ -93,4 +94,7 @@ public class Suscriptor {
 	public void setFech_nac(Date fech_nac) {
 		this.fech_nac = fech_nac;
 	}
+	
+	
+
 }
