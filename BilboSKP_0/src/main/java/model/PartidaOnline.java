@@ -15,6 +15,7 @@ public class PartidaOnline extends Partida {
 	private static final String PARTIDA_ORGANIZANDO = "Organizando";
 	private static final String PARTIDA_EN_CURSO = "En Curso";
 	private static final String PARTIDA_FINALIZANDO = "Finalizando";
+	private int visibleRanking;
 	
 	private String estado;
 	private int codInvitacion;
@@ -25,7 +26,7 @@ public class PartidaOnline extends Partida {
 
  	private static HashMap<Integer, PartidaOnline> partidasOrganizando = new HashMap<Integer, PartidaOnline>();
 
-	// el sistema usará este constructor para el inicio de una nueva partida
+	// el sistema usarÃ¡ este constructor para el inicio de una nueva partida
 	public PartidaOnline(Sala sala, Suscriptor suscriptorAnfitrion, int numJugadores, String nombreGrupo) {
 		super(sala, suscriptorAnfitrion, numJugadores, nombreGrupo);
 		this.vectorJugadores = new Vector<Jugador>();
@@ -34,16 +35,19 @@ public class PartidaOnline extends Partida {
 		this.codInvitacion = generarCodInvitacion();
 		partidasOrganizando.put(this.codInvitacion, this);
 		
+		
 		Anfitrion anfitrion = new Anfitrion(suscriptorAnfitrion.getAlias());
 		agregarJugador(anfitrion);
 	}
-	// el sistema usará este constructor para recibir una partida online jugada desde la base de datos
+	// el sistema usarÃ¡ este constructor para recibir una partida online jugada desde la base de datos
 	public PartidaOnline(Sala sala, Suscriptor anfitrion, int idPartida, int puntaje, int numJugadores,
-			String nombreGrupo, Date fechaInicio, Date fechaFin) {
+			String nombreGrupo, Date fechaInicio, Date fechaFin,int visibleRanking) {
 		super(sala, anfitrion, idPartida, puntaje, numJugadores, nombreGrupo, fechaInicio, fechaFin);
+		setVisibleRanking(visibleRanking);
 	}
 	
-	//un cliente proorciona un codigo, y la clase PartidaOnline determinará si se 
+	
+	//un cliente proorciona un codigo, y la clase PartidaOnline determinarÃ¡ si se 
 	public static boolean usarCodigoInvitacion(int codProporcionado){
 		//si se encuentra una partida organizando en el hashmap con el codProporcionado
 		//devuelve true, de lo contrario false;
@@ -54,11 +58,11 @@ public class PartidaOnline extends Partida {
 	}
 	
 	public boolean agregarJugador(Jugador jugador) {
-		//asegurarse de que el tamaño del vector de jugadores de la partida no exceda el
+		//asegurarse de que el tamaÃ±o del vector de jugadores de la partida no exceda el
 		//max de jugadores
 		if (vectorJugadores.size() < this.getSala().getJugadoresMax()) {
 			vectorJugadores.add(jugador);
-			System.out.println("Jugador agregado con éxito");
+			System.out.println("Jugador agregado con Ã©xito");
 			return true;
 		} else {
 			System.out.println("Sala "+codInvitacion+" llena");
@@ -83,7 +87,7 @@ public class PartidaOnline extends Partida {
 	}
 	
 	public boolean iniciarPartida() {
-		//asegurarse antes de iniciar, que los jugadores son más o igual al minimo requerido por la sala
+		//asegurarse antes de iniciar, que los jugadores son mÃ¡s o igual al minimo requerido por la sala
 		if (vectorJugadores.size() >= this.getSala().getJugadoresMin()) {
 			//quitar la partida de la coleccion de partidas en organizando
 			partidasOrganizando.remove(codInvitacion);
@@ -91,13 +95,13 @@ public class PartidaOnline extends Partida {
 			this.estado = PartidaOnline.PARTIDA_EN_CURSO;
 			//establecer el tiempo de inicio de la partida
 			this.fechaInicio = new Date();
-			//establecer el estado del cupón del anfitrion a en "en uso" para el cupón con la caducidad máx próxima
+			//establecer el estado del cupÃ³n del anfitrion a en "en uso" para el cupÃ³n con la caducidad mÃ¡x prÃ³xima
 
 			//mandar a todos los jugadores al escenario inicial correspondiente a la sala
 			System.out.println("Se ha iniciado una partida online");
 			return true;
 		}
-		System.out.println("No se cumplen los jugadores mínimos para iniciar la partida");
+		System.out.println("No se cumplen los jugadores mÃ­nimos para iniciar la partida");
 		return false;
 	}
 	public void finalizarPartida() {
@@ -118,6 +122,7 @@ public class PartidaOnline extends Partida {
 		
 		//guardar la partida online en la base de datos
 		//TODO METODO, dado una partida online, guardar en la base de datos
+		visibleRanking=1;
 	}
 	public void cancelarPartida() {
 		//quitar la partida de la coleccion de partidas en organizando
@@ -132,5 +137,10 @@ public class PartidaOnline extends Partida {
 		return 0;
 	}
 	
-
+	public int getVisibleRanking() {
+		return visibleRanking;
+	}
+	public void setVisibleRanking(int visibleRanking) {
+		this.visibleRanking = visibleRanking;
+	}
 }
