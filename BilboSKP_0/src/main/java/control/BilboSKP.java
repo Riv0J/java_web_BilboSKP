@@ -483,7 +483,7 @@ public class BilboSKP extends DBC {
 	public static boolean guardarPartidaOnline(PartidaOnline PO) {
 		try {
 			if (getEstadoRanking() == false) {
-				System.out.println("ERROR GUARDANDO PARTIDA ONLINE. El ranking estÃ¡ cerrado.");
+				System.out.println("ERROR GUARDANDO PARTIDA ONLINE. El ranking está cerrado.");
 				return false;
 			}
 			// hacer una sentencia sql
@@ -494,19 +494,12 @@ public class BilboSKP extends DBC {
 			String NG = PO.getNombreGrupo();
 			java.sql.Date fechaSQLInicio = SQLHelper.convertirFechaUtilASql(PO.getFechaInicio());
 			java.sql.Date fechaSQLFin = SQLHelper.convertirFechaUtilASql(PO.getFechaFin());
-
+			
 			if (fechaSQLFin == null || fechaSQLInicio == null) {
-				System.out.println("ERROR GUARDANDO PARTIDA ONLINE. Fechas no asignadas correctamente.");
-				return false;
+				fechaSQLInicio = SQLHelper.convertirFechaUtilASql(new Date());
+				fechaSQLFin = SQLHelper.getFechaFinPruebaSQL(new Date());
+				System.out.println("Fechas de prueba asignadas correctamente.");
 			}
-
-			/*
-			 * String sentenciaSQL =
-			 * "INSERT INTO partidasonline (idSalaOnline, idAnfitrion, puntaje, numeroJugadores, nombreGrupo, fechaInicio, fechaFin) "
-			 * + "VALUES (" + idSala + ", " + idAnfitrion + ", " + puntaje + ", " +
-			 * numeroJugadores + ", '" + NG + "', '" + fechaSQLInicio + "', '" + fechaSQLFin
-			 * + "')";
-			 */
 
 			String[] arrayColumnas = { "idSalaOnline", "idAnfitrion", "puntaje", "numeroJugadores", "nombreGrupo",
 					"fechaInicio", "fechaFin" };
@@ -517,6 +510,7 @@ public class BilboSKP extends DBC {
 			BilboSKP conexion = new BilboSKP();
 			int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
 			if (filasAfectadas == 1) {
+				System.out.println("Partida de "+PO.getNombreGrupo()+" guardada exitosamente");
 				return true;
 			} else {
 				System.out.println("ERROR GUARDANDO PARTIDA ONLINE. No se pudo guardar partida online");
