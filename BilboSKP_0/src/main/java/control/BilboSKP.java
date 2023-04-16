@@ -479,7 +479,7 @@ public class BilboSKP extends DBC {
 		return null;
 	}
 
-	// guardar una partida online en la bd @Rivo
+	// guardar una partida online en la bd @
 	public static boolean guardarPartidaOnline(PartidaOnline PO) {
 		try {
 			if (getEstadoRanking() == false) {
@@ -521,6 +521,27 @@ public class BilboSKP extends DBC {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	// dado un idSuscriptor e idPartidaOnline, agregarlos a la tabla de
+	// suscriptor_partidaonline en la BD @Rivo
+	public static boolean agregarSuscriptorParticipante(int idSuscriptor, int idPartidaOnline) throws Throwable {
+		try {
+			String[] arrayColumnas = { "idSuscriptor", "idPartidaonline" };
+			Object[] arrayValores = { idSuscriptor, idPartidaOnline };
+			String sentenciaSQL = SQLHelper.obtenerSentenciaSQLInsert("suscriptor_partidaonline", arrayColumnas,
+					arrayValores);
+			
+			BilboSKP conexion = new BilboSKP();
+			int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
+			if (filasAfectadas == 1) {
+				System.out.println(sentenciaSQL);
+				System.out.println("Suscriptor "+idSuscriptor+" agregado a la partida "+idPartidaOnline+" exitosamente");
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	/*
 	 * // CUPONES // Cambiar el estado del cupon de Activo / En uso / Gastado /
