@@ -610,4 +610,39 @@ public class BilboSKP extends DBC {
 		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
 	}
 	*/
+	
+	public static Suscriptor actualizarSuscripcion(Suscriptor suscriptor) throws Throwable {
+		//cambiar los strings
+		String email=suscriptor.getEmail();
+		String pass=suscriptor.getPass();
+		String alias=suscriptor.getAlias();
+		String nombre=suscriptor.getNombre();
+		String apellidos=suscriptor.getApellidos();
+		Date fech_nac=suscriptor.getFech_nac();
+		java.util.Date fecha_nac_util = fech_nac;
+		java.sql.Date fechaSQL = new java.sql.Date(fecha_nac_util.getTime());
+		int telefono=suscriptor.getTelefono();
+		String imagen=suscriptor.getImagen();
+		int activo=suscriptor.getActivo();
+		int idSuscriptor=suscriptor.getIdSuscriptor();
+		// hacer sentencia sql select todas las salas
+		String sentenciaSQL = "UPDATE suscriptor SET email = '"+email+"' , pass = '"+pass+"' , alias = '"+alias+"' , nombre = '"+nombre+"' , apellidos = '"+apellidos+"' , fech_nac = '"+fechaSQL+"' , telefono = "+telefono+" , imagen = '"+imagen+"' , activo = "+activo+" WHERE idSuscriptor = "+idSuscriptor;
+		// hacer una conexion
+		BilboSKP conexion = new BilboSKP();
+		// se hace una consulta sql con la conexion y se guarda en el resultset
+		// resultado
+		int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
+		if (filasAfectadas == 1) {
+			System.out.println("se pudo editar suscriptor");
+
+			return loginSuscriptor(email, pass);
+
+		} else {
+			System.out.println("no se pudo editar suscriptor");
+			return null;
+		}
+		
+		
+
+	}
 }
