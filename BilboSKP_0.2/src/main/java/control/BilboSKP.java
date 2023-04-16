@@ -671,7 +671,7 @@ public class BilboSKP extends DBC {
 			return false;
 		}	
 	}
-	    //obtener las reservas de un suscriptor de la bd
+	//obtener las reservas de un suscriptor de la bd @Paula
 	public static Vector<Reserva> obtenerReserva(int idSuscriptor) throws Throwable {
 		Vector<Reserva> reservas= new Vector<Reserva>();
 		String sentenciaSQL="SELECT * FROM reserva WHERE idSuscriptor="+idSuscriptor+" order by fechaHora ";
@@ -702,7 +702,7 @@ public class BilboSKP extends DBC {
 		}
 		return reservas;
 	}
-	//TODO hacer una nueva reserva de una sala física 
+	//TODO hacer una nueva reserva de una sala física @Paula
 	public static Reserva crearReserva(int idReseva, int idSalaFisica, int idSuscriptor, int numeroJugadores, Date fechaHora, int estado) throws Throwable {
 		//hacer sentencia SQL
 		//String sentenciaSQL="INSERT INTO reserva ('idReserva', 'idSalaFisica', 'idSuscriptor', 'numeroJugadores', 'fechaHora', 'estado') VALUES('"+idReserva+"','"+idSalaFisica+"','"+idSuscriptor+"','"+numeroJugadores+"','"+fechaHora+"', '"+estado+"')";
@@ -727,8 +727,7 @@ public class BilboSKP extends DBC {
 		return null;
 	}
 	
-	
-	//TODO cambiar estado reserva dado su id 
+	//TODO cambiar estado reserva dado su id @Paula
 	public static Reserva cambiarEstadoReserva(int estado, int idSuscriptor ) throws Throwable {
 		try {
 			String sentenciaSQL="UPDATE reserva SET estado=1 WHERE idSuscriptor="+idSuscriptor+"";
