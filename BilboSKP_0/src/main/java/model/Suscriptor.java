@@ -4,16 +4,17 @@ import java.util.Date;
 
 public class Suscriptor {
 	private int idSuscriptor, telefono;
-	private String email, alias, nombre, apellidos, imagen;   ;
+	private String email, pass, alias, nombre, apellidos, imagen;   ;
 	private int activo;
 	private Date fech_nac;
 	
-	public Suscriptor(int idSuscriptor, int telefono, String email, String alias, String nombre,
+	public Suscriptor(int idSuscriptor, int telefono, String email, String pass, String alias, String nombre,
 			String apellidos, String imagen, int activo, Date fech_nac) {
 		super();
 		setIdSuscriptor(idSuscriptor);
 		setTelefono(telefono);
 		setEmail(email);
+		setPass(pass);
 		setAlias(alias);
 		setNombre(nombre);
 		setApellidos(apellidos);
@@ -44,6 +45,14 @@ public class Suscriptor {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
 
 	public String getAlias() {
@@ -78,7 +87,7 @@ public class Suscriptor {
 		this.imagen = imagen;
 	}
 
-	public int isActivo() {
+	public int getActivo() {
 		return activo;
 	}
 
@@ -93,4 +102,8 @@ public class Suscriptor {
 	public void setFech_nac(Date fech_nac) {
 		this.fech_nac = fech_nac;
 	}
+	
+	
+
 }
+
