@@ -43,4 +43,17 @@ public class SQLHelper {
 	    
 	    return stringBuilder.toString();
 	}
+		public static java.sql.Date getFechaFinPruebaSQL(java.util.Date fechaUtilInicio) {
+		// Convertir la fecha a un objeto Calendar
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(fechaUtilInicio);
+
+		// Agregar 60 minutos a la fecha
+		calendar.add(Calendar.MINUTE, 60);
+
+		// Convertir el objeto Calendar resultante a una fecha
+		Date fechaUtilFin = calendar.getTime();
+		
+		return convertirFechaUtilASql(fechaUtilFin);
+	}
 }
