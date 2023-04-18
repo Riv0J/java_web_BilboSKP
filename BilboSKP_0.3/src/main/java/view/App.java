@@ -3,6 +3,7 @@ package view;
 import java.util.Date;
 
 import control.BilboSKP;
+import model.Cupon;
 import model.PartidaOnline;
 import model.SalaOnline;
 import model.Suscriptor;
@@ -19,6 +20,7 @@ public class App {
 				BilboSKP.guardarPartidaOnline(PO);
 				BilboSKP.agregarSuscriptorParticipante(4, 13);
 			}
+			BilboSKP.otorgarCupon(Cupon.CUPON_RANKING,4);
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
