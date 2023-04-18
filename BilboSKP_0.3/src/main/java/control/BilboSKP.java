@@ -511,8 +511,27 @@ public class BilboSKP extends DBC {
 		}
 		return false;
 	}
+	// Conseguir los cupones de un suscriptor por su id public static @Inigo
+	Vector<Cupon> getCuponesSuscriptor(int idSuscriptor) throws Throwable {
+		Vector<Cupon> vectorCupones = new Vector<Cupon>();
+		String sentenciaSQL = "select * from cupon where idSuscriptor = " + idSuscriptor + ";";
+		BilboSKP conexion = new BilboSKP();
+		// se hace una consulta sql con la conexion y se guarda en el resultset
+		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
+		// hacer un bucle de cada fila que tiene el resultset resultado
+		while (resultado.next()) {
+			//obtener los campos de cada columna para esta fila
+			int idCupon = resultado.getInt("idCupon");
+			Date fechaCaducidad = resultado.getDate("fechaCaducidad");
+			String Estado = resultado.getString("estado");
+			System.out.println(idCupon);
+			Cupon cupon = new Cupon(idCupon, Estado, fechaCaducidad);
+			vectorCupones.add(cupon);
+		}
+		return vectorCupones;
+	}
 	/*
-	 * // CUPONES // Cambiar el estado del cupon de Activo / En uso / Gastado /
+	 * Cambiar el estado del cupon de Activo / En uso / Gastado /
 	 * Caducado public static Cupon CambiarEstado(Cupon cupon) throws Throwable {
 	 * LocalDate FechaActual = LocalDate.now(); LocalDate FechaCaducidad =
 	 * cupon.getFechaCaducidad().toLocalDate(); String disponibilidad =
@@ -545,24 +564,8 @@ public class BilboSKP extends DBC {
 	 * "UPDATE cupon SET estado = 'Gastado' WHERE idCupon = " + cupon.getId() + ";";
 	 * BilboSKP conexion = new BilboSKP(); ResultSet resultado =
 	 * conexion.SQLQuery(sentenciaSQL); } return cupon; }
-	 * 
-	 * // Conseguir los cupones de un suscriptor por su id public static
-	 * Vector<Cupon> getCuponesSuscriptor(int idSuscriptor) throws Throwable {
-	 * Vector<Cupon> vectorCupones = new Vector<Cupon>(); // hacer sentencia sql
-	 * select todas las salas String sentenciaSQL =
-	 * "select * from cupon where idSuscriptor = " + idSuscriptor + ";"; // hacer
-	 * una conexion BilboSKP conexion = new BilboSKP(); // se hace una consulta sql
-	 * con la conexion y se guarda en el resultset // resultado ResultSet resultado
-	 * = conexion.SQLQuery(sentenciaSQL); // hacer un bucle de cada fila que tiene
-	 * el resultset resultado while (resultado.next()) { // obtener los campos de
-	 * cada columna para esta fila String idCupon = resultado.getString("idCupon");
-	 * Date fechaCaducidad = resultado.getDate("fechaCaducidad"); String Estado =
-	 * resultado.getString("estado"); System.out.println(idCupon); Cupon cupon = new
-	 * Cupon(idCupon, Estado, (java.sql.Date) fechaCaducidad); // agregar cupon al
-	 * vector vectorCupones.add(cupon); }
-	 * 
-	 * return vectorCupones; }
-	 * 
+	 */
+	/*
 	 * // Enviar cupon de bienvenida public void RecibirCuponBienvenida(int
 	 * idSuscriptor) throws Throwable {
 	 * 
