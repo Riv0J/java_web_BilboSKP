@@ -1,12 +1,16 @@
 package control;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import model.Suscriptor;
 
 /**
  * Servlet implementation class ServletLogin
@@ -24,22 +28,37 @@ public class ServletLogin extends HttpServlet {
      */
     public ServletLogin() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+        try {
+        	//Obtenemos los datos enviados desde el formulario
+            String nombre = request.getParameter("nombre");
+            String pass = request.getParameter("pass");
+            String email = request.getParameter("email");
+            
+          //Comprobamos si el usuario y contraseña son válidos
+			Suscriptor usuarioValido = BilboSKP.loginSuscriptor(email, pass);
+			if(usuarioValido!=null) {
+				System.out.println("se pudo logear el usuario");
+				response.sendRedirect("index.jsp?sec=inicio");
+			}else {
+				System.out.println("no se pudo loguear el usuario");
+				//avisar al usuario que sus datos son incorrectos, crear un objeto mensaje.
+				request.setAttribute("errorMessage", "Usuario o contraseña incorrectos");
+	            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+			}
+		} catch (Throwable e) {
+			// avisar al usuario 
+			response.sendRedirect("login.jsp");
+		}
 		doGet(request, response);
 	}
 
