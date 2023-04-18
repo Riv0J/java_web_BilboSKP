@@ -23,8 +23,8 @@ import model.Suscriptor;
 
 public class BilboSKP extends DBC {
 	private static final String dbUrl = "localhost:3306/bilboskpdb";
-	private static final String user = "bilboskp";
-	private static final String pass = "bilboskp";
+	private static final String user = "root";
+	private static final String pass = "";
 	private static boolean estadoRanking = true;
 
 	public BilboSKP() throws Throwable {
@@ -348,6 +348,7 @@ public class BilboSKP extends DBC {
 			return null;
 		}
 	}
+
 	// obtener ranking dado un id sala online @Urko
 	public static Vector<PartidaOnline> obtenerRankingSalaOnline(int idSala) throws Throwable {
 		try {
@@ -462,7 +463,7 @@ public class BilboSKP extends DBC {
 			String NG = PO.getNombreGrupo();
 			java.sql.Date fechaSQLInicio = SQLHelper.convertirFechaUtilASql(PO.getFechaInicio());
 			java.sql.Date fechaSQLFin = SQLHelper.convertirFechaUtilASql(PO.getFechaFin());
-			
+
 			if (fechaSQLFin == null || fechaSQLInicio == null) {
 				fechaSQLInicio = SQLHelper.convertirFechaUtilASql(new Date());
 				fechaSQLFin = SQLHelper.getFechaFinPruebaSQL(new Date());
@@ -473,12 +474,12 @@ public class BilboSKP extends DBC {
 					"fechaInicio", "fechaFin" };
 			Object[] arrayValores = { idSala, idAnfitrion, puntaje, numeroJugadores, NG, fechaSQLInicio, fechaSQLFin };
 			String sentenciaSQL = SQLHelper.obtenerSentenciaSQLInsert("partidaonline", arrayColumnas, arrayValores);
-
+			System.out.println(sentenciaSQL);
 			// hacer una consulta sql con la conexion y se guarda en el resultset resultado
 			BilboSKP conexion = new BilboSKP();
 			int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
 			if (filasAfectadas == 1) {
-				System.out.println("Partida de "+PO.getNombreGrupo()+" guardada exitosamente");
+				System.out.println("Partida de " + PO.getNombreGrupo() + " guardada exitosamente");
 				return true;
 			} else {
 				System.out.println("ERROR GUARDANDO PARTIDA ONLINE. No se pudo guardar partida online");
@@ -490,6 +491,7 @@ public class BilboSKP extends DBC {
 			return false;
 		}
 	}
+
 	// dado un idSuscriptor e idPartidaOnline, agregarlos a la tabla de
 	// suscriptor_partidaonline en la BD @Rivo
 	public static boolean agregarSuscriptorParticipante(int idSuscriptor, int idPartidaOnline) throws Throwable {
@@ -498,12 +500,13 @@ public class BilboSKP extends DBC {
 			Object[] arrayValores = { idSuscriptor, idPartidaOnline };
 			String sentenciaSQL = SQLHelper.obtenerSentenciaSQLInsert("suscriptor_partidaonline", arrayColumnas,
 					arrayValores);
-			
+
 			BilboSKP conexion = new BilboSKP();
 			int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
 			if (filasAfectadas == 1) {
 				System.out.println(sentenciaSQL);
-				System.out.println("Suscriptor "+idSuscriptor+" agregado a la partida "+idPartidaOnline+" exitosamente");
+				System.out.println(
+						"Suscriptor " + idSuscriptor + " agregado a la partida " + idPartidaOnline + " exitosamente");
 				return true;
 			}
 		} catch (Exception e) {
@@ -511,6 +514,7 @@ public class BilboSKP extends DBC {
 		}
 		return false;
 	}
+
 	// Conseguir los cupones de un suscriptor por su id public static @Inigo
 	Vector<Cupon> getCuponesSuscriptor(int idSuscriptor) throws Throwable {
 		Vector<Cupon> vectorCupones = new Vector<Cupon>();
@@ -520,7 +524,7 @@ public class BilboSKP extends DBC {
 		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
 		// hacer un bucle de cada fila que tiene el resultset resultado
 		while (resultado.next()) {
-			//obtener los campos de cada columna para esta fila
+			// obtener los campos de cada columna para esta fila
 			int idCupon = resultado.getInt("idCupon");
 			Date fechaCaducidad = resultado.getDate("fechaCaducidad");
 			String Estado = resultado.getString("estado");
@@ -531,9 +535,9 @@ public class BilboSKP extends DBC {
 		return vectorCupones;
 	}
 	/*
-	 * Cambiar el estado del cupon de Activo / En uso / Gastado /
-	 * Caducado public static Cupon CambiarEstado(Cupon cupon) throws Throwable {
-	 * LocalDate FechaActual = LocalDate.now(); LocalDate FechaCaducidad =
+	 * Cambiar el estado del cupon de Activo / En uso / Gastado / Caducado public
+	 * static Cupon CambiarEstado(Cupon cupon) throws Throwable { LocalDate
+	 * FechaActual = LocalDate.now(); LocalDate FechaCaducidad =
 	 * cupon.getFechaCaducidad().toLocalDate(); String disponibilidad =
 	 * cupon.getEstado();
 	 * 
@@ -565,16 +569,51 @@ public class BilboSKP extends DBC {
 	 * BilboSKP conexion = new BilboSKP(); ResultSet resultado =
 	 * conexion.SQLQuery(sentenciaSQL); } return cupon; }
 	 */
-	/*
-	 * // Enviar cupon de bienvenida public void RecibirCuponBienvenida(int
-	 * idSuscriptor) throws Throwable {
-	 * 
-	 * LocalDate fechaCaducidad = LocalDate.of(2070, 12, 31); String sentenciaSQL =
-	 * "INSERT INTO cupon( idSuscrioptor, fechaCaducidad, estado) VALUES ('" +
-	 * idSuscriptor + "," + fechaCaducidad + ",'ACTIVO' );"; BilboSKP conexion = new
-	 * BilboSKP(); ResultSet resultado = conexion.SQLQuery(sentenciaSQL); }
-	 */
-	//dado un suscriptor, actualizar los datos en la BD @Torni
+
+	// otorgar cupon de bienvenida @Rivo
+	public static void otorgarCupon(String tipoCupon, int idSuscriptor) throws Throwable {
+		try {
+			java.sql.Date fechaCaducidad;
+			int reembolsable;
+			switch (tipoCupon) {
+			case Cupon.CUPON_RANKING: {
+				fechaCaducidad = SQLHelper.getFechaCuponRegular(); // +1 mes de ahora
+				reembolsable = 0; // no reembolsable
+				break;
+			}
+			case Cupon.CUPON_REGULAR: {
+				fechaCaducidad = SQLHelper.getFechaCuponRegular(); // +1 mes de ahora
+				reembolsable = 1; // reembolsable
+				break;
+			}
+			case Cupon.CUPON_BIENVENIDA: {
+				fechaCaducidad = SQLHelper.getFechaCuponBienvenida(); // año 2077
+				reembolsable = 0; // no reembolsable
+				break;
+			}
+			default:
+				throw new IllegalArgumentException("Unexpected value: " + tipoCupon);
+			}
+			String[] arrayColumnas = { "idSuscriptor", "fechaCaducidad", "estado", "reembolsable"};
+			Object[] arrayValores = {idSuscriptor, fechaCaducidad, "Disponible", reembolsable};
+			String sentenciaSQL = SQLHelper.obtenerSentenciaSQLInsert("cupon", arrayColumnas, arrayValores);
+			BilboSKP conexion = new BilboSKP();
+			System.out.println(sentenciaSQL);
+			int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
+			if (filasAfectadas == 1) {
+				System.out.println("Cupon de "+tipoCupon+" creado");
+			} else {
+				System.out.println("Cupon de "+tipoCupon+" NO SE HA CREADO");
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error creando cupon de bienvenida");
+		}
+
+	}
+
+	// dado un suscriptor, actualizar los datos en la BD @Torni
 	public static Suscriptor actualizarSuscripcion(Suscriptor suscriptor) throws Throwable {
 		String email = suscriptor.getEmail();
 		String alias = suscriptor.getAlias();
@@ -591,7 +630,7 @@ public class BilboSKP extends DBC {
 		String sentenciaSQL = "UPDATE suscriptor SET email = '" + email + "' , pass = '" + pass + "' , alias = '"
 				+ alias + "' , nombre = '" + nombre + "' , apellidos = '" + apellidos + "' , fech_nac = '" + fechaSQL
 				+ "' , telefono = " + telefono + " , imagen = '" + imagen + "' , activo = " + activo
-				+ " WHERE idSuscriptor = " + idSuscriptor+";";
+				+ " WHERE idSuscriptor = " + idSuscriptor + ";";
 		// hacer una conexion
 		BilboSKP conexion = new BilboSKP();
 		// se hace una consulta sql con la conexion y se guarda en el resultset
@@ -608,10 +647,11 @@ public class BilboSKP extends DBC {
 		}
 
 	}
-	//darle de baja a un suscriptor @Torni
+
+	// darle de baja a un suscriptor @Torni
 	public Suscriptor darBajaSuscripcion(Suscriptor suscriptor) throws Throwable {
 		int idSuscriptor = suscriptor.getIdSuscriptor();
-		String sentenciaSQL = "UPDATE suscriptor SET  activo =  0  WHERE idSuscriptor = " + idSuscriptor+";";
+		String sentenciaSQL = "UPDATE suscriptor SET  activo =  0  WHERE idSuscriptor = " + idSuscriptor + ";";
 		BilboSKP conexion = new BilboSKP();
 		int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
 		if (filasAfectadas == 1) {
@@ -625,14 +665,14 @@ public class BilboSKP extends DBC {
 			return null;
 		}
 	}
-	//ocultar las partidas de un suscriptor @Torni
+
+	// ocultar las partidas de un suscriptor @Torni
 	public boolean ocultarPartidasRanking(int idSuscriptor) throws Throwable {
 		// hacer sentencia sql
-		String sentenciaSQL = "UPDATE partidaonline SET visibleRanking = 0  WHERE idSuscriptor = " + idSuscriptor+";";
+		String sentenciaSQL = "UPDATE partidaonline SET visibleRanking = 0  WHERE idSuscriptor = " + idSuscriptor + ";";
 		// hacer una conexion
 		BilboSKP conexion = new BilboSKP();
-		// se hace una consulta sql con la conexion y se guarda en el resultset
-		// resultado
+		// se hace una consulta sql con la conexion y se guarda en el int
 		int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
 		if (filasAfectadas >= 1) {
 			System.out.println("Se pudo ocultar partida del ranking");
@@ -640,76 +680,75 @@ public class BilboSKP extends DBC {
 		} else {
 			System.out.println("No se pudo ocultar partida del ranking");
 			return false;
-		}	
+		}
 	}
-	//obtener las reservas de un suscriptor de la bd @Paula
+
+	// obtener las reservas de un suscriptor de la bd @Paula
 	public static Vector<Reserva> obtenerReserva(int idSuscriptor) throws Throwable {
-		Vector<Reserva> reservas= new Vector<Reserva>();
-		String sentenciaSQL="SELECT * FROM reserva WHERE idSuscriptor="+idSuscriptor+" order by fechaHora ";
+		Vector<Reserva> reservas = new Vector<Reserva>();
+		String sentenciaSQL = "SELECT * FROM reserva WHERE idSuscriptor=" + idSuscriptor + " order by fechaHora ";
 		BilboSKP conexion = new BilboSKP();
 		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
-	
-		while(resultado.next()) {
-			 //String idSuscriptor= resultado.getString(idSuscriptor);
-			 int idReserva=resultado.getInt("idReserva");
-			 int idSalaFisica= resultado.getInt("idSalaFisica");
-			 int numJugadores= resultado.getInt("numJugadores");
-			 Date fechaHora= resultado.getDate("fechaHora");
-			 int estado= resultado.getInt("estado");
-			 
-			 Reserva reserva= new Reserva(idReserva, idSalaFisica, numJugadores, numJugadores, fechaHora,estado);
-			 reservas.add(reserva);
+
+		while (resultado.next()) {
+			// String idSuscriptor= resultado.getString(idSuscriptor);
+			int idReserva = resultado.getInt("idReserva");
+			int idSalaFisica = resultado.getInt("idSalaFisica");
+			int numJugadores = resultado.getInt("numJugadores");
+			Date fechaHora = resultado.getDate("fechaHora");
+			int estado = resultado.getInt("estado");
+
+			Reserva reserva = new Reserva(idReserva, idSalaFisica, numJugadores, numJugadores, fechaHora, estado);
+			reservas.add(reserva);
 		}
-		
-		if(reservas.size()>0){
-			for (int i=0;i<reservas.size(); i++) {
+
+		if (reservas.size() > 0) {
+			for (int i = 0; i < reservas.size(); i++) {
 				Reserva r = reservas.get(i);
 				System.out.println(r.getIdReserva());
 			}
 			return reservas;
-		}
-		else {
-			
+		} else {
+
 		}
 		return reservas;
 	}
-	//TODO hacer una nueva reserva de una sala física @Paula
-	public static Reserva crearReserva(int idReserva, int idSalaFisica, int idSuscriptor, int numeroJugadores, Date fechaHora, int estado) throws Throwable {
-		//hacer sentencia SQL
-		String sentenciaSQL="INSERT INTO reserva ('idReserva', 'idSalaFisica', 'idSuscriptor', 'numeroJugadores', 'fechaHora', 'estado') VALUES('"+idReserva+"','"+idSalaFisica+"','"+idSuscriptor+"','"+numeroJugadores+"','"+fechaHora+"', '"+estado+"');";
 
-		/*String[] arrayColumnas = { "idReserva", "idSalaFisia", "idSuscriptor", "numeroJugadores", "fechaHora", "estado" };
-		Object[] arrayValores = { crearReserva(0, 0, 0, 0, null, 0), idSalaFisica,idSuscriptor ,numeroJugadores ,fechaHora , estado };
-		String sentenciaSQL = SQLHELPER.obtenerSentenciaSQLInsert("reserva", arrayColumnas, arrayValores);
-		System.out.println(sentenciaSQL);
-		*/
-		//hacer una conexion
+	// hacer una nueva reserva de una sala física @Paula
+	public static Reserva crearReserva(int idReserva, int idSalaFisica, int idSuscriptor, int numeroJugadores,
+			Date fechaHora, int estado) throws Throwable {
+		// hacer sentencia SQL
+		String sentenciaSQL = "INSERT INTO reserva ('idReserva', 'idSalaFisica', 'idSuscriptor', 'numeroJugadores', 'fechaHora', 'estado') VALUES('"
+				+ idReserva + "','" + idSalaFisica + "','" + idSuscriptor + "','" + numeroJugadores + "','" + fechaHora
+				+ "', '" + estado + "');";
+		// hacer una conexion
 		BilboSKP conexion = new BilboSKP();
 		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
 		int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
-		
-		 if(filasAfectadas==0){
-			 Reserva r= new Reserva(filasAfectadas, filasAfectadas, filasAfectadas, filasAfectadas, fechaHora, filasAfectadas);
-		 }
-		 else {
-			 System.out.println("Ya exsite una reserva");
-		 }
-		 
+
+		if (filasAfectadas == 0) {
+			Reserva r = new Reserva(filasAfectadas, filasAfectadas, filasAfectadas, filasAfectadas, fechaHora,
+					filasAfectadas);
+		} else {
+			System.out.println("Ya exsite una reserva");
+		}
+
 		return null;
 	}
-	
-	//TODO cambiar estado reserva dado su id @Paula
+
+	// TODO cambiar estado reserva dado su id @Paula
 	public static Reserva cambiarEstadoReserva(int nuevoEstado, int idSuscriptor, int idReserva) throws Throwable {
 		try {
-			String sentenciaSQL="UPDATE reserva SET estado=1 WHERE idSuscriptor="+idSuscriptor+";";
+			String sentenciaSQL = "UPDATE reserva SET estado=1 WHERE idSuscriptor=" + idSuscriptor + ";";
 			BilboSKP conexion = new BilboSKP();
-			ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
 			int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
-		
+			if (filasAfectadas == 1) {
+				System.out.println("Se pudo cambiar el estado a la reserva");
+			}
 		} catch (Exception e) {
-			
+
 		}
-		
+
 		return null;
 	}
 }
