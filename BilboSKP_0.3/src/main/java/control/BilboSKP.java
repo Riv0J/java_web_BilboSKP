@@ -534,45 +534,29 @@ public class BilboSKP extends DBC {
 		}
 		return vectorCupones;
 	}
-	/*
-	 * Cambiar el estado del cupon de Activo / En uso / Gastado / Caducado public
-	 * static Cupon CambiarEstado(Cupon cupon) throws Throwable { LocalDate
-	 * FechaActual = LocalDate.now(); LocalDate FechaCaducidad =
-	 * cupon.getFechaCaducidad().toLocalDate(); String disponibilidad =
-	 * cupon.getEstado();
-	 * 
-	 * // Si un cupon tiene estado entra en en la condicion if (disponibilidad !=
-	 * null) { if (disponibilidad.equalsIgnoreCase("ACTIVO")) {
-	 * 
-	 * // Si esta activo significa que puede estar caducado if
-	 * (FechaActual.isBefore(FechaCaducidad)) { // Si no esta caducado se cambia el
-	 * estado a EN USO String sentenciaSQL =
-	 * "UPDATE cupon SET estado = 'En uso' WHERE idCupon = " + cupon.getId() + ";";
-	 * BilboSKP conexion = new BilboSKP(); ResultSet resultado =
-	 * conexion.SQLQuery(sentenciaSQL); cupon.setEstado("EN USO");
-	 * 
-	 * // Si no esta caducado se cambia el estado a EN USO } else if
-	 * (FechaActual.isAfter(FechaCaducidad)) { cupon.setEstado("CADUCADO"); String
-	 * sentenciaSQL = "UPDATE cupon SET estado = 'Caducado' WHERE idCupon = " +
-	 * cupon.getId() + ";"; BilboSKP conexion = new BilboSKP(); ResultSet resultado
-	 * = conexion.SQLQuery(sentenciaSQL); return cupon; } else {
-	 * System.out.println("Caduca hoy"); return cupon; }
-	 * 
-	 * // Si no esta caducado igual esta en uso } else if
-	 * (disponibilidad.equalsIgnoreCase("EN USO")) { cupon.setEstado("GASTADO");
-	 * String sentenciaSQL = "UPDATE cupon SET estado = 'Gastado' WHERE idCupon = "
-	 * + cupon.getId() + ";"; BilboSKP conexion = new BilboSKP(); ResultSet
-	 * resultado = conexion.SQLQuery(sentenciaSQL); return cupon; } else {
-	 * System.out.println("Esta inutilizable"); } return cupon; } else {
-	 * cupon.setEstado("ACTIVO"); String sentenciaSQL =
-	 * "UPDATE cupon SET estado = 'Gastado' WHERE idCupon = " + cupon.getId() + ";";
-	 * BilboSKP conexion = new BilboSKP(); ResultSet resultado =
-	 * conexion.SQLQuery(sentenciaSQL); } return cupon; }
-	 */
+	//cambiar estado de un cupon @Inigo
+	public static boolean cambiarEstadoCupon(int nuevoEstado, int idCupon) throws Throwable {
+		try {
+			String sentenciaSQL = "UPDATE cupon SET estado="+nuevoEstado+" WHERE idCupon=" + idCupon + ";";
+			BilboSKP conexion = new BilboSKP();
+			int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
+			if (filasAfectadas == 1) {
+				System.out.println("Se pudo cambiar el estado del cupon");
+				return true;
+			} else {
+				System.out.println("NO Se pudo cambiar el estado del cupon");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error cambiando el estado del cupon");
+		}
+		return false;
+	}
 
-	// otorgar cupon de bienvenida @Rivo
+	// otorgar cupon @Rivo
 	public static void otorgarCupon(String tipoCupon, int idSuscriptor) throws Throwable {
 		try {
+			//determinar la fecha de caducidad y la reembolsabilidad del cupon
 			java.sql.Date fechaCaducidad;
 			int reembolsable;
 			switch (tipoCupon) {
@@ -594,16 +578,16 @@ public class BilboSKP extends DBC {
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + tipoCupon);
 			}
-			String[] arrayColumnas = { "idSuscriptor", "fechaCaducidad", "estado", "reembolsable"};
-			Object[] arrayValores = {idSuscriptor, fechaCaducidad, "Disponible", reembolsable};
+			String[] arrayColumnas = { "idSuscriptor", "fechaCaducidad", "estado", "reembolsable" };
+			Object[] arrayValores = { idSuscriptor, fechaCaducidad, "Disponible", reembolsable };
 			String sentenciaSQL = SQLHelper.obtenerSentenciaSQLInsert("cupon", arrayColumnas, arrayValores);
 			BilboSKP conexion = new BilboSKP();
 			System.out.println(sentenciaSQL);
 			int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
 			if (filasAfectadas == 1) {
-				System.out.println("Cupon de "+tipoCupon+" creado");
+				System.out.println("Cupon de " + tipoCupon + " creado");
 			} else {
-				System.out.println("Cupon de "+tipoCupon+" NO SE HA CREADO");
+				System.out.println("Cupon de " + tipoCupon + " NO SE HA CREADO");
 
 			}
 		} catch (Exception e) {
