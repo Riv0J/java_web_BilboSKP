@@ -5,6 +5,9 @@ import java.time.Month;
 import java.util.Date;
 
 public class Cupon {
+	public static final String CUPON_BIENVENIDA = "Bienvenida";
+	public static final String CUPON_REGULAR = "Regular";
+	public static final String CUPON_RANKING = "Ranking";
 	private int idCupon, idSuscriptor;
 	private String estado;
 	private Date fechaCaducidad;
