@@ -62,11 +62,9 @@ public class SQLHelper {
 		return convertirFechaUtilASql(fechaUtilFin);
 	}
 
-	public static java.sql.Date getFechaCuponRanking() {
+	public static java.sql.Date getFechaCuponRegular() {
 		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.YEAR, 2077);
-		cal.set(Calendar.MONTH, Calendar.DECEMBER);
-		cal.set(Calendar.DAY_OF_MONTH, 31);
+		cal.add(Calendar.MONTH, 1);
 		java.util.Date fechaUtil = cal.getTime();
 		java.sql.Date fechaSql = convertirFechaUtilASql(fechaUtil);
 		return fechaSql;
@@ -74,7 +72,9 @@ public class SQLHelper {
 
 	public static java.sql.Date getFechaCuponBienvenida() {
 		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.MONTH, 1);
+		cal.set(Calendar.YEAR, 2077);
+		cal.set(Calendar.MONTH, Calendar.DECEMBER);
+		cal.set(Calendar.DAY_OF_MONTH, 31);
 		java.util.Date fechaUtil = cal.getTime();
 		java.sql.Date fechaSql = convertirFechaUtilASql(fechaUtil);
 		return fechaSql;
