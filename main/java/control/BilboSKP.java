@@ -447,7 +447,29 @@ public class BilboSKP extends DBC {
 		}
 		return null;
 	}
+	
+	public static boolean ReiniciarRanking(int idSala) throws Throwable {
+		try {
+			String sentenciaSQL ="DELETE * FROM rankingonline WHERE idSala = "+idSala+";";
+			BilboSKP conexion = new BilboSKP();
+			int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
+			if (filasAfectadas == 1) {
+				System.out.println(sentenciaSQL);
+				System.out.println("Ha sido borrado con exito");
+				return true;
+			}else {
 
+				System.out.println("No ha sido borrado");
+				return false;
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Error al reiniciar ranking");
+			return false;
+			
+		}
+		
 	// guardar una partida online en la bd @Rivo
 	public static boolean guardarPartidaOnline(PartidaOnline PO) {
 		try {
