@@ -387,7 +387,7 @@ CREATE TABLE IF NOT EXISTS `salaonline` (
 
 -- Dumping data for table bilboskpdb.salaonline: ~3 rows (approximately)
 INSERT INTO `salaonline` (`idSala`, `nombre`, `dificultad`, `tematica`, `descripcion`, `tiempoMax`, `jugadoresMin`, `jugadoresMax`, `edad_recomendada`) VALUES
-	(1, 'Perdidos de la mano de Dios', 'Intermedia', 'Terror', 'Vas de camino en medio del bosque, donde eres abducido por un loco perteneciente a una secta. Te das cuenta que ahora estás en un bosque, perdido de la mano de Dios…', 90, 1, 8, 16),
+	(1, 'Perdidos de la mano de Dios', 'Media', 'Terror', 'Vas de camino en medio del bosque, donde eres abducido por un loco perteneciente a una secta. Te das cuenta que ahora estás en un bosque, perdido de la mano de Dios…', 90, 1, 8, 16),
 	(2, 'El Gimnasio Infernal', 'Difícil', 'Fitness', 'En un gimnasio de élite, un grupo de crossfiteros debe luchar contra una conspiración interna, encontrar al impostor entre ellos y superar pruebas físicas y mentales para escapar antes de que sea muy tarde.', 60, 3, 8, 18),
 	(3, 'Hasta la luz del alba', 'Fácil', 'Misterio', 'Un grupo de amigos se encuentran la escena de una cabaña abandonada en el medio del bosque, curiosamente encuentran pistas sobre los que solían habitarla, y la tragedia que les precedió. Terminan siendo víctima de algo más allá de la comprensión humana.', 90, 2, 8, 18);
 

@@ -17,12 +17,6 @@ HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("
 			<div class="caja_titulo">
 				<h2>No se encontraron salas, por favor int�ntalo de nuevo</h2>
 			</div>
-			<div class="caja_sinopsis">
-				<p>Has descubierto que un amigo desaparecio bajo extranias
-					circunstancias. Con los años se descubre que perteneció a una
-					secta que se reunía en medio del bosque. Ahora vas con unos amigos
-					a explorar el lugar, perdido de la mano de Dios…</p>
-			</div>
 			<div class="caja_organizar">
 				<button>
 					<a href="./salas">Reintentar</a>
@@ -36,11 +30,11 @@ HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("
 			String idSala = par.getKey();
 			String nombreSala = sala.getNombre();
 			String textoBoton = "Organizar partida";
-			String enlaceBoton = "./organizar/" + idSala;
+			String enlaceBoton = "./organizar?id=" + idSala;
 			String modalidad = "Online";
 			if (sala instanceof SalaFisica) {
 				textoBoton = "Realizar Reserva";
-				enlaceBoton = "./reservar/" + idSala;
+				enlaceBoton = "./reservar?id=" + idSala;
 				modalidad = "F�sica";
 			}
 		%>
