@@ -27,14 +27,29 @@ seccion = "secciones/" + seccion + ".jsp";
 <body>
 	<%--<%@include file="plantillas/nav.jsp"--%>
 	<header>
-	<ul>
-	<a href="./perfil" > <li>Mi perfil</li></a>
-	
-	</ul>
+		<ul>
+			<a href="./salas">
+				<li>Salas de escape</li>
+			</a>
+			<a href="./salas">
+				<li>Ranking</li>
+			</a>
+			<a href="./tienda">
+				<li>Mi perfil</li>
+			</a>
+			<a href="./perfil">
+				<li>Mi perfil</li>
+			</a>
+			<a href="./salas">
+				<li>Unirse a una partida</li>
+			</a>
+			<a href="./salas" > <li>Contacto</li></a>
+
+		</ul>
 	</header>
 	<main>
 		<%-- <jsp:include page="plantillas/mensaje.jsp"></jsp:include>--%>
-		
+
 		<jsp:include page="<%=seccion%>"></jsp:include>
 	</main>
 </body>
