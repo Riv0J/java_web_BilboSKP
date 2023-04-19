@@ -13,8 +13,6 @@ seccion = "secciones/" + seccion + ".jsp";
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/header_footerR.css">
-<link rel="stylesheet" href="css/quienes_somosV2.css">
 <link rel="stylesheet" href="normalize.css">
 <title>BilboSKP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,7 +32,7 @@ seccion = "secciones/" + seccion + ".jsp";
 				<li>Ranking</li>
 			</a>
 			<a href="./tienda">
-				<li>Mi perfil</li>
+				<li>Tienda</li>
 			</a>
 			<a href="./perfil">
 				<li>Mi perfil</li>

@@ -3,16 +3,19 @@ package control;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Vector;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
-
+import model.Sala;
 import model.SalaOnline;
 import view.Mensaje;
 
@@ -22,25 +25,42 @@ public class ServletSalas extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		System.out.println("Doget Salas");
 		try {
-			// 1.Contactar con el modelo para obtener los datos necesarios
-			Vector<SalaOnline> vectorSalas = BilboSKP.getSalasOnline();
+			// 1. Obtener los parametros necesarios para saber que salas mostrar
+			HashMap<String, Sala> mapaSalas;
+			String search = request.getParameter("search");
+			String modalidad = request.getParameter("modalidad");
+			String tematica = request.getParameter("tematica");
 			
-			// 2.Enviar colección de gatos a la vista (index?sec=galeria)
-			System.out.println("reenviando a index.jsp?sec=salas");
-			for (SalaOnline salaOnline : vectorSalas) {
-				System.out.println(salaOnline.getNombre());
+			if (search == null || search.equals("all")) {
+				System.out.println("Mostrando todas las salas");
+				mapaSalas = Sala.getTodasLasSalasCargadas();
+			} else {
+				mapaSalas = Sala.getTodasLasSalasCargadas();
 			}
-			request.setAttribute("vectorSalas", vectorSalas);
+
+			for (Map.Entry<String, Sala> par : mapaSalas.entrySet()) {
+				System.out.println(par.getValue().getNombre());
+			}
+			// 2.Enviar colección de salas a la vista
+			request.setAttribute("mapaSalas", mapaSalas);
+			System.out.println("reenviando a index.jsp?sec=salas");
 			request.getRequestDispatcher("index.jsp?sec=salas").forward(request, response);
 
-		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 
 	}
-
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		try {
+			BilboSKP.cargarSalasFisicas();
+			BilboSKP.cargarSalasOnline();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		
+	}
 }

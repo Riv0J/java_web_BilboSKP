@@ -1,14 +1,14 @@
 package model;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Vector;
 
 public abstract class Sala {
 	int idSala;
 	private String nombre, dificultad, tematica, descripcion;
 	private int tiempoMax, jugadoresMin, jugadoresMax, edad_recomendada;
-	
-	private static HashMap<String, Sala> salasCargadas = new HashMap<String, Sala>();
-	
 	public Sala(int idSala, String nombre, String dificultad, String tematica, String descripcion, int tiempoMax,
 			int jugadoresMin, int jugadoresMax, int edad_recomendada) {
 		super();
@@ -75,5 +75,19 @@ public abstract class Sala {
 	}
 	public int getIdSala() {
 		return this.idSala;
+	}
+	public static HashMap<String, Sala> getTodasLasSalasCargadas(){
+		HashMap<String, Sala> mapaSalasCargadas = new HashMap<String, Sala>();
+		//agregar las salas online cargadas
+		HashMap<Integer, SalaOnline> salasOnline = SalaOnline.getSalasCargadas();
+		for(Map.Entry<Integer, SalaOnline> par : salasOnline.entrySet()) {
+			mapaSalasCargadas.put("SO"+par.getKey(),par.getValue());
+		}
+		//agregar las salas fisicas cargadas
+		HashMap<Integer, SalaFisica> salasFisicas = SalaFisica.getSalasCargadas();
+		for(Map.Entry<Integer, SalaFisica> par : salasFisicas.entrySet()) {
+			mapaSalasCargadas.put("SF"+par.getKey(),par.getValue());
+		}
+		return mapaSalasCargadas;
 	}
 }
