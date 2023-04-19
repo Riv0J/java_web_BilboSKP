@@ -553,6 +553,26 @@ public class BilboSKP extends DBC {
 		return false;
 	}
 
+	public static boolean cambiarEstadoCuponesCaducados() throws Throwable {
+		try {
+			LocalDate fechaActual = LocalDate.now();
+			LocalDate fechaAnterior = fechaActual.minusDays(1);
+			String sentenciaSQL ="UPDATE cupon SET estado = 'caducado' WHERE fechaCaducidad ="+fechaAnterior+";";
+			BilboSKP conexion = new BilboSKP();
+			int filasAfectadas= conexion.SQLUpdate(sentenciaSQL);
+			if (filasAfectadas == 1) {
+				System.out.println("Se pudo cambiar el estado de los cupones");
+				return true;
+			} else {
+				System.out.println("NO Se pudo cambiar el estado de los cupones");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error cambiando el estado de los cupones");
+		}
+		return false;
+	}
 	// otorgar cupon @Rivo
 	public static void otorgarCupon(String tipoCupon, int idSuscriptor) throws Throwable {
 		try {
