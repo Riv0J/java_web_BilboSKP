@@ -14,15 +14,13 @@ import javax.servlet.http.HttpSession;
 
 import model.Suscriptor;
 //
-@WebFilter({"/perfil","/organizar","/reservar"})
+@WebFilter({"/perfil/","/perfil/*","/organizar","/reservar"})
 public class FilterLogin implements Filter {
 
 	public FilterLogin() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public void destroy() {
-		// TODO Auto-generated method stub
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
