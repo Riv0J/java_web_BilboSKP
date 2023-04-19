@@ -6,7 +6,7 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>Hola, este es el inicio de nuestra humilde bilboskp
-</form>
+<body>
+Hola, este es el inicio de nuestra humilde bilboskp
 </body>
 </html>

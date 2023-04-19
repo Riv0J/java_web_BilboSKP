@@ -16,7 +16,6 @@ seccion = "secciones/" + seccion + ".jsp";
 <link rel="stylesheet" href="css/header_footerR.css">
 <link rel="stylesheet" href="css/quienes_somosV2.css">
 <link rel="stylesheet" href="normalize.css">
-
 <title>BilboSKP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link
