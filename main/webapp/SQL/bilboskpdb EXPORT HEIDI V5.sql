@@ -400,18 +400,16 @@ CREATE TABLE IF NOT EXISTS `salaonline` (
   CONSTRAINT `jugadoresMin` CHECK (`jugadoresMin` <= `jugadoresMax` and `jugadoresMin` >= 1)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla bilboskpdb.salaonline: ~9 rows (aproximadamente)
+-- Volcando datos para la tabla bilboskpdb.salaonline: ~7 rows (aproximadamente)
 DELETE FROM `salaonline`;
 INSERT INTO `salaonline` (`idSala`, `nombre`, `dificultad`, `tematica`, `descripcion`, `tiempoMax`, `jugadoresMin`, `jugadoresMax`, `edad_recomendada`) VALUES
 	(1, 'Perdidos de la mano de Dios', 'Media', 'Terror', 'Vas de camino en medio del bosque, donde eres abducido por un loco perteneciente a una secta. Te das cuenta que ahora estás en un bosque, perdido de la mano de Dios…', 90, 1, 8, 16),
 	(2, 'El Gimnasio Infernal', 'Difícil', 'Fitness', 'En un gimnasio de élite, un grupo de crossfiteros debe luchar contra una conspiración interna, encontrar al impostor entre ellos y superar pruebas físicas y mentales para escapar antes de que sea muy tarde.', 60, 3, 8, 18),
-	(3, 'Hasta la luz del alba', 'Fácil', 'Misterio', 'Un grupo de amigos se encuentran la escena de una cabaña abandonada en el medio del bosque, curiosamente encuentran pistas sobre los que solían habitarla, y la tragedia que les precedió. Terminan siendo víctima de algo más allá de la comprensión humana.', 90, 2, 8, 18),
-	(4, 'El tesoro del pirata', 'Media', 'Aventura', 'En una isla desierta, un grupo de piratas debe encontrar el tesoro escondido por el legendario capitán Barbanegra. Sin embargo, el camino no será fácil, ya que tendrán que enfrentarse a trampas y enemigos.', 75, 2, 6, 12),
-	(5, 'El museo maldito', 'Difícil', 'Sobrenatural', 'Un grupo de investigadores debe resolver el misterio detrás de una serie de extraños sucesos en un museo abandonado. Descubrirán que el lugar está maldito y tendrán que enfrentarse a las fuerzas sobrenaturales para sobrevivir.', 90, 3, 7, 18),
-	(6, 'La mansión encantada', 'Fácil', 'Terror', 'Un grupo de amigos decide explorar una mansión abandonada en la colina, pero pronto se darán cuenta de que el lugar está encantado por espíritus vengativos. Tendrán que encontrar la manera de escapar antes de que sea demasiado tarde.', 60, 2, 6, 16),
-	(7, 'La ciudad perdida', 'Difícil', 'Aventura', 'Un equipo de arqueólogos se adentra en una selva remota para encontrar la legendaria ciudad perdida de los mayas. Pero no están solos, ya que una peligrosa banda de cazadores de tesoros también está tras la pista.', 120, 4, 10, 18),
-	(8, 'La fábrica de sueños', 'Media', 'Sci-fi', 'En un futuro distópico, la compañía DreamCorp ofrece a sus clientes la oportunidad de experimentar cualquier sueño que deseen. Pero cuando un grupo de usuarios se quedan atrapados en un sueño compartido, tendrán que encontrar la manera de despertar.', 90, 2, 6, 18),
-	(9, 'El asesino del ajedrez', 'Difícil', 'Misterio', 'En un torneo de ajedrez de élite, uno de los jugadores es encontrado muerto en su habitación de hotel. El resto de los participantes deberán resolver el crimen antes de que el asesino ataque de nuevo.', 120, 4, 8, 16);
+	(3, 'Hasta la luz del alba', 'Fácil', 'Misterio', 'Un grupo de amigos se encuentran la escena de una cabaña abandonada en el medio del bosque, curiosamente encuentran pistas sobre los que solían habitarla, y la tragedia que les precedió. Terminan siendo víctima de algo más allá de la comprensión humana.', 30, 2, 8, 18),
+	(5, 'El museo maldito', 'Difícil', 'Terror', 'Un grupo de investigadores debe resolver el misterio detrás de una serie de extraños sucesos en un museo abandonado. Descubrirán que el lugar está maldito y tendrán que enfrentarse a las fuerzas sobrenaturales para sobrevivir.', 90, 3, 7, 18),
+	(6, 'La mansión encantada', 'Fácil', 'Sobrenatural', 'Un grupo de amigos decide explorar una mansión abandonada en la colina, pero pronto se darán cuenta de que el lugar está encantado por espíritus vengativos. Tendrán que encontrar la manera de escapar antes de que sea demasiado tarde.', 45, 2, 6, 16),
+	(9, 'El asesino del ajedrez', 'Difícil', 'Misterio', 'En un torneo de ajedrez de élite, uno de los jugadores es encontrado muerto en su habitación de hotel. El resto de los participantes deberán resolver el crimen antes de que el asesino ataque de nuevo.', 90, 4, 8, 16),
+	(10, 'Traición en el espacio', 'Difícil', 'Sci-fi', 'Eres un tripulante de una nave espacial y tienes la misión de descubrir al impostor que se encuentra entre la tripulación. Resuelve acertijos y tareas mientras tratas de encontrar pistas para descubrir al impostor antes de que sea demasiado tarde.', 90, 4, 8, 16);
 
 -- Volcando estructura para tabla bilboskpdb.suscriptor
 CREATE TABLE IF NOT EXISTS `suscriptor` (

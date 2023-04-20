@@ -35,7 +35,7 @@ HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("
 			if (sala instanceof SalaFisica) {
 				textoBoton = "Realizar Reserva";
 				enlaceBoton = "./reservar?id=" + idSala;
-				modalidad = "Física";
+				modalidad = "Reserva";
 			}
 		%>
 		<article class="caja_sala">
@@ -74,16 +74,16 @@ HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("
 						<div><%=sala.getTematica() %></div>
 					</div>
 				</div>
-				<div class="etiqueta calificacion">
+				<div class="etiqueta modalidad">
 					<div>
-						<img class="icon" src="img_web/icons/star.svg" alt="Calif">
-						<div>5</div>
+						<img class="icon" src="img_web/icons/<%=modalidad %>.svg" alt="Modo">
+						<div><%=modalidad %></div>
 					</div>
 				</div>
 			</div>
 			<div class="caja_organizar">
 				<button>
-					<a href=<%=enlaceBoton%>><%=textoBoton%></a>
+					<a href=<%=enlaceBoton%>>Ver más</a>
 				</button>
 			</div>
 		</article>

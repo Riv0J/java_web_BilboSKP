@@ -45,14 +45,13 @@
 }
 .etiqueta p{
     font-size: 1em;
-
 }
 .etiqueta{
     margin: 0.25%;
     display: flex;
     align-items: flex-start;
     flex-direction: row;
-    gap: 5%;
+    gap: 10%;
     height: 60%;
     width: 25%;
 }
@@ -68,8 +67,11 @@
 .tematica div img {
     width: 37.5%;
 }
-.calificacion div img{
+.modalidad div img{
     width: 35%;
+}
+.modalidad{
+	margin-left: 10%;
 }
 .caja_organizar{
     width: 100%;
