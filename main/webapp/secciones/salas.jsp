@@ -5,7 +5,35 @@ HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("
 %>
 
 <link rel="stylesheet" href="css/salas.css">
+<section id="contenedor_buscador">
+	<form>
+		<div id="wrapper_buscador">
+			<div id="caja_buscador">
+				<img alt="" src="img_web/iconos_salas/Lupa.svg"> <input
+					type="text" id="buscar" name="buscar" value=""
+					placeholder="Buscar salas por nombre">
+			</div>
+		</div>
+		<div id="wrapper_filtros">
+			<div id="caja_filtros">
+				<select id="modalidad" name="modalidad">
+					<option value="todas">Todas las modalidades</option>
+					<option value="online">Salas Online</option>
+					<option value="fisicas">Salas Físicas</option>
+				</select> <select id="tematica" name="tematica">
+					<option value="todas">Todas las temáticas</option>
+				</select> <select id="dificultad" name="dificultad">
+					<option value="todas">Todas las dificultades</option>
+				</select>
+			</div>
+		</div>
+	</form>
+</section>
+<section id="caja_titulo_resultados">
+	<h2>Mostrando x resultados de la búsqueda: ""</h2>
+</section>
 <section id="contenedor_salas">
+
 	<div id=contenedor_salas_wrapper>
 		<%
 		if (mapaSalas == null || mapaSalas.size() == 0) {
@@ -37,9 +65,9 @@ HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("
 				textoBoton = "Realizar Reserva";
 				enlaceBoton = "./reservar?id=" + idSala;
 				modalidad = "Reserva";
-				
+
 			}
-			if(sala.getTematica().equals("Suspenso")){
+			if (sala.getTematica().equals("Suspenso")) {
 				classTematicaLarga = "tematica_larga";
 			}
 		%>
