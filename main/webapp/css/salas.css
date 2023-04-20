@@ -15,7 +15,6 @@
 .caja_sala{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     width: 22.5%;
     background-color: wheat;

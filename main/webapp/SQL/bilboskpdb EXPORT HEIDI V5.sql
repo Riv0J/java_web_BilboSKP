@@ -377,12 +377,11 @@ CREATE TABLE IF NOT EXISTS `salafisica` (
   CONSTRAINT `jugadoresMin` CHECK (`jugadoresMin` <= `jugadoresMax` and `jugadoresMin` >= 1)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla bilboskpdb.salafisica: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla bilboskpdb.salafisica: ~2 rows (aproximadamente)
 DELETE FROM `salafisica`;
 INSERT INTO `salafisica` (`idSala`, `nombre`, `dificultad`, `tematica`, `descripcion`, `tiempoMax`, `jugadoresMin`, `jugadoresMax`, `edad_recomendada`, `direccion`, `telefono`) VALUES
-	(1, 'Misterio en la mansión', 'Intermedio', 'Misterio', 'Investiga una mansión abandonada y resuelve los enigmas que esconde su oscuro pasado.', 60, 6, 8, 18, 'Calle Mayor 25', 987654321),
-	(2, 'Escape de la cárcel', 'Difícil', 'Acción', 'Te has despertado encerrado en una prisión de máxima seguridad sin recordar cómo llegaste allí. Deberás trabajar en equipo para encontrar la forma de escapar antes de que los guardias descubran tu plan.', 90, 3, 6, 16, 'Avenida de la Libertad 10', 123456789),
-	(3, 'La caja de Pandora', 'Fácil', 'Aventura', 'Has encontrado una misteriosa caja en un mercado de antigüedades. Descubre su secreto y evita que caiga en manos equivocadas.', 75, 2, 4, 14, 'Plaza de España 5', 654321987);
+	(1, 'Misterio en la mansión', 'Media', 'Misterio', 'Investiga una mansión abandonada y resuelve los enigmas que esconde su oscuro pasado.', 60, 6, 8, 18, 'Calle Mayor 25', 987654321),
+	(2, 'Escape de ciudad 17', 'Difícil', 'Suspenso\r\n', 'Te has despertado encerrado en una prisión de máxima seguridad sin recordar cómo llegaste allí. Deberás trabajar en equipo para encontrar la forma de escapar antes de que los guardias descubran tu plan.', 90, 6, 8, 18, 'Avenida de la Libertad 10', 123456789);
 
 -- Volcando estructura para tabla bilboskpdb.salaonline
 CREATE TABLE IF NOT EXISTS `salaonline` (
@@ -400,15 +399,14 @@ CREATE TABLE IF NOT EXISTS `salaonline` (
   CONSTRAINT `jugadoresMin` CHECK (`jugadoresMin` <= `jugadoresMax` and `jugadoresMin` >= 1)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla bilboskpdb.salaonline: ~7 rows (aproximadamente)
+-- Volcando datos para la tabla bilboskpdb.salaonline: ~6 rows (aproximadamente)
 DELETE FROM `salaonline`;
 INSERT INTO `salaonline` (`idSala`, `nombre`, `dificultad`, `tematica`, `descripcion`, `tiempoMax`, `jugadoresMin`, `jugadoresMax`, `edad_recomendada`) VALUES
 	(1, 'Perdidos de la mano de Dios', 'Media', 'Terror', 'Vas de camino en medio del bosque, donde eres abducido por un loco perteneciente a una secta. Te das cuenta que ahora estás en un bosque, perdido de la mano de Dios…', 90, 1, 8, 16),
 	(2, 'El Gimnasio Infernal', 'Difícil', 'Fitness', 'En un gimnasio de élite, un grupo de crossfiteros debe luchar contra una conspiración interna, encontrar al impostor entre ellos y superar pruebas físicas y mentales para escapar antes de que sea muy tarde.', 60, 3, 8, 18),
 	(3, 'Hasta la luz del alba', 'Fácil', 'Misterio', 'Un grupo de amigos se encuentran la escena de una cabaña abandonada en el medio del bosque, curiosamente encuentran pistas sobre los que solían habitarla, y la tragedia que les precedió. Terminan siendo víctima de algo más allá de la comprensión humana.', 30, 2, 8, 18),
-	(5, 'El museo maldito', 'Difícil', 'Terror', 'Un grupo de investigadores debe resolver el misterio detrás de una serie de extraños sucesos en un museo abandonado. Descubrirán que el lugar está maldito y tendrán que enfrentarse a las fuerzas sobrenaturales para sobrevivir.', 90, 3, 7, 18),
-	(6, 'La mansión encantada', 'Fácil', 'Sobrenatural', 'Un grupo de amigos decide explorar una mansión abandonada en la colina, pero pronto se darán cuenta de que el lugar está encantado por espíritus vengativos. Tendrán que encontrar la manera de escapar antes de que sea demasiado tarde.', 45, 2, 6, 16),
-	(9, 'El asesino del ajedrez', 'Difícil', 'Misterio', 'En un torneo de ajedrez de élite, uno de los jugadores es encontrado muerto en su habitación de hotel. El resto de los participantes deberán resolver el crimen antes de que el asesino ataque de nuevo.', 90, 4, 8, 16),
+	(5, 'El museo maldito', 'Difícil', 'Terror', 'Un grupo de investigadores debe resolver el misterio detrás de una serie de extraños sucesos en un museo abandonado. Descubrirán que el lugar está maldito y tendrán que enfrentarse a las fuerzas sobrenaturales para sobrevivir.', 90, 3, 8, 18),
+	(9, 'El asesino del ajedrez', 'Fácil', 'Misterio', 'En un torneo de ajedrez de élite, uno de los jugadores es encontrado muerto en su habitación de hotel. El resto de los participantes deberán resolver el crimen antes de que el asesino ataque de nuevo.', 45, 4, 8, 16),
 	(10, 'Traición en el espacio', 'Difícil', 'Sci-fi', 'Eres un tripulante de una nave espacial y tienes la misión de descubrir al impostor que se encuentra entre la tripulación. Resuelve acertijos y tareas mientras tratas de encontrar pistas para descubrir al impostor antes de que sea demasiado tarde.', 90, 4, 8, 16);
 
 -- Volcando estructura para tabla bilboskpdb.suscriptor

@@ -70,7 +70,7 @@ HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("
 
 				<div class="etiqueta tematica">
 					<div>
-						<img class="icon" src="img_web/icons/<%=sala.getTematica() %>.svg" alt="Tematica:">
+						<img class="icon" src="img_web/icons/<%=sala.getTematica() %>2.svg" alt="Tematica:">
 						<div><%=sala.getTematica() %></div>
 					</div>
 				</div>

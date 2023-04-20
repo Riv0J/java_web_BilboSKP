@@ -9,6 +9,11 @@ seccion = "secciones/" + seccion + ".jsp";
 %>
 <!DOCTYPE html>
 <html>
+<Style>
+#ColorPrincipal {
+	color: #29fd53;
+}
+</Style>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,7 +23,7 @@ seccion = "secciones/" + seccion + ".jsp";
 <link
 	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
 	rel="stylesheet">
-	
+
 <link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/header.css">
 <link rel="icon" type="image/x-icon" href="img/favicon.png">
@@ -42,7 +47,9 @@ seccion = "secciones/" + seccion + ".jsp";
 			<a href="./salas">
 				<li>Unirse a una partida</li>
 			</a>
-			<a href="./salas" > <li>Contacto</li></a>
+			<a href="./salas">
+				<li>Contacto</li>
+			</a>
 
 		</ul>
 	</header>
