@@ -29,11 +29,11 @@ public class ServletSalas extends HttpServlet {
 		try {
 			// 1. Obtener los parametros necesarios para saber que salas mostrar
 			HashMap<String, Sala> mapaSalas;
-			String search = request.getParameter("search");
+			String search = request.getParameter("buscar");
 			String modalidad = request.getParameter("modalidad");
 			String tematica = request.getParameter("tematica");
 			
-			if (search == null || search.equals("all")) {
+			if (search == null || search.equals("todas")) {
 				System.out.println("Mostrando todas las salas");
 				mapaSalas = Sala.getTodasLasSalasCargadas();
 			} else {

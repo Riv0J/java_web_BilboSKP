@@ -32,7 +32,7 @@ seccion = "secciones/" + seccion + ".jsp";
 	<%--<%@include file="plantillas/nav.jsp"--%>
 	<header>
 		<ul>
-			<a href="./salas">
+			<a href="./salas?buscar=todas">
 				<li>Salas de escape</li>
 			</a>
 			<a href="./salas">

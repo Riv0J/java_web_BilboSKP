@@ -50,35 +50,47 @@ HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("
 			</div>
 			<div class="caja_etiquetas">
 				<div class="etiqueta jugadores">
-					<div>
-						<img class="icon" src="img_web/iconos_salas/user.svg" alt="Jugadores:">
-						<div><%=sala.getJugadoresMin() %>-<%=sala.getJugadoresMax() %></div>
+					<div class="caja_icon">
+						<img class="icon" src="img_web/iconos_salas/User.svg"
+							alt="Jugadores:">
 					</div>
+
+					<div class="caja_text"><%=sala.getJugadoresMin()%>-<%=sala.getJugadoresMax()%></div>
 				</div>
 				<div class="etiqueta dificultad">
-					<div>
-						<img class="icon" src="img_web/iconos_salas/lock.svg" alt="Dificultad:">
-						<div><%=sala.getDificultad() %></div>
+					<div class="caja_icon">
+						<img class="icon" src="img_web/iconos_salas/Lock.svg"
+							alt="Dificultad:">
 					</div>
+
+					<div class="caja_text"><%=sala.getDificultad()%></div>
 				</div>
 				<div class="etiqueta tiempo">
-					<div>
-						<img class="icon" src="img_web/iconos_salas/clock.svg" alt="Tiempo:">
-						<div><%=sala.getTiempoMax() %>'</div>
+					<div class="caja_icon">
+						<img class="icon" src="img_web/iconos_salas/Clock.svg"
+							alt="Tiempo:">
+					</div>
+
+					<div class="caja_text"><%=sala.getTiempoMax()%>'
 					</div>
 				</div>
 
 				<div class="etiqueta tematica">
-					<div>
-						<img class="icon" src="img_web/iconos_salas/<%=sala.getTematica()%>.svg" alt="Tematica:">
-						<div><%=sala.getTematica() %></div>
+					<div class="caja_icon">
+						<img class="icon"
+							src="img_web/iconos_salas/<%=sala.getTematica()%>.svg"
+							alt="Tematica:">
 					</div>
+
+					<div class="caja_text"><%=sala.getTematica()%></div>
 				</div>
 				<div class="etiqueta modalidad">
-					<div>
-						<img class="icon" src="img_web/iconos_salas/<%=modalidad %>.svg" alt="Modo">
-						<div><%=modalidad %></div>
+					<div class="caja_icon">
+						<img class="icon" src="img_web/iconos_salas/<%=modalidad%>.svg"
+							alt="Modo">
 					</div>
+
+					<div class="caja_text"><%=modalidad%></div>
 				</div>
 			</div>
 			<div class="caja_organizar">

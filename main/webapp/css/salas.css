@@ -1,88 +1,96 @@
-#contenedor_salas{
-    display: flex;
-    justify-content: center;
-}
-#contenedor_salas h2{
-    font-size: 1em;
-}
-#contenedor_salas_wrapper{
-    width: 90%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 3%;
-}
-.caja_sala{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 22.5%;
-    background-color: wheat;
-}
-.caja_img{
-    width: 100%;
-}
-.caja_img img{
-    width: 100%;
-    height: auto;
-}
-.caja_sinopsis, .caja_sinopsis, .caja_etiqueta{
-    width: 90%;
-}
-.caja_sinopsis{
-    display: none;
+#contenedor_salas {
+	display: flex;
+	justify-content: center;
 }
 
-.caja_etiquetas{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+#contenedor_salas h2 {
+	font-size: 1em;
 }
-.caja_etiqueta div{
-    width: 10%;
+
+#contenedor_salas_wrapper {
+	width: 90%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	gap: 2%;
 }
-.etiqueta p{
-    font-size: 1em;
+
+.caja_sala {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 22.5%;
+	margin-bottom: 1%;
+	background-color: wheat;
 }
-.etiqueta{
-    margin: 0.25%;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: row;
-    gap: 10%;
-    height: 60%;
-    width: 25%;
+
+.caja_img {
+	width: 100%;
 }
-.etiqueta div{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5%;
+
+.caja_img img {
+	width: 100%;
+	height: auto;
 }
-.icon{
-    width: 30%;
+
+.caja_sinopsis, .caja_sinopsis{
+	width: 90%;
 }
-.tematica div img {
-    width: 35%;
+
+.caja_sinopsis {
+	display: none;
 }
-.modalidad div img{
-    width: 35%;
+
+.caja_etiquetas {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 90%;
 }
-.dificultad div img{
-    width: 35%;
+
+.etiqueta p {
+	font-size: 1em;
+}
+
+.etiqueta {
+	margin: 0.25%;
+	display: flex;
+	align-items: center;
+	justify-content: center; flex-direction : row;
+	height: 60%;
+	width: 32%;
+	flex-direction: row;
 }
 .modalidad{
-	margin-left: 10%;
+	margin-left: 2%;
 }
-.caja_organizar{
-    width: 100%;
-display: flex;
-align-items: center;
-justify-content: center;
+.caja_icon{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 35%;
+	height: 100%;
 }
-.caja_organizar button{
-    width: 55%;
-    margin-top: 7%;
-    margin-bottom: 5%;
+
+.caja_text{
+	margin-left: 7%;
+	text-align: left;
+}
+
+.caja_icon{
+	width: 27.5%;
+}
+
+.caja_organizar {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.caja_organizar button {
+	width: 55%;
+	margin-top: 7%;
+	margin-bottom: 5%;
 }
