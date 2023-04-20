@@ -1,0 +1,9 @@
+header ul{
+	display: flex;
+	flex-direction: row;
+	
+}
+header a{
+	width: 15%;
+	
+}
