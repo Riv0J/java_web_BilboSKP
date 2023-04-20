@@ -1,17 +1,17 @@
 #contenedor_salas {
 	display: flex;
 	justify-content: center;
+	font-size: 0.9em;
+	font-family: Poppins;
 }
-
-#contenedor_salas h2 {
-	font-size: 1em;
+#contenedor_salas h2{
+	font-size: 1.2em;
 }
-
 #contenedor_salas_wrapper {
 	width: 90%;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: flex-start;
+	justify-content: center;
 	gap: 2%;
 }
 
@@ -54,7 +54,7 @@
 }
 
 .etiqueta {
-	margin: 0.25%;
+	margin: 0.3%;
 	display: flex;
 	align-items: center;
 	justify-content: center; flex-direction : row;
@@ -63,8 +63,9 @@
 	flex-direction: row;
 }
 .modalidad{
-	margin-left: 2%;
+	margin-left: 5%;
 }
+
 .caja_icon{
 	display: flex;
 	align-items: center;
@@ -72,9 +73,14 @@
 	width: 35%;
 	height: 100%;
 }
-
+.tematica_larga{
+	margin-right: 5%;
+}
+.tematica_larga .caja_text{
+	width: 60%;
+}
 .caja_text{
-	margin-left: 7%;
+	margin-left: 4%;
 	text-align: left;
 }
 

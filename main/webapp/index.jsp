@@ -23,7 +23,8 @@ seccion = "secciones/" + seccion + ".jsp";
 <link
 	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
 	rel="stylesheet">
-
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/header.css">
 <link rel="icon" type="image/x-icon" href="img/favicon.png">
