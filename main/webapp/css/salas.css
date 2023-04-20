@@ -61,12 +61,15 @@
     gap: 5%;
 }
 .icon{
-    width: 25%;
+    width: 30%;
 }
 .tematica div img {
-    width: 37.5%;
+    width: 35%;
 }
 .modalidad div img{
+    width: 35%;
+}
+.dificultad div img{
     width: 35%;
 }
 .modalidad{

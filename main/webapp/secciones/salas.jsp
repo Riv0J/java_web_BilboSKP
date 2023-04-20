@@ -51,32 +51,32 @@ HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("
 			<div class="caja_etiquetas">
 				<div class="etiqueta jugadores">
 					<div>
-						<img class="icon" src="img_web/icons/user.svg" alt="Jugadores:">
+						<img class="icon" src="img_web/iconos_salas/user.svg" alt="Jugadores:">
 						<div><%=sala.getJugadoresMin() %>-<%=sala.getJugadoresMax() %></div>
 					</div>
 				</div>
 				<div class="etiqueta dificultad">
 					<div>
-						<img class="icon" src="img_web/icons/lock.svg" alt="Dificultad:">
+						<img class="icon" src="img_web/iconos_salas/lock.svg" alt="Dificultad:">
 						<div><%=sala.getDificultad() %></div>
 					</div>
 				</div>
 				<div class="etiqueta tiempo">
 					<div>
-						<img class="icon" src="img_web/icons/clock.svg" alt="Tiempo:">
+						<img class="icon" src="img_web/iconos_salas/clock.svg" alt="Tiempo:">
 						<div><%=sala.getTiempoMax() %>'</div>
 					</div>
 				</div>
 
 				<div class="etiqueta tematica">
 					<div>
-						<img class="icon" src="img_web/icons/<%=sala.getTematica() %>2.svg" alt="Tematica:">
+						<img class="icon" src="img_web/iconos_salas/<%=sala.getTematica()%>.svg" alt="Tematica:">
 						<div><%=sala.getTematica() %></div>
 					</div>
 				</div>
 				<div class="etiqueta modalidad">
 					<div>
-						<img class="icon" src="img_web/icons/<%=modalidad %>.svg" alt="Modo">
+						<img class="icon" src="img_web/iconos_salas/<%=modalidad %>.svg" alt="Modo">
 						<div><%=modalidad %></div>
 					</div>
 				</div>
