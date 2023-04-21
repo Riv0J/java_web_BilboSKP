@@ -2,6 +2,7 @@ package control;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Sala;
+import model.SalaFisica;
 import model.SalaOnline;
 import view.Mensaje;
 
@@ -27,40 +29,102 @@ public class ServletSalas extends HttpServlet {
 			throws ServletException, IOException {
 		System.out.println("Doget Salas");
 		try {
-			// 1. Obtener los parametros necesarios para saber que salas mostrar
-			HashMap<String, Sala> mapaSalas;
-			String search = request.getParameter("buscar");
-			String modalidad = request.getParameter("modalidad");
-			String tematica = request.getParameter("tematica");
-			
-			if (search == null || search.equals("todas")) {
-				System.out.println("Mostrando todas las salas");
-				mapaSalas = Sala.getTodasLasSalasCargadas();
-			} else {
-				mapaSalas = Sala.getTodasLasSalasCargadas();
+			HashMap<String, Sala> mapaSalas = Sala.getTodasLasSalasCargadas();
+			HashMap<String, Sala> salasAMostrar = new HashMap<String, Sala>();
+
+			// Obtener los parámetros de búsqueda de la solicitud HTTP
+			String paramBuscar = request.getParameter("buscar");
+			String busquedaNormalizada = null;
+			String paramModalidad = request.getParameter("m");
+			System.out.println(paramModalidad);
+			String paramTematica = request.getParameter("t");
+			String paramDificultad = request.getParameter("d");
+
+			if (paramBuscar != null) {
+				// normalizar(quitar acentos y poner minusculas)
+				busquedaNormalizada = normalizarTexto(paramBuscar);
 			}
 
-			for (Map.Entry<String, Sala> par : mapaSalas.entrySet()) {
-				System.out.println(par.getValue().getNombre());
-			}
-			// 2.Enviar colección de salas a la vista
-			request.setAttribute("mapaSalas", mapaSalas);
-			System.out.println("reenviando a index.jsp?sec=salas");
-			request.getRequestDispatcher("index.jsp?sec=salas").forward(request, response);
+			// Iterar el mapa de salas cargadas y agregar las que cumplen los criterios de
+			// búsqueda al mapa de salas a mostrar
+			for (Map.Entry<String, Sala> entry : mapaSalas.entrySet()) {
+				Sala sala = entry.getValue();
 
-		} catch (Throwable e) {
-			e.printStackTrace();
+				// filtrar valor de busqueda
+				if (paramBuscar != null) {
+					// si el nombre de la sala no contiene el parametro buscar, se salta esta sala
+					String nombreSalaNormalizada = normalizarTexto(sala.getNombre());
+					if (!nombreSalaNormalizada.contains(busquedaNormalizada))
+						continue;
+				}
+				// filtrar valor de modalidad
+				if (paramModalidad != null) {
+					switch (paramModalidad) {
+					case "online":
+						if (!(sala instanceof SalaOnline)) {
+							continue;
+						}
+						break;
+					case "fisicas":
+						if (!(sala instanceof SalaFisica)) {
+							continue;
+						}
+						break;
+					default:
+					}
+				}
+
+				// filtrar valor de tematica
+				if (paramTematica != null) {
+
+					String tematicaNormalizada = normalizarTexto(sala.getTematica());
+					// si el tematica de la sala no es igual el parametro tematica, se salta esta
+					// sala
+					if (!paramTematica.equals("todas") && !paramTematica.equals(tematicaNormalizada)) {
+						System.out.println(tematicaNormalizada + " " + paramTematica);
+						continue;
+					}
+				}
+				/*
+				 * // filtrar valor de dificultad if (paramDificultad != null ||
+				 * paramDificultad.equals("todas")) { String dificultadNormalizada =
+				 * normalizarTexto(sala.getDificultad()); // si el dificultad de la sala no es
+				 * igual el parametro dificultad, se salta // esta sala if
+				 * (!dificultadNormalizada.equals(paramDificultad)) { continue; } }
+				 */
+				// si pasa todos los filtros, se agrega al hashmap de las salas a mostrar
+				salasAMostrar.put(entry.getKey(), sala);
+			}
+
+			// Agregar los atributos necesarios a la solicitud HTTP
+			request.setAttribute("mapaSalas", salasAMostrar);
+			request.setAttribute("tematicasDisponibles", Sala.getTematicasCargadas());
+			request.setAttribute("dificultadesDisponibles", Sala.getDificultadesCargadas());
+
+			// Enviar la respuesta al usuario
+			request.getRequestDispatcher("index.jsp?sec=salas&buscar=" + busquedaNormalizada + "&m=" + paramModalidad
+					+ "&t=" + paramTematica + "&d=" + paramDificultad).forward(request, response);
+		} catch (
+
+		Throwable e) {
 		}
 
 	}
+
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		try {
 			BilboSKP.cargarSalasFisicas();
 			BilboSKP.cargarSalasOnline();
+			BilboSKP.cargarTematicas();
+			BilboSKP.cargarDificultades();
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-		
+
+	}
+
+	public static String normalizarTexto(String texto) {
+		return Normalizer.normalize(texto, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
 	}
 }

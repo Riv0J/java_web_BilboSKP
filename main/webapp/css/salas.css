@@ -40,6 +40,7 @@
 	gap: 5%;
 }
 #caja_titulo_resultados h2{
+	font-size: 1em;
 	margin-top: 0.5%;
 	margin-bottom: 1%;
 	text-align: center;
@@ -72,7 +73,9 @@
 	margin-bottom: 1%;
 	background-color: wheat;
 }
-
+.caja_titulo{
+	text-align: center;
+}
 .caja_img {
 	width: 100%;
 }

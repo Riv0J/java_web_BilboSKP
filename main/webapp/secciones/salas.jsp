@@ -1,36 +1,73 @@
 <%@ page
-	import="java.util.HashMap, java.util.Map, model.Sala, model.SalaOnline, model.SalaFisica"%>
+	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.text.Normalizer, 
+	model.Sala, model.SalaOnline, model.SalaFisica"%>
 <%
 HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("mapaSalas");
+ArrayList<String> tematicasDisponibles = (ArrayList<String>) request.getAttribute("tematicasDisponibles");
+ArrayList<String> dificultadesDisponibles = (ArrayList<String>) request.getAttribute("dificultadesDisponibles");
+
+String m = request.getParameter("m");
+String d = request.getParameter("d");
+String t = request.getParameter("t");
+String paramBuscar = request.getParameter("buscar");
 %>
 
 <link rel="stylesheet" href="css/salas.css">
+<%
+if (dificultadesDisponibles != null && tematicasDisponibles != null) {
+%>
+
 <section id="contenedor_buscador">
 	<form>
 		<div id="wrapper_buscador">
 			<div id="caja_buscador">
 				<img alt="" src="img_web/iconos_salas/Lupa.svg"> <input
-					type="text" id="buscar" name="buscar" value=""
-					placeholder="Buscar salas por nombre">
+					type="text" id="buscar" name="buscar" value="<%=paramBuscar%>"
+					placeholder="Buscar salas de escape por nombre">
 			</div>
 		</div>
 		<div id="wrapper_filtros">
 			<div id="caja_filtros">
-				<select id="modalidad" name="modalidad">
-					<option value="todas">Todas las modalidades</option>
-					<option value="online">Salas Online</option>
-					<option value="fisicas">Salas Físicas</option>
-				</select> <select id="tematica" name="tematica">
+				<select id="m" name="m">
+					<option <%if (m.equals("todas")) {%> selected <%}%> value="todas">Todas las modalidades</option>
+					<option <%if (m.equals("online")) {%> selected <%}%> value="online">Salas Online</option>
+					<option <%if (m.equals("fisicas")) {%> selected <%}%> value="fisicas">Salas Físicas</option>
+				</select> <select id="tematica" name="t">
 					<option value="todas">Todas las temáticas</option>
-				</select> <select id="dificultad" name="dificultad">
+					<%
+					for (String tematica : tematicasDisponibles) {
+						String tematicaNormalizada = Normalizer.normalize(tematica, Normalizer.Form.NFD)
+	                            .replaceAll("[^\\p{ASCII}]", "")
+	                            .toLowerCase();
+					%>
+					<option <%if (t.equals(tematicaNormalizada)) {%> selected <%}%> value="<%=tematicaNormalizada%>"><%=tematica%></option>
+
+					<%
+					}
+					%>
+
+				</select> <select id="d" name="d">
 					<option value="todas">Todas las dificultades</option>
+					<%
+					for (String dificultad : dificultadesDisponibles) {
+						String dificultadNormalizada = Normalizer.normalize(dificultad, Normalizer.Form.NFD)
+	                            .replaceAll("[^\\p{ASCII}]", "")
+	                            .toLowerCase();
+					%>
+					<option <%if (d.equals(dificultadNormalizada)) {%> selected <%}%> value="<%=dificultadNormalizada%>"><%=dificultad%></option>
+					<%
+					}
+					%>
 				</select>
 			</div>
 		</div>
 	</form>
 </section>
+<%
+}
+%>
 <section id="caja_titulo_resultados">
-	<h2>Mostrando x resultados de la búsqueda: ""</h2>
+	<h2>Mostrando <%=mapaSalas.size()%> resultados de la búsqueda: "<%=paramBuscar%>"</h2>
 </section>
 <section id="contenedor_salas">
 
@@ -47,7 +84,7 @@ HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("
 			</div>
 			<div class="caja_organizar">
 				<button>
-					<a href="./salas">Reintentar</a>
+					<a href=""./salas?buscar=todas&m=todas&t=todas&d=todas"">Reintentar</a>
 				</button>
 			</div>
 		</article>

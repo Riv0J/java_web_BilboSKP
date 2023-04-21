@@ -11,7 +11,9 @@ seccion = "secciones/" + seccion + ".jsp";
 <html>
 <Style>
 #ColorPrincipal {
-	color: #29fd53;
+	color: #29fd53; /*verde*/
+	color: #353535; /*muy gris*/
+	color: #303136; /*gris*/
 }
 </Style>
 <head>
@@ -24,7 +26,9 @@ seccion = "secciones/" + seccion + ".jsp";
 	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
 	rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap"
+	rel="stylesheet">
 <link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/header.css">
 <link rel="icon" type="image/x-icon" href="img/favicon.png">
@@ -33,7 +37,7 @@ seccion = "secciones/" + seccion + ".jsp";
 	<%--<%@include file="plantillas/nav.jsp"--%>
 	<header>
 		<ul>
-			<a href="./salas?buscar=todas">
+			<a href="./salas?buscar=todas&m=todas&t=todas&d=todas">
 				<li>Salas de escape</li>
 			</a>
 			<a href="./salas">

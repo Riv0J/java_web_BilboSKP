@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Vector;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -76,6 +78,7 @@ public class BilboSKP extends DBC {
 					System.out.println(SO.getIdSala() + " > " + SO.getNombre());
 				}
 			}
+			System.out.println("-----");
 			conexion.cerrarFlujo();
 			return vectorSalasOnline;
 		} catch (Exception e) {
@@ -166,6 +169,7 @@ public class BilboSKP extends DBC {
 					System.out.println(SO.getIdSala() + " > " + SO.getNombre());
 				}
 			}
+			System.out.println("-----");
 			conexion.cerrarFlujo();
 			return vectorSalasFisicas;
 		} catch (Exception e) {
@@ -447,29 +451,25 @@ public class BilboSKP extends DBC {
 		}
 		return null;
 	}
-	
+
 	public static boolean ReiniciarRanking(int idSala) throws Throwable {
 		try {
-			String sentenciaSQL ="DELETE * FROM rankingonline WHERE idSala = "+idSala+";";
+			String sentenciaSQL ="DELETE * FROM partidaonline WHERE idSala = "+idSala+";";
 			BilboSKP conexion = new BilboSKP();
 			int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
-			if (filasAfectadas == 1) {
+			if (filasAfectadas >= 1) {
 				System.out.println(sentenciaSQL);
-				System.out.println("Ha sido borrado con exito");
-				return true;
+				System.out.println("Se han borrado datos de ranking con exito");
 			}else {
-
-				System.out.println("No ha sido borrado");
-				return false;
+				System.out.println("No se han borrado datos de ranking");
 			}
-			
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("Error al reiniciar ranking");
-			return false;
-			
 		}
-		
+		return false;
+	}
+
 	// guardar una partida online en la bd @Rivo
 	public static boolean guardarPartidaOnline(PartidaOnline PO) {
 		try {
@@ -556,10 +556,11 @@ public class BilboSKP extends DBC {
 		}
 		return vectorCupones;
 	}
-	//cambiar estado de un cupon @Inigo
+
+	// cambiar estado de un cupon @Inigo
 	public static boolean cambiarEstadoCupon(int nuevoEstado, int idCupon) throws Throwable {
 		try {
-			String sentenciaSQL = "UPDATE cupon SET estado="+nuevoEstado+" WHERE idCupon=" + idCupon + ";";
+			String sentenciaSQL = "UPDATE cupon SET estado=" + nuevoEstado + " WHERE idCupon=" + idCupon + ";";
 			BilboSKP conexion = new BilboSKP();
 			int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
 			if (filasAfectadas == 1) {
@@ -578,7 +579,7 @@ public class BilboSKP extends DBC {
 	// otorgar cupon @Rivo
 	public static void otorgarCupon(String tipoCupon, int idSuscriptor) throws Throwable {
 		try {
-			//determinar la fecha de caducidad y la reembolsabilidad del cupon
+			// determinar la fecha de caducidad y la reembolsabilidad del cupon
 			java.sql.Date fechaCaducidad;
 			int reembolsable;
 			switch (tipoCupon) {
@@ -646,12 +647,10 @@ public class BilboSKP extends DBC {
 			System.out.println("se pudo editar suscriptor");
 
 			return loginSuscriptor(email, pass);
-
 		} else {
 			System.out.println("no se pudo editar suscriptor");
 			return null;
 		}
-
 	}
 
 	// darle de baja a un suscriptor @Torni
@@ -707,7 +706,6 @@ public class BilboSKP extends DBC {
 			Reserva reserva = new Reserva(idReserva, idSalaFisica, numJugadores, numJugadores, fechaHora, estado);
 			reservas.add(reserva);
 		}
-
 		if (reservas.size() > 0) {
 			for (int i = 0; i < reservas.size(); i++) {
 				Reserva r = reservas.get(i);
@@ -745,7 +743,7 @@ public class BilboSKP extends DBC {
 	// TODO cambiar estado reserva dado su id @Paula
 	public static Reserva cambiarEstadoReserva(int nuevoEstado, int idSuscriptor, int idReserva) throws Throwable {
 		try {
-			String sentenciaSQL = "UPDATE reserva SET estado=1 WHERE idSuscriptor=" + idSuscriptor + ";";
+			String sentenciaSQL = "UPDATE reserva SET estado="+nuevoEstado+" WHERE idSuscriptor=" + idSuscriptor + " and idReserva="+idReserva+";";
 			BilboSKP conexion = new BilboSKP();
 			int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
 			if (filasAfectadas == 1) {
@@ -756,5 +754,35 @@ public class BilboSKP extends DBC {
 		}
 
 		return null;
+	}
+
+	public static void cargarTematicas() {
+		ArrayList<String> tematicasCargadas = new ArrayList<String>();
+		HashMap<String, Sala> mapaSalas = Sala.getTodasLasSalasCargadas();
+		for (Map.Entry<String, Sala> par : mapaSalas.entrySet()) {
+			Sala sala = par.getValue();
+			String tematica = sala.getTematica();
+			// si el array de tematicas cargadas no contiene una tematica, se agrega al
+			// arraylist
+			if (!tematicasCargadas.contains(tematica)) {
+				tematicasCargadas.add(tematica);
+			}
+		}
+		Sala.setTematicasCargadas(tematicasCargadas);
+	}
+
+	public static void cargarDificultades() {
+		ArrayList<String> dificultadesCargadas = new ArrayList<String>();
+		HashMap<String, Sala> mapaSalas = Sala.getTodasLasSalasCargadas();
+		for (Map.Entry<String, Sala> par : mapaSalas.entrySet()) {
+			Sala sala = par.getValue();
+			String dificultad = sala.getDificultad();
+			// si el array de tematicas cargadas no contiene una dificultad, se agrega al
+			// arraylist
+			if (!dificultadesCargadas.contains(dificultad)) {
+				dificultadesCargadas.add(dificultad);
+			}
+		}
+		Sala.setDificultadesCargadas(dificultadesCargadas);
 	}
 }
