@@ -86,7 +86,7 @@ p {
 }
 
 .lateral {
-	width: 14em;
+	width: 16%;
 	height: 500px;
 	float: left;
 	margin-left: 3%;
