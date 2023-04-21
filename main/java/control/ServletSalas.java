@@ -33,7 +33,7 @@ public class ServletSalas extends HttpServlet {
 			String modalidad = request.getParameter("modalidad");
 			String tematica = request.getParameter("tematica");
 			
-			if (search == null || search.equals("todas")) {
+			if (search == null || search.equalsIgnoreCase("todas")) {
 				System.out.println("Mostrando todas las salas");
 				mapaSalas = Sala.getTodasLasSalasCargadas();
 			} else {
