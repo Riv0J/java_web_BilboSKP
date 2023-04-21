@@ -11,8 +11,8 @@
 		<div class="caja contacto">
 			<h2>Contacto</h2>
 			<ul>
-				<li><img
-					src="../img_web/icons/directions.png" alt=""><span><a href='#'
+				<li><img src="../img_web/icons/directions.png" alt=""><span><a
+						href='#'
 						onclick="document.getElementById('mapa').style.display='block'">
 							Dirección</a></span>
 					<div id="mapa" style="display: none;">
@@ -24,23 +24,23 @@
 							onclick="document.getElementById('mapa').style.display='none'">Cerrar
 							mapa</button>
 					</div></li>
-				<li><img
-					src="../img_web/icons/llamada-telefonica.png" alt="">Telefono: 944BS7831 </li>
+				<li><img src="../img_web/icons/llamada-telefonica.png" alt="">Telefono:
+					944BS7831</li>
 
 			</ul>
 		</div>
 		<div class="caja redesSociales">
 			<h2>Redes sociales</h2>
 			<ul>
-				<li><img
-					src="../img_web/icons/twitter.png" alt=""><a href="https://twitter.com" target="_blank">Twitter</a></li>
-				<li><img
-					src="../img_web/icons/facebook.png" alt=""><a href="https://facebook.com" target="_blank">Facebook</a></li>
-				<li><img
-					src="../img_web/icons/whatsapp.png" alt=""><a href="https://chat.whatsapp.com/IPaleWYDzwPLNyOMBpNr4q"
+				<li><img src="../img_web/icons/twitter.png" alt=""><a
+					href="https://twitter.com" target="_blank">Twitter</a></li>
+				<li><img src="../img_web/icons/facebook.png" alt=""><a
+					href="https://facebook.com" target="_blank">Facebook</a></li>
+				<li><img src="../img_web/icons/whatsapp.png" alt=""><a
+					href="https://chat.whatsapp.com/IPaleWYDzwPLNyOMBpNr4q"
 					target="_blank">WhatsApp</a></li>
-				<li><img
-					src="../img_web/icons/instagram.png" alt=""><a href="https://instagram.com" target="_blank">Instagram</a></li>
+				<li><img src="../img_web/icons/instagram.png" alt=""><a
+					href="https://instagram.com" target="_blank">Instagram</a></li>
 			</ul>
 		</div>
 	</div>
@@ -77,21 +77,22 @@
 				<li><a href='#'>¿Que pasa si se termina el tiempo en una
 						sala?</a>
 					<ul>
-						<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Morbi at sem diam. Morbi posuere dolor vel pellentesque lobortis.
-							In auctor sit amet lacus et egestas. Curabitur tempus lorem nec
-							nulla feugiat, at pharetra massa fermentum. Nullam quis lacus vel
-							dolor dignissim faucibus. Nam quis dui nisl. Aenean vitae purus
-							leo.</li>
+						<li>El alférez del pendón real o alférez del rey era un
+							magistrado de alta categoría que llevaba antiguamente el pendón o
+							estandarte real en las batallas a las que asistía personalmente
+							el rey, cuyo ejército mandaba en ausencia suya como general en
+							jefe.</li>
 					</ul></li>
 				<li><a href='#'>¿Como sé cuan dificil es una sala?</a>
 					<ul>
-						<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Sed finibus diam sem, ac suscipit felis mattis in. Maecenas ut
-							consequat justo. Nulla egestas volutpat neque, eget sollicitudin
-							nisi feugiat ac. In congue lorem sollicitudin enim tincidunt
-							egestas. Cras mollis facilisis ex quis auctor. Aliquam eget
-							finibus est. In hac habitasse.</li>
+						<li>El Bosque Petrificado de Puyango es un yacimiento
+							fosilífero del tipo conocido popularmente como «bosque
+							petrificado» situado en la cuenca media del río Puyango, entre
+							las provincias ecuatorianas de El Oro y Loja. El área cubre 2,658
+							hectáreas y sus sedimentos están divididos en cuatro formaciones
+							geológicas (Formación Zapotillo, Formación Ciano, Formación Ambin
+							y Formación Progreso), que datan de finales del período
+							Cretácico.</li>
 
 					</ul></li>
 			</ul>
@@ -100,8 +101,8 @@
 			<h2>Otras consultas de utilidad</h2>
 			<ul>
 				<li><p>
-						<img
-					src="../img_web/icons/parking.png" alt="">Vienes en coche y quieres encontrar un <span><a href="#"
+						<img src="../img_web/icons/parking.png" alt="">Vienes en
+						coche y quieres encontrar un <span><a href="#"
 							onclick="document.getElementById('mapaParking').style.display='block'">PARKING</a></span>?
 					</p>
 					<div id="mapaParking" style="display: none">
@@ -114,8 +115,8 @@
 							mapa</button>
 
 					</div></li>
-				<li><img
-					src="../img_web/icons/metro.png" alt="">¿Las paradas de <span> <a href='#'
+				<li><img src="../img_web/icons/metro.png" alt="">¿Las
+					paradas de <span> <a href='#'
 						onclick="document.getElementById('mapaMetro').style.display='block'">
 							Metro</a></span> mas cercanas?
 					<div id="mapaMetro" style="display: none;">
@@ -126,8 +127,7 @@
 						<button
 							onclick="document.getElementById('mapaMetro').style.display='none'">Cerrar
 							mapa</button>
-					</div>
-				</li>
+					</div></li>
 			</ul>
 		</div>
 	</div>
@@ -136,7 +136,8 @@
 			¿Tienes alguna otra consulta que hacernos?<br>
 		</h2>
 		<form method="get">
-			<textarea cols="60" rows="5" placeholder="Escribe tu duda aquí"></textarea><br>	
+			<textarea cols="60" rows="5" placeholder="Escribe tu duda aquí"></textarea>
+			<br>
 			<button name="submit" type="submit">Enviar</button>
 			<button type="reset">Borrar</button>
 
@@ -146,11 +147,12 @@
 	</div>
 	<style>
 #formulario form {
-  text-align: center;
+	text-align: center;
 }
+
 #formulario button {
-  display: inline-block;
-  margin: 10px;
+	display: inline-block;
+	margin: 10px;
 }
 
 body {
@@ -158,9 +160,11 @@ body {
 	flex-direction: column;
 	align-items: center;
 }
-.redesSociales{
+
+.redesSociales {
 	font-size: larger;
 }
+
 img {
 	width: 40px;
 	height: 40px;
@@ -184,11 +188,13 @@ span {
 	display: flex;
 	justify-content: space-evenly;
 }
-.caja h2{
-text-align: center;
+
+.caja h2 {
+	text-align: center;
 }
-.caja ul li{
-list-style: none;
+
+.caja ul li {
+	list-style: none;
 }
 
 /*Estilos acordeon FAQ*/
