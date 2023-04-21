@@ -82,16 +82,16 @@ p {
 	float: right;
 	display: flex;
 	justify-content: center;
-	border: #000 solid 1px;
+	/*border: #000 solid 1px;*/
 }
 
 .lateral {
-	width: 14em;
+	width: 16%;
 	height: 500px;
 	float: left;
 	margin-left: 3%;
 	margin-top: 4%;
-	border: #000 solid 1px;
+	/*border: #000 solid 1px;*/
 }
 
 #podio {
@@ -101,17 +101,20 @@ p {
 	width: 65%;
 	height: 22em;
 	margin-left: 25%;
-	border: #000 solid 1px;
+	/*border: #000 solid 1px;*/
 }
 
 .oro {
 	display: flex;
 	justify-content: center;
 	border: 3px solid #ffd700;
-	height: 12em;
+	height: 10em;
 	width: 10em;
-	padding: 0 auto;
+	/*padding: 0 auto;*/
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	font-size:x-large;
+	font-weight: 700;
+	background-color: #F5DF68;
 }
 
 .plata {
@@ -122,26 +125,32 @@ p {
 	width: 10em;
 	margin: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	font-size:large;
+	font-weight: 600;
+	background-color: #D8D8D8;
 }
 
 .bronce {
 	display: flex;
 	justify-content: center;
-	border: 3px solid #CD7F32;
+	border: 3px solid #8F5732;
 	height: 8em;
 	width: 10em;
 	margin: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	font-size:large;
+	font-weight: 500;
+	background-color: #C68358;
 }
 
 #finalistas {
 	margin-left: 20%;
-	border: #000 solid 1px;
+	/*border: #000 solid 1px;*/
 }
 
 li {
 	margin: 1px;
-	border: #000 solid 1px;
+	/*border: #000 solid 1px;*/
 }
 </style>
 </body>

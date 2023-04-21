@@ -40,7 +40,7 @@ seccion = "secciones/" + seccion + ".jsp";
 			<a href="./salas?buscar=todas&m=todas&t=todas&d=todas">
 				<li>Salas de escape</li>
 			</a>
-			<a href="./salas">
+			<a href="./ranking">
 				<li>Ranking</li>
 			</a>
 			<a href="./tienda">
@@ -52,7 +52,7 @@ seccion = "secciones/" + seccion + ".jsp";
 			<a href="./salas">
 				<li>Unirse a una partida</li>
 			</a>
-			<a href="./salas">
+			<a href="./contacto+FAQ">
 				<li>Contacto</li>
 			</a>
 
