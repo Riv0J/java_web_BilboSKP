@@ -36,13 +36,12 @@ public class ServletSalas extends HttpServlet {
 			String paramBuscar = request.getParameter("buscar");
 			String busquedaNormalizada = null;
 			String paramModalidad = request.getParameter("m");
-			System.out.println(paramModalidad);
 			String paramTematica = request.getParameter("t");
 			String paramDificultad = request.getParameter("d");
 
 			if (paramBuscar != null) {
 				// normalizar(quitar acentos y poner minusculas)
-				busquedaNormalizada = normalizarTexto(paramBuscar);
+				paramBuscar = normalizarTexto(paramBuscar);
 			}
 
 			// Iterar el mapa de salas cargadas y agregar las que cumplen los criterios de
@@ -52,10 +51,13 @@ public class ServletSalas extends HttpServlet {
 
 				// filtrar valor de busqueda
 				if (paramBuscar != null) {
-					// si el nombre de la sala no contiene el parametro buscar, se salta esta sala
-					String nombreSalaNormalizada = normalizarTexto(sala.getNombre());
-					if (!nombreSalaNormalizada.contains(busquedaNormalizada))
-						continue;
+					if(!paramBuscar.equals("todas")) {
+						// se tiene que normalizar el texto(minusculas y sin acentos)
+						// si el nombre de la sala no contiene el parametro buscar, se salta esta sala
+						String nombreSalaNormalizada = normalizarTexto(sala.getNombre());
+						if (!nombreSalaNormalizada.contains(paramBuscar))
+							continue;
+					}
 				}
 				// filtrar valor de modalidad
 				if (paramModalidad != null) {
@@ -81,17 +83,20 @@ public class ServletSalas extends HttpServlet {
 					// si el tematica de la sala no es igual el parametro tematica, se salta esta
 					// sala
 					if (!paramTematica.equals("todas") && !paramTematica.equals(tematicaNormalizada)) {
-						System.out.println(tematicaNormalizada + " " + paramTematica);
 						continue;
 					}
 				}
-				/*
-				 * // filtrar valor de dificultad if (paramDificultad != null ||
-				 * paramDificultad.equals("todas")) { String dificultadNormalizada =
-				 * normalizarTexto(sala.getDificultad()); // si el dificultad de la sala no es
-				 * igual el parametro dificultad, se salta // esta sala if
-				 * (!dificultadNormalizada.equals(paramDificultad)) { continue; } }
-				 */
+
+				// filtrar valor de dificultad
+				if (paramDificultad != null) {
+					String dificultadNormalizada = normalizarTexto(sala.getDificultad());
+					// si la dificultad de la sala no es igual el parametro dificultad, se salta
+					// esta sala
+					if (!paramDificultad.equals("todas") && !paramDificultad.equals(dificultadNormalizada)) {
+						continue;
+					}
+				}
+
 				// si pasa todos los filtros, se agrega al hashmap de las salas a mostrar
 				salasAMostrar.put(entry.getKey(), sala);
 			}
@@ -102,7 +107,7 @@ public class ServletSalas extends HttpServlet {
 			request.setAttribute("dificultadesDisponibles", Sala.getDificultadesCargadas());
 
 			// Enviar la respuesta al usuario
-			request.getRequestDispatcher("index.jsp?sec=salas&buscar=" + busquedaNormalizada + "&m=" + paramModalidad
+			request.getRequestDispatcher("index.jsp?sec=salas&buscar=" + paramBuscar + "&m=" + paramModalidad
 					+ "&t=" + paramTematica + "&d=" + paramDificultad).forward(request, response);
 		} catch (
 

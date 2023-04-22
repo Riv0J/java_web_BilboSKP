@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
 
+import control.BilboSKP;
+
 public abstract class Sala {
 	private static ArrayList<String> tematicasCargadas = new ArrayList<String>();
 	private static ArrayList<String> dificultadesCargadas = new ArrayList<String>();
@@ -102,13 +104,14 @@ public abstract class Sala {
 
 	public static HashMap<String, Sala> getTodasLasSalasCargadas() {
 		HashMap<String, Sala> mapaSalasCargadas = new HashMap<String, Sala>();
-		// agregar las salas online cargadas
+		// obtener las salas cargadas de cada tipo
 		HashMap<Integer, SalaOnline> salasOnline = SalaOnline.getSalasCargadas();
+		HashMap<Integer, SalaFisica> salasFisicas = SalaFisica.getSalasCargadas();
+		
 		for (Map.Entry<Integer, SalaOnline> par : salasOnline.entrySet()) {
 			mapaSalasCargadas.put("SO" + par.getKey(), par.getValue());
 		}
 		// agregar las salas fisicas cargadas
-		HashMap<Integer, SalaFisica> salasFisicas = SalaFisica.getSalasCargadas();
 		for (Map.Entry<Integer, SalaFisica> par : salasFisicas.entrySet()) {
 			mapaSalasCargadas.put("SF" + par.getKey(), par.getValue());
 		}

@@ -2,6 +2,8 @@ package model;
 
 import java.util.HashMap;
 
+import control.BilboSKP;
+
 public class SalaOnline extends Sala{
 	//este hashmap contendrá todas las salas online disponibles
 	private static HashMap<Integer, SalaOnline> salasOnlineCargadas = new HashMap<Integer, SalaOnline>();
@@ -16,6 +18,14 @@ public class SalaOnline extends Sala{
 		salasOnlineCargadas = salasPorCargar;
 	}
 	public static HashMap<Integer, SalaOnline> getSalasCargadas() {
+		//si no hay salas online cargadas, trata de consultarlas de nuevo y establecerlas
+		if (salasOnlineCargadas.size()==0) {
+			try {
+				BilboSKP.cargarSalasOnline();
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
+		}
 		return salasOnlineCargadas;
 	}
 	public static SalaOnline getSalaPorId(int idSalaOnline) {

@@ -28,33 +28,38 @@ if (dificultadesDisponibles != null && tematicasDisponibles != null) {
 		</div>
 		<div id="wrapper_filtros">
 			<div id="caja_filtros">
-				<select id="m" name="m">
-					<option <%if (m.equals("todas")) {%> selected <%}%> value="todas">Todas las modalidades</option>
-					<option <%if (m.equals("online")) {%> selected <%}%> value="online">Salas Online</option>
-					<option <%if (m.equals("fisicas")) {%> selected <%}%> value="fisicas">Salas Físicas</option>
-				</select> <select id="tematica" name="t">
+				<jsp:include page="../plantillas/desplegableFiltroSalas.jsp"></jsp:include>
+				<select name="m">
+					<option <%if (m.equals("todas")) {%> selected <%}%> value="todas">Todas
+						las modalidades</option>
+
+					<option <%if (m.equals("online")) {%> selected <%}%> value="online">Salas
+						Online</option>
+					<option <%if (m.equals("fisicas")) {%> selected <%}%>
+						value="fisicas">Salas Físicas</option>
+				</select> <select name="t">
 					<option value="todas">Todas las temáticas</option>
 					<%
 					for (String tematica : tematicasDisponibles) {
-						String tematicaNormalizada = Normalizer.normalize(tematica, Normalizer.Form.NFD)
-	                            .replaceAll("[^\\p{ASCII}]", "")
-	                            .toLowerCase();
+						String tematicaNormalizada = Normalizer.normalize(tematica, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "")
+						.toLowerCase();
 					%>
-					<option <%if (t.equals(tematicaNormalizada)) {%> selected <%}%> value="<%=tematicaNormalizada%>"><%=tematica%></option>
+					<option <%if (t.equals(tematicaNormalizada)) {%> selected <%}%>
+						value="<%=tematicaNormalizada%>"><%=tematica%></option>
 
 					<%
 					}
 					%>
 
-				</select> <select id="d" name="d">
+				</select> <select name="d">
 					<option value="todas">Todas las dificultades</option>
 					<%
 					for (String dificultad : dificultadesDisponibles) {
-						String dificultadNormalizada = Normalizer.normalize(dificultad, Normalizer.Form.NFD)
-	                            .replaceAll("[^\\p{ASCII}]", "")
-	                            .toLowerCase();
+						String dificultadNormalizada = Normalizer.normalize(dificultad, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "")
+						.toLowerCase();
 					%>
-					<option <%if (d.equals(dificultadNormalizada)) {%> selected <%}%> value="<%=dificultadNormalizada%>"><%=dificultad%></option>
+					<option <%if (d.equals(dificultadNormalizada)) {%> selected <%}%>
+						value="<%=dificultadNormalizada%>"><%=dificultad%></option>
 					<%
 					}
 					%>
@@ -65,12 +70,19 @@ if (dificultadesDisponibles != null && tematicasDisponibles != null) {
 </section>
 <%
 }
+int numeroResultados = 0;
+if (mapaSalas != null) {
+numeroResultados = mapaSalas.size();
+}
 %>
 <section id="caja_titulo_resultados">
-	<h2>Mostrando <%=mapaSalas.size()%> resultados de la búsqueda: "<%=paramBuscar%>"</h2>
+	<h2>
+		Mostrando
+		<%=numeroResultados%>
+		resultados de la búsqueda: "<%=paramBuscar%>"
+	</h2>
 </section>
 <section id="contenedor_salas">
-
 	<div id=contenedor_salas_wrapper>
 		<%
 		if (mapaSalas == null || mapaSalas.size() == 0) {
@@ -84,7 +96,7 @@ if (dificultadesDisponibles != null && tematicasDisponibles != null) {
 			</div>
 			<div class="caja_organizar">
 				<button>
-					<a href=""./salas?buscar=todas&m=todas&t=todas&d=todas"">Reintentar</a>
+					<a href="" ./salas?buscar=todas&m=todas&t=todas&d=todas"">Reintentar</a>
 				</button>
 			</div>
 		</article>
@@ -163,10 +175,8 @@ if (dificultadesDisponibles != null && tematicasDisponibles != null) {
 					<div class="caja_text"><%=modalidad%></div>
 				</div>
 			</div>
-			<div class="caja_organizar">
-				<button>
-					<a href=<%=enlaceBoton%>>Ver más</a>
-				</button>
+			<div class="caja_boton">
+				<a href=<%=enlaceBoton%>>Ver más</a>
 			</div>
 		</article>
 

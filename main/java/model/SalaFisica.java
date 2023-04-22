@@ -2,6 +2,8 @@ package model;
 
 import java.util.HashMap;
 
+import control.BilboSKP;
+
 public class SalaFisica extends Sala{
 	private String direccion;
 	private int telefono;
@@ -36,6 +38,14 @@ public class SalaFisica extends Sala{
 		salasFisicasCargadas = salasPorCargar;
 	}
 	public static HashMap<Integer, SalaFisica> getSalasCargadas() {
+		//si no hay salas fisica cargadas, trata de consultarlas de nuevo y establecerlas
+		if (salasFisicasCargadas.size()==0) {
+			try {
+				BilboSKP.cargarSalasFisicas();
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
+		}
 		return salasFisicasCargadas;
 	}
 	public static void clearSalasCargadas() {

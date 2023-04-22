@@ -1,12 +1,25 @@
-header ul{
+header {
 	display: flex;
 	flex-direction: row;
-	
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	flex-wrap: wrap;
+	height: 4vh;
+	padding: 1%;
+	font-size: 2em;
 }
-header a{
+
+header ul {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+header a {
 	width: 15%;
-	
 }
-.modalidad {
-	margin-left: 5200%;
+
+header {
+	height: 4vh;
 }

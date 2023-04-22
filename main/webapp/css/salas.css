@@ -9,6 +9,7 @@
 }
 
 #caja_buscador {
+	background-color: white;
 	display: flex;
 	justify-content: center;
 	width: 50%;
@@ -22,9 +23,12 @@
 
 #caja_buscador img {
 	margin-right: 0.2%;
+	background-color: white;
+	font-size: 1.75em;
 }
 
 #buscar {
+	font-size: 1.8em;
 	width: 95%;
 	outline: none;
 	border-style: none;
@@ -33,19 +37,62 @@
 	padding-left: 1%;
 }
 
-#caja_filtros{
-		display: flex;
+#caja_filtros {
+	font-size: 1.8em;
+	width: 80%;
+	display: flex;
 	justify-content: center;
 	align-items: center;
 	gap: 5%;
 }
-#caja_titulo_resultados h2{
-	font-size: 1em;
+
+select {
+	background-color: #303136;
+	color: white;
+	padding: 0.35%;
+	padding-left: 1%;
+	padding-right: 0.5%;
+	border-radius: 0.4em;
+	border-width: 0.2em;
+}
+
+select:hover {
+	border-color: #29fd53;
+}
+
+option {
+	line-height: 1em;
+	border-color: #29fd53;
+}
+
+option:hover {
+	background-color: #353535;
+	color: #303136;
+}
+
+select:hover {
+	
+}
+
+#ColorPrincipal {
+	color: #29fd53; /*verde*/
+	color: #353535; /*muy gris*/
+	color: #303136; /*gris*/
+}
+
+#contenedor_buscador {
+	background-color: #303136;
+	padding: 2%;
+}
+
+#caja_titulo_resultados h2 {
+	font-size: 1.75em;
 	margin-top: 0.5%;
 	margin-bottom: 1%;
 	text-align: center;
 	font-family: Poppins;
 }
+
 #contenedor_salas {
 	display: flex;
 	justify-content: center;
@@ -53,8 +100,14 @@
 	font-family: Poppins;
 }
 
+.caja_titulo {
+	margin-top: 4%;
+	margin-bottom: 4%;
+}
+
 #contenedor_salas h2 {
-	font-size: 1.2em;
+	text-align: center;
+	font-size: 2em;
 }
 
 #contenedor_salas_wrapper {
@@ -72,17 +125,22 @@
 	width: 22.5%;
 	margin-bottom: 1%;
 	background-color: wheat;
+	border-radius: 1em;
 }
-.caja_titulo{
-	text-align: center;
+.caja_sala a, a:hover, a:active, a:focus {
+  all: unset;
+  color:white;
+  cursor: pointer;
 }
 .caja_img {
 	width: 100%;
+	
 }
 
 .caja_img img {
 	width: 100%;
 	height: auto;
+	border-radius: 1em;
 }
 
 .caja_sinopsis, .caja_sinopsis {
@@ -94,11 +152,12 @@
 }
 
 .caja_etiquetas {
+	font-size: 1.75em;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
-	width: 90%;
+	width: 95%;
 }
 
 .etiqueta p {
@@ -145,15 +204,21 @@
 	width: 27.5%;
 }
 
-.caja_organizar {
+.caja_boton {
 	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-.caja_organizar button {
+.caja_boton a {
 	width: 55%;
-	margin-top: 7%;
-	margin-bottom: 5%;
+	margin-top: 10%;
+	margin-bottom: 6%;
+	text-align: center;
+	font-size: 1.8em;
+	padding: 2%;
+	background-color: black;
+	border: 0.1em solid white;
+	border-radius: 0.3em;
 }

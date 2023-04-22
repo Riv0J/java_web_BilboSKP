@@ -31,6 +31,7 @@ seccion = "secciones/" + seccion + ".jsp";
 	rel="stylesheet">
 <link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/bilboskp-icon.css">
 <link rel="icon" type="image/x-icon" href="img/favicon.png">
 </head>
 <body>
@@ -38,7 +39,7 @@ seccion = "secciones/" + seccion + ".jsp";
 	<header>
 		<ul>
 			<a href="./salas?buscar=todas&m=todas&t=todas&d=todas">
-				<li>Salas de escape</li>
+				<li><div class="bilboskp-icon">&#xe804;</div>Salas de escape</li>
 			</a>
 			<a href="./ranking">
 				<li>Ranking</li>
