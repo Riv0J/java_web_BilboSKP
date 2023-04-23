@@ -104,7 +104,7 @@ numeroResultados = mapaSalas.size();
 				<h2>No se encontraron salas con esas especificaciones, por
 					favor inténtalo de nuevo</h2>
 			</div>
-			<div class="caja_boton" id=caja_boton_error">
+			<div class="caja_boton" id="caja_boton_error">
 				<a href=<%=enlaceBoton%>>
 					<button>
 						<span>Buscar todas</span>

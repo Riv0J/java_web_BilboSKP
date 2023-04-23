@@ -70,7 +70,7 @@ option:hover {
 	padding: 2%;
 }
 
-#caja_titulo resultados {
+#caja_titulo_resultados {
 	display: flex;
 	justify-content: center;
 }
