@@ -84,7 +84,10 @@ numeroResultados = mapaSalas.size();
 	<h2>
 		Mostrando
 		<%=numeroResultados%>
-		resultados de la búsqueda: "<%=paramBuscar%>", Modalidad: <%=m%>, Temática: <%=t%>, Dificultad: <%=d%>
+		resultados de la búsqueda: "<%=paramBuscar%>", Modalidad:
+		<%=m%>, Temática:
+		<%=t%>, Dificultad:
+		<%=d%>
 	</h2>
 </section>
 <section id="contenedor_salas">
@@ -128,24 +131,22 @@ numeroResultados = mapaSalas.size();
 
 			}
 			//si la tematica de la sala es suspenso, le agregamos una clase
-			String rutaIconoTematica = "img_web/iconos_salas/"+sala.getTematica()+".svg";
+			String rutaIconoTematica = "img_web/iconos_salas/" + sala.getTematica() + ".svg";
 			File archivoImagen = new File(getServletContext().getRealPath("/") + rutaIconoTematica);
 			if (!archivoImagen.exists()) {
 				rutaIconoTematica = "img_web/iconos_salas/Question.svg";
 			}
-			
-			String rutaImagenPortada = "img_salas/portadas/"+idSala+".png";
+
+			String rutaImagenPortada = "img_salas/portadas/" + idSala + ".png";
 			File archivoImagenPortada = new File(getServletContext().getRealPath("/") + rutaImagenPortada);
 			if (!archivoImagenPortada.exists()) {
 				rutaImagenPortada = "img_salas/portadas/Question.png";
 			}
-
 		%>
 		<article class="caja_sala">
 			<div class="caja_img caja_img_portada">
-				<a href=<%=enlaceBoton%>> <img
-					src="<%=rutaImagenPortada%>" alt="Portada"
-					draggable="false">
+				<a href=<%=enlaceBoton%>> <img src="<%=rutaImagenPortada%>"
+					alt="Portada" draggable="false">
 				</a>
 
 			</div>
@@ -183,12 +184,9 @@ numeroResultados = mapaSalas.size();
 					</div>
 				</div>
 
-				<div class="etiqueta tematica"
-					title="Temática de la sala">
+				<div class="etiqueta tematica" title="Temática de la sala">
 					<div class="caja_icon">
-						<img class="icon"
-							src="<%=rutaIconoTematica%>"
-							alt="Tematica:">
+						<img class="icon" src="<%=rutaIconoTematica%>" alt="Tematica:">
 					</div>
 
 					<div class="caja_text"><%=sala.getTematica()%></div>
@@ -273,3 +271,12 @@ select {
 	color: <%=mapaAppConfig.get("colorMuyClaro")%>;
 }
 </style>
+<script>
+    const selects = document.querySelectorAll('#contenedor_buscador form select');
+    selects.forEach(select => {
+      select.addEventListener('change', function() {
+        const form = document.querySelector('#contenedor_buscador form');
+        form.submit();
+      });
+    });
+  </script>

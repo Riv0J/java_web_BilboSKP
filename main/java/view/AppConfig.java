@@ -11,9 +11,9 @@ public class AppConfig {
 		if(mapaConfig==null) {
 			mapaConfig = new HashMap<String,String>();
 			mapaConfig.put("colorAcento", "#29fd53");
+			mapaConfig.put("colorMuyOscuro", "#131313");
 			mapaConfig.put("colorOscuro", "#353535");
 			mapaConfig.put("colorMenosOscuro", "#303136");
-			mapaConfig.put("colorMuyOscuro", "#131313");
 			mapaConfig.put("colorMuyClaro", "#FFFFFF");
 			mapaConfig.put("colorClaro", "#646464");
 		}
