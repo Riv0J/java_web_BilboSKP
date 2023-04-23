@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.Sala;
 import model.SalaFisica;
 import model.SalaOnline;
+import view.AppConfig;
 import view.Mensaje;
 
 @WebServlet("/salas")
@@ -105,6 +106,7 @@ public class ServletSalas extends HttpServlet {
 			request.setAttribute("mapaSalas", salasAMostrar);
 			request.setAttribute("tematicasDisponibles", Sala.getTematicasCargadas());
 			request.setAttribute("dificultadesDisponibles", Sala.getDificultadesCargadas());
+			request.setAttribute("appConfig", AppConfig.getMapaConfig());
 
 			// Enviar la respuesta al usuario
 			request.getRequestDispatcher("index.jsp?sec=salas&buscar=" + paramBuscar + "&m=" + paramModalidad
