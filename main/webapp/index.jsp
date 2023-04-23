@@ -45,7 +45,7 @@ seccion = "secciones/" + seccion + ".jsp";
 				<li>Ranking</li>
 			</a>
 			<a href="./tienda">
-				<li>Tienda</li>
+				<li>TiendaOla</li>
 			</a>
 			<a href="./perfil">
 				<li>Mi perfil</li>
