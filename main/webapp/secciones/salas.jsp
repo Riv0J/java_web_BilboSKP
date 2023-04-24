@@ -122,14 +122,8 @@ numeroResultados = mapaSalas.size();
 			String idSala = par.getKey();
 			String nombreSala = sala.getNombre();
 			String textoBoton = "Organizar partida";
-			String enlaceBoton = "./organizar?id=" + idSala;
+			String enlaceBoton = "./verSala?idSala="+idSala;
 			String modalidad = "Online";
-			if (sala instanceof SalaFisica) {
-				textoBoton = "Realizar Reserva";
-				enlaceBoton = "./reservar?id=" + idSala;
-				modalidad = "Reserva";
-
-			}
 			//si la tematica de la sala es suspenso, le agregamos una clase
 			String rutaIconoTematica = "img_web/iconos_salas/" + sala.getTematica() + ".svg";
 			File archivoImagen = new File(getServletContext().getRealPath("/") + rutaIconoTematica);
