@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import model.Suscriptor;
 //
-@WebFilter({"/perfil/","/perfil/*","/organizar","/reservar"})
+@WebFilter({"/perfil3/","/perfil3/*","/organizar3","/reservar3"})
 public class FilterLogin implements Filter {
 
 	public FilterLogin() {
@@ -25,7 +25,7 @@ public class FilterLogin implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		System.out.println("Petición filtrada");
+		System.out.println("Petición filtrada en FilterLogin");
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession sesion = (req.getSession(false));
 		if (sesion != null) {
