@@ -1,9 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="java.util.HashMap,  model.Sala, model.PartidaOnline, model.Partida"%>
+	pageEncoding="ISO-8859-1" import="java.util.HashMap,java.util.ArrayList,  model.Sala, model.PartidaOnline, model.Partida"%>
 	<%
-HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("mapaSalas");
+	HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("mapaSalas");
+	ArrayList<String> partidas=(ArrayList<String>) request.getAttribute("partidas");
+	
+	
+	
+	
+	String nombregrupo=request.getParameter("nombregrupo");
+	String puntos=request.getParameter("puntos");
+	String fecha=request.getParameter("fecha");
 	
 %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +21,7 @@ HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("
 <title>Ranking</title>
 </head>
 <body>
-	<h2 class="superior">Sala de escape: *En nombre de la proteina*</h2>
+	<h2 class="superior">Sala de escape: </h2>
 	<nav class="lateral">
 	<% //TODO %>
 		sala 1<br>sala 2
