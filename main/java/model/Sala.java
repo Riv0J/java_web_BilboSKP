@@ -9,6 +9,7 @@ import java.util.Vector;
 import control.BilboSKP;
 
 public abstract class Sala {
+	private static HashMap<String, Sala> todasLasSalasCargadas = new HashMap<String,Sala>();
 	private static ArrayList<String> tematicasCargadas = new ArrayList<String>();
 	private static ArrayList<String> dificultadesCargadas = new ArrayList<String>();
 	int idSala;
@@ -103,6 +104,9 @@ public abstract class Sala {
 	}
 
 	public static HashMap<String, Sala> getTodasLasSalasCargadas() {
+		if(todasLasSalasCargadas.size()>0) { 
+			return todasLasSalasCargadas;
+		}
 		HashMap<String, Sala> mapaSalasCargadas = new HashMap<String, Sala>();
 		// obtener las salas cargadas de cada tipo
 		HashMap<Integer, SalaOnline> salasOnline = SalaOnline.getSalasCargadas();
@@ -115,14 +119,16 @@ public abstract class Sala {
 		for (Map.Entry<Integer, SalaFisica> par : salasFisicas.entrySet()) {
 			mapaSalasCargadas.put("SF" + par.getKey(), par.getValue());
 		}
+		setTodasLasSalasCargadas(mapaSalasCargadas);
 		return mapaSalasCargadas;
 	}
-
+	public static void setTodasLasSalasCargadas(HashMap<String, Sala> todasLasSalasCargadas) {
+		Sala.todasLasSalasCargadas = todasLasSalasCargadas;
+	}
 	public static void setTematicasCargadas(ArrayList<String> tematicasCargadas) {
 		Sala.tematicasCargadas = tematicasCargadas;
-
 	}
-
+	
 	public static ArrayList<String> getTematicasCargadas() {
 		return tematicasCargadas;
 	}
@@ -133,5 +139,9 @@ public abstract class Sala {
 
 	public static ArrayList<String> getDificultadesCargadas() {
 		return dificultadesCargadas;
+	}
+	
+	public static Sala getSalaPorId(String idSala) {
+		return todasLasSalasCargadas.get(idSala);
 	}
 }
