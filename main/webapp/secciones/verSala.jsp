@@ -58,7 +58,8 @@ if (esSalaFisica == true) {
 			<div id="caja_jugabilidad">
 				<p>Esta es una sala online, por lo que puedes acceder a ella en
 					cualquier momento, pero eso sí, asegúrate de traer a tus amigos
-					para vencerla rápido, y por supuesto pasar unas buenas risas.</p>
+					para vencerla rápido, y por supuesto pasar unas buenas risas.
+					Podrás invitar a tus amigos cuando estés organizando la partida.</p>
 			</div>
 
 			<%
