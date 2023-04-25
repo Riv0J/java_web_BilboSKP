@@ -7,19 +7,12 @@
 	
 	
 	
-	String nombregrupo=request.getParameter("nombregrupo");
-	String puntos=request.getParameter("puntos");
-	String fecha=request.getParameter("fecha");
+	String nombregrupo = request.getParameter("nombregrupo");
+	String puntos = request.getParameter("puntos");
+	String fecha = request.getParameter("fecha");
 	
 %>
 
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Ranking</title>
-</head>
 <body>
 	<h2 class="superior">Sala de escape: </h2>
 	<nav class="lateral">
@@ -164,4 +157,5 @@ li {
 }
 </style>
 </body>
-</html>
+
+

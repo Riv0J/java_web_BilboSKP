@@ -1,6 +1,6 @@
 <%@ page
 	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.io.File, java.text.Normalizer, 
-	model.Sala, model.SalaOnline, model.SalaFisica, view.AppConfig"%>
+	model.Sala, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig"%>
 <%
 HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("mapaSalas");
 ArrayList<String> tematicasDisponibles = (ArrayList<String>) request.getAttribute("tematicasDisponibles");
@@ -28,22 +28,20 @@ if (dificultadesDisponibles != null && tematicasDisponibles != null) {
 			<div id="caja_buscador">
 				<img alt="" src="img_web/iconos_salas/Lupa.svg"> <input
 					type="text" id="buscar" name="buscar" value="<%=paramBuscar%>"
-					placeholder="Buscar salas de escape por nombre">
+					placeholder="<%=Frases.getFrase("ESSalasBuscar") %>">
 			</div>
 		</div>
 		<div id="wrapper_filtros">
 			<div id="caja_filtros">
 				<jsp:include page="../plantillas/desplegableFiltroSalas.jsp"></jsp:include>
 				<select name="m">
-					<option <%if (m.equals("todas")) {%> selected <%}%> value="todas">Todas
-						las modalidades</option>
+					<option <%if (m.equals("todas")) {%> selected <%}%> value="todas"><%=Frases.getFrase("ESSalasModalidades")%></option>
 
-					<option <%if (m.equals("online")) {%> selected <%}%> value="online">Salas
-						Online</option>
+					<option <%if (m.equals("online")) {%> selected <%}%> value="online"><%=Frases.getFrase("ESSalasOnline")%></option>
 					<option <%if (m.equals("fisicas")) {%> selected <%}%>
-						value="fisicas">Salas Físicas</option>
+						value="fisicas"><%=Frases.getFrase("ESSalasFisicas")%></option>
 				</select> <select name="t">
-					<option value="todas">Todas las temáticas</option>
+					<option value="todas"><%=Frases.getFrase("ESSalasTematicas")%></option>
 					<%
 					for (String tematica : tematicasDisponibles) {
 						String tematicaNormalizada = Normalizer.normalize(tematica, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "")
@@ -57,7 +55,7 @@ if (dificultadesDisponibles != null && tematicasDisponibles != null) {
 					%>
 
 				</select> <select name="d">
-					<option value="todas">Todas las dificultades</option>
+					<option value="todas"><%=Frases.getFrase("ESSalasDificultad")%></option>
 					<%
 					for (String dificultad : dificultadesDisponibles) {
 						String dificultadNormalizada = Normalizer.normalize(dificultad, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "")
@@ -82,13 +80,8 @@ numeroResultados = mapaSalas.size();
 %>
 <section id="caja_titulo_resultados">
 	<h2>
-		Mostrando
-		<%=numeroResultados%>
-		resultados de la búsqueda: "<%=paramBuscar%>", Modalidad:
-		<%=m%>, Temática:
-		<%=t%>, Dificultad:
-		<%=d%>
-	</h2>
+		<%=Frases.getFrase("ESSalasResultado")%>	
+		</h2>
 </section>
 <section id="contenedor_salas">
 	<div id=contenedor_salas_wrapper>
