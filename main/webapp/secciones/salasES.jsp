@@ -80,8 +80,11 @@ numeroResultados = mapaSalas.size();
 %>
 <section id="caja_titulo_resultados">
 	<h2>
-		<%=Frases.getFrase("ESSalasResultado")%>	
-		</h2>
+		<%=Frases.getFrase("ESSalasResultado")%> <%=numeroResultados%>	<%=Frases.getFrase("ESSalasResultado1")%>: "<%=paramBuscar%>",
+		<%=Frases.getFrase("ESSalasResultado2")%>:<%=m%>,
+		<%=Frases.getFrase("ESSalasResultado3")%>:<%=t%>,
+		<%=Frases.getFrase("ESSalasResultado4")%>:<%=d%>
+	</h2>
 </section>
 <section id="contenedor_salas">
 	<div id=contenedor_salas_wrapper>
@@ -97,13 +100,12 @@ numeroResultados = mapaSalas.size();
 
 			</div>
 			<div class="caja_titulo">
-				<h2>No se encontraron salas con esas especificaciones, por
-					favor inténtalo de nuevo</h2>
+				<h2><%=Frases.getFrase("ESSalasNoFound")%></h2>
 			</div>
 			<div class="caja_boton" id="caja_boton_error">
 				<a href=<%=enlaceBoton%>>
 					<button>
-						<span>Buscar todas</span>
+						<span><%=Frases.getFrase("ESSalasBuscarTodas")%></span>
 					</button>
 				</a>
 			</div>
@@ -145,7 +147,7 @@ numeroResultados = mapaSalas.size();
 			</div>
 			<div class="caja_etiquetas">
 				<div class="etiqueta jugadores"
-					title="Cantidad de jugadores que pueden participar">
+					title="<%=Frases.getFrase("ESSalasBuscarTodas")%>">
 					<div class="caja_icon">
 						<img class="icon" src="img_web/iconos_salas/User.svg"
 							alt="Jugadores:">

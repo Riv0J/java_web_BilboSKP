@@ -113,12 +113,38 @@ public class Frases {
 		frases.put("ENSalasDificultad", "All the difficulties");
 		frases.put("EUSalasDificultad", "Zailtasun guztiak");
 		frases.put("ESSalasMostrando", "Todas las dificultades");
-		frases.put("ESSalasMostrando", "All the difficulties");
-		frases.put("ESSalasMostrando", "Zailtasun guztiak");
-		frases.put("ESSalasResultado", "Mostrando <%=numeroResultados%>	resultados de la búsqueda: \"<%=paramBuscar%>\", Modalidad:<%=m%>, Temática:	<%=t%>, Dificultad:	<%=d%>");
+		frases.put("ENSalasMostrando", "All the difficulties");
+		frases.put("EUSalasMostrando", "Zailtasun guztiak");
+		frases.put("ESSalasResultado", "Mostrando ");
+		frases.put("ESSalasResultado1", "resultados de la búsqueda");
+		frases.put("ESSalasResultado2", " Modalidad");
+		frases.put("ESSalasResultado3", "Tematica");
+		frases.put("ESSalasResultado4", "Dificultad");
+		frases.put("ENSalasResultado", "Showing");
+		frases.put("ENSalasResultado1", "results of the search");
+		frases.put("ENSalasResultado2", " Model");
+		frases.put("ENSalasResultado3", "Tematic");
+		frases.put("ENSalasResultado4", "difficulty");
+		frases.put("EUSalasResultado", "Erakusten ");
+		frases.put("EUSalasResultado1", "bilaketa-emaitzak");
+		frases.put("EUSalasResultado2", " modalitatea");
+		frases.put("EUSalasResultado3", "gaia");
+		frases.put("EUSalasResultado4", "zailtasuna");
 		frases.put("ENSalasDificultad", "All the difficulties");
 		frases.put("EUSalasDificultad", "Zailtasun guztiak");
-		
+		frases.put("ESSalasNoFound", "No se encontraron salas con esas especificaciones, por favor inténtalo de nuevo");
+		frases.put("ENSalasNoFound", "No rooms found with those specifications, please try again");
+		frases.put("EUSalasNoFound", "Ez da zehaztapen horiek dituen gelarik aurkitu. Saiatu berriro");
+		frases.put("ESSalasBuscarTodas", "Buscar todas");
+		frases.put("ENSalasBuscarTodas", "Search for everyone");
+		frases.put("EUSalasBuscarTodas", "Guztiak bilatu");
+		frases.put("ESSalasBoton", "Organizar partida");
+		frases.put("ENSalasBoton", "Organize a game");
+		frases.put("EUSalasBoton", "Jokoa antolatu");
+		frases.put("ESSalasCantidadJug", "Cantidad de jugadores que pueden participar?");
+		frases.put("ENSalasCantidadJug", "How many players can participate?");
+		frases.put("EUSalasCantidadJug", "Zenbatekoa da parte har dezaketen jokalari kopurua?");
+
 		
 
 		
