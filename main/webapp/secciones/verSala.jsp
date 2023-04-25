@@ -10,8 +10,10 @@ if (salaAMostrar == null) {
 }
 
 String textoBoton = "Organizar partida";
+String rutaImagenBoton = "./img_web/iconos_salas/Online.svg";
 if (esSalaFisica == true) {
 	textoBoton = "Realizar reserva";
+	rutaImagenBoton = "./img_web/iconos_salas/Reserva.svg";
 }
 %>
 <section id="wrapper_ver_sala">
@@ -20,7 +22,7 @@ if (esSalaFisica == true) {
 			<div class="caja_subtitulo">
 				<h2>Sinopsis</h2>
 			</div>
-			<div id="caja_sinopsis">
+			<div id="caja_sinopsis" class="cuerpo">
 				<p><%=salaAMostrar.getDescripcion()%></p>
 
 			</div>
@@ -28,7 +30,7 @@ if (esSalaFisica == true) {
 			<%
 			if (esSalaFisica == true) {
 			%>
-			<div id="caja_jugabilidad">
+			<div id="caja_jugabilidad" class="cuerpo">
 				<p>Esta es una sala física, por lo que funciona por medio de una
 					reserva. ¡Puede seleccionar entre horarios disponibles y
 					seleccionar la cantidad de participantes que acudirán a la sala!</p>
@@ -55,7 +57,7 @@ if (esSalaFisica == true) {
 			<%
 			} else {
 			%>
-			<div id="caja_jugabilidad">
+			<div id="caja_jugabilidad" class="cuerpo">
 				<p>Esta es una sala online, por lo que puedes acceder a ella en
 					cualquier momento, pero eso sí, asegúrate de traer a tus amigos
 					para vencerla rápido, y por supuesto pasar unas buenas risas.
@@ -70,7 +72,7 @@ if (esSalaFisica == true) {
 				<a href="" id="boton_reservar_organizar">
 					<button>
 						<div id="caja_icono">
-							<img src="./img_web/iconos_salas/Terror.svg">
+							<img src=<%=rutaImagenBoton%>>
 						</div>
 						<p>
 							<%=textoBoton%>
@@ -81,7 +83,7 @@ if (esSalaFisica == true) {
 			</div>
 		</div>
 		<div id="caja_img">
-			<div id=caja_titulo">
+			<div id="caja_titulo">
 				<h2><%=salaAMostrar.getNombre()%></h2>
 			</div>
 			<div class=caja_subtitulo"></div>
@@ -116,7 +118,7 @@ if (esSalaFisica == true) {
 }
 
 #caja_info>* {
-	width: 50%
+	width: 70%;
 }
 
 #caja_info h2 {
@@ -131,16 +133,21 @@ if (esSalaFisica == true) {
 }
 
 #caja_boton {
+	margin-top: 5%;
+	font-size: 2em;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
 #boton_reservar_organizar {
+	background-color: black;
 	width: 50%;
 }
 
 #boton_reservar_organizar button {
+	background-color: transparent;
+	cursor: pointer;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -150,6 +157,7 @@ if (esSalaFisica == true) {
 }
 
 #caja_icono {
+	display: flex;
 	width: 20%;
 }
 
@@ -160,5 +168,18 @@ if (esSalaFisica == true) {
 #caja_titulo {
 	font-size: 2em;
 	margin-top: 5%;
+}
+
+.caja_subtitulo {
+	font-size: 2em;
+	display: none;
+}
+
+.cuerpo {
+	font-size: 2em;
+}
+
+a {
+	
 }
 </style>
