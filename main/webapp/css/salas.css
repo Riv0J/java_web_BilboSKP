@@ -37,6 +37,7 @@
 #caja_filtros {
 	font-size: 1.8em;
 	width: 80%;
+	margin-top: 2%;
 	display: flex;
 	justify-content: center;
 	align-items: center;

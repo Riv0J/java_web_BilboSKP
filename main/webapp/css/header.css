@@ -8,6 +8,11 @@
 }
 
 :root{
+	--bg-color: #1E1E1F; /* gris*/
+	--bg-color: #030303; /* negro/gris oscuro*/
+	--text-color: whitesmoke;
+	--main-color: #C60C02; /* color acento: rojo   */
+	/*
     --bg-color:#331443;
     --bg-color2:#346d6f;
     --text-color:whitesmoke;

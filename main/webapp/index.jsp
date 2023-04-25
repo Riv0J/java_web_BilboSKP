@@ -18,38 +18,40 @@ seccion = "secciones/" + seccion + ".jsp";
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BilboSKP</title>
 <link rel="stylesheet" href="css/normalize.css">
-<link rel="stylesheet" href="css/bilboskp-icon.css"> 
+<link rel="stylesheet" href="css/bilboskp-icon.css">
 <link rel="icon" type="image/x-icon" href="img/favicon.png">
 <link rel="stylesheet" href="css/header.css">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet"
-    href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap"
+	rel="stylesheet">
 </head>
 <body>
 	<%--<%@include file="plantillas/nav.jsp"--%>
 	<header>
-        <a href="" class="logo"><i class='bx bxs-alarm' ></i><span>BILBO SKP</span>
-    
+		<a href="" class="logo"><img src="img_web/logos/500x200-logo-rojo.png"></a>
+		<ul class="navbar">
+			<a href="./salas?buscar=todas&m=todas&t=todas&d=todas"><li>Salas
+					de escape</li></a>
+			<a href="./ranking"><li>Ranking</li></a>
+			<a href="./tienda"><li>Tienda</li></a>
+			<a href="./salas"><li>Unirse a partida</li></a>
+			<a href="./contacto+FAQ"><li>Contacto</li></a>
+		</ul>
 
-
-    <ul class="navbar">
-    <a href="./salas?buscar=todas&m=todas&t=todas&d=todas"><li>Salas de escape</li></a>
-    <a href="./ranking"><li>Ranking</li></a>
-    <a href="./tienda"><li>Tienda</li></a>
-    <a href="./salas"><li>Unirse a partida</li></a>
-    <a href="./contacto+FAQ"><li>Contacto</li></a>
-    </ul>
-
-    <div class="main">
-        <a href="./perfil" class="user"><i class="ri-user-fill"></i>Sing In</a>
-        <a href="#" class="suscribirse">Subscribe</a>
-        <div class="bx bx-menu" id="menu-icon"></div>
-    </div>
-    <script type="text/javascript" src="script.js"></script>
-    </header>
+		<div class="main">
+			<a href="./perfil" class="user"><i class="ri-user-fill"></i>Sing
+				In</a> <a href="#" class="suscribirse">Subscribe</a>
+			<div class="bx bx-menu" id="menu-icon"></div>
+		</div>
+		<script type="text/javascript" src="js/script.js"></script>
+	</header>
 	<main>
 		<%-- <jsp:include page="plantillas/mensaje.jsp"></jsp:include>--%>
 

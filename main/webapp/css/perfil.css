@@ -4,37 +4,121 @@ section{
     display: flex;
     flex-direction: row;
 }
+.subcaja1 input, .subcaja3 input, .caja3 input{
+    border-radius: 2em;
+    height: 35px;
+    width: 20%;
+}
 .caja1 ul li{
     list-style: none;
     margin-bottom: 5%;
 }
-
+h1{
+    text-decoration: underline;
+}
 .caja1{
-    width: 50%;
+    width:40%;
 }
 .caja2{
-    width:50% ;
+    width:60%;
 }
-.perfil{
-    display: flex;
-    justify-content: center;
+.caja3{
+    margin: 5%;
+    text-align: center;
+}
+.subcaja1{
+    margin-bottom: 3%;
 }
 .subcaja1 img{
- 
     width: 15%;
+}
+.form0{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 5%;
 }
+.form1, .form2, .form3{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5%;
+}
+/*CAJA ALIAS*/
+.box1{
+    width: 100%;
+    margin-bottom: 3%;
+}
+.box1 label{
+   margin-bottom: 2%;
+   width: 30%;
+}
+.box1 input{
+    padding: 2%;
+    height: 15px;
+    width: 93%;
+    border-radius: 3em;
+    border:1px solid black;
+}
+/*CIERRE CAJA ALIAS*/
+.box0{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+.box0 label {
+    width: 50%;
+    margin-bottom: 2.5%;
+}
+.box0 input{
+    width:90%;
+    padding: 2%;
+}
+.box0 input, .form0 input{
+    border-radius: 3em;
+    height: 30px;
+    border: 1px solid black;
+}
+.boton1{
+    margin-right:4%;
+}
+@media screen and (max-width:480px) {
+    main{
+        margin: 3%;
+        margin:0 auto;
+    }
+    section{
+        display:flex;
+        flex-direction: column;
+    }
+    .subcaja1 img{
+        width: 23%;
+    }
+    h1{
+        display: none;
+    }
+    .caja1 ul{
+        margin-left: -12%;
+    }
+    .caja2, .caja1{
+        width: 95%;
+    }
+    .form1, .form2, .form3{
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 5%;
+    }
+    .box0 input, .box1 input{
+        display: none;
+    }
+    .box0 label, .box1 label{
+        width: 500%;
+        margin-bottom: 5%;
+    }
+    /*Botones input*/
+    .subcaja1 input, .subcaja3 input, .caja3 input{
+        border-radius: 2em;
+        height: 35px;
+        width: 30%;
+    }
 
-.subcaja1{
-   display: flex;
-   text-align:left;
-   flex-direction: column;  
-   border: 2px solid black;
-   width: 70%;
-   height: 250px;
-   padding: 2%;
-}
-label{
-    margin-bottom:5% ;
 }
