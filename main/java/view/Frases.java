@@ -7,7 +7,7 @@ public class Frases {
 
 	private static HashMap<String, String> frases;
 
-	public Frases() {
+	public static void initFrases() {
 		frases=new HashMap<String, String>();
 		/*HEADER*/
 		frases.put("ESheaderSalas", "Salas de escape");
@@ -27,7 +27,7 @@ public class Frases {
 		frases.put("ESContactocontacto", "Contacto");
 		frases.put("ENContactocontacto", "Contact");
 		frases.put("EUContactocontacto", "Kontaktua");
-		frases.put("ESContactoDireccion", "Dirección");
+		frases.put("ESContactoDireccion", "Direcciï¿½n");
 		frases.put("ENContactoDireccion", "Address");
 		frases.put("EUContactoDireccion", "Helbidea");
 		frases.put("ESContactoBotonCerrar", "Cerrar mapa");
@@ -42,34 +42,34 @@ public class Frases {
 		frases.put("ESContactoFAQ", "Preguntas frecuentes");
 		frases.put("ENContactoFAQ", "FAQ");
 		frases.put("EUContactoFAQ", "Ugari egindako galderak");
-		frases.put("ESContactoFAQ1", "¿Como comprar cupones?");
+		frases.put("ESContactoFAQ1", "ï¿½Como comprar cupones?");
 		frases.put("ENContactoFAQ1", "How I buy coupons?");
 		frases.put("EUContactoFAQ1", "Nola eros dezaket kupoiak?");
-		frases.put("ESContactoFAQ1R", "Quería un perro pero borracho compró un caballo en una subasta online: El joven de 24 años vio que había un caballo muy barato, y quiso subir su valor para que alguien termine pagando más por el animal. Así fue que sin recordar mucho, debido al alcohol, acabó por recibir un llamado al día siguiente donde le preguntaban cuándo iba a buscar el equino.");
+		frases.put("ESContactoFAQ1R", "Querï¿½a un perro pero borracho comprï¿½ un caballo en una subasta online: El joven de 24 aï¿½os vio que habï¿½a un caballo muy barato, y quiso subir su valor para que alguien termine pagando mï¿½s por el animal. Asï¿½ fue que sin recordar mucho, debido al alcohol, acabï¿½ por recibir un llamado al dï¿½a siguiente donde le preguntaban cuï¿½ndo iba a buscar el equino.");
 		frases.put("ENContactoFAQ1R", "Lorem ipsum ipsum lorem");
 		frases.put("EUContactoFAQ1R", "Lorem ipsum ipsum lorem");
-		frases.put("ESContactoFAQ2", "¿Como organizo una partida?");
+		frases.put("ESContactoFAQ2", "ï¿½Como organizo una partida?");
 		frases.put("ENContactoFAQ2", "How I organice a game?");
 		frases.put("EUContactoFAQ2", "Nola antola dezaket joko bat?");
 		frases.put("ESContactoFAQ2R", "Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
 		frases.put("ENContactoFAQ2R", "Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
 		frases.put("EUContactoFAQ2R", "Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
-		frases.put("ESContactoFAQ3", "¿Cuanto tarda en caducar un cupón?");
+		frases.put("ESContactoFAQ3", "ï¿½Cuanto tarda en caducar un cupï¿½n?");
 		frases.put("ENContactoFAQ3", "How many time takes to a coupon to expire?");
 		frases.put("EUContactoFAQ3", "Zenbat denbora daukat kupoi bat erabiltzeko?");
-		frases.put("ESContactoFAQ3R", "Los yogures no tienen fecha de caducidad. Y esto es así desde hace años. En concreto, desde 2014, cuando el entonces Ministerio de Agricultura, Alimentación y Medio Ambiente (MAGRAMA)estableció que este alimento solo debería indicar una fecha de consumo preferente (no de caducidad), determinada por los fabricantes. La medida, recogida en el Real Decreto 271/2014,pretendía simplificar el etiquetado, adaptar la legislación española a la europea y reducir el desperdicio alimentario.");
+		frases.put("ESContactoFAQ3R", "Los yogures no tienen fecha de caducidad. Y esto es asï¿½ desde hace aï¿½os. En concreto, desde 2014, cuando el entonces Ministerio de Agricultura, Alimentaciï¿½n y Medio Ambiente (MAGRAMA)estableciï¿½ que este alimento solo deberï¿½a indicar una fecha de consumo preferente (no de caducidad), determinada por los fabricantes. La medida, recogida en el Real Decreto 271/2014,pretendï¿½a simplificar el etiquetado, adaptar la legislaciï¿½n espaï¿½ola a la europea y reducir el desperdicio alimentario.");
 		frases.put("ENContactoFAQ3R", "Lorem ipsum de yogures");
 		frases.put("EUContactoFAQ3R", "Lorem ipsum de yogures");
-		frases.put("ESContactoFAQ4", "¿Que pasa si se termina el tiempo en una sala?");
+		frases.put("ESContactoFAQ4", "ï¿½Que pasa si se termina el tiempo en una sala?");
 		frases.put("ENContactoFAQ4", "What happens when time runs out?");
 		frases.put("EUContactoFAQ4", "Zer gertatzen da denbora bukatzeran?");
 		frases.put("ESContactoFAQ4R", "Lorem ipsum");
 		frases.put("ENContactoFAQ4R", "Lorem ipsum ipidfjaszhoshfohjdoshfj");
-		frases.put("EUContactoFAQ4R", "Lorem ipsum ipidfjaszhdsadsf kl j oi paàpo oshfohjdoshfj");
-		frases.put("ESContactoFAQ5", "¿Como sé cuan dificil es una sala?");
+		frases.put("EUContactoFAQ4R", "Lorem ipsum ipidfjaszhdsadsf kl j oi paï¿½po oshfohjdoshfj");
+		frases.put("ESContactoFAQ5", "ï¿½Como sï¿½ cuan dificil es una sala?");
 		frases.put("ENContactoFAQ5", "Can I know how hard a escape room is?");
 		frases.put("EUContactoFAQ5", "Nola jakin dezaket zein zaila den eskape gela bat?");
-		frases.put("ESContactoFAQ5R", "El Bosque Petrificado de Puyango es un yacimiento fosilífero del tipo conocido popularmente como «bosque petrificado» situado en la cuenca media del río Puyango, entre las provincias ecuatorianas de El Oro y Loja. El área cubre 2,658 hectáreas y sus sedimentos están divididos en cuatro formaciones geológicas (Formación Zapotillo, Formación Ciano, Formación Ambin y Formación Progreso), que datan de finales del período Cretácico.");
+		frases.put("ESContactoFAQ5R", "El Bosque Petrificado de Puyango es un yacimiento fosilï¿½fero del tipo conocido popularmente como ï¿½bosque petrificadoï¿½ situado en la cuenca media del rï¿½o Puyango, entre las provincias ecuatorianas de El Oro y Loja. El ï¿½rea cubre 2,658 hectï¿½reas y sus sedimentos estï¿½n divididos en cuatro formaciones geolï¿½gicas (Formaciï¿½n Zapotillo, Formaciï¿½n Ciano, Formaciï¿½n Ambin y Formaciï¿½n Progreso), que datan de finales del perï¿½odo Cretï¿½cico.");
 		frases.put("ENContactoFAQ5R", "The Puyango Petrified Forest is a fossil deposit of the type popularly known as \"petrified forest\" located in the middle basin of the Puyango River, between the Ecuadorian provinces of El Oro and Loja. The area covers 2,658 hectares and its sediments are divided into four geological formations (Zapotillo Formation, Ciano Formation, Ambin Formation and Progreso Formation), dating from the late Cretaceous period.");
 		frases.put("EUContactoFAQ5R", "Puyango hondarrezko basoa \"baso pertifikatu\" moduko fosil leku da, Puyango ibaiaren erdigunean kokatua, El Oro eta Loja ekuadorear probintziak artean. Erdigunea 2.658 hektareko azalera hartzen du eta bere sedimentuak lau geologiko eraztunetara banatzen dira (Zapotillo eraztuna, Ciano eraztuna, Ambin eraztuna eta Progreso eraztuna), Kretaziarraren amaieran dataz.");
 		frases.put("ESContactoOtras", "Otras consultas de utilidad");
@@ -78,10 +78,10 @@ public class Frases {
 		frases.put("ESContactoParking", "Vienes en coche y quieres encontrar un PARKING?");
 		frases.put("ENContactoParking", "Are you coming by car and looking for a PARKING spot?");
 		frases.put("EUContactoParking", "Kotxez etorri zara eta PARKING bat aurkitu nahi duzu?");
-		frases.put("ESContactoMetro", "¿Las paradas de Metro mas cercanas? ");
+		frases.put("ESContactoMetro", "ï¿½Las paradas de Metro mas cercanas? ");
 		frases.put("ENContactoMetro", "The nearest subway stations?");
 		frases.put("EUContactoMetro", "Non daude metro geltoki hurbilenak?");
-		frases.put("ESContactoOtraConsulta", "¿Tienes alguna otra consulta que hacernos?");
+		frases.put("ESContactoOtraConsulta", "ï¿½Tienes alguna otra consulta que hacernos?");
 		frases.put("ENContactoOtraConsulta", "Do you have any other question to ask us?");
 		frases.put("EUContactoOtraConsulta", "Beste galderarik?");
 		frases.put("ESContactoTextarea", "Escribe aqui tu pregunta");
@@ -106,7 +106,7 @@ public class Frases {
 		frases.put("ESSalasFisicas", "Salas Fisicas");
 		frases.put("ENSalasFisicas", "Physical Room");
 		frases.put("EUSalasFisicas", "Gela Fisika");
-		frases.put("ESSalasTematicas", "Todas las temáticas");
+		frases.put("ESSalasTematicas", "Todas las temï¿½ticas");
 		frases.put("ENSalasTematicas", "All the modes");
 		frases.put("EUSalasTematicas", "Modalitate guztiak");
 		frases.put("ESSalasDificultad", "Todas las dificultades");
@@ -116,7 +116,7 @@ public class Frases {
 		frases.put("ENSalasMostrando", "All the difficulties");
 		frases.put("EUSalasMostrando", "Zailtasun guztiak");
 		frases.put("ESSalasResultado", "Mostrando ");
-		frases.put("ESSalasResultado1", "resultados de la búsqueda");
+		frases.put("ESSalasResultado1", "resultados de la bï¿½squeda");
 		frases.put("ESSalasResultado2", " Modalidad");
 		frases.put("ESSalasResultado3", "Tematica");
 		frases.put("ESSalasResultado4", "Dificultad");
@@ -132,7 +132,7 @@ public class Frases {
 		frases.put("EUSalasResultado4", "zailtasuna");
 		frases.put("ENSalasDificultad", "All the difficulties");
 		frases.put("EUSalasDificultad", "Zailtasun guztiak");
-		frases.put("ESSalasNoFound", "No se encontraron salas con esas especificaciones, por favor inténtalo de nuevo");
+		frases.put("ESSalasNoFound", "No se encontraron salas con esas especificaciones, por favor intï¿½ntalo de nuevo");
 		frases.put("ENSalasNoFound", "No rooms found with those specifications, please try again");
 		frases.put("EUSalasNoFound", "Ez da zehaztapen horiek dituen gelarik aurkitu. Saiatu berriro");
 		frases.put("ESSalasBuscarTodas", "Buscar todas");
@@ -149,15 +149,18 @@ public class Frases {
 
 		
 		
-		frases.put("pruebalupa", "Habéis conseguido resolver la prueba, id al jardín mostrado en el MAPA");
-		frases.put("pruebalinterna", "Habéis conseguido resolver la prueba, ahora vamos a unir estos pedazos de papel");
+		frases.put("pruebalupa", "Habï¿½is conseguido resolver la prueba, id al jardï¿½n mostrado en el MAPA");
+		frases.put("pruebalinterna", "Habï¿½is conseguido resolver la prueba, ahora vamos a unir estos pedazos de papel");
 		frases.put("pruebaletras_solucion", "El ultimo ritual sera en la mansion");
-		frases.put("pruebaletras_resuelto", "Habéis conseguido descifrar una ubicación  que aparece en el libro \n¿Será la MANSIÓN de Dr.Doofenshmirtz \ndonde podamos resolver este caso?");
-		frases.put("pruebacodigo_resuelto", "Conseguís introducir el código correcto    para abrir la caja fuerte; se abre haciendo  un chirrido metálico horrible.\nSorprendidos, descubrís que la caja está   vacía... salvo por una ¡LLAVE dorada!.     La recogéis, con la certeza de que pronto  la necesitaréis");
+		frases.put("pruebaletras_resuelto", "Habï¿½is conseguido descifrar una ubicaciï¿½n  que aparece en el libro \nï¿½Serï¿½ la MANSIï¿½N de Dr.Doofenshmirtz \ndonde podamos resolver este caso?");
+		frases.put("pruebacodigo_resuelto", "Conseguï¿½s introducir el cï¿½digo correcto    para abrir la caja fuerte; se abre haciendo  un chirrido metï¿½lico horrible.\nSorprendidos, descubrï¿½s que la caja estï¿½   vacï¿½a... salvo por una ï¿½LLAVE dorada!.     La recogï¿½is, con la certeza de que pronto  la necesitarï¿½is");
 		
 	}
 
 	public static String getFrase(String claveFrase) {
+		if(frases==null) {
+			initFrases();
+		}
 		return frases.get(claveFrase);
 	}
 

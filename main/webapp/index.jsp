@@ -19,7 +19,6 @@ seccion = "secciones/" + seccion + ".jsp";
 <title>BilboSKP</title>
 <link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/bilboskp-icon.css">
-<link rel="icon" type="image/x-icon" href="img/favicon.png">
 <link rel="stylesheet" href="css/header.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"
@@ -31,11 +30,13 @@ seccion = "secciones/" + seccion + ".jsp";
 <link
 	href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap"
 	rel="stylesheet">
+<link rel="icon" type="image/x-icon" href="img/favicon.png">
 </head>
 <body>
 	<%--<%@include file="plantillas/nav.jsp"--%>
 	<header>
-		<a href="" class="logo"><img src="img_web/logos/500x200-logo-rojo.png"></a>
+		<a href="" class="logo"><img
+			src="img_web/logos/500x200-logo-rojo.png2"></a>
 		<ul class="navbar">
 			<a href="./salas?buscar=todas&m=todas&t=todas&d=todas"><li>Salas
 					de escape</li></a>
