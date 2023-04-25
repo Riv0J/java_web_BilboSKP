@@ -1,0 +1,10 @@
+@charset "ISO-8859-1";
+main{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 10%;
+}
+.tres img{
+    width: 10%;
+}
