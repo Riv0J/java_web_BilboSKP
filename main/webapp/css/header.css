@@ -269,6 +269,18 @@ header button {
 
 
 @media (max-width: 1090px) {
+	#caja_logo{
+	width: 10%;
+}
+#logo_grande{
+	display:block;
+}
+#logo_peque{
+	display:none;
+}
+#caja_logo img{
+	width:100%;
+}
     #menu-icon{
         display: block;
     }
@@ -277,7 +289,7 @@ header button {
         top: 100%;
         right: -100%;
         width: 270px;
-        height: 37vh;
+        height: 43vh;
         background-color: var(--main-color);
         display: flex;
         flex-direction: column;
@@ -308,5 +320,35 @@ header button {
         justify-content: center;
     }
     
+}
+
+@media (max-width: 900px){
+		#caja_logo {
+		width: 7%;
+	}
+	#logo_grande {
+		display: none;
+	}
+	#logo_peque {
+		display: inline;
+	}
+	#caja_logo img {
+		width: 100%;
+	}
+}
+
+@media (max-width: 600px){
+		#caja_logo {
+		width: 10%;
+	}
+	#logo_grande {
+		display: none;
+	}
+	#logo_peque {
+		display: inline;
+	}
+	#caja_logo img {
+		width: 100%;
+	}
 }
 
