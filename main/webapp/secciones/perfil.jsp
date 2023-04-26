@@ -1,10 +1,10 @@
 <%@ page
 	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.io.File, java.text.Normalizer, 
-	model.Suscriptor, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig"%>
+	model.Suscriptor, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date  "%>
 <!DOCTYPE html>
-<% Suscriptor sus= new Suscriptor(1, 1234, "hola@gmail,com" , "pau", "Paula", "Castillo", "imagen", 1 , null);%>
+<%Suscriptor sus= new Suscriptor(1, 1234, "hola@gmail,com" , "pau", "Paula", "Castillo", "imagen", 1 , new Date());%>
 
-<link rel="stylesheet" href="../css/perfil.css">
+<link rel="stylesheet" href="css/perfil.css">
 <main>
        <section>
             <div class="caja1">
@@ -29,11 +29,11 @@
                     <div class="form1">
                         <div class="box0">
                             <label for="">Nombre:</label>
-                            <input type="text" name="" id="" value="<%=sus.getNombre()%>"/>
+                            <input type="text" name="" id="" value="<%=sus.getNombre()%>" />
                         </div>
                         <div class="box0">
                             <label for="">Apellido:</label>
-                            <input type="text" name="" id="" value="<%=sus.getApellidos()%>"/>
+                            <input type="text" name="" id="" value="<%=sus.getApellidos()%>" />
                      	</div>
                     </div>
                     <div class="form2">
@@ -49,17 +49,23 @@
                     <div class="form3">
                         <div class="box0">
                             <label for="">Fecha de nacimiento</label>
-                            <input type="date" name="" id="" value="" />
+                            <input type="date" name="" id="" />
                         </div>
                         <div class="box0">
                             <label for="">Télefono:</label>
-                            <input type="" name="" id="" value="<%=sus.getTelefono()%>" />
+                        <input type="" name="" id="" value="<%=sus.getTelefono()%>"/> 
                         </div>
                     </div>
                     <div class="subcaja3">
-                        <input type="button"  value="Guardar" <% %>/> 
+                        <input type="button"  value="Guardar"/> 
                     </div>
                 </form>
+                <div class="caja4">
+                	<h2>Cambia tu cotraseña</h2>
+                </div>
+                
+                
+                
             </div>
         </section>
         <div class="caja3">
