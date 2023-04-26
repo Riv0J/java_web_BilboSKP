@@ -14,8 +14,8 @@
             <img src="../img_web/icons/coupon.png" width="40%" height="100px">
             <h3>1 cupon</h3>
             <h5>5% de descuento</h5>
-            <div id="root"></div>
-            </div>
+            <button name="comprar1" class="botonCompra" type="submit">Comprar ya</button>
+        </div>
         
         <div class="cajaCupon">
             <img src="../img_web/icons/coupon.png" width="40%" height="100px">

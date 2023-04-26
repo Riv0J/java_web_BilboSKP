@@ -46,9 +46,9 @@ public class ServletRanking extends HttpServlet {
 			//sala viendose en este momento
 			
 			//partidas que se jugaron
-			//todo esto ira como [setAttribute]
+			//todo esto ira como setAttribute[]
 			
-			//hacer llamado al metodo (solo id) de ranking. obtenermos vector partidas. 
+			//hacer llamado al metodo de ObtenerRanking(id). obtendremos vector <partidas>. 
 			
 			
 			// Enviar la respuesta al usuario
