@@ -29,31 +29,31 @@
                     <div class="form1">
                         <div class="box0">
                             <label for="">Nombre:</label>
-                            <input type="text" name="" id="" value="<%=sus.getNombre()%>">
+                            <input type="text" name="" id="" value="<%=sus.getNombre()%>"/>
                         </div>
                         <div class="box0">
                             <label for="">Apellido:</label>
-                            <input type="text" name="" id="" value="<%=sus.getApellidos()%>">
+                            <input type="text" name="" id="" value="<%=sus.getApellidos()%>"/>
                      	</div>
                     </div>
                     <div class="form2">
                         <div class="box0">
                             <label for="">Email:</label>
-                            <input type="email" name="" id="" value="<%=sus.getEmail()%>">
+                            <input type="email" name="" id="" value="<%=sus.getEmail()%>"/>
                         </div>
                          <div class="box0">
                             <label for="">Alias</label>
-                            <input type="text" name="" id="" value="<%=sus.getAlias()%>">
+                            <input type="text" name="" id="" value="<%=sus.getAlias()%>"/>
                         </div>
                     </div>
                     <div class="form3">
                         <div class="box0">
                             <label for="">Fecha de nacimiento</label>
-                            <input type="date" name="" id="" value="">
+                            <input type="date" name="" id="" value="" />
                         </div>
                         <div class="box0">
                             <label for="">Télefono:</label>
-                            <input type="" name="" id="" value="<%=sus.getTelefono()%>">
+                            <input type="" name="" id="" value="<%=sus.getTelefono()%>" />
                         </div>
                     </div>
                     <div class="subcaja3">

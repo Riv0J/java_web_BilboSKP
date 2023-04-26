@@ -1,6 +1,6 @@
 <%@ page
 	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.io.File, java.text.Normalizer, 
-	model.Sala, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig, view.NormalizeHelper"%>
+	model.Sala, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig, view.NormalizeHelper" %>
 <%
 HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("mapaSalas");
 ArrayList<String> tematicasDisponibles = (ArrayList<String>) request.getAttribute("tematicasDisponibles");

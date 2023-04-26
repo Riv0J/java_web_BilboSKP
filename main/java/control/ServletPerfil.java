@@ -23,7 +23,7 @@ public class ServletPerfil extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-	//que todos los datos aparezcan cuando el suscriptor esté logeado	
+	//que todos los datos aparezcan cuando el suscriptor esta logeado	
 	//obtener el suscriptor de la sesion 
 	//Suscriptor sus= (Suscriptor) sesion.getAttribute("suscriptor");
 		
@@ -44,7 +44,11 @@ public class ServletPerfil extends HttpServlet {
 		sesion.setAttribute("sus", sus);
 		
 		
+	//Guadar los datos modificados
+	
 		
+		
+	//cerrar sesion
 		
 	}
 
