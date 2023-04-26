@@ -1,15 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page
+	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.io.File, java.text.Normalizer, 
+	model.Suscriptor, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
+<% Suscriptor sus= new Suscriptor(1, 1234, "hola@gmail,com" , "pau", "paula", "castillo", "imagen", 1 , null);%>
+
 <link rel="stylesheet" href="../css/perfil.css">
-<title>Mi perfil</title>
-</head>
-<body>
-	<main>
-        <section>
+<main>
+       <section>
             <div class="caja1">
                 <h1>Mi perfil</h1>
                 <ul>
@@ -31,22 +28,23 @@
                     </div>
                     <div class="box1">
                         <label for="">Alias:</label>
-                        <input type="text" name="" id="">
+                       
+                        <input type="text" name="" id="" value="<%=sus.getAlias()%>">    
                     </div>
                     <div class="form1">
                         <div class="box0">
                             <label for="">Nombre:</label>
-                            <input type="text" name="" id="">
+                            <input type="text" name="" id="" value="<%=sus.getNombre()%>">
                         </div>
                         <div class="box0">
                             <label for="">Apellido:</label>
-                            <input type="text" name="" id="">
+                            <input type="text" name="" id="<%%>">
                         </div>
                     </div>
                     <div class="form2">
                         <div class="box0">
                             <label for="">Email:</label>
-                            <input type="email" name="" id="" placeholder="">
+                            <input type="email" name="" id="" value="<%=sus.getEmail()%>">
                         </div>
                         <div class="box0">
                             <label for="">Contraseña:</label>
@@ -56,16 +54,16 @@
                     <div class="form3">
                         <div class="box0">
                             <label for="">Fecha de nacimiento</label>
-                            <input type="date" name="" id="">
+                            <input type="date" name="" id="" value="">
                         </div>
                         <div class="box0">
                             <label for="">Télefono:</label>
-                            <input type="" name="" id="">
+                            <input type="" name="" id="" value="<%=sus.getTelefono()%>">
                         </div>
                     </div>
                     <div class="subcaja3">
                         <input class="boton1" type="button" value="Restablecer"/>
-                        <input type="button"  value="Guardar"/> 
+                        <input type="button"  value="Guardar" <% %>/> 
                 </form>
             </div>
         </section>
@@ -76,5 +74,4 @@
             <a href="darseBaja.jsp"><input type="button" value="Darse de baja"></a>
         </div>
     </main>
-</body>
-</html>
+
