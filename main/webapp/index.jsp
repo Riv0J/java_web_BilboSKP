@@ -1,6 +1,3 @@
-
-
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%
@@ -45,17 +42,15 @@ seccion = "secciones/" + seccion + ".jsp";
 			<a href="./salas"><li>Unirse a partida</li></a>
 			<a href="./contacto+FAQ"><li>Contacto</li></a>
 		</ul>
-
 		<div class="main">
 			<a href="./perfil" class="user"><i class="ri-user-fill"></i>Sing
-				In</a> <a href="#" class="suscribirse">Subscribe</a>
+				In</a> <a href="/subscribe" class="suscribirse">Subscribe</a>
 			<div class="bx bx-menu" id="menu-icon"></div>
 		</div>
 		<script type="text/javascript" src="js/script.js"></script>
 	</header>
 	<main>
 		<%-- <jsp:include page="plantillas/mensaje.jsp"></jsp:include>--%>
-
 		<jsp:include page="<%=seccion%>"></jsp:include>
 	</main>
 </body>

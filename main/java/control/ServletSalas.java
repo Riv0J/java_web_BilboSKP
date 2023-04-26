@@ -21,6 +21,7 @@ import model.SalaFisica;
 import model.SalaOnline;
 import view.AppConfig;
 import view.Mensaje;
+import view.NormalizeHelper;
 
 @WebServlet("/salas")
 public class ServletSalas extends HttpServlet {
@@ -42,7 +43,7 @@ public class ServletSalas extends HttpServlet {
 
 			if (paramBuscar != null) {
 				// normalizar(quitar acentos y poner minusculas)
-				paramBuscar = normalizarTexto(paramBuscar);
+				paramBuscar = NormalizeHelper.normalizarTexto(paramBuscar);
 			}
 
 			// Iterar el mapa de salas cargadas y agregar las que cumplen los criterios de
@@ -55,7 +56,7 @@ public class ServletSalas extends HttpServlet {
 					if(!paramBuscar.equals("todas")) {
 						// se tiene que normalizar el texto(minusculas y sin acentos)
 						// si el nombre de la sala no contiene el parametro buscar, se salta esta sala
-						String nombreSalaNormalizada = normalizarTexto(sala.getNombre());
+						String nombreSalaNormalizada = NormalizeHelper.normalizarTexto(sala.getNombre());
 						if (!nombreSalaNormalizada.contains(paramBuscar))
 							continue;
 					}
@@ -80,7 +81,7 @@ public class ServletSalas extends HttpServlet {
 				// filtrar valor de tematica
 				if (paramTematica != null) {
 
-					String tematicaNormalizada = normalizarTexto(sala.getTematica());
+					String tematicaNormalizada = NormalizeHelper.normalizarTexto(sala.getTematica());
 					// si el tematica de la sala no es igual el parametro tematica, se salta esta
 					// sala
 					if (!paramTematica.equals("todas") && !paramTematica.equals(tematicaNormalizada)) {
@@ -90,7 +91,7 @@ public class ServletSalas extends HttpServlet {
 
 				// filtrar valor de dificultad
 				if (paramDificultad != null) {
-					String dificultadNormalizada = normalizarTexto(sala.getDificultad());
+					String dificultadNormalizada = NormalizeHelper.normalizarTexto(sala.getDificultad());
 					// si la dificultad de la sala no es igual el parametro dificultad, se salta
 					// esta sala
 					if (!paramDificultad.equals("todas") && !paramDificultad.equals(dificultadNormalizada)) {
@@ -129,9 +130,5 @@ public class ServletSalas extends HttpServlet {
 			e.printStackTrace();
 		}
 
-	}
-
-	public static String normalizarTexto(String texto) {
-		return Normalizer.normalize(texto, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
 	}
 }

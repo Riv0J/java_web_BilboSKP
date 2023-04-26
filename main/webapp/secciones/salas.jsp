@@ -1,6 +1,6 @@
 <%@ page
 	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.io.File, java.text.Normalizer, 
-	model.Sala, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig"%>
+	model.Sala, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig, view.NormalizeHelper"%>
 <%
 HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("mapaSalas");
 ArrayList<String> tematicasDisponibles = (ArrayList<String>) request.getAttribute("tematicasDisponibles");
@@ -58,8 +58,7 @@ if (dificultadesDisponibles != null && tematicasDisponibles != null) {
 					<option value="todas"><%=Frases.getFrase("ESSalasDificultad")%></option>
 					<%
 					for (String dificultad : dificultadesDisponibles) {
-						String dificultadNormalizada = Normalizer.normalize(dificultad, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "")
-						.toLowerCase();
+						String dificultadNormalizada = NormalizeHelper.normalizarTexto(dificultad);
 					%>
 					<option <%if (d.equals(dificultadNormalizada)) {%> selected <%}%>
 						value="<%=dificultadNormalizada%>"><%=dificultad%></option>
@@ -120,16 +119,16 @@ numeroResultados = mapaSalas.size();
 			String enlaceBoton = "./verSala?idSala="+idSala;
 			String modalidad = "Online";
 			//si la tematica de la sala es suspenso, le agregamos una clase
-			String rutaIconoTematica = "img_web/iconos_salas/" + sala.getTematica() + ".svg";
+			String rutaIconoTematica = "img_web/iconos_salas/" + NormalizeHelper.normalizarTexto(sala.getTematica()) + ".svg";
 			File archivoImagen = new File(getServletContext().getRealPath("/") + rutaIconoTematica);
 			if (!archivoImagen.exists()) {
-				rutaIconoTematica = "img_web/iconos_salas/Question.svg";
+				rutaIconoTematica = "img_web/iconos_salas/question.svg";
 			}
 
 			String rutaImagenPortada = "img_salas/portadas/" + idSala + ".png";
 			File archivoImagenPortada = new File(getServletContext().getRealPath("/") + rutaImagenPortada);
 			if (!archivoImagenPortada.exists()) {
-				rutaImagenPortada = "img_salas/portadas/Question.png";
+				rutaImagenPortada = "img_salas/portadas/question.png";
 			}
 		%>
 		<article class="caja_sala">
@@ -149,7 +148,7 @@ numeroResultados = mapaSalas.size();
 				<div class="etiqueta jugadores"
 					title="<%=Frases.getFrase("ESSalasBuscarTodas")%>">
 					<div class="caja_icon">
-						<img class="icon" src="img_web/iconos_salas/User.svg"
+						<img class="icon" src="img_web/iconos_salas/user.svg"
 							alt="Jugadores:">
 					</div>
 
@@ -157,7 +156,7 @@ numeroResultados = mapaSalas.size();
 				</div>
 				<div class="etiqueta dificultad" title="Dificultad de la sala">
 					<div class="caja_icon">
-						<img class="icon" src="img_web/iconos_salas/Lock.svg"
+						<img class="icon" src="img_web/iconos_salas/lock.svg"
 							alt="Dificultad:">
 					</div>
 
@@ -165,7 +164,7 @@ numeroResultados = mapaSalas.size();
 				</div>
 				<div class="etiqueta tiempo" title="Tiempo máximo de la sala">
 					<div class="caja_icon">
-						<img class="icon" src="img_web/iconos_salas/Clock.svg"
+						<img class="icon" src="img_web/iconos_salas/clock.svg"
 							alt="Tiempo:">
 					</div>
 
@@ -182,7 +181,7 @@ numeroResultados = mapaSalas.size();
 				</div>
 				<div class="etiqueta modalidad" title="Modo de acceso a la sala">
 					<div class="caja_icon">
-						<img class="icon" src="img_web/iconos_salas/<%=modalidad%>.svg"
+						<img class="icon" src="img_web/iconos_salas/<%=NormalizeHelper.normalizarTexto(modalidad)%>.svg"
 							alt="Modo">
 					</div>
 
