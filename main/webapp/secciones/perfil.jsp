@@ -2,7 +2,7 @@
 	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.io.File, java.text.Normalizer, 
 	model.Suscriptor, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig"%>
 <!DOCTYPE html>
-<% Suscriptor sus= new Suscriptor(1, 1234, "hola@gmail,com" , "pau", "paula", "castillo", "imagen", 1 , null);%>
+<% Suscriptor sus= new Suscriptor(1, 1234, "hola@gmail,com" , "pau", "Paula", "Castillo", "imagen", 1 , null);%>
 
 <link rel="stylesheet" href="../css/perfil.css">
 <main>
@@ -26,11 +26,6 @@
                         <img src="../img_web/icons/user.png" alt="">
                         <input type="button" value="Modificar"/>
                     </div>
-                    <div class="box1">
-                        <label for="">Alias:</label>
-                       
-                        <input type="text" name="" id="" value="<%=sus.getAlias()%>">    
-                    </div>
                     <div class="form1">
                         <div class="box0">
                             <label for="">Nombre:</label>
@@ -38,17 +33,17 @@
                         </div>
                         <div class="box0">
                             <label for="">Apellido:</label>
-                            <input type="text" name="" id="<%%>">
-                        </div>
+                            <input type="text" name="" id="" value="<%=sus.getApellidos()%>">
+                     	</div>
                     </div>
                     <div class="form2">
                         <div class="box0">
                             <label for="">Email:</label>
                             <input type="email" name="" id="" value="<%=sus.getEmail()%>">
                         </div>
-                        <div class="box0">
-                            <label for="">Contraseña:</label>
-                            <input type="password" name="" id="">
+                         <div class="box0">
+                            <label for="">Alias</label>
+                            <input type="text" name="" id="" value="<%=sus.getAlias()%>">
                         </div>
                     </div>
                     <div class="form3">
@@ -62,8 +57,8 @@
                         </div>
                     </div>
                     <div class="subcaja3">
-                        <input class="boton1" type="button" value="Restablecer"/>
                         <input type="button"  value="Guardar" <% %>/> 
+                    </div>
                 </form>
             </div>
         </section>
