@@ -39,13 +39,20 @@ public class ServletRanking extends HttpServlet {
 			HashMap<String, Sala> mapaSalas = Sala.getTodasLasSalasCargadas();
 			// Obtener los parametros de la sala que queremos ver el ranking
 			String idSala = request.getParameter("id");
-			String onlineoFisica = request.getParameter("oof");
 			String nombregrupo = request.getParameter("nombregrupo");
 			String puntos = request.getParameter("puntos");
 			String fecha = request.getParameter("fecha");
-
+			
+			//sala viendose en este momento
+			
+			//partidas que se jugaron
+			//todo esto ira como [setAttribute]
+			
+			//hacer llamado al metodo (solo id) de ranking. obtenermos vector partidas. 
+			
+			
 			// Enviar la respuesta al usuario
-			request.getRequestDispatcher("index.jsp?sec=ranking&oof=" + onlineoFisica + "&id=" + idSala)
+			request.getRequestDispatcher("index.jsp?sec=ranking&oof=" + onlineoFisica + "&id=" + nombreSala)
 					.forward(request, response);
 		} catch (Throwable e) {
 			e.printStackTrace();
