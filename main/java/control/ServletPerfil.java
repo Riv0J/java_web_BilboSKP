@@ -10,45 +10,49 @@ import javax.servlet.http.HttpSession;
 
 import model.Suscriptor;
 
-@WebServlet("/ServletPerfil")
+@WebServlet("/perfil")
 public class ServletPerfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	// metodos que se usarna desde la clase BilnoSKP
-	// ACTUALIZARSUSCRIPCION
-	// CREARSUSCRIPCION
-	// LOGINSUSCRIPTOR
-	// getadatosSuscriptor
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		
+	String subseccion =	request.getParameter("subseccion");
+	if(subseccion==null) {
+		subseccion="editar";
+	}
 	//que todos los datos aparezcan cuando el suscriptor esta logeado	
 	//obtener el suscriptor de la sesion 
 	//Suscriptor sus= (Suscriptor) sesion.getAttribute("suscriptor");
-		
-		
+	
 		HttpSession sesion = request.getSession();
 		Suscriptor sus= new Suscriptor(1, 1234, "hola@gmail,com" , "pau", "paula", "castillo", "imagen", 1 , null);
 	
-		if(sus!=null) {
-			sus.setAlias("pau");
-			sus.setNombre("paula");
-			sus.setApellidos("castillo");
-			sus.setEmail("hola@gmail.com");
-			sus.setFech_nac(null);
-			sus.setTelefono(1234);
-			sus.setImagen("imagen");
-			
-		}
 		sesion.setAttribute("sus", sus);
+		switch (subseccion) {
+		case"editar":
+			request.getRequestDispatcher("index.jsp?sec=perfil").forward(request, response);
+			break;
+		case "reservas":
+			//obtener todas las reservas del suscriptor 
+			//hacer setAttribute de las reservas
+			break;		
+		case "cupones":
+			//obtner todos los cupones
+			//dispatch
+			break;
+		default:
+			break;
+		}
 		
-		
-	//Guadar los datos modificados
+		//Guadar los datos modificados
 	
 		
 		
-	//cerrar sesion
+		//cerrar sesion
+		
+		
+		
+		//Enviar la respuesta al usuario
+		request.getRequestDispatcher("index.jsp?sec=perfil").forward(request, response);
 		
 	}
 

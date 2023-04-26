@@ -16,6 +16,7 @@ rutaJspSeccion = "secciones/" + seccion + ".jsp";
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><%=seccion.substring(0, 1).toUpperCase() + seccion.substring(1)%> | BilboSKP</title>
 <link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/bilboskp-icon.css">
 <link rel="stylesheet" href="css/header.css">
 <link
@@ -57,5 +58,31 @@ rutaJspSeccion = "secciones/" + seccion + ".jsp";
 		<%-- <jsp:include page="plantillas/mensaje.jsp"></jsp:include>--%>
 		<jsp:include page="<%=rutaJspSeccion%>"></jsp:include>
 	</main>
+	<footer>
+        <section id="caja1">
+            <div class="box">
+                <ul>
+                    <li> <a href="">Política de privacidad</a></li>
+                    <li> <a href="">Cookies</a></li>
+                    <li> <a href="">Site map</a></li>
+                </ul>
+            </div>
+            <div class="box1">
+                <img src="img_web/logos/500x200-logo-rojo-2.png" alt="">
+            </div>
+            <div class="box">
+                <ul>
+                    <li><a href="">Contáctanos</a></li>
+                    <li><a href="">Redes</a></li>
+                    <li><a href="">FAQ</a></li>
+                </ul>
+            </div>
+        </section>
+        <section id="caja2">
+            <ul>
+                <li>Copyright</li>
+            </ul>
+        </section>
+    </footer>
 </body>
 </html>
