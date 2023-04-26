@@ -44,7 +44,7 @@
                     <div class="form2">
                         <div class="box0">
                             <label for="">Email:</label>
-                            <input type="email" name="" id="" value"">
+                            <input type="email" name="" id="" value="<%=sus.getEmail()%>">
                         </div>
                         <div class="box0">
                             <label for="">Contraseña:</label>
@@ -54,11 +54,11 @@
                     <div class="form3">
                         <div class="box0">
                             <label for="">Fecha de nacimiento</label>
-                            <input type="date" name="" id="">
+                            <input type="date" name="" id="" value="">
                         </div>
                         <div class="box0">
                             <label for="">Télefono:</label>
-                            <input type="" name="" id="">
+                            <input type="" name="" id="" value="<%=sus.getTelefono()%>">
                         </div>
                     </div>
                     <div class="subcaja3">
