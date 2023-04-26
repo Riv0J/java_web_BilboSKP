@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="java.util.HashMap,java.util.ArrayList,  model.Sala, model.PartidaOnline, model.Partida"%>
-	<%
+	pageEncoding="ISO-8859-1"
+	import="java.util.HashMap,java.util.ArrayList,  model.Sala, model.PartidaOnline, model.Partida"%>
+<%
 	HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("mapaSalas");
 	ArrayList<String> partidas=(ArrayList<String>) request.getAttribute("partidas");
 	
@@ -10,15 +11,32 @@
 	String nombregrupo = request.getParameter("nombregrupo");
 	String puntos = request.getParameter("puntos");
 	String fecha = request.getParameter("fecha");
+	String idSala = request.getParameter("id");
+	String onlineOFisica = request.getParameter("oof");
+	String nombreSala = request.getParameter("nombre");
+
 	
 %>
 
 <body>
-	<h2 class="superior">Sala de escape: </h2>
+	<h2 class="superior">
+		Sala de escape:<%=Sala.getNombre() %>
+	</h2>
 	<nav class="lateral">
-	<% //TODO %>
-		sala 1<br>sala 2
+		<% //TODO recorrer salas hasta que no haya mas %>
+		<% for  (int i=0;i<mapaSala.size();i++) {
+		
+		
+		
+		}
+		%><br>sala 2
 	</nav>
+	
+	<%//consulta sql query ,    
+	
+	
+	
+	%>
 	<div id="podio">
 		<div class="info">
 			<img src="../img_web/icons/copa2.png">
@@ -115,7 +133,7 @@ p {
 	width: 10em;
 	/*padding: 0 auto;*/
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	font-size:x-large;
+	font-size: x-large;
 	font-weight: 700;
 	background-color: #F5DF68;
 }
@@ -128,7 +146,7 @@ p {
 	width: 10em;
 	margin: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	font-size:large;
+	font-size: large;
 	font-weight: 600;
 	background-color: #D8D8D8;
 }
@@ -141,7 +159,7 @@ p {
 	width: 10em;
 	margin: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	font-size:large;
+	font-size: large;
 	font-weight: 500;
 	background-color: #C68358;
 }
