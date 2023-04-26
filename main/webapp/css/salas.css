@@ -203,10 +203,9 @@ option:hover {
 	height: 40%;
 }
 
-.tematica_larga .caja_text {
-	width: 70%;
+.tematica .caja_text{
+	width: 77%;
 }
-
 .caja_text {
 	margin-left: 4%;
 	text-align: center;

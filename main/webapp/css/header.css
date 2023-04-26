@@ -27,7 +27,6 @@ body{
 	margin-top: 5%;
     min-height: 100vh;
     background-color: var(--bg-color);
-    color: #fff;
 }
 
 /*MENU*/
@@ -42,6 +41,7 @@ header{
     align-items: center;
     justify-content: space-between;
     background-color: var(--bg-color);
+    color: #fff;
     padding: 28px 6%;
     transition:all .50s ease
 }
