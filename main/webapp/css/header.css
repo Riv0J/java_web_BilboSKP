@@ -7,6 +7,18 @@
     list-style: none;
 }
 
+#caja_logo{
+	width: 10%;
+}
+#logo_grande{
+	display:block;
+}
+#logo_peque{
+	display:none;
+}
+#caja_logo img{
+	width:100%;
+}
 :root{
 	--bg-color: #1E1E1F; /* gris*/
 	--bg-color: #030303; /* negro/gris oscuro*/
@@ -150,7 +162,7 @@ padding-top: 2%;
 justify-content: center;
 }
 
-button {
+header button {
     padding: 10px 20px;
     border-radius: 5px;
     background-color: var(--main-color);
@@ -166,8 +178,6 @@ button {
     display: flex;
     flex-direction: row;
     
-
-
   }
   .llave{
     width: 30%;

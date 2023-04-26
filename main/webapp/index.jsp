@@ -32,8 +32,11 @@ seccion = "secciones/" + seccion + ".jsp";
 <body>
 	<%--<%@include file="plantillas/nav.jsp"--%>
 	<header>
-		<a href="" class="logo"><img
-			src="img_web/logos/500x200-logo-rojo.png2"></a>
+		<div id=caja_logo>
+			<a id="logo_grande" href="./index.jsp?sec=inicio" class="logo"> <img  src="img_web/logos/500x200-logo-rojo.png"></a>
+			<a id="logo_peque" href="./index.jsp?sec=inicio" class="logo"> <img  src="img_web/logos/500x200-logo-rojo.png"></a>
+		</div>
+
 		<ul class="navbar">
 			<a href="./salas?buscar=todas&m=todas&t=todas&d=todas"><li>Salas
 					de escape</li></a>

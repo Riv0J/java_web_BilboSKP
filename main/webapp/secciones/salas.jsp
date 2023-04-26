@@ -44,8 +44,7 @@ if (dificultadesDisponibles != null && tematicasDisponibles != null) {
 					<option value="todas"><%=Frases.getFrase("ESSalasTematicas")%></option>
 					<%
 					for (String tematica : tematicasDisponibles) {
-						String tematicaNormalizada = Normalizer.normalize(tematica, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "")
-						.toLowerCase();
+						String tematicaNormalizada = NormalizeHelper.normalizarTexto(tematica);
 					%>
 					<option <%if (t.equals(tematicaNormalizada)) {%> selected <%}%>
 						value="<%=tematicaNormalizada%>"><%=tematica%></option>
