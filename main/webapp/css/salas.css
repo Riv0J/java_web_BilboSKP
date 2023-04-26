@@ -1,6 +1,17 @@
+:root{
+	--bg-color2: #1E1E1F; /* gris*/
+	--bg-color: #030303; /* negro/gris oscuro*/
+	--text-color: whitesmoke;
+	--main-color: #C60C02; /* color acento: rojo   */
+	--main-color2: #FFE400; /* color acento2: amarillo   */
+}
+
 #contenedor_buscador {
-	margin-top: 1%;
-	margin-bottom: 1%;
+	padding: 2%;
+	background-image: url("../img_web/texturas/cuero.png");
+	background-repeat: repeat;
+	border-top: 0.02em solid DimGrey;
+	border-bottom: 0.02em solid DimGrey;
 }
 
 #wrapper_buscador, #wrapper_filtros {
@@ -34,46 +45,32 @@
 	padding-left: 1%;
 }
 
+#wrapper_filtros{
+	margin-top: 1%;
+}
 #caja_filtros {
 	font-size: 1.8em;
 	width: 80%;
-	margin-top: 2%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	gap: 5%;
 }
-
 select {
 	color: white;
 	padding: 0.35%;
-	padding-left: 1%;
+	padding-left: 3%;
 	padding-right: 0.5%;
 	border-radius: 0.4em;
 	border-width: 0.2em;
 }
 
-select:hover {
-	border-color: #29fd53;
-}
-
-option {
-	line-height: 1em;
-	border-color: #29fd53;
-}
-
-option:hover {
-	background-color: #353535;
-	color: #303136;
-}
-
-#contenedor_buscador {
-	padding: 2%;
-}
-
 #caja_titulo_resultados {
 	display: flex;
 	justify-content: center;
+	width: 100%;
+	color: whitesmoke;
+	z-index: 200;
 }
 
 #caja_titulo_resultados h2 {
@@ -86,14 +83,29 @@ option:hover {
 }
 
 #contenedor_salas {
+	padding-top:1%;
 	position: relative;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 	font-size: 0.9em;
 	font-family: Poppins;
 	padding-bottom: 5%;
+	/*background-image: url("../img_web/texturas/cuero.png");*/
+	/*background-image: url("../img_web/texturas/fondoSalas.jpg");*/
 }
-
+#contenedor_salas::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top right, #666666 0%, #000000 100%);
+  pointer-events: none;
+  opacity: 0.5;
+}
 #contenedor_salas_wrapper {
 	width: 90%;
 	display: flex;
@@ -103,28 +115,40 @@ option:hover {
 }
 
 .caja_sala {
+	margin-top: 1%;
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	width: 22.5%;
-	/*margin-bottom: 1%;*/
 	border-radius: 1em;
 	overflow: hidden;
 	user-select: none;
+	background-image: url("../img_web/texturas/papel.png");
+	z-index: 10;
 }
-
+.caja_sala::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.05) 100%);
+  pointer-events: none;
+}
 .caja_sala a a:hover, a:active, a:focus {
 	all: unset;
 	cursor: pointer;
 }
 
 .caja_img {
-	width: 100%;
 	overflow: hidden;
 }
 
 .caja_img img {
 	width: 100%;
+	scale: 1.05;
 	height: auto;
 	border-radius: 1em;
 	display: block;
@@ -139,7 +163,7 @@ option:hover {
 	margin-top: 6%;
 }
 
-#contenedor_salas h2 {
+.caja_sala h2 {
 	padding-bottom: 3%;
 	border-bottom-style: solid;
 	border-bottom-width: 0.15em;
@@ -274,6 +298,72 @@ option:hover {
 
 #caja_img_error img {
 	animation: giro 2s infinite ease-in-out; /* Duración de 2 segundos */
+}
+:root{
+	--bg-color2: #1E1E1F; /* gris*/
+	--bg-color: #030303; /* negro/gris oscuro*/
+	--text-color: whitesmoke;
+	--main-color: #C60C02; /* color acento: rojo   */
+	--main-color2: #FFE400; /* color acento2: amarillo   */
+}
+#contenedor_buscador {
+	background-color: var(--bg-color2);
+}
+
+#caja_buscador {
+	background-color: whitesmoke;
+}
+
+#caja_buscador img {
+	background-color: whitesmoke;
+}
+
+select {
+	color: var(--bg-color2);
+}
+select:focus {
+  outline: 2.5px solid var(--main-color2);
+}
+#contenedor_salas h2 {
+	border-bottom-color: var(--main-color);
+	color: whitesmoke;
+}
+
+.caja_sala:hover {
+	box-shadow: 0 0 4em var(--main-color2);
+    scale: 1.1;
+    translate: 1.1 1;
+    z-index: 200;
+    transition: 0.2s;
+    outline: 2px solid var(--bg-color);
+}
+
+#caja_img_error {
+	background-color: whitesmoke;
+}
+
+.caja_img_portada img {
+	background-color: whitesmoke;
+}
+
+.etiqueta {
+	background-color: whitesmoke;
+}
+
+.caja_boton button {
+	background-color: var(--main-color);
+	color: whitesmoke;
+}
+
+.caja_boton button:hover {
+	background-color: var(--bg-color2);
+	color: var(--main-color);
+		color: red;
+	font-weight: bolder;
+}
+
+.caja_sala a a:hover, a:active, a:focus {
+	color: whitesmoke;
 }
 
 @keyframes giro { 

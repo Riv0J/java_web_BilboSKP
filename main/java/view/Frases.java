@@ -48,13 +48,13 @@ public class Frases {
 		frases.put("ESContactoFAQ1R", "Quería un perro pero borracho compr� un caballo en una subasta online: El joven de 24 a�os vio que hab�a un caballo muy barato, y quiso subir su valor para que alguien termine pagando m�s por el animal. As� fue que sin recordar mucho, debido al alcohol, acab� por recibir un llamado al d�a siguiente donde le preguntaban cu�ndo iba a buscar el equino.");
 		frases.put("ENContactoFAQ1R", "Lorem ipsum ipsum lorem");
 		frases.put("EUContactoFAQ1R", "Lorem ipsum ipsum lorem");
-		frases.put("ESContactoFAQ2", "�Como organizo una partida?");
+		frases.put("ESContactoFAQ2", "¿Como organizo una partida?");
 		frases.put("ENContactoFAQ2", "How I organice a game?");
 		frases.put("EUContactoFAQ2", "Nola antola dezaket joko bat?");
 		frases.put("ESContactoFAQ2R", "Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
 		frases.put("ENContactoFAQ2R", "Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
 		frases.put("EUContactoFAQ2R", "Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
-		frases.put("ESContactoFAQ3", "�Cuanto tarda en caducar un cup�n?");
+		frases.put("ESContactoFAQ3", "¿Cuanto tarda en caducar un cup�n?");
 		frases.put("ENContactoFAQ3", "How many time takes to a coupon to expire?");
 		frases.put("EUContactoFAQ3", "Zenbat denbora daukat kupoi bat erabiltzeko?");
 		frases.put("ESContactoFAQ3R", "Los yogures no tienen fecha de caducidad. Y esto es as� desde hace a�os. En concreto, desde 2014, cuando el entonces Ministerio de Agricultura, Alimentaci�n y Medio Ambiente (MAGRAMA)estableci� que este alimento solo deber�a indicar una fecha de consumo preferente (no de caducidad), determinada por los fabricantes. La medida, recogida en el Real Decreto 271/2014,pretend�a simplificar el etiquetado, adaptar la legislaci�n espa�ola a la europea y reducir el desperdicio alimentario.");
@@ -106,7 +106,7 @@ public class Frases {
 		frases.put("ESSalasFisicas", "Salas Fisicas");
 		frases.put("ENSalasFisicas", "Physical Room");
 		frases.put("EUSalasFisicas", "Gela Fisika");
-		frases.put("ESSalasTematicas", "Todas las tem�ticas");
+		frases.put("ESSalasTematicas", "Todas las temáticas");
 		frases.put("ENSalasTematicas", "All the modes");
 		frases.put("EUSalasTematicas", "Modalitate guztiak");
 		frases.put("ESSalasDificultad", "Todas las dificultades");
@@ -132,7 +132,7 @@ public class Frases {
 		frases.put("EUSalasResultado4", "zailtasuna");
 		frases.put("ENSalasDificultad", "All the difficulties");
 		frases.put("EUSalasDificultad", "Zailtasun guztiak");
-		frases.put("ESSalasNoFound", "No se encontraron salas con esas especificaciones, por favor int�ntalo de nuevo");
+		frases.put("ESSalasNoFound", "No se encontraron salas con esas especificaciones, por favor inténtalo de nuevo");
 		frases.put("ENSalasNoFound", "No rooms found with those specifications, please try again");
 		frases.put("EUSalasNoFound", "Ez da zehaztapen horiek dituen gelarik aurkitu. Saiatu berriro");
 		frases.put("ESSalasBuscarTodas", "Buscar todas");
@@ -149,7 +149,7 @@ public class Frases {
 
 		
 		
-		frases.put("pruebalupa", "Hab�is conseguido resolver la prueba, id al jard�n mostrado en el MAPA");
+		frases.put("pruebalupa", "Habéis conseguido resolver la prueba, id al jard�n mostrado en el MAPA");
 		frases.put("pruebalinterna", "Hab�is conseguido resolver la prueba, ahora vamos a unir estos pedazos de papel");
 		frases.put("pruebaletras_solucion", "El ultimo ritual sera en la mansion");
 		frases.put("pruebaletras_resuelto", "Hab�is conseguido descifrar una ubicaci�n  que aparece en el libro \n�Ser� la MANSI�N de Dr.Doofenshmirtz \ndonde podamos resolver este caso?");

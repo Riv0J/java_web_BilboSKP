@@ -24,6 +24,7 @@
 	--bg-color: #030303; /* negro/gris oscuro*/
 	--text-color: whitesmoke;
 	--main-color: #C60C02; /* color acento: rojo   */
+	--main-color2: #FFE400; /* color acento2: amarillo   */
 	/*
     --bg-color:#331443;
     --bg-color2:#346d6f;
@@ -140,8 +141,7 @@ align-items: center;
 
 /*SLIDER*/
 main{
-    margin-top: 5%;
-    
+	margin-top: 6.3%;
 }
 
 .principal{
@@ -220,12 +220,11 @@ header button {
       }
   }
 
-
 /*SLIDER*/
 
 @media (max-width: 1590px) {
     header{
-        padding: 20px 4%;
+        padding: 15px 4%;
         transition: .2s;
     }
 
@@ -238,7 +237,7 @@ header button {
 
 @media (max-width: 1350px) {
     header{
-        padding: 20px 2%;
+        padding: 15px 2%;
         transition: .2s;
     }
 
@@ -252,7 +251,7 @@ header button {
 
 @media (max-width: 1280px) {
     header{
-        padding: 18px 2%;
+        padding: 15px 2%;
         transition: .2s;
     }
 

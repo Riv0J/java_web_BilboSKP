@@ -1,6 +1,6 @@
 <%@ page
 	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.io.File, java.text.Normalizer, 
-	model.Sala, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig, view.NormalizeHelper" %>
+	model.Sala, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig, view.NormalizeHelper"%>
 <%
 HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("mapaSalas");
 ArrayList<String> tematicasDisponibles = (ArrayList<String>) request.getAttribute("tematicasDisponibles");
@@ -26,45 +26,54 @@ if (dificultadesDisponibles != null && tematicasDisponibles != null) {
 	<form>
 		<div id="wrapper_buscador">
 			<div id="caja_buscador">
-				<img alt="" src="img_web/iconos_salas/Lupa.svg"> <input
+				<img alt="" src="img_web/iconos_salas/lupa.svg"> <input
 					type="text" id="buscar" name="buscar" value="<%=paramBuscar%>"
-					placeholder="<%=Frases.getFrase("ESSalasBuscar") %>">
+					placeholder="<%=Frases.getFrase("ESSalasBuscar")%>">
 			</div>
 		</div>
 		<div id="wrapper_filtros">
 			<div id="caja_filtros">
-				<jsp:include page="../plantillas/desplegableFiltroSalas.jsp"></jsp:include>
-				<select name="m">
-					<option <%if (m.equals("todas")) {%> selected <%}%> value="todas"><%=Frases.getFrase("ESSalasModalidades")%></option>
+				<div class="caja_select">
+					<select name="m">
+						<option <%if (m.equals("todas")) {%> selected <%}%> value="todas"><%=Frases.getFrase("ESSalasModalidades")%></option>
 
-					<option <%if (m.equals("online")) {%> selected <%}%> value="online"><%=Frases.getFrase("ESSalasOnline")%></option>
-					<option <%if (m.equals("fisicas")) {%> selected <%}%>
-						value="fisicas"><%=Frases.getFrase("ESSalasFisicas")%></option>
-				</select> <select name="t">
-					<option value="todas"><%=Frases.getFrase("ESSalasTematicas")%></option>
-					<%
-					for (String tematica : tematicasDisponibles) {
-						String tematicaNormalizada = NormalizeHelper.normalizarTexto(tematica);
-					%>
-					<option <%if (t.equals(tematicaNormalizada)) {%> selected <%}%>
-						value="<%=tematicaNormalizada%>"><%=tematica%></option>
+						<option <%if (m.equals("online")) {%> selected <%}%>
+							value="online"><%=Frases.getFrase("ESSalasOnline")%></option>
+						<option <%if (m.equals("fisicas")) {%> selected <%}%>
+							value="fisicas"><%=Frases.getFrase("ESSalasFisicas")%></option>
 
-					<%
-					}
-					%>
+					</select>
+				</div>
+				<div class="caja_select">
+					<select name="t">
+						<option value="todas"><%=Frases.getFrase("ESSalasTematicas")%></option>
+						<%
+						for (String tematica : tematicasDisponibles) {
+							String tematicaNormalizada = NormalizeHelper.normalizarTexto(tematica);
+						%>
+						<option <%if (t.equals(tematicaNormalizada)) {%> selected <%}%>
+							value="<%=tematicaNormalizada%>"><%=tematica%></option>
 
-				</select> <select name="d">
-					<option value="todas"><%=Frases.getFrase("ESSalasDificultad")%></option>
-					<%
-					for (String dificultad : dificultadesDisponibles) {
-						String dificultadNormalizada = NormalizeHelper.normalizarTexto(dificultad);
-					%>
-					<option <%if (d.equals(dificultadNormalizada)) {%> selected <%}%>
-						value="<%=dificultadNormalizada%>"><%=dificultad%></option>
-					<%
-					}
-					%>
-				</select>
+						<%
+						}
+						%>
+
+					</select>
+				</div>
+				<div class="caja_select">
+					<select name="d">
+						<option value="todas"><%=Frases.getFrase("ESSalasDificultad")%></option>
+						<%
+						for (String dificultad : dificultadesDisponibles) {
+							String dificultadNormalizada = NormalizeHelper.normalizarTexto(dificultad);
+						%>
+						<option <%if (d.equals(dificultadNormalizada)) {%> selected <%}%>
+							value="<%=dificultadNormalizada%>"><%=dificultad%></option>
+						<%
+						}
+						%>
+					</select>
+				</div>
 			</div>
 		</div>
 	</form>
@@ -76,25 +85,28 @@ if (mapaSalas != null) {
 numeroResultados = mapaSalas.size();
 }
 %>
-<section id="caja_titulo_resultados">
-	<h2>
-		<%=Frases.getFrase("ESSalasResultado")%> <%=numeroResultados%>	<%=Frases.getFrase("ESSalasResultado1")%>: "<%=paramBuscar%>",
-		<%=Frases.getFrase("ESSalasResultado2")%>:<%=m%>,
-		<%=Frases.getFrase("ESSalasResultado3")%>:<%=t%>,
-		<%=Frases.getFrase("ESSalasResultado4")%>:<%=d%>
-	</h2>
-</section>
 <section id="contenedor_salas">
+	<div id="caja_titulo_resultados">
+	<h2>
+		<%=Frases.getFrase("ESSalasResultado")%>
+		<%=numeroResultados%>
+		<%=Frases.getFrase("ESSalasResultado1")%>: "<%=paramBuscar%>",
+		<%=Frases.getFrase("ESSalasResultado2")%>: <%=m%>,
+		<%=Frases.getFrase("ESSalasResultado3")%>: <%=t%>,
+		<%=Frases.getFrase("ESSalasResultado4")%>: <%=d%>
+	</h2>
+</div>
 	<div id=contenedor_salas_wrapper>
 		<%
 		if (mapaSalas == null || mapaSalas.size() == 0) {
 			String enlaceBoton = "./salas?buscar=todas&m=todas&t=todas&d=todas";
 		%>
-		<article class="caja_sala">
+		<article class="caja_sala" style="animation: entrada 0.25s forwards;">
 			<div class="caja_img" id="caja_img_error">
 				<a href=<%=enlaceBoton%>> <img
 					src="img_salas/portadas/ErrorBusqueda.png" draggable="false">
 				</a>
+
 
 			</div>
 			<div class="caja_titulo">
@@ -110,12 +122,14 @@ numeroResultados = mapaSalas.size();
 		</article>
 		<%
 		} else {
+		int contadorSalas = 1;
 		for (Map.Entry<String, Sala> par : mapaSalas.entrySet()) {
+			double tiempoAnim = contadorSalas*0.75;
 			Sala sala = par.getValue();
 			String idSala = par.getKey();
 			String nombreSala = sala.getNombre();
 			String textoBoton = "Organizar partida";
-			String enlaceBoton = "./verSala?idSala="+idSala;
+			String enlaceBoton = "./verSala?idSala=" + idSala;
 			String modalidad = "Online";
 			//si la tematica de la sala es suspenso, le agregamos una clase
 			String rutaIconoTematica = "img_web/iconos_salas/" + NormalizeHelper.normalizarTexto(sala.getTematica()) + ".svg";
@@ -127,10 +141,10 @@ numeroResultados = mapaSalas.size();
 			String rutaImagenPortada = "img_salas/portadas/" + idSala + ".png";
 			File archivoImagenPortada = new File(getServletContext().getRealPath("/") + rutaImagenPortada);
 			if (!archivoImagenPortada.exists()) {
-				rutaImagenPortada = "img_salas/portadas/question.png";
+				rutaImagenPortada = "img_salas/portadas/Question.png";
 			}
 		%>
-		<article class="caja_sala">
+		<article class="caja_sala" style="animation: entrada <%=tiempoAnim%>s forwards;">
 			<div class="caja_img caja_img_portada">
 				<a href=<%=enlaceBoton%>> <img src="<%=rutaImagenPortada%>"
 					alt="Portada" draggable="false">
@@ -180,7 +194,8 @@ numeroResultados = mapaSalas.size();
 				</div>
 				<div class="etiqueta modalidad" title="Modo de acceso a la sala">
 					<div class="caja_icon">
-						<img class="icon" src="img_web/iconos_salas/<%=NormalizeHelper.normalizarTexto(modalidad)%>.svg"
+						<img class="icon"
+							src="img_web/iconos_salas/<%=NormalizeHelper.normalizarTexto(modalidad)%>.svg"
 							alt="Modo">
 					</div>
 
@@ -197,67 +212,12 @@ numeroResultados = mapaSalas.size();
 		</article>
 
 		<%
+		contadorSalas +=1;
 		}
 		}
 		%>
 	
 </section>
-<style>
-#contenedor_buscador {
-	background-color: <%=mapaAppConfig.get("colorMenosOscuro")%>;
-}
-
-#caja_buscador {
-	background-color: <%=mapaAppConfig.get("colorMuyClaro")%>;
-}
-
-#caja_buscador img {
-	background-color: <%=mapaAppConfig.get("colorMuyClaro")%>;
-}
-
-select {
-	color: <%=mapaAppConfig.get("colorMenosOscuro")%>
-}
-
-#contenedor_salas h2 {
-	border-bottom-color: <%=mapaAppConfig.get("colorAcento")%>;
-	color: <%=mapaAppConfig.get("colorMuyClaro")%>;
-}
-
-.caja_sala {
-	background-color: <%=mapaAppConfig.get("colorClaro")%>;
-}
-
-.caja_sala:hover {
-	box-shadow: 0 0 1.75em<%=mapaAppConfig.get("colorAcento")%>;
-}
-
-#caja_img_error {
-	background-color: <%=mapaAppConfig.get("colorMuyClaro")%>;
-}
-
-.caja_img_portada img {
-	background-color: <%=mapaAppConfig.get("colorMuyClaro")%>;
-}
-
-.etiqueta {
-	background-color: <%=mapaAppConfig.get("colorMuyClaro")%>;
-}
-
-.caja_boton button {
-	background-color: <%=mapaAppConfig.get("colorAcento")%>;
-	color: <%=mapaAppConfig.get("colorMuyOscuro")%>;
-}
-
-.caja_boton button:hover {
-	background-color: <%=mapaAppConfig.get("colorOscuro")%>;
-	color: <%=mapaAppConfig.get("colorAcento")%>;
-}
-
-.caja_sala a a:hover, a:active, a:focus {
-	color: <%=mapaAppConfig.get("colorMuyClaro")%>;
-}
-</style>
 <script>
     const selects = document.querySelectorAll('#contenedor_buscador form select');
     selects.forEach(select => {
@@ -267,3 +227,17 @@ select {
       });
     });
   </script>
+  <style>
+  
+  .caja_sala {
+  	opacity: 0;
+	}
+	@keyframes entrada { 
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+  </style>
