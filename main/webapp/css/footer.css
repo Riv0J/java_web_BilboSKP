@@ -11,6 +11,7 @@ a, a:hover, a:active, a:focus {
     list-style: none;
 }
 footer{
+	transition: transform 0.3s ease-out;
     background-color: var(--bg-oscuro);
     color: var(--text-color);
     text-align: center;

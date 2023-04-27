@@ -124,7 +124,7 @@ numeroResultados = mapaSalas.size();
 		} else {
 		int contadorSalas = 1;
 		for (Map.Entry<String, Sala> par : mapaSalas.entrySet()) {
-			double tiempoAnim = contadorSalas*0.75;
+			double tiempoAnim = contadorSalas*0.8;
 			Sala sala = par.getValue();
 			String idSala = par.getKey();
 			String nombreSala = sala.getNombre();
@@ -186,7 +186,7 @@ numeroResultados = mapaSalas.size();
 				</div>
 
 				<div class="etiqueta tematica" title="Temática de la sala">
-					<div class="caja_icon">
+					<div class="caja_icon <%=NormalizeHelper.normalizarTexto(sala.getTematica())%>">
 						<img class="icon" src="<%=rutaIconoTematica%>" alt="Tematica:">
 					</div>
 

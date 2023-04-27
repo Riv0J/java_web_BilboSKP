@@ -1,3 +1,6 @@
+#contenedor_salas{
+	transition: transform 0.3s ease-out;
+}
 #contenedor_buscador {
 	padding: 2%;
 	background-image: url("../img_web/texturas/cuero2.png");
@@ -93,11 +96,12 @@ select {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to top right, #666666 0%, var(--bg-oscuro) 100%);
+  background: linear-gradient(to top right, var(--bg-claro) 0%, var(--bg-oscuro) 100%);
   pointer-events: none;
   opacity: 0.5;
 }
 #contenedor_salas_wrapper {
+	margin-top: 0.5%;
 	width: 90%;
 	display: flex;
 	flex-wrap: wrap;
@@ -106,7 +110,7 @@ select {
 }
 
 .caja_sala {
-	margin-top: 1%;
+	margin-bottom: 2.5%;
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -195,10 +199,6 @@ select {
 	margin-bottom: 2%;
 }
 
-.modalidad {
-	margin-left: 5%;
-}
-
 .caja_icon {
 	display: flex;
 	align-items: center;
@@ -207,16 +207,6 @@ select {
 	height: 100%;
 }
 
-.tematica, .modalidad {
-	padding-left: 2%;
-	padding-right: 5%;
-	width: 40%;
-	height: 40%;
-}
-
-.tematica .caja_text{
-	width: 77%;
-}
 .caja_text {
 	margin-left: 4%;
 	text-align: center;
@@ -225,7 +215,16 @@ select {
 .caja_icon {
 	width: 27.5%;
 }
+.tematica, .modalidad {
+	padding-left: 2%;
+	padding-right: 5%;
+	width: 40%;
+	height: 40%;
+}
 
+.tematica .caja_text{
+	text-align: left;
+}
 .caja_boton {
 	display: flex;
 	justify-content: center;
@@ -234,7 +233,12 @@ select {
 	margin-bottom: 5%;
 	font-size: 2em;
 }
-
+.suspenso{
+	padding-left: 3%;
+}
+.suspenso  .caja_text{
+	width: 77%;
+}
 .caja_boton a {
 	width: 60%;
 	display: flex;
@@ -292,11 +296,11 @@ select {
 }
 
 #caja_buscador {
-	background-color: whitesmoke;
+	background-color: var(--text-color);
 }
 
 #caja_buscador img {
-	background-color: whitesmoke;
+	background-color: var(--bg-color2);
 }
 
 select {
@@ -307,7 +311,7 @@ select:focus {
 }
 #contenedor_salas h2 {
 	border-bottom-color: var(--main-color);
-	color: whitesmoke;
+	color: var(--text-color);
 }
 
 .caja_sala:hover {
@@ -322,28 +326,28 @@ select:focus {
 }
 
 #caja_img_error {
-	background-color: whitesmoke;
+	background-color: var(--text-color);
 }
 
 .caja_img_portada img {
-	background-color: whitesmoke;
+	background-color: var(--text-color);
 }
 
 .etiqueta {
-	background-color: whitesmoke;
+	background-color: var(--text-color);
 }
 
 .caja_boton button {
 	background-color: var(--main-color);
-	color: whitesmoke;
+	color: var(--text-color);
 }
 
 .caja_boton button:hover {
 	background-color: var(--bg-color2);
 	color: var(--main-color);
-		color: #FF7070;
+	color: var(--text-color-main);
 	font-weight: bolder;
-	outline: 1px solid red;;
+	outline: 1px solid var(--outline-color-main);
 }
 
 .caja_sala a a:hover, a:active, a:focus {
@@ -357,29 +361,73 @@ select:focus {
 
 
 @media (max-width: 1590px) {
-.caja_sala{
-	width: 45%;
-}
 }
 
 @media (max-width: 1350px) {
-  
+	.caja_sala{
+		width: 30%;
+	}
 }
 
 
 @media (max-width: 1280px) {
-    
+    .caja_sala{
+		width: 30%;
+	}
+	#contenedor_salas_wrapper {
+		gap: 2%;
+	}
+	.tematica{
+		padding-right: 1%;
+	}
 }
 
 
 @media (max-width: 1090px) {
-
+	main{
+		margin-top: 7.5%;
+	}
+	#contenedor_salas_wrapper {
+	 	width: 95%;
+	}
 }
 
 @media (max-width: 900px){
-
+	.caja_titulo h2{
+		font-size: 1.5em;
+	}
+	.caja_etiquetas{
+	    font-size: 1.4em;
+	}
+	#caja_boton_ver span{
+	padding-left: 0;
+	}
+	.caja_boton span:after {
+		display:none;
+	}
 }
 
 @media (max-width: 700px){
-
+	#caja_filtros{
+		flex-direction: column;
+		font-size: 1.4em;
+	}
+	.caja_select{
+		margin-bottom: 2%;
+	}
+    .caja_sala{
+		width: 60%;
+		margin-bottom: 2%;
+	}
+	.caja_sala:hover {
+		box-shadow:none;
+	    outline: none;
+	    scale: none;
+	}
+	.caja_etiquetas{
+	    font-size: 1.8em;
+	}
+	.tematica{
+		padding-left: 0;
+	}
 }
