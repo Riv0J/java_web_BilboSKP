@@ -18,6 +18,9 @@ footer{
     padding-bottom: 1%;
     border-top: 0.16em solid var(--gray-border-color);
 }
+#logo_peque_footer{
+	display:none;
+}
 .box{
     width: 90%;
     display:flex;
@@ -32,8 +35,8 @@ footer{
 	justify-content: center;
 	align-items: center;
 }
-.box1{
-    width: 30%;
+footer .caja_logo{
+	width: 30%;
 }
 .box ul li{
     width: 50%;
@@ -69,4 +72,92 @@ footer{
 #caja2 ul{
     display: flex;
     justify-content: center;
+}
+
+@media (max-width: 1590px) {
+    header{
+        padding: 15px 4%;
+        transition: .2s;
+    }
+
+    .navbar a{
+        padding: 5px 0;
+        margin: 0px 20px;
+    }
+    
+}
+
+@media (max-width: 1350px) {
+  
+}
+
+
+@media (max-width: 1280px) {
+    
+}
+
+
+@media (max-width: 1090px) {
+	footer .caja_logo{
+	width: 20%;
+	}
+    .navbar{
+        position: absolute;
+        top: 100%;
+        right: -100%;
+        width: 270px;
+        height: 43vh;
+        background-color: var(--main-color);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        border-radius: 10px;
+        transition: all .50s ease;
+    }
+    .navbar a{
+        display: block;
+        margin: 12px 0;
+        padding: 0px 25px;
+        transition: all .50s ease;
+    }
+
+    .navbar a:hover{
+        color: var(--text-color);
+        transform: translateY(5px);
+    }
+
+    .navbar.open{
+        right: 2%;
+    }
+
+    .principal{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+}
+
+@media (max-width: 900px){
+	footer .caja_logo{
+	width: 15%;
+	}
+}
+
+@media (max-width: 700px){
+	.box ul{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	}
+	#caja1 ul li{
+	padding: 2.5%}
+	.caja_logo{
+	  display: flex;
+  align-items: center;
+}
+	footer .caja_logo{
+	width: 45%;}
+
 }

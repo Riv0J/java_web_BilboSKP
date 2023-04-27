@@ -69,9 +69,10 @@ rutaJspSeccion = "secciones/" + seccion + ".jsp";
                     <li> <a href="">Cookies</a></li>
                 </ul>
             </div>
-            <div class="box1">
-                <img src="img_web/logos/500x200-logo-rojo-2.png" alt="">
-            </div>
+            <div class=caja_logo>
+				<a id="logo_grande" href="./index.jsp?sec=inicio" class="logo"> <img  src="img_web/logos/500x200-logo-rojo-2.png"></a>
+				<a id="logo_peque" href="./index.jsp?sec=inicio" class="logo"> <img  src="img_web/logos/500x400-cuadrado-2.png"></a>
+			</div>
             <div class="box">
                 <ul>
                     <li><a href="">Contáctanos</a></li>
