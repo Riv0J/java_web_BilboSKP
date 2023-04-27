@@ -1,6 +1,9 @@
 package control;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,9 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Reserva;
 import model.Suscriptor;
 
-@WebServlet("/perfil")
+@WebServlet("/perfil , /reserva")
 public class ServletPerfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
@@ -33,11 +37,17 @@ public class ServletPerfil extends HttpServlet {
 			break;
 		case "reservas":
 			//obtener todas las reservas del suscriptor 
+			ArrayList <Reserva> reserva=new ArrayList<Reserva>();
+			
 			//hacer setAttribute de las reservas
+			Reserva r= (Reserva) sesion.getAttribute("reserva");
+			//respuesta usuario
+			request.getRequestDispatcher("index.jsp?sec=reserva").forward(request, response);
 			break;		
 		case "cupones":
 			//obtner todos los cupones
 			//dispatch
+			
 			break;
 		default:
 			break;

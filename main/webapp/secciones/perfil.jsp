@@ -3,76 +3,83 @@
 	model.Suscriptor, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date  "%>
 <!DOCTYPE html>
 <%Suscriptor sus= new Suscriptor(1, 1234, "hola@gmail,com" , "pau", "Paula", "Castillo", "imagen", 1 , new Date());%>
-
 <link rel="stylesheet" href="css/perfil.css">
 <main>
-       <section>
+        <section>
             <div class="caja1">
                 <h1>Mi perfil</h1>
                 <ul>
-                    <li class="gc"><a href="perfil.jsp">Gestión de la cuenta</a></li>
-                    <li><a href="misReservas.jsp">Mis reservas</a></li>
-                    <li><a href="misCupones.jsp">Mis cupones</a></li>
-                    <li><a href="ajustesCuenta.jsp">Cerrar sesión</a></li>
+                    <li class="gc"><a href="perfil.html">Gestión de la cuenta</a></li>
+                    <li><a href="misReservas.html">Mis reservas</a></li>
+                    <li><a href="misCupones.html">Mis cupones</a></li>
+                    <li><a href="ajustesCuenta.html">Cerrar sesión</a></li>
                 </ul>
             </div>
             <div class="caja2">
                 <div>
                     <h2>Gestión de la cuenta</h2>
-                    <p>Modifica aquí tus datos personales.Tanto el alias como tu nombre y apellido se mostrarán en tu perfil público.
+                    <p>Modifica aquí tus datos personales. Recuerda que tanto como el alias, nombre y apellidos serán
+                        pertenecen a tu perfil público.</p>
                 </div>
                 <form action="">
                     <div class="subcaja1">
-                        <img src="../img_web/icons/user.png" alt="">
-                        <input type="button" value="Modificar"/>
+                        <img src="img/gato.png" alt="">
+                        <input type="button" value="Modificar" />
                     </div>
                     <div class="form1">
                         <div class="box0">
                             <label for="">Nombre:</label>
-                            <input type="text" name="" id="" value="<%=sus.getNombre()%>" />
+                            <input type="text" name="" id="">
                         </div>
                         <div class="box0">
                             <label for="">Apellido:</label>
-                            <input type="text" name="" id="" value="<%=sus.getApellidos()%>" />
-                     	</div>
+                            <input type="text" name="" id="">
+                        </div>
                     </div>
                     <div class="form2">
                         <div class="box0">
                             <label for="">Email:</label>
-                            <input type="email" name="" id="" value="<%=sus.getEmail()%>"/>
+                            <input type="email" name="" id="">
                         </div>
-                         <div class="box0">
-                            <label for="">Alias</label>
-                            <input type="text" name="" id="" value="<%=sus.getAlias()%>"/>
+                        <div class="box0">
+                            <label for="">Alias:</label>
+                            <input type="text" name="" id="">
                         </div>
                     </div>
                     <div class="form3">
                         <div class="box0">
                             <label for="">Fecha de nacimiento</label>
-                            <input type="date" name="" id="" />
+                            <input type="date" name="" id="">
                         </div>
                         <div class="box0">
                             <label for="">Télefono:</label>
-                        <input type="" name="" id="" value="<%=sus.getTelefono()%>"/> 
+                            <input type="" name="" id="">
                         </div>
                     </div>
-                    <div class="subcaja3">
-                        <input type="button"  value="Guardar"/> 
+                    <div class="caja">
+                        <input type="button" value="Guardar" />
                     </div>
                 </form>
                 <div class="caja4">
-                	<h2>Cambia tu cotraseña</h2>
+                    <h2>Cambiar contraseña</h2>
+                    <div class="box1">
+                        <label for="">Introduce la contraseña actual</label>
+                        <input type="password" name="" id="">
+                    </div>
+                    <div class="box1">
+                        <label for="">Introduce la nueva contraseña</label>
+                        <input type="password" name="" id="">
+                    </div>
                 </div>
-                
-                
-                
+
             </div>
         </section>
+
         <div class="caja3">
             <h2>¿Deseas darte de baja?</h2>
             <p>Al darte de baja se perderán tus avances y en caso de tener cupones no canjeados
-            se te hará un reembolso</p>
-            <a href="darseBaja.jsp"><input type="button" value="Darse de baja"></a>
+                se te hará un reembolso</p>
+            <a href="darseBaja.html"><input type="button" value="Darse de baja"></a>
         </div>
     </main>
 
