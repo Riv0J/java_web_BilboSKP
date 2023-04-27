@@ -140,7 +140,7 @@ public class PartidaOnline extends Partida {
 		if (puntaje < 0) {
 			puntaje = 0;
 		}
-		return 0;
+		return puntaje;
 	}
 
 	public int getVisibleRanking() {
