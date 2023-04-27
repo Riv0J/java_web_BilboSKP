@@ -1,7 +1,10 @@
 package control;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Vector;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -10,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Partida;
+import model.PartidaOnline;
 import model.Sala;
 
 /**
@@ -38,28 +43,49 @@ public class ServletRanking extends HttpServlet {
 			HashMap<String, Sala> mapaSalas = Sala.getTodasLasSalasCargadas();
 			// Obtener los parametros de la sala que queremos ver el ranking
 			String idSala = request.getParameter("idSala");
-			String nombregrupo = request.getParameter("nombregrupo");
-			String puntos = request.getParameter("puntos");
-			String fecha = request.getParameter("fecha");
 			
-			//si no hay sala seleccionada poner la primera
+			
+			//si no hay sala seleccionada forzar la primera
 			
 			if (idSala==null) {
-				idSala="1";
+				idSala="SF1";
 			}
 			System.out.println("idSala= "+idSala);
 			
 			
+			HashMap<String, Sala> salas= Sala.getTodasLasSalasCargadas();
+			for (Map.Entry<String, Sala> sala : mapaSalas.entrySet()) {
+				sala.getKey();
+				System.out.println(sala.getKey());
+			}
+			
 			//sala viendose en este momento
 			Sala salaSeleccionada = Sala.getSalaPorId(idSala);
 			request.setAttribute("salaSeleccionada", salaSeleccionada);
-			System.out.println("Ver la sala: "+salaSeleccionada.getNombre());
+			//System.out.println("Sala seleccionada: "+salaSeleccionada.getNombre());
 			
 			//partidas que se jugaron
 			//todo esto ira como setAttribute[]
 			
 			
 			//hacer llamado al metodo de ObtenerRanking(id). obtendremos vector <partidas>. 
+			Vector<PartidaOnline> partidas=new Vector<PartidaOnline>();
+			partidas=BilboSKP.obtenerRankingSalaOnline(salaSeleccionada.getIdSala());
+			
+			//recorrer vector de partidas
+			for (PartidaOnline partida:partidas) {
+				
+				String nombregrupo = partida.getNombreGrupo();
+				String	puntos=Integer.toString(partida.getPuntaje());
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+				String fecha = sdf.format(partida.getFechaInicio());
+				System.out.println(nombregrupo);
+			
+				
+			//poner atributos del request, para que la seccion pueda mostrar la info
+			request.setAttribute("nombregrupo", nombregrupo);
+			request.setAttribute("puntos", puntos);
+			request.setAttribute("fecha", fecha);
 			
 			
 			// Enviar la respuesta al usuario
@@ -67,6 +93,8 @@ public class ServletRanking extends HttpServlet {
 			
 			request.getRequestDispatcher("index.jsp?sec=ranking&sala=" + salaSeleccionada.getNombre())
 					.forward(request, response);
+			
+			}
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}

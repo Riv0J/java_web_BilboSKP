@@ -36,13 +36,22 @@ public class ServletPerfil extends HttpServlet {
 			request.getRequestDispatcher("index.jsp?sec=perfil?sub=gestionCuenta").forward(request, response);
 			break;
 		case "reservas":
-			//obtener todas las reservas del suscriptor 
+			//obtener todas las reservas del suscriptor
+			Reserva re= new Reserva(0, 0, 0, 0, null, 0);
 			ArrayList <Reserva> reserva=new ArrayList<Reserva>();
+			reserva.add(re);
+			reserva.add(re);
+			reserva.add(re);
+		
+			for(int i=0; i>reserva.size() ; i++) {
+				
+			}
+			
 			
 			//hacer setAttribute de las reservas
 			Reserva r= (Reserva) sesion.getAttribute("reserva");
 			//respuesta usuario
-			request.getRequestDispatcher("index.jsp?sec=reserva").forward(request, response);
+			request.getRequestDispatcher("index.jsp?sec=perfil?sub=reserva").forward(request, response);
 			break;		
 		case "cupones":
 			//obtner todos los cupones
