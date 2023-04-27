@@ -8,8 +8,8 @@
 
 #contenedor_buscador {
 	padding: 2%;
-	background-image: url("../img_web/texturas/cuero.png");
-	background-repeat: repeat;
+	background-image: url("../img_web/texturas/cuero2.png");
+	background-size: cover;
 	border-top: 0.02em solid DimGrey;
 	border-bottom: 0.02em solid DimGrey;
 }
@@ -111,7 +111,7 @@ select {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	gap: 1%;
+	gap: 2.5%;
 }
 
 .caja_sala {
@@ -124,7 +124,8 @@ select {
 	border-radius: 1em;
 	overflow: hidden;
 	user-select: none;
-	background-image: url("../img_web/texturas/papel.png");
+	background-image: url("../img_web/texturas/cuero.png");
+	background-size: cover;
 	z-index: 10;
 }
 .caja_sala::after {
@@ -137,11 +138,6 @@ select {
   background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.05) 100%);
   pointer-events: none;
 }
-.caja_sala a a:hover, a:active, a:focus {
-	all: unset;
-	cursor: pointer;
-}
-
 .caja_img {
 	overflow: hidden;
 }
@@ -331,11 +327,13 @@ select:focus {
 
 .caja_sala:hover {
 	box-shadow: 0 0 4em var(--main-color2);
-    scale: 1.1;
-    translate: 1.1 1;
+    scale: 1.08;
+    translate: 1.1;
     z-index: 200;
     transition: 0.2s;
-    outline: 2px solid var(--bg-color);
+    outline: 0.22em solid var(--main-color2);
+    /*outline: 0.22em solid var(--main-color2);*/
+    background-size: 2;
 }
 
 #caja_img_error {
@@ -358,8 +356,9 @@ select:focus {
 .caja_boton button:hover {
 	background-color: var(--bg-color2);
 	color: var(--main-color);
-		color: red;
+		color: #FF7070;
 	font-weight: bolder;
+	outline: 1px solid red;;
 }
 
 .caja_sala a a:hover, a:active, a:focus {
