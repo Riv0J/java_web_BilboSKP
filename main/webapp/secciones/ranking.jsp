@@ -3,7 +3,7 @@
 	import="java.util.HashMap,java.util.ArrayList,  model.Sala, model.PartidaOnline, model.Partida"%>
 <%
 	HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("mapaSalas");
-	ArrayList<String> partidas=(ArrayList<String>) request.getAttribute("partidas");
+	ArrayList<String> partida=(ArrayList<String>) request.getAttribute("partida");
 	
 	
 	
@@ -20,7 +20,7 @@
 
 <body>
 	<h2 class="superior">
-		Sala de escape:<%=nombreSala%>
+		Sala de escape:<% Sala.getSalaPorId(idSala);%>
 	</h2>
 	<nav class="lateral">
 		<% //TODO recorrer salas hasta que no haya mas %>
@@ -50,7 +50,7 @@
 			<img src="../img_web/icons/copa1.png">
 			<div class="caja oro">
 				<p>
-					Grupo 1<br> 1500 puntos <br> 2023-02-13
+					<%=nombregrupo%> Grupo 1<br> <% %>1500 puntos <br> 2023-02-13
 				</p>
 			</div>
 		</div>
