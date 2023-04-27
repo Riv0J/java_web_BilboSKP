@@ -20,15 +20,15 @@
 
 <body>
 	<h2 class="superior">
-		Sala de escape:<%=salaSeleccionada.getNombre() %>
+		Sala de escape:<%=nombreSala%>
 	</h2>
 	<nav class="lateral">
 		<% //TODO recorrer salas hasta que no haya mas %>
-		<% for  (int i=0;i<mapaSala.size();i++) {
+		<% //for  (int i=0;i<mapaSala.size();i++) {
 		
 		
 		
-		}
+		//}
 		%><br>sala 2
 	</nav>
 	
