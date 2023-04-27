@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import model.Reserva;
 import model.Suscriptor;
 
-@WebServlet("/perfil , /reserva")
+@WebServlet("/perfil")
 public class ServletPerfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
@@ -33,7 +33,7 @@ public class ServletPerfil extends HttpServlet {
 		sesion.setAttribute("sus", sus);
 		switch (subseccion) {
 		case"editar":
-			request.getRequestDispatcher("index.jsp?sec=perfil").forward(request, response);
+			request.getRequestDispatcher("index.jsp?sec=perfil?sub=gestionCuenta").forward(request, response);
 			break;
 		case "reservas":
 			//obtener todas las reservas del suscriptor 

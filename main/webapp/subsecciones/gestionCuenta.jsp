@@ -3,34 +3,26 @@
 	model.Suscriptor, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date  "%>
 <!DOCTYPE html>
 <%Suscriptor sus= new Suscriptor(1, 1234, "hola@gmail,com" , "pau", "Paula", "Castillo", "imagen", 1 , new Date());%>
-<link rel="stylesheet" href="css/perfil.css">
+<link rel="stylesheet" href="../css/perfil.css">
 <main>
-        <section>
-            <div class="caja1">
-                <h1>Mi perfil</h1>
-                <ul>
-                    <li class="gc"><a href="perfil.html">Gestión de la cuenta</a></li>
-                    <li><a href="misReservas.html">Mis reservas</a></li>
-                    <li><a href="misCupones.html">Mis cupones</a></li>
-                    <li><a href="ajustesCuenta.html">Cerrar sesión</a></li>
-                </ul>
-            </div>
+        <section/>
             <div class="caja2">
                 <div>
                     <h2>Gestión de la cuenta</h2>
                     <p>Modifica aquí tus datos personales. Recuerda que tanto como el alias, nombre y apellidos serán
-                        pertenecen a tu perfil público.</p>
+                       pertenecen a tu perfil público.</p>
                 </div>
                 <form action="">
                     <div class="subcaja1">
-                        <img src="img/gato.png" alt="">
+                        <img src="../img_web/icons/gato.png" alt="">
                         <input type="button" value="Modificar" />
                     </div>
                     <div class="form1">
                         <div class="box0">
                             <label for="">Nombre:</label>
-                            <input type="text" name="" id="">
+                            <input type="text" name="" id=""/>
                         </div>
+                        
                         <div class="box0">
                             <label for="">Apellido:</label>
                             <input type="text" name="" id="">
