@@ -62,9 +62,9 @@ rutaJspSeccion = "secciones/" + seccion + ".jsp";
         <section id="caja1">
             <div class="box">
                 <ul>
-                    <li> <a href="">Política de privacidad</a></li>
-                    <li> <a href="">Cookies</a></li>
                     <li> <a href="">Site map</a></li>
+                    <li> <a href="">Privacidad</a></li>
+                    <li> <a href="">Cookies</a></li>
                 </ul>
             </div>
             <div class="box1">
@@ -80,7 +80,7 @@ rutaJspSeccion = "secciones/" + seccion + ".jsp";
         </section>
         <section id="caja2">
             <ul>
-                <li>Copyright</li>
+                <li>©BilboSKP 2022-2023</li>
             </ul>
         </section>
     </footer>
