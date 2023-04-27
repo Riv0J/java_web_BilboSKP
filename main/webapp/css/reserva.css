@@ -1,0 +1,40 @@
+@charset "ISO-8859-1";
+main{
+    padding: 3%;
+}
+.historial{
+    display: flex;
+    flex-direction: row;
+}
+h2{
+    margin-right: 5%;
+}
+.subcaja{
+    margin-top: 1%;
+    border: 1px solid black;
+  
+    padding: 1%;
+    display: flex;
+    flex-direction: row;
+}
+.cajita{
+    width: 20%;
+    padding: 0.8%;
+}
+.subcaja1{
+    margin-top: 1%;
+    text-align: right;
+}
+.subcaja1 input{
+    width:15%;
+    border-radius: 1em;
+    height: 40px;
+}
+.subcaja{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+}
+.etiquetas label{
+    padding-right: 10%;
+}
