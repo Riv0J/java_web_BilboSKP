@@ -19,22 +19,6 @@
 #caja_logo img{
 	width:100%;
 }
-:root{
-	--bg-color: #1E1E1F; /* gris*/
-	--bg-color: #030303; /* negro/gris oscuro*/
-	--text-color: whitesmoke;
-	--main-color: #C60C02; /* color acento: rojo   */
-	--main-color2: #FFE400; /* color acento2: amarillo   */
-	/*
-    --bg-color:#331443;
-    --bg-color2:#346d6f;
-    --text-color:whitesmoke;
-    --main-color: #FFF200;
-    /*muy amarillo: #FFF200
-    verde:#29fd53
-    morado: #ba44ff
-    */
-}
 
 body{
 	margin-top: 5%;
@@ -53,10 +37,11 @@ header{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--bg-color);
-    color: #fff;
+    background-color: var(--bg-oscuro);
+    color: var(--text-color);
     padding: 28px 6%;
-    transition:all .50s ease
+    transition:all .50s ease;
+    border-bottom: 0.2em solid var(--gray-border-color);
 }
 
 .logo{
