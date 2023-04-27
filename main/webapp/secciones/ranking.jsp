@@ -20,7 +20,7 @@
 
 <body>
 	<h2 class="superior">
-		Sala de escape:<% Sala.getSalaPorId(idSala);%>
+		Sala de escape:<%= Sala.getSalaPorId(idSala)%>
 	</h2>
 	<nav class="lateral">
 		<% //TODO recorrer salas hasta que no haya mas %>
