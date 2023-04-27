@@ -15,6 +15,7 @@ rutaJspSeccion = "secciones/" + seccion + ".jsp";
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><%=seccion.substring(0, 1).toUpperCase() + seccion.substring(1)%> | BilboSKP</title>
+<link rel="stylesheet" jref="css/colores.css">
 <link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/bilboskp-icon.css">
@@ -33,6 +34,7 @@ rutaJspSeccion = "secciones/" + seccion + ".jsp";
 </head>
 <body>
 	<%--<%@include file="plantillas/nav.jsp"--%>
+	<jsp:include page="css/colores.jsp"></jsp:include>
 	<header>
 		<div id=caja_logo>
 			<a id="logo_grande" href="./index.jsp?sec=inicio" class="logo"> <img  src="img_web/logos/500x200-logo-rojo-2.png"></a>

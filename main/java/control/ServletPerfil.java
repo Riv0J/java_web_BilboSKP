@@ -1,6 +1,9 @@
 package control;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Reserva;
 import model.Suscriptor;
 
 @WebServlet("/perfil")
@@ -29,15 +33,21 @@ public class ServletPerfil extends HttpServlet {
 		sesion.setAttribute("sus", sus);
 		switch (subseccion) {
 		case"editar":
-			request.getRequestDispatcher("index.jsp?sec=perfil").forward(request, response);
+			request.getRequestDispatcher("index.jsp?sec=perfil?sub=gestionCuenta").forward(request, response);
 			break;
 		case "reservas":
 			//obtener todas las reservas del suscriptor 
+			ArrayList <Reserva> reserva=new ArrayList<Reserva>();
+			
 			//hacer setAttribute de las reservas
+			Reserva r= (Reserva) sesion.getAttribute("reserva");
+			//respuesta usuario
+			request.getRequestDispatcher("index.jsp?sec=reserva").forward(request, response);
 			break;		
 		case "cupones":
 			//obtner todos los cupones
 			//dispatch
+			
 			break;
 		default:
 			break;
