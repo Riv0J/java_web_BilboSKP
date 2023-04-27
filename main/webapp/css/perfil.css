@@ -8,11 +8,6 @@ section{
     display: flex;
     flex-direction: row;
 }
-.subcaja1 input, .subcaja3 input, .caja3 input, .caja input{
-    border-radius: 2em;
-    height: 35px;
-    width: 20%;
-}
 .caja1 ul li{
     list-style: none;
     margin-bottom: 5%;
@@ -22,74 +17,6 @@ h1{
 }
 .caja1{
     width:40%;
-}
-.caja2{
-    width:60%;
-}
-.caja3{
-    margin: 5%;
-    text-align: center;
-}
-.subcaja1{
-    margin-bottom: 3%;
-}
-.subcaja1 img{
-    width: 15%;
-}
-.form0{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 5%;
-}
-.form1, .form2, .form3{
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 5%;
-}
-/*CAMBIAR CONTRASEÑAS*/
-.caja4{
-    margin-top:7%;
-    display: flex;
-    flex-direction: column;
-}
-.box1{
-    width: 100%;
-    margin-bottom: 3%;
-}
-.box1 label{
-   width: 30%;
-   color: wheat;
-}
-.box1 input{
-    padding: 2%;
-    height: 15px;
-    width: 93%;
-    border-radius: 3em;
-    border:1px solid wheat;
-    margin-top: 2%;
-
-}
-/*SECCION CAMBIAR CONRASEÑA*/
-.box0{
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-}
-.box0 label {
-    width: 50%;
-    margin-bottom: 2.5%;
-}
-.box0 input{
-    width:90%;
-    padding: 2%;
-}
-.box0 input, .form0 input{
-    border-radius: 3em;
-    height: 30px;
-    border: 1px solid wheat;
-}
-.boton1{
-    margin-right:4%;
 }
 @media screen and (max-width:480px) {
     main{

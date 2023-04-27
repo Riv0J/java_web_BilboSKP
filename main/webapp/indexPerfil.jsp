@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%
-String seccion = request.getParameter("sec");
+String subseccion = request.getParameter("sub");
 String rutaJspSeccion = "";
-if (seccion == null) {
-	seccion = "perfil";
+if (subseccion == null) {
+	subseccion = "gestionCuenta";
 }
-rutaJspSeccion = "secciones/" + seccion + ".jsp";
+rutaJspSeccion = "subsecciones/" + subseccion + ".jsp";
 %>
-<link rel="stylesheet" href="/css/perfil.css">
+<link rel="stylesheet" href="css/perfil.css">
+<link rel="stylesheet" href="css/gestionCuenta.css">
+
 <section>
             <div class="caja1">
                 <h1>Mi perfil</h1>
@@ -18,12 +20,14 @@ rutaJspSeccion = "secciones/" + seccion + ".jsp";
                     <li><a href="cupones.jsp">Mis cupones</a></li>
                     <li><a href="ajustesCuenta.html">Cerrar sesión</a></li>
                 </ul>
-            </div>
+            </div> 
             
-</section>     
-<main>
-		<%-- <jsp:include page="plantillas/mensaje.jsp"></jsp:include>--%>
+        <div class="caja2">
+        <%-- <jsp:include page="plantillas/mensaje.jsp"></jsp:include>--%>
 		<jsp:include page="<%=rutaJspSeccion%>"></jsp:include>
-</main>
+        </div>         
+</section>     
+
+		
 
 
