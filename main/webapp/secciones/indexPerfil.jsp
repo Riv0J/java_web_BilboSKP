@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <%
 String subseccion = request.getParameter("sub");
 String rutaJspSeccion = "";
@@ -9,7 +7,6 @@ if (subseccion == null) {
 rutaJspSeccion = "subsecciones/" + subseccion + ".jsp";
 %>
 <link rel="stylesheet" href="css/perfil.css">
-<link rel="stylesheet" href="css/gestionCuenta.css">
 
 <section>
             <div class="caja1">
