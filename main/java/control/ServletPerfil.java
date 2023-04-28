@@ -17,47 +17,56 @@ import model.Cupon;
 import model.Reserva;
 import model.Suscriptor;
 
-@WebServlet("/perfil")
+@WebServlet("/indexPerfil")
 public class ServletPerfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	public static final String INSERT_OR_EDIT="gestionCuenta.jsp ";
+	
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+			
 	String subseccion =	request.getParameter("subseccion");
+	String forward="";
+	
 	if(subseccion==null) {
 		subseccion="editar";
 	}
-	//que todos los datos aparezcan cuando el suscriptor esta logeado	
-	//obtener el suscriptor de la sesion 
-	//Suscriptor sus= (Suscriptor) sesion.getAttribute("suscriptor");
+	//Suscriptor sus= (Suscriptor) sesion.getAttribute("suscriptor"); 
+	//sesion.setAttribute("sus", sus);
 	
 		HttpSession sesion = request.getSession();
 		Suscriptor sus= new Suscriptor(1, 1234, "hola@gmail,com" , "pau", "paula", "castillo", "imagen", 1 , null);
 	
 		sesion.setAttribute("sus", sus);
 		Object fecha;
+
 		switch (subseccion) {
 		case"editar":
-			request.getRequestDispatcher("index.jsp?sec=perfil?sub=gestionCuenta").forward(request, response);
+			request.getRequestDispatcher("index.jsp?sec=indexPerfil?sub=gestionCuenta").forward(request, response);
 			break;
 		case "reservas":
 			//obtener todas las reservas del suscriptor
-			Reserva re= new Reserva(0, 0, 0, 0, null, 0);
+			
 			ArrayList <Reserva> reserva=new ArrayList<Reserva>();
-			reserva.add(re);
-			reserva.add(re);
-			reserva.add(re);
+			reserva.add(null);
+			reserva.add(null);
+			reserva.add(null);
+			reserva.add(null);
 		
 			for(int i=0; i>reserva.size() ; i++) {
-				
+				Reserva re= new Reserva(i, i, i, i, null, i);
 			}
 			
-			
 			//hacer setAttribute de las reservas
-			Reserva r= (Reserva) sesion.getAttribute("reserva");
+			Reserva re= (Reserva) sesion.getAttribute("reserva");
 			//respuesta usuario
+
 			request.getRequestDispatcher("index.jsp?sec=perfil?sub=reserva").forward(request, response);
 			break;		
 		
+
 		case "cupones":
 			LocalDate fechaCupon = LocalDate.of(2023, 4, 28);
 			Date fechaDate = (Date) Date.from(fechaCupon.atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -76,19 +85,26 @@ public class ServletPerfil extends HttpServlet {
 			
 			break;
 		default:
-			break;
+	}
+		
+		//GUARDAR Y EDITAR DATOS
+		if(subseccion.equalsIgnoreCase("editar")) {
+			try {
+				
+				BilboSKP.actualizarSuscripcion(null);
+			} catch (Throwable e) {
+				
+				e.printStackTrace();
+			}
 		}
 		
-		//Guadar los datos modificados
-	
 		
-		
-		//cerrar sesion
+		//CERRAR SESION
 		
 		
 		
 		//Enviar la respuesta al usuario
-		request.getRequestDispatcher("index.jsp?sec=perfil").forward(request, response);
+		request.getRequestDispatcher("index.jsp?sec=indexPerfil").forward(request, response);
 		
 	}
 

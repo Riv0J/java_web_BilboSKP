@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <%
 String subseccion = request.getParameter("sub");
 String rutaJspSeccion = "";
@@ -9,16 +7,16 @@ if (subseccion == null) {
 rutaJspSeccion = "subsecciones/" + subseccion + ".jsp";
 %>
 <link rel="stylesheet" href="css/perfil.css">
-<link rel="stylesheet" href="css/gestionCuenta.css">
 
 <section>
             <div class="caja1">
                 <h1>Mi perfil</h1>
                 <ul>
-                    <li class="gc"><a href="perfil.jsp">Gestión de la cuenta</a></li>
-                    <li><a href="misReservas.jsp">Mis reservas</a></li>
-                    <li><a href="subsecciones/cupones.jsp">Mis cupones</a></li>
-                    <li><a href="ajustesCuenta.html">Cerrar sesión</a></li>
+
+                    <li class="gc"><a href="<%=rutaJspSeccion%>">Gestión de la cuenta</a></li>
+                    <li><a href="">Mis reservas</a></li>
+                    <li><a href="">Mis cupones</a></li>
+                    <li><a href="">Cerrar sesión</a></li>
                 </ul>
             </div> 
             

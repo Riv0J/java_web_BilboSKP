@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"
-	import="java.util.HashMap,java.util.ArrayList,  model.Sala, model.PartidaOnline, model.Partida"%>
+	import="java.util.HashMap,java.util.ArrayList,java.util.Vector,  model.Sala, model.PartidaOnline, model.Partida"%>
 <%
 	HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("mapaSalas");
-	ArrayList<String> partida=(ArrayList<String>) request.getAttribute("partida");
+	Vector<PartidaOnline> partidas=(Vector<PartidaOnline>) request.getAttribute("partidas");
+	Sala sala=(Sala)request.getAttribute("sala");
 	
 	
 	
-	
+	//String salaseleccionada = request.getParameter("salaseleccionada");
 	String nombregrupo = request.getParameter("nombregrupo");
 	String puntos = request.getParameter("puntos");
 	String fecha = request.getParameter("fecha");
@@ -20,15 +21,15 @@
 
 <body>
 	<h2 class="superior">
-		Sala de escape:<%= Sala.getSalaPorId(idSala)%>
+		Sala de escape:<%=sala.getNombre()%>
 	</h2>
 	<nav class="lateral">
 		<% //TODO recorrer salas hasta que no haya mas %>
-		<% //for  (int i=0;i<mapaSala.size();i++) {
+		<%//for  (int i=0;i<partidas.size();i++) {
 		
 		
 		
-		//}
+	//	}
 		%><br>sala 2
 	</nav>
 	
@@ -50,7 +51,7 @@
 			<img src="../img_web/icons/copa1.png">
 			<div class="caja oro">
 				<p>
-					<%=nombregrupo%> Grupo 1<br> <% %>1500 puntos <br> 2023-02-13
+					<%=partidas.getNombreGrupo()%> <br> <%=partidas.getPuntaje() %><br><%=partidas.calcularTiempo() %>
 				</p>
 			</div>
 		</div>

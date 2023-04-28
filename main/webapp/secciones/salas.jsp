@@ -5,16 +5,11 @@
 HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("mapaSalas");
 ArrayList<String> tematicasDisponibles = (ArrayList<String>) request.getAttribute("tematicasDisponibles");
 ArrayList<String> dificultadesDisponibles = (ArrayList<String>) request.getAttribute("dificultadesDisponibles");
-HashMap<String, String> mapaAppConfig = (HashMap<String, String>) request.getAttribute("appConfig");
 
 String m = request.getParameter("m");
 String d = request.getParameter("d");
 String t = request.getParameter("t");
 String paramBuscar = request.getParameter("buscar");
-
-if (mapaAppConfig == null) {
-	mapaAppConfig = AppConfig.getMapaConfig();
-}
 %>
 
 <link rel="stylesheet" href="css/salas.css">
@@ -214,9 +209,8 @@ numeroResultados = mapaSalas.size();
 		<%
 		contadorSalas +=1;
 		}
-		}
-		%>
-	
+	}
+	%>
 </section>
 <script>
     const selects = document.querySelectorAll('#contenedor_buscador form select');
@@ -226,12 +220,12 @@ numeroResultados = mapaSalas.size();
         form.submit();
       });
     });
-  </script>
+</script>
   <style>
   
   .caja_sala {
   	opacity: 0;
-	}
+  }
 	@keyframes entrada { 
 		0% {
 			opacity: 0;
