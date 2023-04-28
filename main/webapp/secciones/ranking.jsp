@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"
-	import="java.util.HashMap,java.util.ArrayList,java.util.Vector,  model.Sala, model.PartidaOnline, model.Partida"%>
+	import="java.util.HashMap,java.util.ArrayList, java.util.Vector,  model.Sala, model.PartidaOnline, model.Partida"%>
 <%
 	HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("mapaSalas");
+	Sala sala=(Sala)request.getAttribute("sala"); //una sala
 	Vector<PartidaOnline> partidas=(Vector<PartidaOnline>) request.getAttribute("partidas");
-	Sala sala=(Sala)request.getAttribute("sala");
 	
 	
+	//necesito un array de todas las salas/ un array de todas las partidas de esa sala/
 	
 	//String salaseleccionada = request.getParameter("salaseleccionada");
 	String nombregrupo = request.getParameter("nombregrupo");
@@ -25,16 +26,25 @@
 	</h2>
 	<nav class="lateral">
 		<% //TODO recorrer salas hasta que no haya mas %>
-		<%//for  (int i=0;i<partidas.size();i++) {
+		<%for  (int i=0;i<mapaSalas.size();i++) {
+		
+			
+			
+			//for (int u=0;i<partidas.size();u++){
 		
 		
 		
-	//	}
+		}
 		%><br>sala 2
 	</nav>
 	
 	<%//consulta sql query ,    
-	
+	for (PartidaOnline partida:partidas) {
+		Sala sala =partida.getSala();
+		String nombregrupo = partida.getNombreGrupo();
+		String	puntos=Integer.toString(partida.getPuntaje());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		String fecha = sdf.format(partida.getFechaInicio());
 	
 	
 	%>
@@ -51,7 +61,7 @@
 			<img src="../img_web/icons/copa1.png">
 			<div class="caja oro">
 				<p>
-					<%=partidas.getNombreGrupo()%> <br> <%=partidas.getPuntaje()%><br><%=partidas.calcularTiempo() %>
+					<%=partida.getNombreGrupo()%> <br> <%=partida.getPuntaje()%><br><%=partida.calcularTiempo() %>
 				</p>
 			</div>
 		</div>
@@ -74,7 +84,7 @@
 			<li>Grupo 9</li>
 		</ol>
 	</div>
-
+<%} %>
 
 
 
