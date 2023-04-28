@@ -13,7 +13,7 @@
 }
 
 #MisCuponesTitulo{
-    border-bottom: 0.05em solid #000000;
+    border-bottom: 0.05em solid #C60C02;
     padding-right: 9%;
     padding-bottom: 0.8%;
     position:relative;
@@ -24,8 +24,9 @@
 .fichaCupones{
     display: grid;
     flex-direction: column;
-    background-color: #C60C02;
+    background-color: #0F0F0F;
     width: 60%;
+    border:0.03em solid #666666;
     text-align: center;
     margin-left:22%;
     margin-top:5%;
@@ -33,6 +34,9 @@
     
 }
 
+.fichaCupones p{
+	background-color: #0F0F0F;
+}
 .CodigoCupon{
     font-size: 180%;
 }
