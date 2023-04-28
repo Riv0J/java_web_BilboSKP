@@ -44,6 +44,8 @@ public class ServletSalas extends HttpServlet {
 			if (paramBuscar != null) {
 				// normalizar(quitar acentos y poner minusculas)
 				paramBuscar = NormalizeHelper.normalizarTexto(paramBuscar);
+			} else {
+				paramBuscar = "todas";
 			}
 
 			// Iterar el mapa de salas cargadas y agregar las que cumplen los criterios de
