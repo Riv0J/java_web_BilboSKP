@@ -2,11 +2,12 @@
 	transition: transform 0.3s ease-out;
 }
 #contenedor_buscador {
-	padding: 2%;
-	background-image: url("../img_web/texturas/cuero2.png");
-	background-size: cover;
-	border-top: 0.4em solid var(--gray-border-color);
-	border-bottom: 0.4em solid var(--gray-border-color);
+  padding: 2%;
+  background-image: url("../img_web/texturas/laberinto.jpg");
+  border-top: 0.4em solid var(--gray-border-color);
+  border-bottom: 0.4em solid var(--gray-border-color);
+  background-repeat: repeat;
+  background-size: contain;
 }
 
 #wrapper_buscador, #wrapper_filtros {
@@ -86,8 +87,7 @@ select {
 	font-size: 0.9em;
 	font-family: Poppins;
 	padding-bottom: 5%;
-	/*background-image: url("../img_web/texturas/cuero.png");*/
-	/*background-image: url("../img_web/texturas/fondoSalas.jpg");*/
+	/*background-image: url("../img_web/texturas/laberinto.jpg");*/
 }
 #contenedor_salas::before {
   content: "";
@@ -315,12 +315,12 @@ select:focus {
 }
 
 .caja_sala:hover {
-	box-shadow: 0 0 4em var(--main-color2);
+	box-shadow: 0 0 4em var(--main-color);
     scale: 1.08;
     translate: 1.1;
     z-index: 200;
     transition: 0.2s;
-    outline: 0.22em solid var(--main-color2);
+    outline: 0.22em solid var(--main-color);
     /*outline: 0.22em solid var(--main-color2);*/
     background-size: 2;
 }

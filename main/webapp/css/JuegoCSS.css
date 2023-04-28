@@ -1,0 +1,156 @@
+
+
+#Escenario{
+    background-image: none;
+    height: 98%;
+    position:absolute;
+    z-index: -1;
+    width: 99%;
+}
+#Menu{
+    display: flex;
+    float:right;
+    width: 20%;
+    height: 10%;
+    background-image: url('Imagenes/hierro.jpg');
+    z-index: 0;
+ }
+
+#temporizador{
+    margin-left:3%;
+    width: 30%;
+    padding: 3%;
+    border: 6px solid #383838;
+    border-radius: 14px;
+}
+
+#Ajustes{
+    background-image: url('/Imagenes/Ajustes.png');
+    background-repeat: no-repeat;
+    width: 16%;
+    background-position: center;
+    z-index: 10;
+    display: inline-flex;
+    margin-left:14%;
+    padding:2%;
+    background-size:100%;
+}
+
+#Pistas{
+    background-image: url('Imagenes/Pistas.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 20%;
+    z-index: 10;
+    display: inline-flex;
+    margin-left:10%;
+    padding:2%;
+    background-size:70%;
+}
+
+#MenuInventario{
+    position: absolute;
+    width: 6%;
+    bottom: 2%;
+    left: 92%;
+    float: right;
+}
+
+#BotonInventario{
+    position: relative;
+    background-image: url('Imagenes/Maletin.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 18%;
+    height: 16%;
+    z-index: 10;
+    display: inline-flex;
+    left: 15%;
+    padding-left: 83%;
+    padding-top: 91%;
+    background-size: 100%;
+}
+
+
+
+#FondoInventario{
+    background-color: #d1d1ad; 
+    border: 2px solid #aaa0a0; 
+    height: 68%;
+    width: 20%;
+    box-sizing: border-box; 
+    top: 18%;
+    left: 78%;
+    position: fixed;
+    overflow-y:scroll;
+    display: flex;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 10px;
+    justify-items: center;
+    align-items: center;
+    padding: 10px;
+    flex-wrap: wrap;
+}
+
+  .fila {
+    display: table-row;
+    
+  }
+  .celda {
+    display: table-cell;
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+    width: 100px;
+  }
+
+#mensajeContainer {
+    height: 10%;
+    overflow-y: scroll;
+    background-color: #f1f1f1;
+    padding: 2%;
+    position:absolute;
+    width: 21.5%;
+    margin-top: 35%;
+    
+  }
+  
+.flecha{
+  background-image: url('Imagenes/Flecha.png');
+}
+  
+  #formulario input[type=text] {
+    width: 20%;
+    padding: 1% ;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    top: 90%;
+  }
+  
+  #formulario input[type=submit] {
+    width: 5%;
+    background-color: #f8ef9c;
+    color: #000000;;
+    padding: 1%;    
+    margin-top: 45.6%;
+    border-radius: 4px;
+  }
+  
+  #formulario input[type=submit]:hover {
+    background-color: #c5bf85;
+  }
+
+  .objeto{
+    width: 100%;
+    height: 100%;
+    max-width: 100px;
+    max-height: 100px;
+    overflow: hidden;
+    object-fit: contain;
+    margin-top:-8%;
+    padding: 2%;
+    display: flex;
+    
+  }

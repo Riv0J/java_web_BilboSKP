@@ -1,13 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
+<%@ page
+	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.io.File, java.text.Normalizer, 
+	model.Reserva, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date  "%>
+    
+    
+<%Reserva re= new Reserva(i, i, i, i, null, i);%>
 <link rel="stylesheet" href="../css/reserva.css">
-<title>Mis reservas</title>
-</head>
-<body>
 <main>
         <section id="caja1">
             <h1>Administra tus reservas</h1>
@@ -37,5 +34,4 @@
         </section>
 
     </main>
-</body>
-</html>
+

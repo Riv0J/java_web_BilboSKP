@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"
-	import="java.util.HashMap,java.util.ArrayList,  model.Sala, model.PartidaOnline, model.Partida"%>
+	import="java.util.HashMap,java.util.ArrayList, java.util.Vector,  model.Sala, model.PartidaOnline, model.Partida"%>
 <%
 	HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("mapaSalas");
-	ArrayList<String> partida=(ArrayList<String>) request.getAttribute("partida");
+	Sala sala=(Sala)request.getAttribute("sala"); //una sala
+	Vector<PartidaOnline> partidas=(Vector<PartidaOnline>) request.getAttribute("partidas");
 	
 	
+	//necesito un array de todas las salas/ un array de todas las partidas de esa sala/
 	
-	
+	//String salaseleccionada = request.getParameter("salaseleccionada");
 	String nombregrupo = request.getParameter("nombregrupo");
 	String puntos = request.getParameter("puntos");
 	String fecha = request.getParameter("fecha");
@@ -20,20 +22,29 @@
 
 <body>
 	<h2 class="superior">
-		Sala de escape:<%= Sala.getSalaPorId(idSala)%>
+		Sala de escape:<%=sala.getNombre()%>
 	</h2>
 	<nav class="lateral">
 		<% //TODO recorrer salas hasta que no haya mas %>
-		<% //for  (int i=0;i<mapaSala.size();i++) {
+		<%for  (int i=0;i<mapaSalas.size();i++) {
+		
+			
+			
+			//for (int u=0;i<partidas.size();u++){
 		
 		
 		
-		//}
+		}
 		%><br>sala 2
 	</nav>
 	
 	<%//consulta sql query ,    
-	
+	for (PartidaOnline partida:partidas) {
+		Sala sala =partida.getSala();
+		String nombregrupo = partida.getNombreGrupo();
+		String	puntos=Integer.toString(partida.getPuntaje());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		String fecha = sdf.format(partida.getFechaInicio());
 	
 	
 	%>
@@ -50,7 +61,7 @@
 			<img src="../img_web/icons/copa1.png">
 			<div class="caja oro">
 				<p>
-					<%=nombregrupo%> Grupo 1<br> <% %>1500 puntos <br> 2023-02-13
+					<%=partida.getNombreGrupo()%> <br> <%=partida.getPuntaje()%><br><%=partida.calcularTiempo() %>
 				</p>
 			</div>
 		</div>
@@ -73,7 +84,7 @@
 			<li>Grupo 9</li>
 		</ol>
 	</div>
-
+<%} %>
 
 
 

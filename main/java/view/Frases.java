@@ -118,7 +118,7 @@ public class Frases {
 		frases.put("ESSalasResultado", "Mostrando ");
 		frases.put("ESSalasResultado1", "resultados de la busqueda");
 		frases.put("ESSalasResultado2", " Modalidad");
-		frases.put("ESSalasResultado3", "Tematica");
+		frases.put("ESSalasResultado3", "Temática");
 		frases.put("ESSalasResultado4", "Dificultad");
 		frases.put("ENSalasResultado", "Showing");
 		frases.put("ENSalasResultado1", "results of the search");
