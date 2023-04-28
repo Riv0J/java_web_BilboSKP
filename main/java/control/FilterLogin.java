@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import model.Suscriptor;
 //
-@WebFilter({"/perfil3/","/perfil3/*","/organizar3","/reservar3"})
+@WebFilter({"/perfil","/perfil/*","/organizar","/reservar"})
 public class FilterLogin implements Filter {
 
 	public FilterLogin() {
@@ -36,12 +36,12 @@ public class FilterLogin implements Filter {
 				chain.doFilter(request, response);
 			} else {
 				//existe la sesion pero no tiene un objeto suscriptor, lo mandamos al login
-				request.getRequestDispatcher("index.jsp?sec=preguntarLogin").forward(request, response);
+				request.getRequestDispatcher("index.jsp?sec=login").forward(request, response);
 			}
 			
 		} else {
 			// no existe la sesion, lo mandamos al login
-			request.getRequestDispatcher("index.jsp?sec=preguntarLogin").forward(request, response);
+			request.getRequestDispatcher("index.jsp?sec=login").forward(request, response);
 		}
 	}
 

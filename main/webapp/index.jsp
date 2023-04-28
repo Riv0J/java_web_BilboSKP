@@ -20,6 +20,7 @@ rutaJspSeccion = "secciones/" + seccion + ".jsp";
 <link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/bilboskp-icon.css">
 <link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/index.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"
 	rel="stylesheet">
