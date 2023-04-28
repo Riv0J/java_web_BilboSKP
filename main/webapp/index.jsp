@@ -50,7 +50,7 @@ rutaJspSeccion = "secciones/" + seccion + ".jsp";
 			<a href="./contacto+FAQ"><li>Contacto</li></a>
 		</ul>
 		<div class="main">
-			<a href="./perfil" class="user"><i class="ri-user-fill"></i>Sing
+			<a href="./indexPerfil" class="user"><i class="ri-user-fill"></i>Sing
 				In</a> <a href="/subscribe" class="suscribirse">Subscribe</a>
 			<div class="bx bx-menu" id="menu-icon"></div>
 		</div>
