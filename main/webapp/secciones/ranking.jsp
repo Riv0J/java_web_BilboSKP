@@ -51,7 +51,7 @@
 			<img src="../img_web/icons/copa1.png">
 			<div class="caja oro">
 				<p>
-					<%=partidas.getNombreGrupo()%> <br> <%=partidas.getPuntaje() %><br><%=partidas.calcularTiempo() %>
+					<%=partidas.getNombreGrupo()%> <br> <%=partidas.getPuntaje()%><br><%=partidas.calcularTiempo() %>
 				</p>
 			</div>
 		</div>
