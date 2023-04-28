@@ -48,7 +48,7 @@ public class ServletRanking extends HttpServlet {
 			//si no hay sala seleccionada forzar la primera
 			
 			if (idSala==null) {
-				idSala="SF1";
+				idSala="SO1";
 			}
 			System.out.println("idSala= "+idSala);
 			
@@ -62,7 +62,7 @@ public class ServletRanking extends HttpServlet {
 			//sala viendose en este momento
 			Sala salaSeleccionada = Sala.getSalaPorId(idSala);
 			request.setAttribute("salaSeleccionada", salaSeleccionada);
-			//System.out.println("Sala seleccionada: "+salaSeleccionada.getNombre());
+			System.out.println("Sala seleccionada: "+salaSeleccionada.getNombre());
 			
 			//partidas que se jugaron
 			//todo esto ira como setAttribute[]
@@ -74,7 +74,7 @@ public class ServletRanking extends HttpServlet {
 			
 			//recorrer vector de partidas
 			for (PartidaOnline partida:partidas) {
-				
+				Sala sala =partida.getSala();
 				String nombregrupo = partida.getNombreGrupo();
 				String	puntos=Integer.toString(partida.getPuntaje());
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -86,8 +86,9 @@ public class ServletRanking extends HttpServlet {
 			request.setAttribute("nombregrupo", nombregrupo);
 			request.setAttribute("puntos", puntos);
 			request.setAttribute("fecha", fecha);
-			
-			
+			request.setAttribute("salaseleccionada", salaSeleccionada);	
+			request.setAttribute("sala", sala);
+			request.setAttribute("partidas", partidas);
 			// Enviar la respuesta al usuario
 			
 			
