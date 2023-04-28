@@ -15,7 +15,7 @@
          <form action="">
                     <div class="subcaja1">
                         	<img src="img/gato.png" alt="">
-                        	<input type="button" value="Modificar" />
+                        	<input type="button" value="Modificar" value="<%=sus.getImagen()%>">
                     </div>
                     <div class="form1">
                         <div class="box0">
@@ -34,7 +34,7 @@
                         </div>
                         <div class="box0">
                             	<label for="">Alias:</label>
-                            	<input type="text" name="" id="" >
+                            	<input type="text" name="" id="" value="<%=sus.getAlias()%>">
                         </div>
                     </div>
                     <div class="form3">
@@ -44,7 +44,7 @@
                         </div>
                         <div class="box0">
                             	<label for="">Télefono:</label>
-                            	<input type="" name="" id="">
+                            	<input type="" name="" id=""  value="<%=sus.getTelefono()%>">
                         </div>
                     </div>
                     <div class="caja">
