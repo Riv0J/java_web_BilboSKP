@@ -18,7 +18,7 @@ import model.Reserva;
 import model.Suscriptor;
 
 @WebServlet("/indexPerfil")
-public class ServletPerfil extends HttpServlet {
+public class ServletPerfil2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	public static final String INSERT_OR_EDIT="gestionCuenta.jsp ";

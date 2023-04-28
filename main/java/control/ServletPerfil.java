@@ -68,6 +68,7 @@ public class ServletPerfil extends HttpServlet {
 		
 
 		case "cupones":
+
 			LocalDate fechaCupon = LocalDate.of(2023, 4, 28);
 			Date fechaDate = (Date) Date.from(fechaCupon.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
@@ -82,6 +83,7 @@ public class ServletPerfil extends HttpServlet {
 			//dispatch
 			Cupon c1= (Cupon) sesion.getAttribute("cupon");
 			request.getRequestDispatcher("index.jsp?sec=perfil?sub=cupon");
+			
 			
 			break;
 		default:
