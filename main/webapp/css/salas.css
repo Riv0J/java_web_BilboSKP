@@ -321,7 +321,6 @@ select:focus {
     z-index: 200;
     transition: 0.2s;
     outline: 0.22em solid var(--main-color);
-    /*outline: 0.22em solid var(--main-color2);*/
     background-size: 2;
 }
 
@@ -369,13 +368,15 @@ select:focus {
 	}
 }
 
-
 @media (max-width: 1280px) {
-    .caja_sala{
-		width: 30%;
+	#contenedor_salas{
+		padding-bottom: 12%;
 	}
 	#contenedor_salas_wrapper {
 		gap: 2%;
+	}
+    .caja_sala{
+		width: 30%;
 	}
 	.tematica{
 		padding-right: 1%;
@@ -412,6 +413,9 @@ select:focus {
 }
 
 @media (max-width: 700px){
+	#caja_salas_wrapper{
+		padding-bottom: 100%;
+	}
 	#caja_filtros{
 		flex-direction: column;
 		font-size: 1.4em;
