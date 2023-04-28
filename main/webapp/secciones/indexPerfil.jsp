@@ -12,6 +12,7 @@ rutaJspSeccion = "subsecciones/" + subseccion + ".jsp";
             <div class="caja1">
                 <h1>Mi perfil</h1>
                 <ul>
+
                     <li class="gc"><a href="<%=rutaJspSeccion%>">Gestión de la cuenta</a></li>
                     <li><a href="">Mis reservas</a></li>
                     <li><a href="">Mis cupones</a></li>
