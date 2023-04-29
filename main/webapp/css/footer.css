@@ -1,4 +1,4 @@
-a, a:hover, a:active, a:focus {
+footer a, footer a:hover, footer a:active, footer a:focus {
 	all: unset;
 	cursor: pointer;
 }

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="css/inicio.css">
 <main>
     <section class="principal">
         <div class="contenido">
@@ -11,7 +12,7 @@
     </section>
 
 <section class="titulo">
-<h2>¡descubre nuestras salas mas jugadas!</h2>
+<h2>¡descubre nuestras salas más jugadas!</h2>
 </section>
 
     <section class="card-container">

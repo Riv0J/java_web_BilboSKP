@@ -71,3 +71,47 @@
 	/* Uncomment for 3D effect */
 	/* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
+
+        .bilboskp_submit{
+        	font-size: 1.75em;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 0.35em;
+            padding: 2%;
+            padding-left: 5%;
+            padding-right: 5%;
+            transition: all 0.5s;
+            color: var(--text-color);
+            background-color: var(--main-color);
+        }
+        .bilboskp_submit:hover{
+        	background-color: var(--bg-oscuro);
+			color: var(--text-color-main);
+
+			outline: 1px solid var(--outline-color-main);
+        }
+        .bilboskp_li{
+        	position: relative
+        }
+        .bilboskp_li::after{
+        	display:none;
+			left: 0;
+			content: "";
+			position: absolute;
+			border-top: 0.14em solid var(--main-color);
+			top: 100%;
+			width: 10%;
+        }
+        .bilboskp_li:hover::after{
+        	display: block;
+		    animation: line 0.5s forwards;
+        }
+		@keyframes line {
+		  from {
+		    width: 0;
+		  }
+		  to {
+		    width: 100%;
+		  }
+		}

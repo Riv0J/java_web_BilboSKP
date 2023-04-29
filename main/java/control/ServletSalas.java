@@ -55,7 +55,7 @@ public class ServletSalas extends HttpServlet {
 
 				// filtrar valor de busqueda
 				if (paramBuscar != null) {
-					if(!paramBuscar.equals("todas")) {
+					if (!paramBuscar.equals("todas")) {
 						// se tiene que normalizar el texto(minusculas y sin acentos)
 						// si el nombre de la sala no contiene el parametro buscar, se salta esta sala
 						String nombreSalaNormalizada = NormalizeHelper.normalizarTexto(sala.getNombre());
@@ -109,11 +109,10 @@ public class ServletSalas extends HttpServlet {
 			request.setAttribute("mapaSalas", salasAMostrar);
 			request.setAttribute("tematicasDisponibles", Sala.getTematicasCargadas());
 			request.setAttribute("dificultadesDisponibles", Sala.getDificultadesCargadas());
-			request.setAttribute("appConfig", AppConfig.getMapaConfig());
 
 			// Enviar la respuesta al usuario
-			request.getRequestDispatcher("index.jsp?sec=salas&buscar=" + paramBuscar + "&m=" + paramModalidad
-					+ "&t=" + paramTematica + "&d=" + paramDificultad).forward(request, response);
+			request.getRequestDispatcher("index.jsp?sec=salas&buscar=" + paramBuscar + "&m=" + paramModalidad + "&t="
+					+ paramTematica + "&d=" + paramDificultad).forward(request, response);
 		} catch (
 
 		Throwable e) {

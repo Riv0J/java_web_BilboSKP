@@ -10,13 +10,10 @@ String m = request.getParameter("m");
 String d = request.getParameter("d");
 String t = request.getParameter("t");
 String paramBuscar = request.getParameter("buscar");
-%>
 
-<link rel="stylesheet" href="css/salas.css">
-<%
 if (dificultadesDisponibles != null && tematicasDisponibles != null) {
 %>
-
+<link rel="stylesheet" href="css/salas.css">
 <section id="contenedor_buscador">
 	<form>
 		<div id="wrapper_buscador">
@@ -180,8 +177,8 @@ numeroResultados = mapaSalas.size();
 					</div>
 				</div>
 
-				<div class="etiqueta tematica" title="Temática de la sala">
-					<div class="caja_icon <%=NormalizeHelper.normalizarTexto(sala.getTematica())%>">
+				<div class="etiqueta tematica <%=NormalizeHelper.normalizarTexto(sala.getTematica())%>" title="Temática de la sala">
+					<div class="caja_icon">
 						<img class="icon" src="<%=rutaIconoTematica%>" alt="Tematica:">
 					</div>
 

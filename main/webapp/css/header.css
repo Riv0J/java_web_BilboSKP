@@ -6,7 +6,30 @@
     text-decoration: none;
     list-style: none;
 }
+a li::after {
+	display:none;
+	left: 0;
+	content: "";
+	position: absolute;
+	border-top-color: red;
+	border-top-style: solid;
+	border-top-width: 0.125em;
+	top: 50%;
+	width: 10%;
+}
+a li:hover::after {
+  display: block;
+  animation: line 0.5s forwards;
+}
 
+@keyframes line {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
 #caja_logo{
 	width: 10%;
 }
@@ -66,6 +89,7 @@ align-items: center;
 }
 
 .navbar a{
+	position: relative;
     color: var(--text-color);
     font-size: 1.1rem;
     font-weight: 500;
@@ -99,7 +123,9 @@ align-items: center;
     font-weight: 500;
     transition: all .50 ease;
 }
-
+.main a:hover{
+	cursor: pointer;
+}
 .user{
     display: flex;
     align-items: center;
@@ -253,7 +279,7 @@ header button {
 
 @media (max-width: 1090px) {
 	main{
-		margin-top: 7.5%;
+		margin-top: 8%;
 	}
 	#caja_logo{
 		width: 10%;

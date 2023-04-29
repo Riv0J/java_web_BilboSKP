@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" import="model.Suscriptor"%>
 <%
 String seccion = request.getParameter("sec");
-String rutaJspSeccion = "";
 if (seccion == null) {
 	seccion = "inicio";
 }
-rutaJspSeccion = "secciones/" + seccion + ".jsp";
-String nombreTitulo = seccion.substring(0, 1).toUpperCase() + seccion.substring(1) + "| BilboSKP";
+String rutaJspSeccion = "secciones/" + seccion + ".jsp";
+String tituloPagina = seccion.substring(0, 1).toUpperCase() + seccion.substring(1) + " | BilboSKP";
+Object sus = (Object) session.getAttribute("suscriptor");
 %>
 <!DOCTYPE html>
 <html>
@@ -15,13 +15,12 @@ String nombreTitulo = seccion.substring(0, 1).toUpperCase() + seccion.substring(
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><%=nombreTitulo%></title>
+<title><%=tituloPagina%></title>
 <link rel="stylesheet" href="css/colores.css">
 <link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/footer.css">
-<link rel="stylesheet" href="css/bilboskp-icon.css">
+<link rel="stylesheet" href="css/bilboskp.css">
 <link rel="stylesheet" href="css/header.css">
-<link rel="stylesheet" href="css/index.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,13 +45,25 @@ String nombreTitulo = seccion.substring(0, 1).toUpperCase() + seccion.substring(
 			<a href="./contacto+FAQ"><li>Contacto</li></a>
 		</ul>
 		<div class="main">
-			<a href="./indexPerfil" class="user"><i class="ri-user-fill"></i>Iniciar Sesión</a> <a href="/subscribe" class="suscribirse">Subscribe</a>
-			<div class="bx bx-menu" id="menu-icon"></div>
+			<% if(sus instanceof Suscriptor){ Suscriptor suscriptor = (Suscriptor) sus; %>
+				<a href="./perfil" class="user" id="botonPerfil"><i class="ri-user-fill"></i> <%=suscriptor.getAlias() %></a> <a href="/subscribe" class="suscribirse">Subscribe</a>
+				<div class="bx bx-menu" id="menu-icon"></div>
+							
+			<% } else { %>
+				<a class="user" id="botonPerfil"><i class="ri-user-fill"></i>Sign in</a> <a href="/subscribe" class="suscribirse">Subscribe</a>
+				<div class="bx bx-menu" id="menu-icon"></div>
+				<script>
+					document.querySelector("#botonPerfil").addEventListener("click", function() {
+					document.querySelector("#caja_login").style.display = "flex";
+					});
+				</script>
+			<% } %>
 		</div>
 		<script type="text/javascript" src="js/script.js"></script>
 	</header>
 	<main>
 		<%-- <jsp:include page="plantillas/mensaje.jsp"></jsp:include>--%>
+		<jsp:include page="plantillas/login.jsp"></jsp:include>
 		<jsp:include page="<%=rutaJspSeccion%>"></jsp:include>
 	</main>
 	<footer>
