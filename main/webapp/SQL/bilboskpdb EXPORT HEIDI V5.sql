@@ -381,19 +381,21 @@ CREATE TABLE IF NOT EXISTS `salaonline` (
   `jugadoresMin` int(2) unsigned NOT NULL DEFAULT 1,
   `jugadoresMax` int(2) unsigned NOT NULL DEFAULT 8,
   `edad_recomendada` int(2) unsigned NOT NULL DEFAULT 18,
+  `disponible` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`idSala`) USING BTREE,
   CONSTRAINT `jugadoresMax` CHECK (`jugadoresMax` >= 1),
   CONSTRAINT `jugadoresMin` CHECK (`jugadoresMin` <= `jugadoresMax` and `jugadoresMin` >= 1)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table bilboskpdb.salaonline: ~6 rows (approximately)
-INSERT INTO `salaonline` (`idSala`, `nombre`, `dificultad`, `tematica`, `descripcion`, `tiempoMax`, `jugadoresMin`, `jugadoresMax`, `edad_recomendada`) VALUES
-	(1, 'Perdidos de la mano de Dios', 'Fácil', 'Terror', 'Vas de camino en medio del bosque, donde eres abducido por un loco perteneciente a una secta. Te das cuenta que ahora estás en un bosque, perdido de la mano de Dios…', 45, 1, 8, 16),
-	(2, 'El Gimnasio Infernal', 'Difícil', 'Suspenso', 'En un gimnasio de élite, un grupo de crossfiteros debe luchar contra una conspiración interna, encontrar al impostor entre ellos y superar pruebas físicas y mentales para escapar antes de que sea muy tarde.', 60, 2, 8, 18),
-	(3, 'Hasta la luz del Alba', 'Media', 'Misterio', 'Un grupo de amigos se encuentran la escena de una cabaña abandonada en el medio del bosque, curiosamente encuentran pistas sobre los que solían habitarla, y la tragedia que les precedió. Terminan siendo víctima de algo más allá de la comprensión humana.', 45, 1, 8, 18),
-	(5, 'El Museo Maldito', 'Difícil', 'Terror', 'Un grupo de investigadores debe resolver el misterio detrás de una serie de extraños sucesos en un museo abandonado. Descubrirán que el lugar está maldito y tendrán que enfrentarse a las fuerzas sobrenaturales para sobrevivir.', 90, 3, 8, 18),
-	(9, 'El Asesino del Ajedrez', 'Media', 'Misterio', 'En un torneo de ajedrez de élite, uno de los jugadores es encontrado muerto en su habitación de hotel. El resto de los participantes deberán resolver el crimen antes de que el asesino ataque de nuevo.', 60, 4, 8, 16),
-	(10, 'Traición en el Espacio', 'Difícil', 'Sci-fi', 'Eres un tripulante de una nave espacial y tienes la misión de descubrir al impostor que se encuentra entre la tripulación. Resuelve acertijos y tareas mientras tratas de encontrar pistas para descubrir al impostor antes de que sea demasiado tarde.', 90, 4, 8, 16);
+-- Dumping data for table bilboskpdb.salaonline: ~7 rows (approximately)
+INSERT INTO `salaonline` (`idSala`, `nombre`, `dificultad`, `tematica`, `descripcion`, `tiempoMax`, `jugadoresMin`, `jugadoresMax`, `edad_recomendada`, `disponible`) VALUES
+	(1, 'Perdidos de la mano de Dios', 'Fácil', 'Terror', 'Vas de camino en medio del bosque, donde eres abducido por un loco perteneciente a una secta. Te das cuenta que ahora estás en un bosque, perdido de la mano de Dios…', 45, 1, 8, 16, 1),
+	(2, 'El Gimnasio Infernal', 'Difícil', 'Suspenso', 'En un gimnasio de élite, un grupo de crossfiteros debe luchar contra una conspiración interna, encontrar al impostor entre ellos y superar pruebas físicas y mentales para escapar antes de que sea muy tarde.', 60, 2, 8, 18, 1),
+	(3, 'Hasta la luz del Alba', 'Media', 'Misterio', 'Un grupo de amigos se encuentran la escena de una cabaña abandonada en el medio del bosque, curiosamente encuentran pistas sobre los que solían habitarla, y la tragedia que les precedió. Terminan siendo víctima de algo más allá de la comprensión humana.', 45, 1, 8, 18, 1),
+	(5, 'El Museo Maldito', 'Difícil', 'Terror', 'Un grupo de investigadores debe resolver el misterio detrás de una serie de extraños sucesos en un museo abandonado. Descubrirán que el lugar está maldito y tendrán que enfrentarse a las fuerzas sobrenaturales para sobrevivir.', 90, 3, 8, 18, 1),
+	(9, 'El Asesino del Ajedrez', 'Media', 'Misterio', 'En un torneo de ajedrez de élite, uno de los jugadores es encontrado muerto en su habitación de hotel. El resto de los participantes deberán resolver el crimen antes de que el asesino ataque de nuevo.', 60, 4, 8, 16, 1),
+	(10, 'Traición en el Espacio', 'Difícil', 'Sci-fi', 'Como tripulante de una nave espacial, tienes la misión de descubrir al impostor que se encuentra entre la tripulación. Resuelve acertijos y tareas mientras tratas de encontrar pistas para descubrir al impostor antes de que sea demasiado tarde.', 90, 4, 8, 16, 1),
+	(11, 'La sala del terror', 'Facil', 'terrrior', 'Sala de pruebas', 45, 1, 8, 18, 1);
 
 -- Dumping structure for table bilboskpdb.suscriptor
 CREATE TABLE IF NOT EXISTS `suscriptor` (

@@ -46,7 +46,7 @@ Object sus = (Object) session.getAttribute("suscriptor");
 		</ul>
 		<div class="main">
 			<% if(sus instanceof Suscriptor){ Suscriptor suscriptor = (Suscriptor) sus; %>
-				<a href="./perfil" class="user" id="botonPerfil"><i class="ri-user-fill"></i> <%=suscriptor.getAlias() %></a> <a href="/subscribe" class="suscribirse">Subscribe</a>
+				<a href="./perfil" class="user" id="botonPerfil"><i class="ri-user-fill"></i> <%=suscriptor.getAlias() %></a>
 				<div class="bx bx-menu" id="menu-icon"></div>
 							
 			<% } else { %>

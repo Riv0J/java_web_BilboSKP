@@ -123,6 +123,9 @@ numeroResultados = mapaSalas.size();
 			String textoBoton = "Organizar partida";
 			String enlaceBoton = "./verSala?idSala=" + idSala;
 			String modalidad = "Online";
+			if(sala instanceof SalaFisica){
+				modalidad = "Reserva";
+			}
 			//si la tematica de la sala es suspenso, le agregamos una clase
 			String rutaIconoTematica = "img_web/iconos_salas/" + NormalizeHelper.normalizarTexto(sala.getTematica()) + ".svg";
 			File archivoImagen = new File(getServletContext().getRealPath("/") + rutaIconoTematica);

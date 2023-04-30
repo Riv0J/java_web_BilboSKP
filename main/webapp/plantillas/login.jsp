@@ -87,7 +87,7 @@
         #linea_logo{
         	padding-bottom: 5%;
         }
-        input{
+        #caja_login input{
         	font-size: 1.75em;
         }
         #linea_login_boton_submit{
@@ -99,8 +99,8 @@
             padding-top: 5%;
             padding-bottom: 0;
         }
-        input[type="text"],
-		input[type="password"] {
+        #caja_login input[type="text"],
+		#caja_login input[type="password"] {
 			width: 90%;
 		    padding: 1%;
 		    background-color: white;
@@ -109,6 +109,21 @@
 		    padding-left: 2%;
 		    padding-right: 2%;
 		}
-		input[type="submit"] {
+		#caja_login input[type="submit"] {
+		}
+		@media (max-width: 1090px){
+			#caja_login form{
+				 width: 40%;
+			}
+		}
+		@media (max-width: 800px){
+			#caja_login form{
+				 width: 60%;
+			}
+		}
+		@media (max-width: 600px){
+			#caja_login form{
+				 width: 80%;
+			}
 		}
 	</style>

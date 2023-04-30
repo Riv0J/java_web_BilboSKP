@@ -36,6 +36,7 @@ public class ServletVerSala extends HttpServlet {
 				System.out.println("Ver la sala: " + salaAMostrar.getNombre());
 				// enviar al cliente a la seccion con id sala
 				request.getRequestDispatcher("./index.jsp?sec=verSala&idSala=" + idSala).forward(request, response);
+				return;
 			}
 		}
 		// si no se encuentra el id de la sala que el usuario quierr ver, se le manda a

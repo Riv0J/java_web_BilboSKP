@@ -19,7 +19,8 @@ a li::after {
 }
 a li:hover::after {
   display: block;
-  animation: line 0.5s forwards;
+  animation: line 0.275s forwards;
+  animation-timing-function: ease-out;
 }
 
 @keyframes line {

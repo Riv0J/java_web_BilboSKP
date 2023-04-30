@@ -1,11 +1,9 @@
 /*SLIDER*/
 main{
     margin-top: 5%;
-    
 }
 
 .principal{
-    
     display: flex;
     flex-direction: row;
     background-color: var(--bg-color2);
@@ -16,10 +14,7 @@ main{
     padding-bottom: 5%;
     padding-top: 3%;
     color:var(--text-color);
-
-        background-image: linear-gradient(rgba(0, 55, 2, 0.2), rgba(0, 0, 0, 0.9)), url("../img_web/inicio/portada.PNG");
-    
-    
+    background-image: linear-gradient(rgba(0, 55, 2, 0.2), rgba(0, 0, 0, 0.9)), url("../img_web/inicio/portada.PNG");
     background-size: cover;
     background-position:5%;
 }
@@ -31,7 +26,7 @@ padding-top: 2%;
 justify-content: center;
 }
 
-button {
+header button {
     padding: 10px 20px;
     border-radius: 5px;
     background-color: var(--main-color);
@@ -46,9 +41,6 @@ button {
   section .principal{
     display: flex;
     flex-direction: row;
-    
-
-
   }
   .llave{
     width: 30%;
