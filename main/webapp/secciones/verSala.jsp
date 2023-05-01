@@ -177,7 +177,7 @@ String tematicaNormalizada = NormalizeHelper.normalizarTexto(salaAMostrar.getTem
 	justify-content: center;
 	align-items: center;
 	height: 100%;
-	background: linear-gradient(283deg, rgba(2,0,36,0.05) 30%, rgba(255,25,25,0.2) 66%, rgba(198,12,2,1) 100%);
+	background: linear-gradient(283deg, rgba(2,0,36,0.05) 30%, rgba(255,25,25,0.2) 66%, rgba(198,12,2,0.8) 100%);
 }
 
 #caja_info, #caja_img {
@@ -290,29 +290,29 @@ width: 34%;
 @keyframes fondo {
   0% {
     background-position: -1% 5%;
-    background-size: 153em;
+    background-size: 100.5%;
   }
   10%{
   	background-position: 3% 8%;
   }
   25% {
     background-position: 2% 6%;
-    background-size: 152em;
+    background-size: 101%;
   }
   50% {
     background-position: 1% 3%;
-    background-size: 153em;
+    background-size: 100.5%;
   }
   10%{
   	background-position: 3% 4%;
   }
   75% {
     background-position: 4% 3%;
-    background-size: 154em;
+    background-size: 100%;
   }
   100% {
     background-position: 1% 5%;
-    background-size: 153em;
+    background-size: 100.5%;
   }
 }
 </style>
