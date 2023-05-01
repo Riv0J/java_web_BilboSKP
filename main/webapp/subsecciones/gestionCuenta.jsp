@@ -1,8 +1,12 @@
 <%@ page
 	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.io.File, java.text.Normalizer, 
 	model.Suscriptor, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date  "%>
-<%Suscriptor sus= new Suscriptor(1, 1234, "hola@gmail,com" , "pau", "Paula", "Castillo", "imagen", 1 , new Date());%>
+
 <link rel="stylesheet" href="../css/gestionCuenta.css">
+<% HttpSession sesion = request.getSession();
+Suscriptor sus= (Suscriptor) sesion.getAttribute("suscriptor");
+sesion.setAttribute("sus", sus);
+%>
 
     <div class="caja2">
          <div>
@@ -14,7 +18,7 @@
          <form action="">
                     <div class="subcaja1">
                         	<img src="img/gato.png" alt="">
-                        	<input type="button" value="Modificar" value="<%=sus.getImagen()%>">
+                        	<input type="button" value="Modificar" value="<%=%>">
                     </div>
                     <div class="form1">
                         <div class="box0">

@@ -32,13 +32,10 @@ public class ServletPerfil extends HttpServlet {
 		if (subseccion == null) {
 			subseccion = "editar";
 		}
-		// Suscriptor sus= (Suscriptor) sesion.getAttribute("suscriptor");
-		// sesion.setAttribute("sus", sus);
-
 		HttpSession sesion = request.getSession();
-		Suscriptor sus = new Suscriptor(1, 1234, "hola@gmail,com", "pau", "paula", "castillo", "imagen", 1, null);
-
+		Suscriptor sus= (Suscriptor) sesion.getAttribute("suscriptor");
 		sesion.setAttribute("sus", sus);
+
 		Object fecha;
 
 		switch (subseccion) {

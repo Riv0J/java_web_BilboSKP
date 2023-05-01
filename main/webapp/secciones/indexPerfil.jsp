@@ -9,7 +9,7 @@ rutaJspSeccion = "subsecciones/" + subseccion + ".jsp";
 <link rel="stylesheet" href="css/perfil.css">
 
 <section>
-            <div class="caja1">
+        <div class="caja1">
                 <h1>Mi perfil</h1>
                 <ul>
 
