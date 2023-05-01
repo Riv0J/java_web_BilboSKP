@@ -154,9 +154,14 @@ public class BilboSKP extends DBC {
 				int edad_recomendada = resultado.getInt("edad_recomendada");
 				String direccion = resultado.getString("direccion");
 				int telefono = resultado.getInt("telefono");
-
+				
+				
 				SalaFisica sala = new SalaFisica(idSala, nombre, dificultad, tematica, descripcion, tiempoMax,
 						jugadoresMin, jugadoresMax, edad_recomendada, direccion, telefono);
+				
+				//intentar obtener los horarios de esta sala física
+				Vector<Horario> vectorHorarios = BilboSKP.obtenerHorariosSalaFisica(idSala);
+				sala.setVectorHorariosDisponibles(vectorHorarios);
 				// agregar sala al vector
 				vectorSalasFisicas.add(sala);
 			}
@@ -199,7 +204,7 @@ public class BilboSKP extends DBC {
 					// clave: el codigo de sala, valor: la sala
 					salasPorCargar.put(sala.getIdSala(), sala);
 				}
-				// si vectorSalasFisicas tiene tamaÃƒÂ±o 0 quiere decir que no habian salas en
+				// si vectorSalasFisicas tiene tamaño 0 quiere decir que no habian salas en
 				// el
 				// vector
 				if (vectorSalasFisicas.size() == 0) {
@@ -218,25 +223,24 @@ public class BilboSKP extends DBC {
 	}
 
 	// conectarse a la BD y obtener todos los horarios de la sala fisica @Urko
-	public static Vector<Horario> obtenerFechasFisica(String idSala) throws Throwable {
+	public static Vector<Horario> obtenerHorariosSalaFisica(int idSala) throws Throwable {
 		try {
 			// crear el vector que vamos a devolver
 			Vector<Horario> vectorFechasSalasFisicas = new Vector<Horario>();
 
-			// hacer sentencia sql select todas las reservas de la sala que queremos
-			String sentenciaSQL = "select * from horario where idSalaFisica= '" + idSala
-					+ "' and disponible=1 order by date(fechaHora);";
+			// hacer sentencia sql select todas los horarios de la sala que queremos, exluyendo fechas pasadas
+			String sentenciaSQL = "SELECT * FROM horario WHERE idSalaFisica='" + idSala 
+					+ "' AND disponible=1 AND fechaHora >= '" + SQLHelper.getFechaAhoraSQL() + "' ORDER BY fechaHora;";
 			// hacer una conexion
 			BilboSKP conexion = new BilboSKP();
 			ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
 			// hacer un bucle de cada fila que tiene el resultset
 			while (resultado.next()) {
 				// obtener los campos de cada columna para esta fila
-				String idSalaFisica = resultado.getString("idSalaFisica");
 				Timestamp fechaHora = resultado.getTimestamp("fechaHora");
 				boolean disponible = resultado.getBoolean("disponible");
 
-				Horario horario = new Horario(idSalaFisica, fechaHora, disponible);
+				Horario horario = new Horario(fechaHora, disponible);
 				// agregar horario al vector
 				vectorFechasSalasFisicas.add(horario);
 			}
@@ -252,6 +256,7 @@ public class BilboSKP extends DBC {
 					// System.out.println(HO.getFechaHora());
 				}
 			}
+			System.out.println("-----------------------------------");
 			conexion.cerrarFlujo();
 			return vectorFechasSalasFisicas;
 		} catch (Exception e) {

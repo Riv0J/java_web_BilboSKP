@@ -26,7 +26,7 @@ public class Icon {
 		if(mapaIconClasses==null) {
 			InitIcon();
 		}
-		String normalizarLlave = NormalizeHelper.normalizarTexto(key);
+		String normalizarLlave = StringHelper.normalizarTexto(key);
 		String valor = mapaIconClasses.get(normalizarLlave);
 		if (valor == null) {
 			valor = mapaIconClasses.get("question");

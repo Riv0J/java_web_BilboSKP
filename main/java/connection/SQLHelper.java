@@ -79,4 +79,8 @@ public class SQLHelper {
 		java.sql.Date fechaSql = convertirFechaUtilASql(fechaUtil);
 		return fechaSql;
 	}
+	public static java.sql.Date getFechaAhoraSQL(){
+		java.util.Date ahora = new java.util.Date();
+		return convertirFechaUtilASql(ahora);
+	}
 }
