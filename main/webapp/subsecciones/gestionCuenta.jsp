@@ -3,7 +3,8 @@
 	model.Suscriptor, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date  "%>
 
 <link rel="stylesheet" href="../css/gestionCuenta.css">
-<% HttpSession sesion = request.getSession();
+<%
+HttpSession sesion = request.getSession();
 Suscriptor sus= (Suscriptor) sesion.getAttribute("suscriptor");
 sesion.setAttribute("sus", sus);
 %>
@@ -18,26 +19,26 @@ sesion.setAttribute("sus", sus);
          <form action="">
                     <div class="subcaja1">
                         	<img src="img/gato.png" alt="">
-                        	<input type="button" value="Modificar" value="<%=%>">
+                        	<input type="button" value="Modificar" value="">
                     </div>
                     <div class="form1">
                         <div class="box0">
                            		<label for="">Nombre:</label>
-                            	<input type="text" name="" id="" value="<%=sus.getNombre()%>">
+                            	<input type="text" name="" id="" value="">
                         </div>
                         <div class="box0">
                             	<label for="">Apellido:</label>
-                            	<input type="text" name="" id="" value="<%=sus.getApellidos()%>">
+                            	<input type="text" name="" id="" value="">
                         </div>
                     </div>
                     <div class="form2">
                         <div class="box0">
                             	<label for="">Email:</label>
-                            	<input type="email" name="" id="" value="<%=sus.getEmail()%>">
+                            	<input type="email" name="" id="" value="">
                         </div>
                         <div class="box0">
                             	<label for="">Alias:</label>
-                            	<input type="text" name="" id="" value="<%=sus.getAlias()%>">
+                            	<input type="text" name="" id="" value="">
                         </div>
                     </div>
                     <div class="form3">
@@ -47,7 +48,7 @@ sesion.setAttribute("sus", sus);
                         </div>
                         <div class="box0">
                             	<label for="">Télefono:</label>
-                            	<input type="" name="" id=""  value="<%=sus.getTelefono()%>">
+                            	<input type="" name="" id=""  value="">
                         </div>
                     </div>
                     <div class="caja">

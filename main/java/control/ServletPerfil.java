@@ -21,10 +21,10 @@ import model.Suscriptor;
 public class ServletPerfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public static final String INSERT_OR_EDIT = "gestionCuenta.jsp ";
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		System.out.println("Doget servlet perfil");
 		String subseccion = request.getParameter("subseccion");
 		String forward = "";
@@ -36,32 +36,26 @@ public class ServletPerfil extends HttpServlet {
 		Suscriptor sus= (Suscriptor) sesion.getAttribute("suscriptor");
 		sesion.setAttribute("sus", sus);
 
-		Object fecha;
-
+		//Object fecha;
 		switch (subseccion) {
 		case "editar":
-			request.getRequestDispatcher("index.jsp?sec=indexPerfil?sub=gestionCuenta").forward(request, response);
+			request.getRequestDispatcher("index.jsp?sec=perfil?sub=gestionCuenta").forward(request, response);
 			break;
+			
+		//RESERVAS
 		case "reservas":
 			// obtener todas las reservas del suscriptor
-
-			ArrayList<Reserva> reserva = new ArrayList<Reserva>();
-			reserva.add(null);
-			reserva.add(null);
-			reserva.add(null);
-			reserva.add(null);
-
-			for (int i = 0; i > reserva.size(); i++) {
-				Reserva re = new Reserva(i, i, i, i, null, i);
-			}
+				Reserva re=(Reserva) sesion.getAttribute("reserava");
 
 			// hacer setAttribute de las reservas
-			Reserva re = (Reserva) sesion.getAttribute("reserva");
-			// respuesta usuario
+				sesion.setAttribute("re", re);
 
-			request.getRequestDispatcher("index.jsp?sec=perfil?sub=reserva").forward(request, response);
+			// respuesta usuario
+				request.getRequestDispatcher("index.jsp?sec=perfil?sub=reserva").forward(request, response);
 			break;
 
+			
+		//CUPONES
 		case "cupones":
 
 			LocalDate fechaCupon = LocalDate.of(2023, 4, 28);
@@ -73,11 +67,10 @@ public class ServletPerfil extends HttpServlet {
 			cupones.add(c);
 			cupones.add(c);
 
-			// obtner todos los cupones
+			// obtener todos los cupones
 			// dispatch
 			Cupon c1 = (Cupon) sesion.getAttribute("cupon");
 			request.getRequestDispatcher("index.jsp?sec=perfil?sub=cupon");
-
 			break;
 		default:
 		}
@@ -94,9 +87,9 @@ public class ServletPerfil extends HttpServlet {
 		}
 
 		// CERRAR SESION
-
+		
 		// Enviar la respuesta al usuario
-		request.getRequestDispatcher("index.jsp?sec=indexPerfil").forward(request, response);
+		request.getRequestDispatcher("index.jsp?sec=perfil").forward(request, response);
 
 	}
 
