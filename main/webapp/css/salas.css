@@ -436,6 +436,9 @@ select:focus {
 	}
 }
 @media (max-width: 600px){
+	#caja_salas_wrapper{
+		gap: 0.5%;
+	}
     .caja_sala{
 		width: 90%;
 	}

@@ -1,6 +1,6 @@
 <%@ page
 	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.io.File, java.text.Normalizer, 
-	model.Sala, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig, view.NormalizeHelper"%>
+	model.Sala, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig,view.StringHelper"%>
 <%
 HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("mapaSalas");
 ArrayList<String> tematicasDisponibles = (ArrayList<String>) request.getAttribute("tematicasDisponibles");
@@ -41,7 +41,7 @@ if (dificultadesDisponibles != null && tematicasDisponibles != null) {
 						<option value="todas"><%=Frases.getFrase("ESSalasTematicas")%></option>
 						<%
 						for (String tematica : tematicasDisponibles) {
-							String tematicaNormalizada = NormalizeHelper.normalizarTexto(tematica);
+															String tematicaNormalizada = StringHelper.normalizarTexto(tematica);
 						%>
 						<option <%if (t.equals(tematicaNormalizada)) {%> selected <%}%>
 							value="<%=tematicaNormalizada%>"><%=tematica%></option>
@@ -57,7 +57,7 @@ if (dificultadesDisponibles != null && tematicasDisponibles != null) {
 						<option value="todas"><%=Frases.getFrase("ESSalasDificultad")%></option>
 						<%
 						for (String dificultad : dificultadesDisponibles) {
-							String dificultadNormalizada = NormalizeHelper.normalizarTexto(dificultad);
+															String dificultadNormalizada = StringHelper.normalizarTexto(dificultad);
 						%>
 						<option <%if (d.equals(dificultadNormalizada)) {%> selected <%}%>
 							value="<%=dificultadNormalizada%>"><%=dificultad%></option>
@@ -114,8 +114,8 @@ numeroResultados = mapaSalas.size();
 		</article>
 		<%
 		} else {
-		int contadorSalas = 1;
-		for (Map.Entry<String, Sala> par : mapaSalas.entrySet()) {
+				int contadorSalas = 1;
+				for (Map.Entry<String, Sala> par : mapaSalas.entrySet()) {
 			double tiempoAnim = contadorSalas*0.8;
 			Sala sala = par.getValue();
 			String idSala = par.getKey();
@@ -127,7 +127,7 @@ numeroResultados = mapaSalas.size();
 				modalidad = "Reserva";
 			}
 			//si la tematica de la sala es suspenso, le agregamos una clase
-			String rutaIconoTematica = "img_web/iconos_salas/" + NormalizeHelper.normalizarTexto(sala.getTematica()) + ".svg";
+			String rutaIconoTematica = "img_web/iconos_salas/" + StringHelper.normalizarTexto(sala.getTematica()) + ".svg";
 			File archivoImagen = new File(getServletContext().getRealPath("/") + rutaIconoTematica);
 			if (!archivoImagen.exists()) {
 				rutaIconoTematica = "img_web/iconos_salas/question.svg";
@@ -180,7 +180,7 @@ numeroResultados = mapaSalas.size();
 					</div>
 				</div>
 
-				<div class="etiqueta tematica <%=NormalizeHelper.normalizarTexto(sala.getTematica())%>" title="Temática de la sala">
+				<div class="etiqueta tematica <%=StringHelper.normalizarTexto(sala.getTematica())%>" title="Temática de la sala">
 					<div class="caja_icon">
 						<img class="icon" src="<%=rutaIconoTematica%>" alt="Tematica:">
 					</div>
@@ -190,7 +190,7 @@ numeroResultados = mapaSalas.size();
 				<div class="etiqueta modalidad" title="Modo de acceso a la sala">
 					<div class="caja_icon">
 						<img class="icon"
-							src="img_web/iconos_salas/<%=NormalizeHelper.normalizarTexto(modalidad)%>.svg"
+							src="img_web/iconos_salas/<%=StringHelper.normalizarTexto(modalidad)%>.svg"
 							alt="Modo">
 					</div>
 

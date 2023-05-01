@@ -1,25 +1,36 @@
 <%@ page
-	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.io.File, java.text.Normalizer, 
-	model.Sala, model.SalaOnline, model.SalaFisica, view.NormalizeHelper, view.Icon"%>
+	import="java.util.Vector, java.util.HashMap, java.util.Map, java.util.Locale,java.util.Date, java.time.LocalDate, java.io.File, java.text.Normalizer, 
+	model.Sala, model.SalaOnline, model.SalaFisica, model.Horario,view.StringHelper, view.DateHelper, view.Icon"%>
 <%
 Sala salaAMostrar = (Sala) request.getAttribute("salaAMostrar");
 String idSala = (String) request.getParameter("idSala");
 boolean esSalaFisica = (boolean) request.getAttribute("esSalaFisica");
 if (salaAMostrar == null) {
-	response.sendRedirect("./salas?buscar=todas&m=todas&t=todas&d=todas");
+	response.sendRedirect("./salas");
 }
 
 String modalidad = "Online";
 String textoBoton = "Organizar partida";
 String enlaceBoton = "./organizar?idSala="+idSala;
+
+String direccion = null;
+LocalDate fechaSeleccionada = (LocalDate) request.getAttribute("fechaSeleccionada");
+Vector<LocalDate> fechasAMostrar = null;
+Vector<Horario> horariosAMostrar = null;
+
 if (esSalaFisica == true) {
 	modalidad = "Reserva";
 	textoBoton = "Realizar reserva";
 	enlaceBoton = "./reservar?idSala="+idSala;
+	
+	direccion = ((SalaFisica)salaAMostrar).getDireccion();
+	fechasAMostrar = (Vector<LocalDate>) request.getAttribute("fechasAMostrar");
+	horariosAMostrar = (Vector<Horario>) request.getAttribute("horariosAMostrar");
+	
 }
 String rutaImagenPortadaLarga = "./img_salas/portadas_largas/"+idSala+".png";
-String rutaIconoTematica = "img_web/iconos_salas/" + NormalizeHelper.normalizarTexto(salaAMostrar.getTematica()) + ".svg";
-String tematicaNormalizada = NormalizeHelper.normalizarTexto(salaAMostrar.getTematica());
+String rutaIconoTematica = "img_web/iconos_salas/" + StringHelper.normalizarTexto(salaAMostrar.getTematica()) + ".svg";
+String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTematica());
 %>
 <section id="wrapper_ver_sala">
 	<div id="caja_ver_sala">
@@ -64,8 +75,8 @@ String tematicaNormalizada = NormalizeHelper.normalizarTexto(salaAMostrar.getTem
 			<div id="caja_sinopsis">
 				<p><%=salaAMostrar.getDescripcion()%></p>
 			</div>
-			<% if (esSalaFisica == true) { 
-			String direccion = ((SalaFisica)salaAMostrar).getDireccion();
+			<%
+			if (esSalaFisica == true) {
 			%>
 			<div id="caja_jugabilidad">
 				<p>Esta es una sala física, por lo que funciona por medio de una
@@ -73,41 +84,72 @@ String tematicaNormalizada = NormalizeHelper.normalizarTexto(salaAMostrar.getTem
 					seleccionar la cantidad de participantes que acudirán a la sala!</p>
 			</div>
 			<div id="caja_reserva">
-				<!--  <div id="caja_ubicacion">
-					<a href="https://www.google.es/maps/search/<%=direccion%>/">Dirección: <%=direccion%></a> 
-				</div>-->
-				<div id="caja_fecha">
-					<label for="fecha_reserva">Fecha de la reserva:</label> <input
-						type="date" id="fecha_reserva" name="fecha_reserva">
-				</div>
-				<div id="caja_numero_jugadores">
-					<label for="num_jugadores">Número de jugadores que
-						participarán:</label> <select id="num_jugadores" class="bilboskp_select" name="num_jugadores" >
-						<%
-						int maxJugadores = salaAMostrar.getJugadoresMax();
-						for (int i = 1; i <= maxJugadores; i++) {
-						%>
-						<option value="<%=i%>"><%=i%></option>
-						<%
-						}
-						%>
+				<% if (horariosAMostrar.size()>0 && fechaSeleccionada != null) { %>
+				<form id="caja_fecha" action="./verSala?idSala="<%=idSala%> method="GET" >
+					<label for="fecha_reserva">Escoge una fecha para ver los horarios:</label> 
+					<select id="fechas" class="bilboskp_select" name="fechaSeleccionada">
+					<%for(LocalDate localDate: fechasAMostrar){
+							String localDateString = StringHelper.getLocalDateString(localDate); %>
+							<option value="<%=localDateString%>"><%=localDateString%></option>
+					<%}%>
 					</select>
-				</div>
+				</form>
+				<script>
+				  const selectFechas = document.querySelector('#fechas');
+				  selectFechas.addEventListener('change', function() {
+				    const form = document.querySelector('#caja_fecha');
+				    form.submit();
+				  });
+				</script>
+				<form action="./reservar" method="POST">
+					<div id="caja_horarios">
+						<label for="horarios">Horarios disponibles para <%=StringHelper.getLocalDateString(fechaSeleccionada)%>:</label>
+						<select id="horarios" class="bilboskp_select" name="horarios">
+							<%for(Horario horario: horariosAMostrar){
+								if(horario.isDisponible()==false){ continue; }
+								Date fecha= horario.getFechaHora();
+								String stringHorario = StringHelper.getDiaSemana(fecha)+" "+fecha.getDay()+" "+fecha.getHours()+":";
+								int minutos = fecha.getMinutes();
+								if (minutos==0){ stringHorario+= "00"; } else { stringHorario+= ""+minutos; }
+								%>
+								<option value="<%=fecha.toString()%>"><%=stringHorario%></option>
+							<% } %>
+						</select>
+					</div>
+					<div id="caja_numero_jugadores">
+						<label for="num_jugadores">Número de jugadores que participarán:</label> 
+						<select id="num_jugadores" class="bilboskp_select" name="num_jugadores" >
+							<%
+							int maxJugadores = salaAMostrar.getJugadoresMax();
+							for (int i = 1; i <= maxJugadores; i++) {
+							%>
+							<option value="<%=i%>"><%=i%></option>
+							<%
+							}
+							%>
+						</select>
+					</div>
+					<div id="contenedor_boton">
+						<a href=<%=enlaceBoton%>>
+							<button type=input class="bilboskp_icon_button">
+								<i class="<%=Icon.getIconHTMLClass(modalidad)%>"></i>
+								<div>
+									<%=textoBoton%>
+								</div>
+							</button>
+						</a>
+					</div>
+				<% }  else { %>
+				<div>No hay horarios disponibles para esta sala, ¡echa un ojo más tarde!</div>
+				<% } %>
 			</div>
-			<%
-			} else {
-			%>
+			<% } else { %>
 			<div id="caja_jugabilidad">
 				<p>Esta es una sala online, por lo que puedes acceder a ella en
 					cualquier momento, pero eso sí, asegúrate de traer a tus amigos
 					para vencerla rápido, y por supuesto pasar unas buenas risas.
 					Podrás invitar a tus amigos cuando estés organizando la partida.</p>
 			</div>
-
-			<%
-			}
-			%>
-
 			<div id="contenedor_boton">
 				<a href=<%=enlaceBoton%>>
 					<button class="bilboskp_icon_button">
@@ -115,23 +157,23 @@ String tematicaNormalizada = NormalizeHelper.normalizarTexto(salaAMostrar.getTem
 						<div>
 							<%=textoBoton%>
 						</div>
-
 					</button>
 				</a>
 			</div>
+			<% } %>
 		</div>
 		<div id="caja_img">
 		<style>
-		#caja_img{
-			height: 100%;
-			background: rgb(2,0,36);
-			background: linear-gradient(135deg, rgba(2,0,36,0) 0%, rgba(2,0,36,0) 55%, rgba(0,0,0,0.73) 100%);
-			animation: fondo2 15s infinite;
-			animation-timing-function: ease;
-			opacity: 1;
-		}
+			#caja_img{
+				height: 100%;
+				background: rgb(2,0,36);
+				background: linear-gradient(135deg, rgba(2,0,36,0) 0%, rgba(2,0,36,0) 55%, rgba(0,0,0,0.85) 100%);
+				animation: fondo2 15s infinite;
+				animation-timing-function: ease;
+				opacity: 1;
+			}
 		
-					@keyframes fondo2 {
+			@keyframes fondo2 {
 			  0% {
 			  opacity: 1;
 			    background-position: 0 0;
@@ -158,7 +200,7 @@ String tematicaNormalizada = NormalizeHelper.normalizarTexto(salaAMostrar.getTem
 	background-image: url(<%=rutaImagenPortadaLarga%>);
 	background-size: cover;
 	color: var(--text-color);
-	animation: fondo 25s infinite;
+	animation: fondo 30s infinite;
 	animation-timing-function: ease;
 }
 #wrapper_ver_sala p{
@@ -189,7 +231,7 @@ String tematicaNormalizada = NormalizeHelper.normalizarTexto(salaAMostrar.getTem
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 4%;
+	gap: 3%;
 	height: 100%;
 }
 
@@ -198,14 +240,15 @@ String tematicaNormalizada = NormalizeHelper.normalizarTexto(salaAMostrar.getTem
 }
 
 #contenedor_boton {
-	padding-top: 3%;
-	font-size: 1.15em;
+	padding-top: 2%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 #contenedor_boton a{
 	width: 50%;
+	display: flex;
+    justify-content: center;
 }
 #contenedor_boton button{
 	font-size: 1.45em;
@@ -289,30 +332,195 @@ width: 34%;
 }
 @keyframes fondo {
   0% {
-    background-position: -1% 5%;
-    background-size: 100.5%;
-  }
-  10%{
-  	background-position: 3% 8%;
+  	background-position: -1% 4%;
+    background-size: 102.9%;
   }
   25% {
-    background-position: 2% 6%;
-    background-size: 101%;
+    background-position: 2% 4%;
+    background-size: 103%;
   }
   50% {
-    background-position: 1% 3%;
-    background-size: 100.5%;
-  }
-  10%{
-  	background-position: 3% 4%;
+	background-position: 1% 3%;
+    background-size: 102.9%;
   }
   75% {
-    background-position: 4% 3%;
-    background-size: 100%;
+	background-position: 4% 2%;
+    background-size: 102.8%;
   }
   100% {
-    background-position: 1% 5%;
-    background-size: 100.5%;
+	background-position: -1% 4%;
+    background-size: 102.9%;
   }
+}
+@media (max-width: 1590px) {
+}
+
+@media (max-width: 1367px) {
+	#caja_info>*{
+		width:90%;
+	}
+	#wrapper_ver_sala p{
+		line-height: 1.1;
+	    text-align: justify;
+	    font-size: 1.75em;
+	}
+	#caja_ver_sala{
+	}
+	#caja_img{
+	}
+	#caja_info{
+		gap: 1%;
+	}
+	#caja_titulo{
+		margin-bottom: 3%;
+
+	}
+	#caja_sinopsis p:nth-child(1){
+		margin-bottom: 4%;
+	}
+	#contenedor_boton{
+		padding-top:5%;
+	}
+	#contenedor_boton button{
+		font-size: 1.65em;
+	}
+
+}
+
+@media (max-width: 1280px) {
+	#caja_info>*{
+		width:90%;
+	}
+	#wrapper_ver_sala p{
+		line-height: 1.1;
+	    text-align: justify;
+	    font-size: 1.5em;
+	    text-shadow: 1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
+	}
+	#caja_ver_sala{
+	}
+	#caja_img{
+		width: 35%;
+	}
+	#caja_info{
+		width: 65%;
+		gap: 1%;
+	}
+	.etiqueta{
+		font-size: 1em;
+		width: 14%;
+	}
+	.modalidad, .dificultad, .jugadores {
+   		width: 18%;
+	}
+	.tematica{
+		width: 20%;
+	}
+	#caja_sinopsis p:nth-child(1){
+		margin-bottom: 4%;
+	}
+	#contenedor_boton a{
+		width: 40%;
+	}
+}
+
+@media (max-width: 1090px) {
+	#caja_info>*{
+		width:100%;
+	}
+	#wrapper_ver_sala{
+		animation: none;
+		height: 95vh;
+		background-position: 50%;
+	}
+	#wrapper_ver_sala p{
+		line-height: 1.1;
+	    text-align: justify;
+	    font-size: 1.5em;
+	}
+	#caja_ver_sala{
+	}
+	#caja_img{
+		display:none;
+	}
+	#caja_info{
+		width: 70%;
+		gap: 1%;
+	}
+	.etiqueta{
+		padding: 0.5%;
+		font-size: 1em;
+		width: 12%;
+	}
+	.modalidad, .dificultad, .jugadores {
+   		width: 16%;
+	}
+	.tematica{
+		width: 18%;
+	}
+	#caja_sinopsis p:nth-child(1){
+		margin-bottom: 3%;
+	}
+	#contenedor_boton a {
+	    width: 40%
+	}
+}
+
+@media (max-width: 920px) {
+	#wrapper_ver_sala{
+		animation: none;
+		height: 95vh;
+		background-position: 65%;
+	}
+	#wrapper_ver_sala h2{
+		font-size: 1.5em;
+	}
+	/*#caja_sinopsis, #caja_jugabilidad{
+		background-color: var(--text-color);
+		color: var(--bg-oscuro);
+		padding: 0.5%;
+	}*/
+	#caja_info{
+		width: 80%;
+		gap: 1%;
+	}
+	
+}
+
+@media (max-width: 700px){
+	#contenedor_boton a{
+		width: 50%;
+	}
+	#contenedor_boton button {
+	}
+}
+@media (max-width: 600px){
+	#wrapper_ver_sala{
+		background-position: 65%;
+	}
+	#wrapper_ver_sala h2{
+		font-size: 1.3em;
+	}
+	#caja_titulo{
+	}
+	#caja_etiquetas{
+		gap:1%;
+	}
+	.etiqueta{
+		font-size: 1em;
+		width: 22%;
+	}
+	.modalidad, .dificultad, .jugadores {
+   		width: 26%;
+	}
+	.tematica{
+		width: 37%;
+	}
+	#contenedor_boton a{
+	width: 75%;
+	}
+	#contenedor_boton{
+	  padding-top: 15%;
+	}
 }
 </style>
