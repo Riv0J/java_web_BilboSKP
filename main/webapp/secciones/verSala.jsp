@@ -125,7 +125,7 @@ String tematicaNormalizada = NormalizeHelper.normalizarTexto(salaAMostrar.getTem
 		#caja_img{
 			height: 100%;
 			background: rgb(2,0,36);
-			background: linear-gradient(135deg, rgba(2,0,36,0) 0%, rgba(2,0,36,0) 55%, rgba(0,0,0,0.73) 100%);
+			background: linear-gradient(135deg, rgba(2,0,36,0) 0%, rgba(2,0,36,0) 55%, rgba(0,0,0,0.85) 100%);
 			animation: fondo2 15s infinite;
 			animation-timing-function: ease;
 			opacity: 1;
@@ -158,7 +158,7 @@ String tematicaNormalizada = NormalizeHelper.normalizarTexto(salaAMostrar.getTem
 	background-image: url(<%=rutaImagenPortadaLarga%>);
 	background-size: cover;
 	color: var(--text-color);
-	animation: fondo 25s infinite;
+	animation: fondo 30s infinite;
 	animation-timing-function: ease;
 }
 #wrapper_ver_sala p{
@@ -189,7 +189,7 @@ String tematicaNormalizada = NormalizeHelper.normalizarTexto(salaAMostrar.getTem
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 4%;
+	gap: 3%;
 	height: 100%;
 }
 
@@ -198,14 +198,15 @@ String tematicaNormalizada = NormalizeHelper.normalizarTexto(salaAMostrar.getTem
 }
 
 #contenedor_boton {
-	padding-top: 3%;
-	font-size: 1.15em;
+	padding-top: 2%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 #contenedor_boton a{
 	width: 50%;
+	display: flex;
+    justify-content: center;
 }
 #contenedor_boton button{
 	font-size: 1.45em;
@@ -289,30 +290,195 @@ width: 34%;
 }
 @keyframes fondo {
   0% {
-    background-position: -1% 5%;
-    background-size: 100.5%;
-  }
-  10%{
-  	background-position: 3% 8%;
+  	background-position: -1% 4%;
+    background-size: 102.9%;
   }
   25% {
-    background-position: 2% 6%;
-    background-size: 101%;
+    background-position: 2% 4%;
+    background-size: 103%;
   }
   50% {
-    background-position: 1% 3%;
-    background-size: 100.5%;
-  }
-  10%{
-  	background-position: 3% 4%;
+	background-position: 1% 3%;
+    background-size: 102.9%;
   }
   75% {
-    background-position: 4% 3%;
-    background-size: 100%;
+	background-position: 4% 2%;
+    background-size: 102.8%;
   }
   100% {
-    background-position: 1% 5%;
-    background-size: 100.5%;
+	background-position: -1% 4%;
+    background-size: 102.9%;
   }
+}
+@media (max-width: 1590px) {
+}
+
+@media (max-width: 1367px) {
+	#caja_info>*{
+		width:90%;
+	}
+	#wrapper_ver_sala p{
+		line-height: 1.1;
+	    text-align: justify;
+	    font-size: 1.75em;
+	}
+	#caja_ver_sala{
+	}
+	#caja_img{
+	}
+	#caja_info{
+		gap: 1%;
+	}
+	#caja_titulo{
+		margin-bottom: 3%;
+
+	}
+	#caja_sinopsis p:nth-child(1){
+		margin-bottom: 4%;
+	}
+	#contenedor_boton{
+		padding-top:5%;
+	}
+	#contenedor_boton button{
+		font-size: 1.65em;
+	}
+
+}
+
+@media (max-width: 1280px) {
+	#caja_info>*{
+		width:90%;
+	}
+	#wrapper_ver_sala p{
+		line-height: 1.1;
+	    text-align: justify;
+	    font-size: 1.5em;
+	    text-shadow: 1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
+	}
+	#caja_ver_sala{
+	}
+	#caja_img{
+		width: 35%;
+	}
+	#caja_info{
+		width: 65%;
+		gap: 1%;
+	}
+	.etiqueta{
+		font-size: 1em;
+		width: 14%;
+	}
+	.modalidad, .dificultad, .jugadores {
+   		width: 18%;
+	}
+	.tematica{
+		width: 20%;
+	}
+	#caja_sinopsis p:nth-child(1){
+		margin-bottom: 4%;
+	}
+	#contenedor_boton a{
+		width: 40%;
+	}
+}
+
+@media (max-width: 1090px) {
+	#caja_info>*{
+		width:100%;
+	}
+	#wrapper_ver_sala{
+		animation: none;
+		height: 95vh;
+		background-position: 50%;
+	}
+	#wrapper_ver_sala p{
+		line-height: 1.1;
+	    text-align: justify;
+	    font-size: 1.5em;
+	}
+	#caja_ver_sala{
+	}
+	#caja_img{
+		display:none;
+	}
+	#caja_info{
+		width: 70%;
+		gap: 1%;
+	}
+	.etiqueta{
+		padding: 0.5%;
+		font-size: 1em;
+		width: 12%;
+	}
+	.modalidad, .dificultad, .jugadores {
+   		width: 16%;
+	}
+	.tematica{
+		width: 18%;
+	}
+	#caja_sinopsis p:nth-child(1){
+		margin-bottom: 3%;
+	}
+	#contenedor_boton a {
+	    width: 40%
+	}
+}
+
+@media (max-width: 920px) {
+	#wrapper_ver_sala{
+		animation: none;
+		height: 95vh;
+		background-position: 65%;
+	}
+	#wrapper_ver_sala h2{
+		font-size: 1.5em;
+	}
+	/*#caja_sinopsis, #caja_jugabilidad{
+		background-color: var(--text-color);
+		color: var(--bg-oscuro);
+		padding: 0.5%;
+	}*/
+	#caja_info{
+		width: 80%;
+		gap: 1%;
+	}
+	
+}
+
+@media (max-width: 700px){
+	#contenedor_boton a{
+		width: 50%;
+	}
+	#contenedor_boton button {
+	}
+}
+@media (max-width: 600px){
+	#wrapper_ver_sala{
+		background-position: 65%;
+	}
+	#wrapper_ver_sala h2{
+		font-size: 1.3em;
+	}
+	#caja_titulo{
+	}
+	#caja_etiquetas{
+		gap:1%;
+	}
+	.etiqueta{
+		font-size: 1em;
+		width: 22%;
+	}
+	.modalidad, .dificultad, .jugadores {
+   		width: 26%;
+	}
+	.tematica{
+		width: 37%;
+	}
+	#contenedor_boton a{
+	width: 75%;
+	}
+	#contenedor_boton{
+	  padding-top: 15%;
+	}
 }
 </style>
