@@ -50,7 +50,8 @@ Object sus = (Object) session.getAttribute("suscriptor");
 				<div class="bx bx-menu" id="menu-icon"></div>
 							
 			<% } else { %>
-				<a class="user" id="botonPerfil"><i class="ri-user-fill"></i>Sign in</a> <a href="/subscribe" class="suscribirse">Subscribe</a>
+				<a class="user" id="botonPerfil"><i class="ri-user-fill"></i>Sign in</a> 
+				<a href="./secciones/subscribe.jsp" class="suscribirse">Subscribe</a>
 				<div class="bx bx-menu" id="menu-icon"></div>
 				<script>
 					document.querySelector("#botonPerfil").addEventListener("click", function() {

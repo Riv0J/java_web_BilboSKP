@@ -21,7 +21,7 @@ import model.SalaFisica;
 import model.SalaOnline;
 import view.AppConfig;
 import view.Mensaje;
-import view.NormalizeHelper;
+import view.StringHelper;
 
 @WebServlet("/salas")
 public class ServletSalas extends HttpServlet {
@@ -43,7 +43,7 @@ public class ServletSalas extends HttpServlet {
 
 			if (paramBuscar != null) {
 				// normalizar(quitar acentos y poner minusculas)
-				paramBuscar = NormalizeHelper.normalizarTexto(paramBuscar);
+				paramBuscar = StringHelper.normalizarTexto(paramBuscar);
 			} else {
 				paramBuscar = "todas";
 			}
@@ -58,7 +58,7 @@ public class ServletSalas extends HttpServlet {
 					if (!paramBuscar.equals("todas")) {
 						// se tiene que normalizar el texto(minusculas y sin acentos)
 						// si el nombre de la sala no contiene el parametro buscar, se salta esta sala
-						String nombreSalaNormalizada = NormalizeHelper.normalizarTexto(sala.getNombre());
+						String nombreSalaNormalizada = StringHelper.normalizarTexto(sala.getNombre());
 						if (!nombreSalaNormalizada.contains(paramBuscar))
 							continue;
 					}
@@ -83,7 +83,7 @@ public class ServletSalas extends HttpServlet {
 				// filtrar valor de tematica
 				if (paramTematica != null) {
 
-					String tematicaNormalizada = NormalizeHelper.normalizarTexto(sala.getTematica());
+					String tematicaNormalizada = StringHelper.normalizarTexto(sala.getTematica());
 					// si el tematica de la sala no es igual el parametro tematica, se salta esta
 					// sala
 					if (!paramTematica.equals("todas") && !paramTematica.equals(tematicaNormalizada)) {
@@ -93,7 +93,7 @@ public class ServletSalas extends HttpServlet {
 
 				// filtrar valor de dificultad
 				if (paramDificultad != null) {
-					String dificultadNormalizada = NormalizeHelper.normalizarTexto(sala.getDificultad());
+					String dificultadNormalizada = StringHelper.normalizarTexto(sala.getDificultad());
 					// si la dificultad de la sala no es igual el parametro dificultad, se salta
 					// esta sala
 					if (!paramDificultad.equals("todas") && !paramDificultad.equals(dificultadNormalizada)) {
