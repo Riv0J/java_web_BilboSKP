@@ -56,7 +56,7 @@ for (PartidaOnline partida : partidas) {
 		 --%>
 		 <div id="podio">
 		<div class="info">
-			<img src="../img_web/icons/copa2.png">
+			<img src="./img_web/icons/copa2.png">
 			<div class="caja plata">
 				<p>
 					
@@ -64,7 +64,7 @@ for (PartidaOnline partida : partidas) {
 			</div>
 		</div>
 		<div class="info">
-			<img src="../img_web/icons/copa1.png">
+			<img src="./img_web/icons/copa1.png">
 			<div class="caja oro">
 				<p>
 					
@@ -72,7 +72,7 @@ for (PartidaOnline partida : partidas) {
 			</div>
 		</div>
 		<div class="info">
-			<img src="../img_web/icons/copa3.png">
+			<img src="./img_web/icons/copa3.png">
 			<div class="caja bronce">
 				<p>
 					
@@ -97,7 +97,7 @@ for (PartidaOnline partida : partidas) {
 	%>
 	<div id="podio">
 		<div class="info">
-			<img src="../../img_web/icons/copa2.png">
+			<img src="../img_web/icons/copa2.png">
 			<div class="caja plata">
 				<p>
 					<%
@@ -254,8 +254,10 @@ p {
 }
 
 #podio {
+	position: static;
 	display: flex;
 	/*  align-content: center;*/
+	top:-20;
 	align-items: flex-end;
 	width: 65%;
 	height: 22em;
