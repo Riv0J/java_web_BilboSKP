@@ -3,7 +3,7 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    font-size: 1.5em;
+    
 }
 .caja1 ul li{
     list-style: none;
@@ -11,7 +11,7 @@
 }
 .caja1{
     padding: 5%;
-    width: 25%;
+    width: 30%;
     background-color: #141414;
     color: rgb(255, 255, 255);
 }
