@@ -10,23 +10,22 @@ System.out.println(rutaJspSeccion);
 
 <link rel="stylesheet" href="css/perfil.css">
 
-<section>
-        <div class="caja1">
-                <h1>Mi perfil</h1>
+<div id="caja0">
+            <div class="caja1">
+            	<h1>Mi perfil</h1>
                 <ul>
-
-                    <li class="gc"><a href="<%=subseccion%>">Gestión de la cuenta</a></li>
+                    <li><a href="">Gestión de la cuenta</a></li>
                     <li><a href="">Mis reservas</a></li>
                     <li><a href="">Mis cupones</a></li>
                     <li><a href="">Cerrar sesión</a></li>
                 </ul>
-            </div> 
-            
-        <div class="caja2">
-        	<%-- <jsp:include page="plantillas/mensaje.jsp"></jsp:include>--%>
-			<jsp:include page="<%=rutaJspSeccion%>"></jsp:include>
-        </div>         
-</section>     
+            </div>
+            <div class="caja2">
+            	<jsp:include page="<%=rutaJspSeccion%>"></jsp:include>
+            </div>
+</div>
+
+
 
 		
 
