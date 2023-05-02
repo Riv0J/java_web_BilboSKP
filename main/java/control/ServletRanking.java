@@ -16,11 +16,13 @@ import javax.servlet.http.HttpServletResponse;
 import model.Partida;
 import model.PartidaOnline;
 import model.Sala;
+import model.SalaFisica;
+import model.SalaOnline;
 
 /**
  * Servlet implementation class Ranking
  */
-@WebServlet({ "/Ranking", "/ranking" })
+@WebServlet({ "/ranking" })
 public class ServletRanking extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -41,6 +43,10 @@ public class ServletRanking extends HttpServlet {
 		try {
 			// 1. Obtener los parametros necesarios para mostrar la info
 			HashMap<String, Sala> mapaSalas = Sala.getTodasLasSalasCargadas();
+			HashMap<String, SalaOnline> salasAMostrar = new HashMap<String, SalaOnline>();
+			
+		
+			
 			// Obtener los parametros de la sala que queremos ver el ranking
 			String idSala = request.getParameter("idSala");
 
@@ -51,14 +57,20 @@ public class ServletRanking extends HttpServlet {
 			}
 			System.out.println("idSala= " + idSala);
 
-			HashMap<String, Sala> salas = Sala.getTodasLasSalasCargadas();
-			for (Map.Entry<String, Sala> sala : mapaSalas.entrySet()) {
-				sala.getKey();
-				System.out.println(sala.getKey());
+			for (Map.Entry<String, Sala> par : mapaSalas.entrySet()) {
+				par.getKey();
+				System.out.println(par.getKey());
+				if(par.getValue() instanceof SalaOnline) {
+					salasAMostrar.put(par.getKey(), (SalaOnline) par.getValue());
+					System.out.println(par.getValue().getNombre());
+				}
 			}
 
 			// sala viendose en este momento
 			Sala salaSeleccionada = Sala.getSalaPorId(idSala);
+			if(salaSeleccionada instanceof SalaFisica)
+				salaSeleccionada =Sala.getSalaPorId("SO1");
+					System.out.println("Era una sala Fisica");
 			request.setAttribute("salaSeleccionada", salaSeleccionada);
 			System.out.println("Sala seleccionada: " + salaSeleccionada.getNombre());
 
@@ -69,30 +81,27 @@ public class ServletRanking extends HttpServlet {
 			Vector<PartidaOnline> partidas = new Vector<PartidaOnline>();
 			partidas = BilboSKP.obtenerRankingSalaOnline(salaSeleccionada.getIdSala());
 
-			// recorrer vector de partidas
+			// verificar que hay partidas / vector de partidas
 			for (PartidaOnline partida : partidas) {
 				Sala sala = partida.getSala();
 				String nombregrupo = partida.getNombreGrupo();
 				String puntos = Integer.toString(partida.getPuntaje());
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 				String fecha = sdf.format(partida.getFechaInicio());
-				System.out.println(nombregrupo);
-
-				// poner atributos del request, para que la seccion pueda mostrar la info
-				request.setAttribute("nombregrupo", nombregrupo);
-				request.setAttribute("puntos", puntos);
-				request.setAttribute("fecha", fecha);
-				request.setAttribute("salaseleccionada", salaSeleccionada);
-				request.setAttribute("sala", sala);
-				request.setAttribute("partidas", partidas);
-				// Enviar la respuesta al usuario
-
-				request.getRequestDispatcher("index.jsp?sec=ranking&sala=" + salaSeleccionada.getNombre())
-						.forward(request, response);
+				System.out.println(sala.getIdSala());
 
 			}
+			// poner atributos del request, para que la seccion pueda mostrar la info
+			request.setAttribute("partidas", partidas);
+			request.setAttribute("salasAMostrar", salasAMostrar);
+			// Enviar la respuesta al usuario
+
+			request.getRequestDispatcher("index.jsp?sec=ranking&sala=" + salaSeleccionada.getNombre()).forward(request,
+					response);
+
 		} catch (Throwable e) {
 			e.printStackTrace();
+			System.out.println("Error conexion ranking");
 		}
 
 	}

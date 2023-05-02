@@ -1,50 +1,54 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"
-	import="java.util.HashMap,java.util.ArrayList, java.util.Vector,  model.Sala, model.PartidaOnline, model.Partida"%>
+	import="java.util.HashMap,java.util.ArrayList,java.util.Map, java.util.Vector, java.text.SimpleDateFormat, model.Sala, model.PartidaOnline, model.Partida"%>
 <%
-	HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("mapaSalas");
-	Sala sala=(Sala)request.getAttribute("sala"); //una sala
+	HashMap<String, Sala> salasAMostrar = (HashMap<String, Sala>) request.getAttribute("salasAMostrar"); //hashmap de salas Online cargadas
+	Sala salaSeleccionada=(Sala)request.getAttribute("salaSeleccionada"); //una sala
 	Vector<PartidaOnline> partidas=(Vector<PartidaOnline>) request.getAttribute("partidas");
-	
-	
+	System.out.println(salaSeleccionada.getNombre());
+	System.out.print(salasAMostrar.size());
+	// verificar que hay partidas / vector de partidas
+				for (PartidaOnline partida : partidas) {
+					Sala salapartida = partida.getSala();
+					String nombregrupo = partida.getNombreGrupo();
+					String puntos = Integer.toString(partida.getPuntaje());
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+					String fecha = sdf.format(partida.getFechaInicio());
+					//System.out.println(nombregrupo);
 	//necesito un array de todas las salas/ un array de todas las partidas de esa sala/
 	
 	//String salaseleccionada = request.getParameter("salaseleccionada");
-	String nombregrupo = request.getParameter("nombregrupo");
-	String puntos = request.getParameter("puntos");
-	String fecha = request.getParameter("fecha");
-	String idSala = request.getParameter("id");
-	String onlineOFisica = request.getParameter("oof");
-	String nombreSala = request.getParameter("nombre");
 
+				}
 	
 %>
 
 <body>
 	<h2 class="superior">
-		Sala de escape:<%=sala.getNombre()%>
+		Sala de escape:<%=salaSeleccionada.getNombre() %>
 	</h2>
 	<nav class="lateral">
-		<% //TODO recorrer salas hasta que no haya mas %>
-		<%for  (int i=0;i<mapaSalas.size();i++) {
-		
-			
-			
+		<%--recorrer salas hasta que no haya mas --%>
+		<ul>
+		<%for (Map.Entry<String, Sala> salas : salasAMostrar.entrySet()) {%>
+			<li> <%salas.getValue().getNombre();%> </li><br><% 
+			System.out.println(salas.getValue().getNombre());
+			}
 			//for (int u=0;i<partidas.size();u++){
 		
+		%>
+		</ul>
 		
 		
-		}
-		%><br>sala 2
 	</nav>
 	
 	<%//consulta sql query ,    
-	for (PartidaOnline partida:partidas) {
-		Sala sala =partida.getSala();
-		String nombregrupo = partida.getNombreGrupo();
-		String	puntos=Integer.toString(partida.getPuntaje());
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		String fecha = sdf.format(partida.getFechaInicio());
+	//for (PartidaOnline partida:partidas) {
+//		Sala sala =partida.getSala();
+	//	String nombregrupo = partida.getNombreGrupo();
+		//String	puntos=Integer.toString(partida.getPuntaje());
+		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		//String fecha = sdf.format(partida.getFechaInicio());
 	
 	
 	%>
@@ -61,7 +65,7 @@
 			<img src="../img_web/icons/copa1.png">
 			<div class="caja oro">
 				<p>
-					<%=partida.getNombreGrupo()%> <br> <%=partida.getPuntaje()%><br><%=partida.calcularTiempo() %>
+					<%--<%=partida.getNombreGrupo()%> <br> <%=partida.getPuntaje()%><br><%=partida.calcularTiempo() %> --%>
 				</p>
 			</div>
 		</div>
@@ -84,7 +88,7 @@
 			<li>Grupo 9</li>
 		</ol>
 	</div>
-<%} %>
+<%//} %>
 
 
 

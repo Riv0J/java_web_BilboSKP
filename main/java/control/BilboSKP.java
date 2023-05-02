@@ -395,7 +395,7 @@ public class BilboSKP extends DBC {
 					Partida pa = vectorPartidas.get(i);
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 					String fechaHoraString = sdf.format(pa.getFechaInicio());
-					System.out.println(pa.getNombreGrupo() + ", " + pa.getPuntaje() + " puntos, " + fechaHoraString);
+					//System.out.println(pa.getNombreGrupo() + ", " + pa.getPuntaje() + " puntos, " + fechaHoraString);
 				}
 			}
 			conexion.cerrarFlujo();
