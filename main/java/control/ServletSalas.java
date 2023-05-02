@@ -122,14 +122,6 @@ public class ServletSalas extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		try {
-			BilboSKP.cargarSalasFisicas();
-			BilboSKP.cargarSalasOnline();
-			BilboSKP.cargarTematicas();
-			BilboSKP.cargarDificultades();
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
-
+		BilboSKP.cargarInfoSalas();
 	}
 }

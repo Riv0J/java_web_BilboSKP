@@ -790,4 +790,15 @@ public class BilboSKP extends DBC {
 		}
 		Sala.setDificultadesCargadas(dificultadesCargadas);
 	}
+	public static void cargarInfoSalas() {
+		try {
+			BilboSKP.cargarSalasFisicas();
+			BilboSKP.cargarSalasOnline();
+			BilboSKP.cargarTematicas();
+			BilboSKP.cargarDificultades();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+
+	}
 }

@@ -22,11 +22,9 @@ if (esSalaFisica == true) {
 	modalidad = "Reserva";
 	textoBoton = "Realizar reserva";
 	enlaceBoton = "./reservar?idSala="+idSala;
-	
 	direccion = ((SalaFisica)salaAMostrar).getDireccion();
 	fechasAMostrar = (Vector<LocalDate>) request.getAttribute("fechasAMostrar");
 	horariosAMostrar = (Vector<Horario>) request.getAttribute("horariosAMostrar");
-	
 }
 String rutaImagenPortadaLarga = "./img_salas/portadas_largas/"+idSala+".png";
 String rutaIconoTematica = "img_web/iconos_salas/" + StringHelper.normalizarTexto(salaAMostrar.getTematica()) + ".svg";
@@ -75,25 +73,38 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 			<div id="caja_sinopsis">
 				<p><%=salaAMostrar.getDescripcion()%></p>
 			</div>
-			<%
-			if (esSalaFisica == true) {
-			%>
-			<div id="caja_jugabilidad">
-				<p>Esta es una sala física, por lo que funciona por medio de una
-					reserva. ¡Puede seleccionar entre horarios disponibles y
-					seleccionar la cantidad de participantes que acudirán a la sala!</p>
-			</div>
-			<div id="caja_reserva">
-				<% if (horariosAMostrar.size()>0 && fechaSeleccionada != null) { %>
-				<form id="caja_fecha" action="./verSala?idSala="<%=idSala%> method="GET" >
-					<label for="fecha_reserva">Escoge una fecha para ver los horarios:</label> 
-					<select id="fechas" class="bilboskp_select" name="fechaSeleccionada">
-					<%for(LocalDate localDate: fechasAMostrar){
-							String localDateString = StringHelper.getLocalDateString(localDate); %>
-							<option value="<%=localDateString%>"><%=localDateString%></option>
-					<%}%>
-					</select>
-				</form>
+			
+			<% if (esSalaFisica == true) { %>
+				<div id="caja_jugabilidad">
+					<p>Esta es una sala física, por lo que funciona por medio de una
+						reserva. ¡Puedes seleccionar entre horarios disponibles y
+						seleccionar la cantidad de participantes que acudirán a la sala!</p>
+				</div>
+				<div id="caja_reserva">
+					<form action="./verSala" method="GET" id="caja_fecha">
+						<input type="hidden" name="idSala" value="<%=idSala%>">
+					    <label for="fecha_reserva">Escoge una fecha para ver los horarios:</label> 
+					    <select id="fechas" class="bilboskp_select" name="fechaSeleccionada">
+					    <%if(fechaSeleccionada == null) {%>
+					    	<option value="" selected="" >Selecciona una fecha</option>
+					    	 <%for(LocalDate localDate: fechasAMostrar){
+					                String localDateString = StringHelper.getLocalDateString(localDate);  %>
+					                <option value="<%=localDateString%>"><%=localDateString%></option>
+					         <%}
+					      }else if (fechaSeleccionada!=null){ 
+					    	String fechaSeleccionadaString = StringHelper.getLocalDateString(fechaSeleccionada);
+					          for(LocalDate localDate: fechasAMostrar){
+					                String localDateString = StringHelper.getLocalDateString(localDate); 
+					                System.out.println(fechaSeleccionadaString);
+									System.out.println(localDateString);%>
+					                <option value="<%=localDateString%>" <% if(fechaSeleccionadaString.equals(localDateString)){ %> selected <% } %>><%=localDateString%></option>
+					        <%}
+					          %><div><%=fechaSeleccionadaString%></div> <%
+					    }%>
+					        
+					    </select>
+					    
+					</form>
 				<script>
 				  const selectFechas = document.querySelector('#fechas');
 				  selectFechas.addEventListener('change', function() {
@@ -101,46 +112,52 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 				    form.submit();
 				  });
 				</script>
-				<form action="./reservar" method="POST">
-					<div id="caja_horarios">
-						<label for="horarios">Horarios disponibles para <%=StringHelper.getLocalDateString(fechaSeleccionada)%>:</label>
-						<select id="horarios" class="bilboskp_select" name="horarios">
-							<%for(Horario horario: horariosAMostrar){
-								if(horario.isDisponible()==false){ continue; }
-								Date fecha= horario.getFechaHora();
-								String stringHorario = StringHelper.getDiaSemana(fecha)+" "+fecha.getDay()+" "+fecha.getHours()+":";
-								int minutos = fecha.getMinutes();
-								if (minutos==0){ stringHorario+= "00"; } else { stringHorario+= ""+minutos; }
-								%>
-								<option value="<%=fecha.toString()%>"><%=stringHorario%></option>
-							<% } %>
-						</select>
-					</div>
-					<div id="caja_numero_jugadores">
-						<label for="num_jugadores">Número de jugadores que participarán:</label> 
-						<select id="num_jugadores" class="bilboskp_select" name="num_jugadores" >
-							<%
-							int maxJugadores = salaAMostrar.getJugadoresMax();
-							for (int i = 1; i <= maxJugadores; i++) {
-							%>
-							<option value="<%=i%>"><%=i%></option>
-							<%
-							}
-							%>
-						</select>
-					</div>
-					<div id="contenedor_boton">
-						<a href=<%=enlaceBoton%>>
-							<button type=input class="bilboskp_icon_button">
-								<i class="<%=Icon.getIconHTMLClass(modalidad)%>"></i>
-								<div>
-									<%=textoBoton%>
-								</div>
-							</button>
-						</a>
-					</div>
-				<% }  else { %>
-				<div>No hay horarios disponibles para esta sala, ¡echa un ojo más tarde!</div>
+				<% if (fechaSeleccionada != null) { 
+					if(horariosAMostrar!=null && horariosAMostrar.size()>0){ %>
+						<form action="./reservar" method="POST">
+							<div id="caja_horarios">
+								<label for="horarios">Horarios disponibles para <%=StringHelper.getLocalDateString(fechaSeleccionada)%>:</label>
+								<select id="horarios" class="bilboskp_select" name="horarios">
+									<%for(Horario horario: horariosAMostrar){
+										if(horario.isDisponible()==false){ continue; }
+										Date fecha= horario.getFechaHora();
+										String stringHorario = StringHelper.getDiaSemana(fecha)+" "+fecha.getDay()+" "+fecha.getHours()+":";
+										int minutos = fecha.getMinutes();
+										if (minutos==0){ stringHorario+= "00"; } else { stringHorario+= ""+minutos; }
+										%>
+										<option value="<%=fecha.toString()%>"><%=stringHorario%></option>
+									<% } %>
+								</select>
+							</div>
+							<div id="caja_numero_jugadores">
+								<label for="num_jugadores">Número de jugadores que participarán:</label> 
+								<select id="num_jugadores" class="bilboskp_select" name="num_jugadores" >
+									<%
+									int maxJugadores = salaAMostrar.getJugadoresMax();
+									for (int i = 1; i <= maxJugadores; i++) {
+									%>
+									<option value="<%=i%>"><%=i%></option>
+									<%
+									}
+									%>
+								</select>
+							</div>
+							<div id="contenedor_boton">
+								<a href=<%=enlaceBoton%>>
+									<button type=input class="bilboskp_icon_button">
+										<i class="<%=Icon.getIconHTMLClass(modalidad)%>"></i>
+										<div>
+											<%=textoBoton%>
+										</div>
+									</button>
+								</a>
+							</div>
+						</form>
+						<% } else { %>
+						<div>No hay horarios disponibles para esa fecha, ¡Echa un ojo en un rato!</div>
+						<% } %>
+				<% }  else if (fechaSeleccionada==null){ %>
+				<div>¡Seleciona una fecha disponible para esta sala para poder reservar!</div>
 				<% } %>
 			</div>
 			<% } else { %>
@@ -207,6 +224,7 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 	line-height: 1.2;
 	text-align: justify;
 	font-size: 1.75em;
+	text-shadow: 1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
 }
 #wrapper_ver_sala h2{
 	letter-spacing: 0.1em;
@@ -219,7 +237,7 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 	justify-content: center;
 	align-items: center;
 	height: 100%;
-	background: linear-gradient(283deg, rgba(2,0,36,0.05) 30%, rgba(255,25,25,0.2) 66%, rgba(198,12,2,0.8) 100%);
+	background: linear-gradient(300deg, rgba(2,0,36,0.05) 30%, rgba(255,25,25,0.05) 75%, rgba(198,12,2,0.8) 100%)
 }
 
 #caja_info, #caja_img {
@@ -307,16 +325,16 @@ i{
 	width: 28%;
 }
 .suspenso{
-width: 34%;
+	width: 34%;
 }
 .jugadores, .modalidad, .dificultad {
 	width: 24%;
 }
-
 .tematica .caja_text{
 	text-align: left;
 }
 #caja_reserva{
+	margin-top: 5%;
 	font-size: 1.75em;
 }
 #caja_fecha{
@@ -395,7 +413,7 @@ width: 34%;
 		line-height: 1.1;
 	    text-align: justify;
 	    font-size: 1.5em;
-	    text-shadow: 1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
+
 	}
 	#caja_ver_sala{
 	}

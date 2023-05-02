@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import control.BilboSKP;
+import control.ServletSalas;
 
 public abstract class Sala {
 	private static HashMap<String, Sala> todasLasSalasCargadas = new HashMap<String,Sala>();
@@ -142,6 +143,22 @@ public abstract class Sala {
 	}
 	
 	public static Sala getSalaPorId(String idSala) {
-		return todasLasSalasCargadas.get(idSala);
+		Sala salaObtenida = todasLasSalasCargadas.get(idSala);
+		if(salaObtenida==null){
+			System.out.println("No se ha podido encontrar la sala solicitada con id: "+idSala);
+			MostrarTodasLasSalasCargadas();
+		}
+		return salaObtenida;
+	}
+
+	public static void MostrarTodasLasSalasCargadas() {
+		if(todasLasSalasCargadas.size()==0) {
+			System.out.println("No habían salas cargadas, reintentando contactar con la bd:");
+			BilboSKP.cargarInfoSalas();
+		}
+		for(Map.Entry<String, Sala> par : todasLasSalasCargadas.entrySet()) {
+			System.out.println(par.getKey()+" "+par.getValue());
+		}
+		
 	}
 }

@@ -2,8 +2,10 @@ package control;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Vector;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.Horario;
 import model.Sala;
 import model.SalaFisica;
+import view.StringHelper;
 
 @WebServlet({ "/verSala", "/reservar<das/*" })
 public class ServletVerSala extends HttpServlet {
@@ -28,8 +31,9 @@ public class ServletVerSala extends HttpServlet {
 		System.out.println("Doget verSala");
 		//obtener los datos del request
 		String idSala = request.getParameter("idSala");
-		String fechaSeleccionada = request.getParameter("fechaAMostrar");
+		String fechaSeleccionada = request.getParameter("fechaSeleccionada");
 		if (idSala != null) {
+			System.out.println("Sala a mostrar = "+idSala);
 			Sala salaAMostrar = Sala.getSalaPorId(idSala);
 			if (salaAMostrar != null) {
 				// determinar si la sala es fisica
@@ -40,35 +44,47 @@ public class ServletVerSala extends HttpServlet {
 					esSalaFisica = true;
 					LocalDate fechaSeleccionadaLocalDate;
 					try {
-						if (fechaSeleccionada!=null) {
-							fechaSeleccionadaLocalDate = LocalDate.parse(fechaSeleccionada);
-						} else {
-							fechaSeleccionadaLocalDate = LocalDate.now();
-						}
+					    if (fechaSeleccionada != null) {
+					        System.out.println("ServletVerSala fecha recibida: " + fechaSeleccionada);
+					        // Crear un objeto DateTimeFormatter para analizar la fecha en el formato "dd/MM/yyyy"
+					        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+					        fechaSeleccionadaLocalDate = LocalDate.parse(fechaSeleccionada, formatter);
+					    } else {
+					        System.out.println("fecha seleccionada era null");
+					        fechaSeleccionadaLocalDate = null;
+					    }
 					} catch (Exception e) {
-						fechaSeleccionadaLocalDate = LocalDate.now();
+					    System.out.println("Error tratando de convertir de string a localDate, asignando fecha null");
+					    fechaSeleccionadaLocalDate = null;
+					    e.printStackTrace();
+					    //<option value="" selected="">Selecciona una opción</option>
 					}
+					//System.out.println("ServletVerSala: a mandar: "+StringHelper.getLocalDateString(fechaSeleccionadaLocalDate));
 
 					//colocar informacion en el request, sobre las fechas y horarios
 					request.setAttribute("fechaSeleccionada", fechaSeleccionadaLocalDate);
 					request.setAttribute("fechasAMostrar", salaFisica.getFechasAMostrar());
-					request.setAttribute("horariosAMostrar", salaFisica.getVectorHorariosDisponibles(fechaSeleccionadaLocalDate));
+					Vector<Horario> horariosDisponibles =  salaFisica.getVectorHorariosDisponibles(fechaSeleccionadaLocalDate);
+					request.setAttribute("horariosAMostrar", horariosDisponibles);
+				} else {
+					System.out.println("ServletVerSala: Esta no es una sala fisica");
 				}
 				
 				// poner atributos del request, para que la seccion pueda mostrar la info
 				request.setAttribute("salaAMostrar", salaAMostrar);
 				request.setAttribute("esSalaFisica", esSalaFisica);
-				System.out.println("Ver la sala: " + salaAMostrar.getNombre());
 				// enviar al cliente a la seccion con id sala
 				request.getRequestDispatcher("./index.jsp?sec=verSala&idSala=" + idSala).forward(request, response);
 				return;
 			} else {
-				System.out.println("No se ha podido encontrar la sala solicitada: '"+idSala+"'");
+				System.out.println("ServletVerSala: No se ha podido encontrar la sala solicitada con id: "+idSala);
 			}
+		} else {
+			System.out.println("ServletVerSala: No hay un id para buscar la sala");
 		}
 		// si no se encuentra el id de la sala que el usuario quierr ver, se le manda a
 		// ver todas las salas
-		response.sendRedirect("./salas?buscar=todas&m=todas&t=todas&d=todas");
+		//response.sendRedirect("./salas");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
