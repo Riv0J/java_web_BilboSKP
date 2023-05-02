@@ -1,63 +1,24 @@
 @charset "ISO-8859-1";
-*{
-    background-color: black;
-    color: white;
-}
-section{
-    margin:10%;
+#caja0{
+    width: 100%;
     display: flex;
     flex-direction: row;
+    font-size: 1.5em;
 }
 .caja1 ul li{
     list-style: none;
-    margin-bottom: 5%;
-}
-h1{
-    text-decoration: underline;
+    margin: 15%;
 }
 .caja1{
-    width:30%;
+    padding: 5%;
+    width: 25%;
+    background-color: #141414;
+    color: rgb(255, 255, 255);
 }
-@media screen and (max-width:480px) {
-    main{
-        margin: 3%;
-        margin:0 auto;
-    }
-    section{
-        display:flex;
-        flex-direction: column;
-    }
-    .subcaja1 img{
-        width: 23%;
-    }
-    h1{
-        display: none;
-    }
-    .caja1 ul{
-        margin-left: -12%;
-    }
-    .caja2, .caja1{
-        width: 95%;
-    }
-    .form1, .form2, .form3{
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 5%;
-    }
-    .box0 input, .box1 input{
-        display: none;
-    }
-    .box0 label, .box1 label{
-        width: 500%;
-        margin-bottom: 5%;
-    }
-    /*Botones input*/
-    .subcaja1 input, .subcaja3 input, .caja3 input{
-        border-radius: 2em;
-        height: 35px;
-        width: 30%;
-    }
-
+.caja2{
+    padding: 5%;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+/*aqui irán todas las secciones de jsp */
 }
 
