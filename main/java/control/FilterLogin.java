@@ -18,8 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Suscriptor;
+
 //
-@WebFilter({"/perfil","/perfil/*","/organizar","/reservar"})
+@WebFilter({ "/perfil", "/perfil/*", "/organizar", "/reservar" })
 public class FilterLogin implements Filter {
 
 	public FilterLogin() {
@@ -33,28 +34,26 @@ public class FilterLogin implements Filter {
 		try {
 			System.out.println("Petición filtrada en FilterLogin");
 			HttpServletRequest req = (HttpServletRequest) request;
-			HttpSession sesion = (req.getSession(false));
-			//establecer el tiempo de vida de la sesion en 2 min
+			HttpSession sesion = (req.getSession());
+			// establecer el tiempo de vida de la sesion en 2 min
 			sesion.setMaxInactiveInterval(20);
-			if (sesion != null) {
-				// Obtener el objeto "Suscriptor" de la sesión
-				Object suscriptor = (Object) sesion.getAttribute("suscriptor");
-				//si el objeto obtenido es de clases suscriptor, significa que está logeado!
-				if (suscriptor instanceof Suscriptor) {
-					System.out.println("El objeto Suscriptor existe en la sesión");
-					chain.doFilter(request, response);
-				} else {
-					System.out.println("El objeto Suscriptor existe en la sesión pero no es del tipo suscriptor???");
-					//existe la sesion pero no tiene un objeto suscriptor correcto, lo mandamos al login
-					Suscriptor sus = new Suscriptor(1, 1234, "hola@gmail,com", "pau", "paula", "castillo", "imagen", 1, null);
-					sesion.setAttribute("suscriptor", sus);
-					chain.doFilter(request, response);
-				}
-				
+			// Obtener el objeto "Suscriptor" de la sesión
+			Object suscriptor = (Object) sesion.getAttribute("suscriptor");
+
+			// si el objeto obtenido es de clases suscriptor, significa que está logeado!
+			if (suscriptor instanceof Suscriptor) {
+				System.out.println("El objeto Suscriptor existe en la sesión");
+				chain.doFilter(request, response);
 			} else {
-				// no existe la sesion, lo mandamos al login
-				request.getRequestDispatcher("index.jsp?sec=login").include(request, response);
+				System.out.println("El objeto Suscriptor existe en la sesión pero no es del tipo suscriptor???");
+				// existe la sesion pero no tiene un objeto suscriptor correcto, lo mandamos al
+				// login
+				Suscriptor sus = new Suscriptor(1, 1234, "hola@gmail,com", "pau", "paula", "castillo", "imagen", 1,
+						null);
+				sesion.setAttribute("suscriptor", sus);
+				chain.doFilter(request, response);
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -62,6 +61,7 @@ public class FilterLogin implements Filter {
 
 	public void init(FilterConfig fConfig) throws ServletException {
 	}
+
 	public static void mostrarJSP(ServletResponse response, String rutajsp) {
 		try {
 			System.out.println(rutajsp);
@@ -78,7 +78,6 @@ public class FilterLogin implements Filter {
 			e.printStackTrace();
 			System.out.println("Error tratando de devolver jsp");
 		}
-
 
 	}
 

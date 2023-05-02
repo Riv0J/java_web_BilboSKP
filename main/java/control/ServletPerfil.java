@@ -26,27 +26,35 @@ public class ServletPerfil extends HttpServlet {
 			throws ServletException, IOException {
 		
 		System.out.println("Doget servlet perfil");
-		String subseccion = request.getParameter("subseccion");
-		String forward = "";
+		String subseccion = request.getParameter("sub");
 
 		if (subseccion == null) {
-			subseccion = "editar";
+			subseccion = "gestionCuenta";
 		}
+		System.out.println("la seccion buscada es la subseccion " +subseccion);
 		HttpSession sesion = request.getSession();
 		Suscriptor sus= (Suscriptor) sesion.getAttribute("suscriptor");
-		sesion.setAttribute("sus", sus);
 
 		//Object fecha;
 		switch (subseccion) {
-		case "editar":
-			request.getRequestDispatcher("index.jsp?sec=perfil?sub=gestionCuenta").forward(request, response);
-			break;
+		case "gestionCuenta":
+			request.getRequestDispatcher("index.jsp?sec=perfil&sub=gestionCuenta").forward(request, response);
+			return;
 			
 		//RESERVAS
 		case "reservas":
 			// obtener todas las reservas del suscriptor
-				Reserva re=(Reserva) sesion.getAttribute("reserava");
-
+			
+				Reserva re=(Reserva) sesion.getAttribute("reserva");
+				ArrayList <Reserva> reservas= new ArrayList<Reserva>();
+				reservas.add(re);
+				reservas.add(re);
+				reservas.add(re);
+				
+				
+				
+				
+			
 			// hacer setAttribute de las reservas
 				sesion.setAttribute("re", re);
 

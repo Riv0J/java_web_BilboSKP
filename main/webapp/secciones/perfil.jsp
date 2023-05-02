@@ -1,11 +1,13 @@
 <%
+
 String subseccion = request.getParameter("sub");
-String rutaJspSeccion = "";
-if (subseccion == null) {
-	subseccion = "gestionCuenta";
+if (subseccion == null)  {
+	response.sendRedirect("./perfil");
 }
-rutaJspSeccion = "subsecciones/" + subseccion + ".jsp";
+String rutaJspSeccion = "subsecciones/" + subseccion + ".jsp";
+System.out.println(rutaJspSeccion);
 %>
+
 <link rel="stylesheet" href="css/perfil.css">
 
 <section>
@@ -13,7 +15,7 @@ rutaJspSeccion = "subsecciones/" + subseccion + ".jsp";
                 <h1>Mi perfil</h1>
                 <ul>
 
-                    <li class="gc"><a href="<%=rutaJspSeccion%>">Gestión de la cuenta</a></li>
+                    <li class="gc"><a href="<%=subseccion%>">Gestión de la cuenta</a></li>
                     <li><a href="">Mis reservas</a></li>
                     <li><a href="">Mis cupones</a></li>
                     <li><a href="">Cerrar sesión</a></li>
@@ -21,8 +23,8 @@ rutaJspSeccion = "subsecciones/" + subseccion + ".jsp";
             </div> 
             
         <div class="caja2">
-        <%-- <jsp:include page="plantillas/mensaje.jsp"></jsp:include>--%>
-		<jsp:include page="<%=rutaJspSeccion%>"></jsp:include>
+        	<%-- <jsp:include page="plantillas/mensaje.jsp"></jsp:include>--%>
+			<jsp:include page="<%=rutaJspSeccion%>"></jsp:include>
         </div>         
 </section>     
 
