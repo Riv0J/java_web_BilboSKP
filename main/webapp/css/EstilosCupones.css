@@ -1,3 +1,11 @@
+#BodyCupones{
+	background-color:white;
+	width:65%;
+	padding:2,5%;
+	height:100%;
+    position:absolute;
+    z-index: -1;
+}
  #Cupones{
     height: 80%;
     width: 100%;
@@ -5,15 +13,20 @@
     grid-template-columns: repeat(4, 2fr);
 }
 #TextosEncabezado{
-    height: 30%;
+    height: 17%;
     font-size: 120%;
     display: block;
     margin-top: 3%;
     padding-left:5%
 }
 
+
+ .fichaCupones p{
+	background-color:#C60C02;
+	color:white;
+}
 #MisCuponesTitulo{
-    border-bottom: 0.05em solid #000000;
+    border-bottom: 0.20em solid #C60C02;
     padding-right: 9%;
     padding-bottom: 0.8%;
     position:relative;
@@ -25,10 +38,10 @@
     display: grid;
     flex-direction: column;
     background-color: #C60C02;
-    width: 60%;
+    width: 80%;
     text-align: center;
     margin-left:22%;
-    margin-top:5%;
+    margin-top:2%;
     font-size: 110%;
     
 }
