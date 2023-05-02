@@ -96,7 +96,7 @@ public class ServletRanking extends HttpServlet {
 			request.setAttribute("salasAMostrar", salasAMostrar);
 			// Enviar la respuesta al usuario
 
-			request.getRequestDispatcher("index.jsp?sec=ranking&sala=" + salaSeleccionada.getNombre()).forward(request,
+			request.getRequestDispatcher("index.jsp?sec=ranking&sala=" + salaSeleccionada.getIdSala()).forward(request,
 					response);
 
 		} catch (Throwable e) {
