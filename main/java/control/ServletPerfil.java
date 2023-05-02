@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.time.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Vector;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,63 +22,56 @@ import model.Suscriptor;
 public class ServletPerfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		System.out.println("Doget servlet perfil");
 		String subseccion = request.getParameter("sub");
 
 		if (subseccion == null) {
 			subseccion = "gestionCuenta";
 		}
-		System.out.println("la seccion buscada es la subseccion " +subseccion);
+		System.out.println("la seccion buscada es la subseccion " + subseccion);
 		HttpSession sesion = request.getSession();
-		Suscriptor sus= (Suscriptor) sesion.getAttribute("suscriptor");
+		Suscriptor sus = (Suscriptor) sesion.getAttribute("suscriptor");
 
-		//Object fecha;
+		// Object fecha;
 		switch (subseccion) {
 		case "gestionCuenta":
 			request.getRequestDispatcher("index.jsp?sec=perfil&sub=gestionCuenta").forward(request, response);
 			return;
-			
-		//RESERVAS
+
+		// RESERVAS
 		case "reservas":
 			// obtener todas las reservas del suscriptor
-			
-				Reserva re=(Reserva) sesion.getAttribute("reserva");
-				ArrayList <Reserva> reservas= new ArrayList<Reserva>();
-				reservas.add(re);
-				reservas.add(re);
-				reservas.add(re);
-				
-				
-				
-				
-			
+
+			Reserva re = (Reserva) sesion.getAttribute("reserva");
+			ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+			reservas.add(re);
+			reservas.add(re);
+			reservas.add(re);
+
 			// hacer setAttribute de las reservas
-				sesion.setAttribute("re", re);
+			sesion.setAttribute("re", re);
 
 			// respuesta usuario
-				request.getRequestDispatcher("index.jsp?sec=perfil?sub=reserva").forward(request, response);
+			request.getRequestDispatcher("index.jsp?sec=perfil?sub=reserva").forward(request, response);
 			break;
 
-			
-		//CUPONES
+		// CUPONES
 		case "cupones":
 
-			LocalDate fechaCupon = LocalDate.of(2023, 4, 28);
-			Date fechaDate = (Date) Date.from(fechaCupon.atStartOfDay(ZoneId.systemDefault()).toInstant());
+			// obtener todos los cupones y guardar
+			try {
+				Vector<Cupon> cupones = BilboSKP.getCuponesSuscriptor(12);
+				System.out.println("Necesito ayuda 1");
+				request.setAttribute("cupones", cupones);
+				System.out.println("Necesito ayuda 2");
+				request.getRequestDispatcher("index.jsp?sec=perfil&sub=cupon").forward(request, response);
+			} catch (Throwable e1) {
+				System.out.println("Error al mostrar cupones aiuda");
+			}
 
-			Cupon c = new Cupon(1, "Activo", fechaDate);
-			ArrayList<Cupon> cupones = new ArrayList<Cupon>();
-			cupones.add(c);
-			cupones.add(c);
-			cupones.add(c);
-
-			// obtener todos los cupones
-			// dispatch
-			Cupon c1 = (Cupon) sesion.getAttribute("cupon");
 			request.getRequestDispatcher("index.jsp?sec=perfil?sub=cupon");
 			break;
 		default:
@@ -95,7 +89,7 @@ public class ServletPerfil extends HttpServlet {
 		}
 
 		// CERRAR SESION
-		
+
 		// Enviar la respuesta al usuario
 		request.getRequestDispatcher("index.jsp?sec=perfil").forward(request, response);
 
