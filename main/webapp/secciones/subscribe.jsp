@@ -40,7 +40,7 @@
   }
 </style>
 
-<form action="/subscribe" method="post">
+<form action="./subscribe" method="post">
   <label for="email">Email:</label>
   <input type="email" id="email" name="email" required>
 

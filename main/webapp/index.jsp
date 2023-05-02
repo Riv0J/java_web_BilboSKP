@@ -1,10 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="model.Suscriptor"%>
+    <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1" import="model.Suscriptor, view.Mensaje"%>
 <%
 String seccion = request.getParameter("sec");
+Object mensaje = request.getAttribute("mensaje");
 if (seccion == null) {
 	seccion = "inicio";
 }
+
 String rutaJspSeccion = "secciones/" + seccion + ".jsp";
 String tituloPagina = seccion.substring(0, 1).toUpperCase() + seccion.substring(1) + " | BilboSKP";
 Object sus = (Object) session.getAttribute("suscriptor");
@@ -51,7 +53,7 @@ Object sus = (Object) session.getAttribute("suscriptor");
 							
 			<% } else { %>
 				<a class="user" id="botonPerfil"><i class="ri-user-fill"></i>Sign in</a> 
-				<a href="./secciones/subscribe.jsp" class="suscribirse">Subscribe</a>
+				<a href="index.jsp?sec=subscribe" class="suscribirse">Subscribe</a>
 				<div class="bx bx-menu" id="menu-icon"></div>
 				<script>
 					document.querySelector("#botonPerfil").addEventListener("click", function() {
@@ -65,6 +67,12 @@ Object sus = (Object) session.getAttribute("suscriptor");
 	<main>
 		<%-- <jsp:include page="plantillas/mensaje.jsp"></jsp:include>--%>
 		<jsp:include page="plantillas/login.jsp"></jsp:include>
+		<% if (mensaje instanceof Mensaje){%>
+			<jsp:include page="plantillas/mensaje.jsp"></jsp:include>
+		
+		<% }%>
+		
+
 		<jsp:include page="<%=rutaJspSeccion%>"></jsp:include>
 	</main>
 	<footer>

@@ -326,7 +326,7 @@ public class BilboSKP extends DBC {
 
 	// metodo que pide los campos de un suscriptor y crea una suscripcion @Torni
 	public static Suscriptor crearSuscripcion(String email, String pass, int telefono, String alias, String nombre,
-			String apellidos, String fech_nac) throws Throwable {
+			String apellidos, java.sql.Date fech_nac) throws Throwable {
 		// hacer sentencia sql select todas las salas
 		/*
 		 * String sentenciaSQL =
