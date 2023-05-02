@@ -3,67 +3,63 @@
 	pageEncoding="ISO-8859-1"
 	import="java.util.HashMap,java.util.ArrayList,java.util.Map, java.util.Vector, java.text.SimpleDateFormat, model.Sala, model.PartidaOnline, model.Partida"%>
 <%
-	HashMap<String, Sala> salasAMostrar = (HashMap<String, Sala>) request.getAttribute("salasAMostrar"); //hashmap de salas Online cargadas
-	Sala salaSeleccionada=(Sala)request.getAttribute("salaSeleccionada"); //una sala
-	Vector<PartidaOnline> partidas=(Vector<PartidaOnline>) request.getAttribute("partidas");
-	System.out.println(salaSeleccionada.getNombre());
-	System.out.print(salasAMostrar.size());
-	// verificar que hay partidas / vector de partidas
-				for (PartidaOnline partida : partidas) {
-					Sala salapartida = partida.getSala();
-					String nombregrupo = partida.getNombreGrupo();
-					String puntos = Integer.toString(partida.getPuntaje());
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-					String fecha = sdf.format(partida.getFechaInicio());
-					//System.out.println(nombregrupo);
+HashMap<String, Sala> salasAMostrar = (HashMap<String, Sala>) request.getAttribute("salasAMostrar"); //hashmap de salas Online cargadas
+Sala salaSeleccionada = (Sala) request.getAttribute("salaSeleccionada"); //una sala
+Vector<PartidaOnline> partidas = (Vector<PartidaOnline>) request.getAttribute("partidas");
+System.out.println(salaSeleccionada.getNombre());
+System.out.print(salasAMostrar.size());
+// verificar que hay partidas / vector de partidas
+for (PartidaOnline partida : partidas) {
+	Sala salapartida = partida.getSala();
+	String nombregrupo = partida.getNombreGrupo();
+	String puntos = Integer.toString(partida.getPuntaje());
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	String fecha = sdf.format(partida.getFechaInicio());
+	System.out.println(nombregrupo);
+
 	//necesito un array de todas las salas/ un array de todas las partidas de esa sala/
-	
+
 	//String salaseleccionada = request.getParameter("salaseleccionada");
 
-				}
-	
+}
 %>
 
 <body>
 	<h2 class="superior">
-		Sala de escape:<%=salaSeleccionada.getNombre() %>
+		Sala de escape:<%=salaSeleccionada.getNombre()%>
 	</h2>
 	<nav class="lateral">
 		<%--recorrer salas hasta que no haya mas --%>
 		<ul>
-			<%for (Map.Entry<String, Sala> salas : salasAMostrar.entrySet()) {%>
-			<li><a
-				href="ranking&sala=<%= salas.getKey() %>">
-					<%=salas.getValue().getNombre()%>
+			<%
+			for (Map.Entry<String, Sala> salas : salasAMostrar.entrySet()) {
+			%>
+			<li><a href="ranking&sala=<%=salas.getKey()%>"> <%=salas.getValue().getNombre()%>
 			</a></li>
 			<br>
-			<% 
-			
+			<%
 			}
-			
-		
-		%>
+			%>
 		</ul>
 
 
 	</nav>
 
-	<%//consulta sql query ,    
+	<%--//consulta sql query ,    
 	//for (PartidaOnline partida:partidas) {
-//		Sala sala =partida.getSala();
-	//	String nombregrupo = partida.getNombreGrupo();
-		//String	puntos=Integer.toString(partida.getPuntaje());
+		//Sala sala =partida.getSala();
+		//String nombregrupo = partida.getNombreGrupo();
+		//String puntos=Integer.toString(partida.getPuntaje());
 		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		//String fecha = sdf.format(partida.getFechaInicio());
-			for (PartidaOnline partida : partidas) {
-BilboSKP.obtenerRankingSalaOnline(salaSeleccionada.getIdSala())	;
-	%>
-	<div id="podio">
+		//int contador= 1;
+		 --%>
+		 <div id="podio">
 		<div class="info">
 			<img src="../img_web/icons/copa2.png">
 			<div class="caja plata">
 				<p>
-					Grupo 2<br> 1350 puntos<br> 2023-02-17
+					
 				</p>
 			</div>
 		</div>
@@ -71,7 +67,7 @@ BilboSKP.obtenerRankingSalaOnline(salaSeleccionada.getIdSala())	;
 			<img src="../img_web/icons/copa1.png">
 			<div class="caja oro">
 				<p>
-					<%=partida.getNombreGrupo()%> <br> <%=partida.getPuntaje()%><br><%=partida.calcularTiempo() %> --%>
+					
 				</p>
 			</div>
 		</div>
@@ -79,22 +75,143 @@ BilboSKP.obtenerRankingSalaOnline(salaSeleccionada.getIdSala())	;
 			<img src="../img_web/icons/copa3.png">
 			<div class="caja bronce">
 				<p>
-					Grupo 3<br> 1250 puntos<br> 2023-02-19
+					
 				</p>
 			</div>
 		</div>
 	</div>
 	<div id="finalistas">
 		<ol>
-			<li value="4">Grupo 4</li>
-			<li>Grupo 5</li>
-			<li>Grupo 6</li>
-			<li>Grupo 7</li>
-			<li>Grupo 8</li>
-			<li>Grupo 9</li>
+			<li value="4"></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		 
+	<%
+	for (int i = 0; i < partidas.size(); i++) {
+		PartidaOnline partida = (PartidaOnline) partidas.get(i);
+	%>
+	<div id="podio">
+		<div class="info">
+			<img src="../../img_web/icons/copa2.png">
+			<div class="caja plata">
+				<p>
+					<%
+					if (i == 1) {
+					%>
+					<%=partida.getNombreGrupo()%>
+					<br>
+					<%=partida.getPuntaje()%><br><%=partida.calcularTiempo()%>
+					<%
+					}
+					%>
+				</p>
+			</div>
+		</div>
+		<div class="info">
+			<img src="../img_web/icons/copa1.png">
+			<div class="caja oro">
+				<p>
+					<%
+					if (i == 0) {
+					%>
+					<%=partida.getNombreGrupo()%>
+					<br>
+					<%=partida.getPuntaje()%><br><%=partida.calcularTiempo()%>
+					<%
+					}
+					%>
+				</p>
+			</div>
+		</div>
+		<div class="info">
+			<img src="../img_web/icons/copa3.png">
+			<div class="caja bronce">
+				<p>
+					<%
+					if (i == 2) {
+					%>
+					<%=partida.getNombreGrupo()%>
+					<br>
+					<%=partida.getPuntaje()%><br><%=partida.calcularTiempo()%>
+					<%
+					}
+					%>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div id="finalistas">
+		<ol>
+			<li value="4">
+				<%
+				if (i == 3) {
+				%> <%=partida.getNombreGrupo()%> <%=partida.getPuntaje()%><%=partida.calcularTiempo()%>
+				<%
+				}
+				%>
+			</li>
+			<li>
+				<%
+				if (i == 4) {
+				%> <%=partida.getNombreGrupo()%> <%=partida.getPuntaje()%><%=partida.calcularTiempo()%>
+				<%
+				}
+				%>
+			</li>
+			<li>
+				<%
+				if (i == 5) {
+				%> <%=partida.getNombreGrupo()%> <%=partida.getPuntaje()%><%=partida.calcularTiempo()%>
+				<%
+				}
+				%>
+			</li>
+			<li>
+				<%
+				if (i == 6) {
+				%> <%=partida.getNombreGrupo()%> <%=partida.getPuntaje()%><%=partida.calcularTiempo()%>
+				<%
+				}
+				%>
+			</li>
+			<li>
+				<%
+				if (i == 7) {
+				%> <%=partida.getNombreGrupo()%> <%=partida.getPuntaje()%><%=partida.calcularTiempo()%>
+				<%
+				}
+				%>
+			</li>
+			<li>
+				<%
+				if (i == 8) {
+				%> <%=partida.getNombreGrupo()%> <%=partida.getPuntaje()%><%=partida.calcularTiempo()%>
+				<%
+				}
+				%>
+			</li>
+			<li>
+				<%
+				if (i == 9) {
+				%> <%=partida.getNombreGrupo()%> <%=partida.getPuntaje()%><%=partida.calcularTiempo()%>
+				<%
+				}
+				%>
+			</li>
 		</ol>
 	</div>
-	<%//} %>
+	<%
+	if (i >= 9) {
+		break;
+	}
+
+	}
+	%>
 
 
 
@@ -149,6 +266,7 @@ p {
 .oro {
 	display: flex;
 	justify-content: center;
+	align-items: center;
 	border: 3px solid #ffd700;
 	height: 10em;
 	width: 10em;
@@ -162,6 +280,7 @@ p {
 .plata {
 	display: flex;
 	justify-content: center;
+	align-items: center;
 	border: 3px solid #C0C0C0;
 	height: 10em;
 	width: 10em;
@@ -175,6 +294,7 @@ p {
 .bronce {
 	display: flex;
 	justify-content: center;
+	align-items: center;
 	border: 3px solid #8F5732;
 	height: 8em;
 	width: 10em;
