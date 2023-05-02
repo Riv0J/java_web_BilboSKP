@@ -782,7 +782,7 @@ public class BilboSKP extends DBC {
 		for (Map.Entry<String, Sala> par : mapaSalas.entrySet()) {
 			Sala sala = par.getValue();
 			String dificultad = sala.getDificultad();
-			// si el array de tematicas cargadas no contiene una dificultad, se agrega al
+			// si el array de tematicas cargadas no contiene la dificultad, se agrega al
 			// arraylist
 			if (!dificultadesCargadas.contains(dificultad)) {
 				dificultadesCargadas.add(dificultad);
@@ -799,6 +799,5 @@ public class BilboSKP extends DBC {
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-
 	}
 }

@@ -144,6 +144,9 @@
 .bilboskp_select{
 	color: var(--bg-color);
 }
+.bilboskp_select option:hover{
+	color: var(--bg-oscuro);
+}
 .bilboskp_select:focus{
   outline: 2.5px solid var(--main-color2);
 }

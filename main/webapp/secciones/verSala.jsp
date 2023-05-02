@@ -20,7 +20,7 @@ Vector<Horario> horariosAMostrar = null;
 
 if (esSalaFisica == true) {
 	modalidad = "Reserva";
-	textoBoton = "Realizar reserva";
+	textoBoton = "Reservar sala";
 	enlaceBoton = "./reservar?idSala="+idSala;
 	direccion = ((SalaFisica)salaAMostrar).getDireccion();
 	fechasAMostrar = (Vector<LocalDate>) request.getAttribute("fechasAMostrar");
@@ -81,9 +81,9 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 						seleccionar la cantidad de participantes que acudirán a la sala!</p>
 				</div>
 				<div id="caja_reserva">
-					<form action="./verSala" method="GET" id="caja_fecha">
+					<form action="./verSala" method="GET" id="caja_fecha" class="linea_form">
 						<input type="hidden" name="idSala" value="<%=idSala%>">
-					    <label for="fecha_reserva">Escoge una fecha para ver los horarios:</label> 
+					    <label for="fecha_reserva">Escoge una fecha:</label> 
 					    <select id="fechas" class="bilboskp_select" name="fechaSeleccionada">
 					    <%if(fechaSeleccionada == null) {%>
 					    	<option value="" selected="" >Selecciona una fecha</option>
@@ -115,13 +115,13 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 				<% if (fechaSeleccionada != null) { 
 					if(horariosAMostrar!=null && horariosAMostrar.size()>0){ %>
 						<form action="./reservar" method="POST">
-							<div id="caja_horarios">
-								<label for="horarios">Horarios disponibles para <%=StringHelper.getLocalDateString(fechaSeleccionada)%>:</label>
+							<div id="caja_horarios" class="linea_form">
+								<label for="horarios">Horarios disponibles:</label>
 								<select id="horarios" class="bilboskp_select" name="horarios">
 									<%for(Horario horario: horariosAMostrar){
 										if(horario.isDisponible()==false){ continue; }
 										Date fecha= horario.getFechaHora();
-										String stringHorario = StringHelper.getDiaSemana(fecha)+" "+fecha.getDay()+" "+fecha.getHours()+":";
+										String stringHorario = StringHelper.getDiaSemana(fecha)+" "+fecha.getDate()+" "+fecha.getHours()+":";
 										int minutos = fecha.getMinutes();
 										if (minutos==0){ stringHorario+= "00"; } else { stringHorario+= ""+minutos; }
 										%>
@@ -129,7 +129,7 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 									<% } %>
 								</select>
 							</div>
-							<div id="caja_numero_jugadores">
+							<div id="caja_numero_jugadores" class="linea_form">
 								<label for="num_jugadores">Número de jugadores que participarán:</label> 
 								<select id="num_jugadores" class="bilboskp_select" name="num_jugadores" >
 									<%
@@ -142,7 +142,7 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 									%>
 								</select>
 							</div>
-							<div id="contenedor_boton">
+							<div id="contenedor_boton" class="linea_form">
 								<a href=<%=enlaceBoton%>>
 									<button type=input class="bilboskp_icon_button">
 										<i class="<%=Icon.getIconHTMLClass(modalidad)%>"></i>
@@ -212,6 +212,24 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 </section>
 
 <style>
+.linea_form{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap:3%;
+	margin-top:1%;
+	
+}
+#num_jugadores{
+	width:6%;
+}
+#horarios{
+	text-align: center;
+	width:30%;
+}
+#fechas{
+}
 #wrapper_ver_sala {
 	height: 85vh;
 	background-image: url(<%=rutaImagenPortadaLarga%>);
