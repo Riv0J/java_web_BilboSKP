@@ -543,7 +543,7 @@ public class BilboSKP extends DBC {
 	}
 
 	// Conseguir los cupones de un suscriptor por su id public static @Inigo
-	public Vector<Cupon> getCuponesSuscriptor(int idSuscriptor) throws Throwable {
+	public static Vector<Cupon> getCuponesSuscriptor(int idSuscriptor) throws Throwable {
 		Vector<Cupon> vectorCupones = new Vector<Cupon>();
 		String sentenciaSQL = "select * from cupon where idSuscriptor = " + idSuscriptor + ";";
 		BilboSKP conexion = new BilboSKP();

@@ -48,10 +48,11 @@ public class FilterLogin implements Filter {
 				System.out.println("El objeto Suscriptor existe en la sesión pero no es del tipo suscriptor???");
 				// existe la sesion pero no tiene un objeto suscriptor correcto, lo mandamos al
 				// login
-				Suscriptor sus = new Suscriptor(1, 1234, "hola@gmail,com", "pau", "paula", "castillo", "imagen", 1,
+				/* Suscriptor sus = new Suscriptor(1, 1234, "hola@gmail,com", "pau", "paula", "castillo", "imagen", 1,
 						null);
 				sesion.setAttribute("suscriptor", sus);
-				chain.doFilter(request, response);
+				chain.doFilter(request, response);*/
+				request.getRequestDispatcher("index.jsp?sec=incio").forward(request, response);
 			}
 
 		} catch (Exception e) {
