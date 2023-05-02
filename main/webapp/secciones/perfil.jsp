@@ -14,9 +14,12 @@ System.out.println(rutaJspSeccion);
             <div class="caja1">
             	<h1>Mi perfil</h1>
                 <ul>
-                    <li><a href="">Gestión de la cuenta</a></li>
-                    <li><a href="">Mis reservas</a></li>
-                    <li><a href="">Mis cupones</a></li>
+
+
+                    <li class="gc"><a href="<%=subseccion%>">Gestión de la cuenta</a></li>
+                    <li><a href="<%=subseccion%>">Mis reservas</a></li>
+                    <li><a href="./perfil?sub=cupones">Mis cupones</a></li>
+
                     <li><a href="">Cerrar sesión</a></li>
                 </ul>
             </div>
