@@ -1,7 +1,8 @@
 <%@ page
 	import="java.util.Vector, java.util.HashMap, java.util.Map, java.util.Locale,java.util.Date, java.time.LocalDate, java.io.File, java.text.Normalizer, 
-	model.Sala, model.SalaOnline, model.SalaFisica, model.Horario,view.StringHelper, view.DateHelper, view.Icon"%>
+	model.Sala, model.SalaOnline, model.SalaFisica, model.Horario, model.Suscriptor, view.StringHelper, view.DateHelper, view.Icon"%>
 <%
+Object sus = (Object) request.getAttribute("suscriptor");
 Sala salaAMostrar = (Sala) request.getAttribute("salaAMostrar");
 String idSala = (String) request.getParameter("idSala");
 boolean esSalaFisica = (boolean) request.getAttribute("esSalaFisica");
@@ -25,6 +26,17 @@ if (esSalaFisica == true) {
 	direccion = ((SalaFisica)salaAMostrar).getDireccion();
 	fechasAMostrar = (Vector<LocalDate>) request.getAttribute("fechasAMostrar");
 	horariosAMostrar = (Vector<Horario>) request.getAttribute("horariosAMostrar");
+}
+//este if, checkea si no hay suscriptor en la sesion, y si no lo hay, pone un script que impide usar el boton de organizar, y mas bien revela la caja de login
+if(!(sus instanceof Suscriptor)){ 
+	enlaceBoton = "#";
+%>
+	<script>
+		document.querySelector("#boton_reservar_organizar").addEventListener("click", function() {
+		document.querySelector("#caja_login").style.display = "flex";
+		});
+	</script>
+<% 
 }
 String rutaImagenPortadaLarga = "./img_salas/portadas_largas/"+idSala+".png";
 String rutaIconoTematica = "img_web/iconos_salas/" + StringHelper.normalizarTexto(salaAMostrar.getTematica()) + ".svg";
@@ -165,7 +177,7 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 			</div>
 			<div id="contenedor_boton">
 				<a href=<%=enlaceBoton%>>
-					<button class="bilboskp_icon_button">
+					<button id="boton_reservar_organizar" class="bilboskp_icon_button">
 						<i class="<%=Icon.getIconHTMLClass(modalidad)%>"></i>
 						<div>
 							<%=textoBoton%>

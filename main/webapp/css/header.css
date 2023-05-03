@@ -43,7 +43,9 @@ a li:hover::after {
 #caja_logo img{
 	width:100%;
 }
-
+#logout_icon{
+	font-size: 1.5em;
+}
 body{
 	margin-top: 5%;
     min-height: 100vh;

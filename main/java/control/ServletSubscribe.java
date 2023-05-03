@@ -18,33 +18,26 @@ import com.mysql.cj.protocol.Message;
 import model.Suscriptor;
 import view.Mensaje;
 
-/**
- * Servlet implementation class ServletSubscribe
- */
 @WebServlet("/subscribe")
 public class ServletSubscribe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ServletSubscribe() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession sesion = request.getSession();
+		// chequear si hay una url previa a hacer la suscripcion
+		String urlPrevia = (String) sesion.getAttribute("urlPrevia");
+		if (urlPrevia instanceof String) {
+			System.out.println("ServletSubscribe: url previa detectada = " + (String) urlPrevia);
+		} else {
+			// si no habia url previa, lo mandamos al login
+			System.out.println("ServletSubscribe: no habia url previa");
+			urlPrevia = "index.jsp";
+		}
 		System.out.println("hace dopost subscribe");
 		String pass = request.getParameter("pass");
 		String email = request.getParameter("email");
@@ -52,44 +45,42 @@ public class ServletSubscribe extends HttpServlet {
 		int telefono = Integer.parseInt(request.getParameter("telefono"));
 		String nombre = request.getParameter("nombre");
 		String apellidos = request.getParameter("apellidos");
-		
-		 // Obtener el valor del par�metro de entrada de fecha
+
+		// Obtener el valor del parámetro de entrada de fecha
 		String fech_nac = request.getParameter("fech_nac");
-	    
-	    
 
-	   
-	      // Parsear la fecha a un objeto java.util.date
-		  LocalDate fecha = LocalDate.parse(fech_nac);
+		// Parsear la fecha a un objeto java.util.date
+		LocalDate fecha = LocalDate.parse(fech_nac);
 
-		  // Convertir a java.sql.date
-		  java.sql.Date sqlDate = java.sql.Date.valueOf(fecha);
-	      
+		// Convertir a java.sql.date
+		java.sql.Date sqlDate = java.sql.Date.valueOf(fecha);
+		boolean exitoso = false;
 		try {
-			//crea el suscriptor
-			Suscriptor sus= BilboSKP.crearSuscripcion(email, pass, telefono, alias, nombre, apellidos, sqlDate);
-			
-			
-			if (sus!=null) {
-				HttpSession sesion= request.getSession();
+			// crea el suscriptor
+			Suscriptor sus = BilboSKP.crearSuscripcion(email, pass, telefono, alias, nombre, apellidos, sqlDate);
+
+			if (sus != null) {
 				sesion.setAttribute("suscriptor", sus);
-				request.getRequestDispatcher("index.jsp").forward(request, response);
-			}else {
-				Mensaje mensaje= new Mensaje("no se pudo crear suscripcion", Mensaje.MENSAJE_ERROR);
-				request.getRequestDispatcher("index.jsp?sec=subscribe").forward(request, response);
-				
+				exitoso = true;
+
+			} else {
+				Mensaje mensaje = new Mensaje("No se pudo crear suscripcion, inténtalo nuevamente",
+						Mensaje.MENSAJE_ERROR);
+
 			}
-			
+
 		} catch (Throwable e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("no se pudo crear suscripcion");
-			Mensaje mensaje= new Mensaje("no se pudo crear suscripcion", Mensaje.MENSAJE_ERROR);
+			System.out.println("Susbscribe: No se pudo crear suscripcion");
+			Mensaje mensaje = new Mensaje("No se pudo crear suscripcion, intenta nuevamente", Mensaje.MENSAJE_ERROR);
 			request.setAttribute("mensaje", mensaje);
-			request.getRequestDispatcher("index.jsp?sec=subscribe").forward(request, response);
+
 		}
-
-
-	    
-}
+		if (exitoso == false) {
+			// si no se pudo hacer la suscripcion, lo manda nuevamente a suscribirse
+			request.getRequestDispatcher("index.jsp?sec=subscribe").forward(request, response);
+		} else if (exitoso == true) {
+			request.getRequestDispatcher(urlPrevia).forward(request, response);
+		}
+	}
 }

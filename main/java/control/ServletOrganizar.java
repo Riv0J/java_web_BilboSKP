@@ -32,11 +32,10 @@ public class ServletOrganizar extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doget Organizar sala");
-		
-		String idSala = request.getParameter("idSala");
-		
+		System.out.println("Doget Organizar sala");
 		HttpSession sesion = request.getSession();
+
+		String idSala = request.getParameter("idSala");
 		Object suscriptor = (Object) sesion.getAttribute("suscriptor");
 		if(suscriptor instanceof Suscriptor) {
 			Suscriptor anfitrion = (Suscriptor) suscriptor;

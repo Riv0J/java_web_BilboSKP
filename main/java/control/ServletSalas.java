@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.Sala;
 import model.SalaFisica;
@@ -30,6 +31,11 @@ public class ServletSalas extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("Doget Salas");
+		//establecer la urlPrevia de la sesion, como la actual
+		//String urlPrevia = request.getRequestURL().toString();
+		//HttpSession sesion = request.getSession();
+		//System.out.println("ServletSalas urlprevia establecida = "+urlPrevia);
+		//sesion.setAttribute("urlPrevia", urlPrevia);
 		try {
 			HashMap<String, Sala> mapaSalas = Sala.getTodasLasSalasCargadas();
 			HashMap<String, Sala> salasAMostrar = new HashMap<String, Sala>();
@@ -109,13 +115,23 @@ public class ServletSalas extends HttpServlet {
 			request.setAttribute("mapaSalas", salasAMostrar);
 			request.setAttribute("tematicasDisponibles", Sala.getTematicasCargadas());
 			request.setAttribute("dificultadesDisponibles", Sala.getDificultadesCargadas());
-
+			
+			//establecer la url a otorgar como url previa
+			String urlPrevia = "./salas?buscar=" + paramBuscar + "&m=" + paramModalidad + "&t="
+					+ paramTematica + "&d=" + paramDificultad;
+			
+			System.out.println("ServletSalas urlprevia establecida = "+urlPrevia);
+			HttpSession sesion = request.getSession();
+			sesion.setAttribute("urlPrevia", urlPrevia);
+			
+			String rutaDestino = "index.jsp?sec=salas&buscar=" + paramBuscar + "&m=" + paramModalidad + "&t="
+					+ paramTematica + "&d=" + paramDificultad;
 			// Enviar la respuesta al usuario
-			request.getRequestDispatcher("index.jsp?sec=salas&buscar=" + paramBuscar + "&m=" + paramModalidad + "&t="
-					+ paramTematica + "&d=" + paramDificultad).forward(request, response);
-		} catch (
-
-		Throwable e) {
+			request.getRequestDispatcher(rutaDestino).forward(request, response);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			System.out.println("hubo un error en serv salas");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 
 	}

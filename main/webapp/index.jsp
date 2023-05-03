@@ -1,8 +1,20 @@
     <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="view.Mensaje, model.Suscriptor"%>
+	pageEncoding="ISO-8859-1" import="view.Mensaje, view.Icon, model.Suscriptor"%>
 <%
 String seccion = request.getParameter("sec");
-Object mensaje = request.getAttribute("mensaje");
+Object mensaje = (Object) session.getAttribute("mensaje");
+Object mostrarLogin = (Object) session.getAttribute("mostrarLogin");
+boolean mostrarVentanaLogin = false;
+Mensaje mostrarMensaje = null;
+if(mostrarLogin instanceof String){
+	session.setAttribute("mostrarLogin", null);
+	mostrarVentanaLogin = true;
+}
+if(mensaje instanceof Mensaje){
+	session.setAttribute("mensaje", null);
+	mostrarMensaje = (Mensaje) mensaje;
+}
+
 if (seccion == null) {
 	seccion = "inicio";
 }
@@ -43,36 +55,34 @@ Object sus = (Object) session.getAttribute("suscriptor");
 			<a href="./salas?buscar=todas&m=todas&t=todas&d=todas"><li>Salas de escape</li></a>
 			<a href="./ranking"><li>Ranking</li></a>
 			<a href="./tienda"><li>Tienda</li></a>
-			<a href="./salas"><li>Unirse a partida</li></a>
+			<!--  <a href="./salas"><li>Unirse a partida</li></a>-->
 			<a href="./contacto+FAQ"><li>Contacto</li></a>
 		</ul>
 		<div class="main">
 			<% if(sus instanceof Suscriptor){ Suscriptor suscriptor = (Suscriptor) sus; %>
-				<a href="./perfil" class="user" id="botonPerfil"><i class="ri-user-fill"></i> <%=suscriptor.getAlias() %></a>
-				<div class="bx bx-menu" id="menu-icon"></div>
+				<a href="./perfil" class="user" id="botonPerfil"><i id="logout_icon" class="<%=Icon.getIconHTMLClass("user-fill")%>"></i> <%=suscriptor.getAlias() %></a>
+				<a href="./logout" class="suscribirse"><i class="<%=Icon.getIconHTMLClass("logout")%>"></i></a>
 							
 			<% } else { %>
 				<a class="user" id="botonPerfil"><i class="ri-user-fill"></i>Sign in</a> 
 				<a href="index.jsp?sec=subscribe" class="suscribirse">Subscribe</a>
-				<div class="bx bx-menu" id="menu-icon"></div>
 				<script>
 					document.querySelector("#botonPerfil").addEventListener("click", function() {
 					document.querySelector("#caja_login").style.display = "flex";
 					});
 				</script>
 			<% } %>
+			<div class="bx bx-menu" id="menu-icon"></div>
 		</div>
 		<script type="text/javascript" src="js/script.js"></script>
 	</header>
 	<main>
 		<%-- <jsp:include page="plantillas/mensaje.jsp"></jsp:include>--%>
 		<jsp:include page="plantillas/login.jsp"></jsp:include>
-		<% if (mensaje instanceof Mensaje){%>
+		<% if (mostrarMensaje!=null){
+			System.out.println("Mostrando mensaje en el index");%>
 			<jsp:include page="plantillas/mensaje.jsp"></jsp:include>
-		
 		<% }%>
-		
-
 		<jsp:include page="<%=rutaJspSeccion%>"></jsp:include>
 	</main>
 	<footer>
@@ -103,4 +113,12 @@ Object sus = (Object) session.getAttribute("suscriptor");
         </section>
     </footer>
 </body>
+<% if(mostrarVentanaLogin == true){
+	System.out.println("Mostrando la ventana de login"); %>
+	<style>
+		#caja_login{
+			display: flex;
+		}
+	</style>
+<% } %>
 </html>

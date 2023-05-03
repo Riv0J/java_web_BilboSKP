@@ -6,10 +6,11 @@ public class Icon {
 	private static HashMap<String,String> mapaIconClasses = null;
 	
 	public static void InitIcon() {
-		//  
+		//introducir cada icono con su valor de clase html
 		mapaIconClasses = new HashMap<String,String>();
 		mapaIconClasses.put("clock", "ri-time-line");
 		mapaIconClasses.put("user", "ri-user-line");
+		mapaIconClasses.put("user-fill", "ri-user-fill");
 		mapaIconClasses.put("lock", "ri-lock-line");
 		mapaIconClasses.put("online", "ri-earth-line");
 		mapaIconClasses.put("reserva", "ri-file-list-3-line");
@@ -21,6 +22,7 @@ public class Icon {
 		mapaIconClasses.put("question", "ri-question-mark");
 		mapaIconClasses.put("age", "ri-body-scan-fill");
 		mapaIconClasses.put("cupon", "ri-coupon-line");
+		mapaIconClasses.put("logout", "ri-logout-box-r-line");
 	}
 	public static String getIconHTMLClass(String key) {
 		if(mapaIconClasses==null) {

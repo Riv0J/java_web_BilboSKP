@@ -1,7 +1,8 @@
 <%@ page
 	import="model.Suscriptor, model.SalaOnline, control.BilboSKP, view.Mensaje, java.util.Vector, java.io.File"%>
-
 <%
+session.setAttribute("urlPrevia", "index.jsp");
+System.out.println("JSP Inicio establecida url previa = index.jsp");
 Vector<SalaOnline> vectorSalasMasJugadas = new Vector<SalaOnline>();
 try {
 	vectorSalasMasJugadas = BilboSKP.getSalasMasJugadas(3);
