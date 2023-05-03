@@ -44,20 +44,19 @@ public class ServletPerfil extends HttpServlet {
 		// RESERVAS
 		case "reservas":
 			// obtener todas las reservas del suscriptor
+			try {
+				Vector<Reserva> reservas = BilboSKP.obtenerReserva(12);
+				System.out.println("Necesito ayuda 1");
+				request.setAttribute("reservas", reservas);
+				System.out.println("Necesito ayuda 2");
+				request.getRequestDispatcher("index.jsp?sec=perfil?sub=reserva").forward(request, response);
+			} catch (Throwable e1) {
+				System.out.println("Error al mostrar cupones aiuda");
+			}
 
-			Reserva re = (Reserva) sesion.getAttribute("reserva");
-			ArrayList<Reserva> reservas = new ArrayList<Reserva>();
-			reservas.add(re);
-			reservas.add(re);
-			reservas.add(re);
-
-			// hacer setAttribute de las reservas
-			sesion.setAttribute("re", re);
-
-			// respuesta usuario
-			request.getRequestDispatcher("index.jsp?sec=perfil?sub=reserva").forward(request, response);
+			request.getRequestDispatcher("index.jsp?sec=perfil?sub=reserva");
 			break;
-
+			
 		// CUPONES
 		case "cupones":
 

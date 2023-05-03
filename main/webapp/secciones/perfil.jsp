@@ -20,7 +20,7 @@ System.out.println(rutaJspSeccion);
                     <li><a href="./perfil?sub=reserva">Mis reservas</a></li>
                     <li><a href="./perfil?sub=cupones">Mis cupones</a></li>
 
-                    <li><a href="./perfil?sec=inicio"></a></li>
+                    <li><a href="./perfil?sec=inicio">Cerrar sesión</a></li>
                 </ul>
             </div>
             <div class="caja2">

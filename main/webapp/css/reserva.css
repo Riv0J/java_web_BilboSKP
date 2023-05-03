@@ -1,40 +1,104 @@
 @charset "ISO-8859-1";
-main{
-    padding: 3%;
+#caja2{
+    margin-top: 4%;
 }
-.historial{
+h1{
+    font-size: 1.5em;
+}
+.title{
+    font-size: 1.2em;
+    text-decoration: underline;
+}
+#subcaja2{
+    border-bottom: #C60C02 3px solid;
+}
+#subcaja2 ul{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    padding: 0%;
+}
+.menu2{
     display: flex;
     flex-direction: row;
 }
-h2{
-    margin-right: 5%;
+.menu1{
+    width: 65%;
 }
-.subcaja{
-    margin-top: 1%;
-    border: 1px solid black;
-  
-    padding: 1%;
+.menu3{
+    width: 25%;   
+}
+.menu3 li{
+    text-align: center;
+    margin-right: 18%;
+}
+.menu3{
     display: flex;
     flex-direction: row;
+    justify-content: center;
+}
+.subcaja2{
+    border-bottom: 4px solid #C60C02 ;
+}
+.subcaja2 ul{
+    display: flex;
+    flex-direction: row;
+    padding-left:0%;
+}
+.dife ul li{
+    list-style: none;
+    margin-right:20%;
+}
+.subcaja2 .dif ul li{
+    margin-right: 20%;
+    list-style: none;
+}
+.subcaja3{
+    display: flex;
+    flex-direction: row;
+}
+.info1{
+    width:50%;
+}
+.info{
+    display: flex;
+    flex-direction: row;
+    margin-left: 14%;
+    align-items: center;
+}
+.info input{
+    text-align: center;
+    border-style: none;
 }
 .cajita{
-    width: 20%;
-    padding: 0.8%;
-}
-.subcaja1{
-    margin-top: 1%;
-    text-align: right;
-}
-.subcaja1 input{
-    width:15%;
-    border-radius: 1em;
-    height: 40px;
-}
-.subcaja{
-    border: 1px solid black;
     display: flex;
     flex-direction: row;
 }
-.etiquetas label{
-    padding-right: 10%;
+.cajita input{
+    width: 100%;
+    border-style: none;
+    margin-bottom: 3%;
+    margin-top: 3%;
+    margin-left: 5%;
+}
+.cajita label{
+    width: 160%;
+    border-style: none;
+    margin-bottom: 3%;
+    margin-top: 3%;
+}
+/*botones*/
+.subcaja4 input{
+    margin-top: 2.5%;
+    text-align: center;
+    color: white;
+    background-color:#C60C02;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    width: 20%;
+    border-radius: 0.35em ;
+    border:#C60C02;
+    padding: 1%;
+    transition: all 0.5s;
 }
