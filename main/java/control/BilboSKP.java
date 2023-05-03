@@ -1,6 +1,7 @@
 package control;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -692,6 +693,11 @@ public class BilboSKP extends DBC {
 		}
 	}
 
+	//Eliminar una reserva de la BD
+	public static void eliminarReserva(int idReserva) throws Throwable {
+		String sql = "DELETE from reserva WHERE id="+idReserva+";";
+	}
+		
 	// obtener las reservas de un suscriptor de la bd @Paula
 	public static Vector<Reserva> obtenerReserva(int idSuscriptor) throws Throwable {
 		Vector<Reserva> reservas = new Vector<Reserva>();

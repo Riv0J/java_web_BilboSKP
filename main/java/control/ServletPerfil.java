@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import model.Cupon;
 import model.Reserva;
 import model.Suscriptor;
+import view.Mensaje;
 
 @WebServlet("/perfil")
 public class ServletPerfil extends HttpServlet {
@@ -50,10 +51,21 @@ public class ServletPerfil extends HttpServlet {
 				request.setAttribute("reservas", reservas);
 				System.out.println("Necesito ayuda 2");
 				request.getRequestDispatcher("index.jsp?sec=perfil?sub=reserva").forward(request, response);
+				
+				
+				//ELIMINAR UNA RESERVA
+				if (request.getParameter("borrar") != null) {
+					int idReserva = Integer.parseInt(request.getParameter("borrar"));
+					BilboSKP.eliminarReserva(idReserva);
+					Mensaje m = new Mensaje("Tu reserva ha sido eliminda", Mensaje.MENSAJE_EXITO);
+					request.setAttribute("mensaje", m);
+				}
 			} catch (Throwable e1) {
 				System.out.println("Error al mostrar cupones aiuda");
 			}
-
+			
+			
+			
 			request.getRequestDispatcher("index.jsp?sec=perfil?sub=reserva");
 			break;
 			
