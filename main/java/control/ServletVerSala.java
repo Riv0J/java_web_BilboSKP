@@ -33,7 +33,7 @@ public class ServletVerSala extends HttpServlet {
 		String idSala = request.getParameter("idSala");
 		String fechaSeleccionada = request.getParameter("fechaSeleccionada");
 		if (idSala != null) {
-			System.out.println("Sala a mostrar = "+idSala);
+			System.out.println("Servlet ver sala: Sala a mostrar = "+idSala);
 			Sala salaAMostrar = Sala.getSalaPorId(idSala);
 			if (salaAMostrar != null) {
 				// determinar si la sala es fisica
@@ -50,16 +50,13 @@ public class ServletVerSala extends HttpServlet {
 					        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 					        fechaSeleccionadaLocalDate = LocalDate.parse(fechaSeleccionada, formatter);
 					    } else {
-					        System.out.println("fecha seleccionada era null");
 					        fechaSeleccionadaLocalDate = null;
 					    }
 					} catch (Exception e) {
 					    System.out.println("Error tratando de convertir de string a localDate, asignando fecha null");
 					    fechaSeleccionadaLocalDate = null;
 					    e.printStackTrace();
-					    //<option value="" selected="">Selecciona una opción</option>
 					}
-					//System.out.println("ServletVerSala: a mandar: "+StringHelper.getLocalDateString(fechaSeleccionadaLocalDate));
 
 					//colocar informacion en el request, sobre las fechas y horarios
 					request.setAttribute("fechaSeleccionada", fechaSeleccionadaLocalDate);
@@ -84,7 +81,7 @@ public class ServletVerSala extends HttpServlet {
 		}
 		// si no se encuentra el id de la sala que el usuario quierr ver, se le manda a
 		// ver todas las salas
-		//response.sendRedirect("./salas");
+		response.sendRedirect("./salas");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -81,39 +81,35 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 						seleccionar la cantidad de participantes que acudirán a la sala!</p>
 				</div>
 				<div id="caja_reserva">
+				<% if(fechasAMostrar==null || fechasAMostrar.size()==0){ %>
+						<div class="caja_mensaje">
+							<i class="<%=Icon.getIconHTMLClass("reserva")%>"></i><div>No quedan fechas libres para reservar en esta sala, ¡por favor echa un vistazo más tarde!</div>
+						</div>
+				<% } else { %>
 					<form action="./verSala" method="GET" id="caja_fecha" class="linea_form">
 						<input type="hidden" name="idSala" value="<%=idSala%>">
-					    <label for="fecha_reserva">Escoge una fecha:</label> 
-					    <select id="fechas" class="bilboskp_select" name="fechaSeleccionada">
-					    <%if(fechaSeleccionada == null) {%>
-					    	<option value="" selected="" >Selecciona una fecha</option>
-					    	 <%for(LocalDate localDate: fechasAMostrar){
-					                String localDateString = StringHelper.getLocalDateString(localDate);  %>
-					                <option value="<%=localDateString%>"><%=localDateString%></option>
-					         <%}
-					      }else if (fechaSeleccionada!=null){ 
+						<label for="fecha_reserva">Escoge una fecha:</label> 
+						<select id="fechas" class="bilboskp_select" name="fechaSeleccionada">
+					    <% if(fechaSeleccionada == null) { %>
+						    		<option value="" selected="" >Selecciona una fecha</option>
+							    	 <% for(LocalDate localDate: fechasAMostrar){
+							                String localDateString = StringHelper.getLocalDateString(localDate);  %>
+							                <option value="<%=localDateString%>"><%=localDateString%></option>
+							         <% } %>
+						    	 
+					      <% } else if (fechaSeleccionada != null){ 
 					    	String fechaSeleccionadaString = StringHelper.getLocalDateString(fechaSeleccionada);
 					          for(LocalDate localDate: fechasAMostrar){
 					                String localDateString = StringHelper.getLocalDateString(localDate); 
 					                System.out.println(fechaSeleccionadaString);
-									System.out.println(localDateString);%>
+									System.out.println(localDateString); %>
 					                <option value="<%=localDateString%>" <% if(fechaSeleccionadaString.equals(localDateString)){ %> selected <% } %>><%=localDateString%></option>
 					        <%}
-					          %><div><%=fechaSeleccionadaString%></div> <%
 					    }%>
-					        
-					    </select>
-					    
+					    </select>  
 					</form>
-				<script>
-				  const selectFechas = document.querySelector('#fechas');
-				  selectFechas.addEventListener('change', function() {
-				    const form = document.querySelector('#caja_fecha');
-				    form.submit();
-				  });
-				</script>
-				<% if (fechaSeleccionada != null) { 
-					if(horariosAMostrar!=null && horariosAMostrar.size()>0){ %>
+				<% if (fechaSeleccionada != null){ 
+					if(horariosAMostrar!=null  && horariosAMostrar != null && horariosAMostrar.size()>0){ %>
 						<form action="./reservar" method="POST">
 							<div id="caja_horarios" class="linea_form">
 								<label for="horarios">Horarios disponibles:</label>
@@ -121,7 +117,7 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 									<%for(Horario horario: horariosAMostrar){
 										if(horario.isDisponible()==false){ continue; }
 										Date fecha= horario.getFechaHora();
-										String stringHorario = StringHelper.getDiaSemana(fecha)+" "+fecha.getDate()+" "+fecha.getHours()+":";
+										String stringHorario = StringHelper.getDiaSemana(fecha)+" "+fecha.getDate()+", "+fecha.getHours()+":";
 										int minutos = fecha.getMinutes();
 										if (minutos==0){ stringHorario+= "00"; } else { stringHorario+= ""+minutos; }
 										%>
@@ -132,14 +128,13 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 							<div id="caja_numero_jugadores" class="linea_form">
 								<label for="num_jugadores">Número de jugadores que participarán:</label> 
 								<select id="num_jugadores" class="bilboskp_select" name="num_jugadores" >
-									<%
+									<% 
+									int minJugadores = salaAMostrar.getJugadoresMin();
 									int maxJugadores = salaAMostrar.getJugadoresMax();
-									for (int i = 1; i <= maxJugadores; i++) {
+									for (int i = minJugadores; i <= maxJugadores; i++) { 
 									%>
 									<option value="<%=i%>"><%=i%></option>
-									<%
-									}
-									%>
+									<% } %>
 								</select>
 							</div>
 							<div id="contenedor_boton" class="linea_form">
@@ -157,9 +152,10 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 						<div>No hay horarios disponibles para esa fecha, ¡Echa un ojo en un rato!</div>
 						<% } %>
 				<% }  else if (fechaSeleccionada==null){ %>
-				<div>¡Seleciona una fecha disponible para esta sala para poder reservar!</div>
+				<div>¡Seleciona una fecha disponible para poder ver los horarios!</div>
 				<% } %>
 			</div>
+				<% } %>
 			<% } else { %>
 			<div id="caja_jugabilidad">
 				<p>Esta es una sala online, por lo que puedes acceder a ella en
@@ -210,7 +206,13 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 		</div>
 	</div>
 </section>
-
+<script>
+	const selectFechas = document.querySelector('#fechas');
+	selectFechas.addEventListener('change', function() {
+	const form = document.querySelector('#caja_fecha');
+	form.submit();
+	});
+</script>
 <style>
 .linea_form{
 	display: flex;
@@ -222,11 +224,10 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 	
 }
 #num_jugadores{
-	width:6%;
+	width:10%;
 }
 #horarios{
 	text-align: center;
-	width:30%;
 }
 #fechas{
 }
@@ -281,6 +282,7 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 	align-items: center;
 	justify-content: center;
 }
+
 #contenedor_boton a{
 	width: 50%;
 	display: flex;
@@ -290,6 +292,7 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 	font-size: 1.45em;
 	width: 100%;
 }
+
 i{
 	font-size: 1.25em;
 }
@@ -297,10 +300,29 @@ i{
 	font-size: 2em;
 }
 
+<% if (esSalaFisica== true){ %>
+	#contenedor_boton button{
+		font-size: 1.3em;
+	}
+	#contenedor_boton i{
+		font-size: 1.5em;
+	}
+<% } %>
+.caja_mensaje{
+	margin-top: 5%;
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+    justify-content: center;
+    align-items: center;
+
+}
+.caja_mensaje i{
+    font-size: 1.75em;
+}
 #caja_titulo {
 	font-size: 2em;
 	letter-spacing: 0.1em;
-	text-stroke: 0.5em solid red;
 }
 
 .caja_subtitulo {
@@ -352,7 +374,6 @@ i{
 	text-align: left;
 }
 #caja_reserva{
-	margin-top: 5%;
 	font-size: 1.75em;
 }
 #caja_fecha{
@@ -431,9 +452,6 @@ i{
 		line-height: 1.1;
 	    text-align: justify;
 	    font-size: 1.5em;
-
-	}
-	#caja_ver_sala{
 	}
 	#caja_img{
 		width: 35%;
@@ -457,6 +475,26 @@ i{
 	}
 	#contenedor_boton a{
 		width: 40%;
+	}
+	#contenedor_boton button{
+		font-size: 1.2em;
+	}
+	.linea_form{
+		flex-direction: column;
+		font-size: 0.8em;
+		margin-bottom: 1%;
+	}
+	#contenedor_boton {
+	  padding-top: 5%;
+	}
+	#num_jugadores{
+	  width: auto;
+	}
+	form label{
+		margin-bottom: 1%;
+	}
+	#contenedor_boton {
+	  padding-top: 1%;
 	}
 }
 
@@ -489,7 +527,7 @@ i{
 		width: 12%;
 	}
 	.modalidad, .dificultad, .jugadores {
-   		width: 16%;
+   		width: 20%;
 	}
 	.tematica{
 		width: 18%;
@@ -499,6 +537,15 @@ i{
 	}
 	#contenedor_boton a {
 	    width: 40%
+	}
+	form label{
+		margin-bottom: 1%;
+	}
+	#contenedor_boton {
+	  padding-top: 2%;
+	}
+	#caja_fecha{
+		margin-bottom: 0;
 	}
 }
 
@@ -511,16 +558,13 @@ i{
 	#wrapper_ver_sala h2{
 		font-size: 1.5em;
 	}
-	/*#caja_sinopsis, #caja_jugabilidad{
-		background-color: var(--text-color);
-		color: var(--bg-oscuro);
-		padding: 0.5%;
-	}*/
 	#caja_info{
 		width: 80%;
 		gap: 1%;
 	}
-	
+	form label{
+		margin-bottom: 2%;
+	}
 }
 
 @media (max-width: 700px){
@@ -546,8 +590,11 @@ i{
 		font-size: 1em;
 		width: 22%;
 	}
-	.modalidad, .dificultad, .jugadores {
+	.dificultad, .jugadores {
    		width: 26%;
+	}
+	.modalidad{
+		width: 32%;
 	}
 	.tematica{
 		width: 37%;
@@ -556,7 +603,10 @@ i{
 	width: 75%;
 	}
 	#contenedor_boton{
-	  padding-top: 15%;
+	  padding-top: 5%;
+	}
+	.linea_form{
+		margin-top: 5%;
 	}
 }
 </style>

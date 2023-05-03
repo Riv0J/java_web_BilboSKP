@@ -14,21 +14,21 @@ Object sus = (Object) session.getAttribute("suscriptor");
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><%=tituloPagina%></title>
-<link rel="stylesheet" href="css/colores.css">
-<link rel="stylesheet" href="css/normalize.css">
-<link rel="stylesheet" href="css/footer.css">
-<link rel="stylesheet" href="css/bilboskp.css">
-<link rel="stylesheet" href="css/header.css">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
-<link rel="icon" type="image/x-icon" href="img_web/logos/500x400-cuadrado-2.png">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title><%=tituloPagina%></title>
+	<link rel="stylesheet" href="css/colores.css">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/footer.css">
+	<link rel="stylesheet" href="css/bilboskp.css">
+	<link rel="stylesheet" href="css/header.css">
+	<link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/x-icon" href="img_web/logos/500x400-cuadrado-2.png">
 </head>
 <body>
 	<%--<%@include file="plantillas/nav.jsp"--%>

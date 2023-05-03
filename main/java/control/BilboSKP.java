@@ -584,7 +584,7 @@ public class BilboSKP extends DBC {
 	// Conseguir los cupones de un suscriptor por su id public static @Inigo
 	public static Vector<Cupon> getCuponesSuscriptor(int idSuscriptor) throws Throwable {
 		Vector<Cupon> vectorCupones = new Vector<Cupon>();
-		String sentenciaSQL = "select * from cupon where idSuscriptor = " + idSuscriptor + ";";
+		String sentenciaSQL = "select * from cupon where idSuscriptor = " + idSuscriptor + " order by fechaCaducidad;";
 		BilboSKP conexion = new BilboSKP();
 		// se hace una consulta sql con la conexion y se guarda en el resultset
 		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
@@ -704,8 +704,7 @@ public class BilboSKP extends DBC {
 				+ " WHERE idSuscriptor = " + idSuscriptor + ";";
 		// hacer una conexion
 		BilboSKP conexion = new BilboSKP();
-		// se hace una consulta sql con la conexion y se guarda en el resultset
-		// resultado
+		// hacer consulta sql con la conexion y se guarda en el resultset resultado
 		int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
 		if (filasAfectadas == 1) {
 			System.out.println("se pudo editar suscriptor");
@@ -763,9 +762,8 @@ public class BilboSKP extends DBC {
 		String sentenciaSQL = "SELECT * FROM reserva WHERE idSuscriptor=" + idSuscriptor + " order by fechaHora ";
 		BilboSKP conexion = new BilboSKP();
 		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
-
+		//por cada fila, crear un objeto reserva
 		while (resultado.next()) {
-			// String idSuscriptor= resultado.getString(idSuscriptor);
 			int idReserva = resultado.getInt("idReserva");
 			int idSalaFisica = resultado.getInt("idSalaFisica");
 			int numJugadores = resultado.getInt("numJugadores");
@@ -824,7 +822,7 @@ public class BilboSKP extends DBC {
 
 		return null;
 	}
-
+	//cargar todas las tematicas disponibles @Rivo
 	public static void cargarTematicas() {
 		ArrayList<String> tematicasCargadas = new ArrayList<String>();
 		HashMap<String, Sala> mapaSalas = Sala.getTodasLasSalasCargadas();
@@ -839,7 +837,7 @@ public class BilboSKP extends DBC {
 		}
 		Sala.setTematicasCargadas(tematicasCargadas);
 	}
-
+	//cargar todas las dificultades disponibles @Rivo
 	public static void cargarDificultades() {
 		ArrayList<String> dificultadesCargadas = new ArrayList<String>();
 		HashMap<String, Sala> mapaSalas = Sala.getTodasLasSalasCargadas();
@@ -854,6 +852,7 @@ public class BilboSKP extends DBC {
 		}
 		Sala.setDificultadesCargadas(dificultadesCargadas);
 	}
+	//cargar toda la info relacionada con salas @Rivo
 	public static void cargarInfoSalas() {
 		try {
 			BilboSKP.cargarSalasFisicas();

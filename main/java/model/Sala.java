@@ -111,16 +111,17 @@ public abstract class Sala {
 	public int getIdSala() {
 		return this.idSala;
 	}
-
+	//@Rivo
 	public static HashMap<String, Sala> getTodasLasSalasCargadas() {
 		if(todasLasSalasCargadas.size()>0) { 
 			return todasLasSalasCargadas;
 		}
+		//
 		HashMap<String, Sala> mapaSalasCargadas = new HashMap<String, Sala>();
 		// obtener las salas cargadas de cada tipo
 		HashMap<Integer, SalaOnline> salasOnline = SalaOnline.getSalasCargadas();
 		HashMap<Integer, SalaFisica> salasFisicas = SalaFisica.getSalasCargadas();
-		
+		//colocar una llave unica según la modalidad, fisica/online
 		for (Map.Entry<Integer, SalaOnline> par : salasOnline.entrySet()) {
 			mapaSalasCargadas.put("SO" + par.getKey(), par.getValue());
 		}
@@ -149,7 +150,7 @@ public abstract class Sala {
 	public static ArrayList<String> getDificultadesCargadas() {
 		return dificultadesCargadas;
 	}
-	
+	//dado un ID STRING, itentar buscar una sala en el hashmap de todas las salas @Rivo
 	public static Sala getSalaPorId(String idSala) {
 		Sala salaObtenida = todasLasSalasCargadas.get(idSala);
 		if(salaObtenida==null){
@@ -158,7 +159,7 @@ public abstract class Sala {
 		}
 		return salaObtenida;
 	}
-
+	//hacer un print por cada sala, intentar recargar segun la bd @Rivo
 	public static void MostrarTodasLasSalasCargadas() {
 		if(todasLasSalasCargadas.size()==0) {
 			System.out.println("No habían salas cargadas, reintentando contactar con la bd:");
