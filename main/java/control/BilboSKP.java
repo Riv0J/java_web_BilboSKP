@@ -594,8 +594,9 @@ public class BilboSKP extends DBC {
 			int idCupon = resultado.getInt("idCupon");
 			Date fechaCaducidad = resultado.getDate("fechaCaducidad");
 			String Estado = resultado.getString("estado");
+			int rembolsabilidad=resultado.getInt("Rembolsable");
 			System.out.println(idCupon);
-			Cupon cupon = new Cupon(idCupon, Estado, fechaCaducidad);
+			Cupon cupon = new Cupon(idCupon, Estado, fechaCaducidad,rembolsabilidad);
 			vectorCupones.add(cupon);
 		}
 		return vectorCupones;

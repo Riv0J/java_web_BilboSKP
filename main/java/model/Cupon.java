@@ -11,8 +11,9 @@ public class Cupon {
 	private int idCupon, idSuscriptor;
 	private String estado;
 	private Date fechaCaducidad;
-
-	public Cupon(int idCupon, String estado,  Date fechaCaducidad) {
+	private int Rembolsable;
+	
+	public Cupon(int idCupon, String estado,  Date fechaCaducidad, int rembolsabilidad) {
 		super();
 		this.idCupon = idCupon;
 		this.estado = estado;
@@ -50,5 +51,21 @@ public class Cupon {
 	public void setIdSuscriptor(int idSuscriptor) {
 		idSuscriptor = idSuscriptor;
 	}
+
+	public String getRembolsable() {
+        if (Rembolsable == 0) {
+        	String Rembolsabilidad="No rembolsable";
+        	return Rembolsabilidad;
+        } else {
+        	String Rembolsabilidad=" Rembolsable";
+        	return Rembolsabilidad;
+        }
+        }
+
+	public void setRembolsable(int reusable) {
+		this.Rembolsable = reusable;
+	}
+	
+	
 }
 

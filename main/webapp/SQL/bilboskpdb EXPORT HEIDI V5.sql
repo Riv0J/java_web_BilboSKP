@@ -42,9 +42,9 @@ INSERT INTO `cupon` (`idCupon`, `idSuscriptor`, `fechaCaducidad`, `estado`, `ree
 	(7, 8, '2023-06-06 00:00:00', 'Disponible', 1),
 	(8, 8, '2023-06-09 00:00:00', 'Disponible', 1),
 	(9, 8, '2023-02-09 00:00:00', 'Caducado', 1),
-	(11, 4, '2077-12-31 00:00:00', 'Disponible', 0),
-	(12, 4, '2077-12-31 00:00:00', 'Disponible', 0),
-	(13, 4, '2023-05-18 00:00:00', 'Disponible', 0);
+	(11, 11, '2077-12-31 00:00:00', 'Disponible', 1),
+	(12, 11, '2077-12-31 00:00:00', 'Disponible', 0),
+	(13, 11, '2023-05-18 00:00:00', 'Disponible', 0);
 
 -- Volcando estructura para tabla bilboskpdb.escenario
 CREATE TABLE IF NOT EXISTS `escenario` (
