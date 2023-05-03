@@ -392,7 +392,7 @@ public class BilboSKP extends DBC {
 			return null;
 
 		} else {
-			System.out.println("No se pudo crear nuevo suscriptor");
+			System.out.println("BilboSKP: No se pudo crear nuevo suscriptor");
 			return null;
 		}
 	}

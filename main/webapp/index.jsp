@@ -60,8 +60,8 @@ Object sus = (Object) session.getAttribute("suscriptor");
 		</ul>
 		<div class="main">
 			<% if(sus instanceof Suscriptor){ Suscriptor suscriptor = (Suscriptor) sus; %>
-				<a href="./perfil" class="user" id="botonPerfil"><i id="logout_icon" class="<%=Icon.getIconHTMLClass("user-fill")%>"></i> <%=suscriptor.getAlias() %></a>
-				<a href="./logout" class="suscribirse"><i class="<%=Icon.getIconHTMLClass("logout")%>"></i></a>
+				<a href="./perfil" class="user" id="botonPerfil"><i class="<%=Icon.getIconHTMLClass("user-fill")%>"></i> <%=suscriptor.getAlias() %></a>
+				<a href="./logout" class="suscribirse"><i class="<%=Icon.getIconHTMLClass("logout")%>" style="font-size: 1.65em;"></i></a>
 							
 			<% } else { %>
 				<a class="user" id="botonPerfil"><i class="ri-user-fill"></i>Sign in</a> 

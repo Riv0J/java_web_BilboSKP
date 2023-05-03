@@ -29,16 +29,7 @@ public class ServletSubscribe extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession sesion = request.getSession();
-		// chequear si hay una url previa a hacer la suscripcion
-		String urlPrevia = (String) sesion.getAttribute("urlPrevia");
-		if (urlPrevia instanceof String) {
-			System.out.println("ServletSubscribe: url previa detectada = " + (String) urlPrevia);
-		} else {
-			// si no habia url previa, lo mandamos al login
-			System.out.println("ServletSubscribe: no habia url previa");
-			urlPrevia = "index.jsp";
-		}
-		System.out.println("hace dopost subscribe");
+		System.out.println("Dopost subscribe");
 		String pass = request.getParameter("pass");
 		String email = request.getParameter("email");
 		String alias = request.getParameter("alias");
@@ -76,11 +67,27 @@ public class ServletSubscribe extends HttpServlet {
 			request.setAttribute("mensaje", mensaje);
 
 		}
-		if (exitoso == false) {
-			// si no se pudo hacer la suscripcion, lo manda nuevamente a suscribirse
+		//redireccionamiento
+		// chequear si hay una url previa a hacer la suscripcion
+		String urlPrevia = (String) sesion.getAttribute("urlPrevia");
+		try {
+			if (exitoso == true) {
+				if (urlPrevia instanceof String) {
+					System.out.println("ServletLogin: habia una url previa: "+urlPrevia);
+					response.sendRedirect((String) urlPrevia);
+				} else {
+					System.out.println("ServletLogin: NO url previa establecida = "+urlPrevia);
+					response.sendRedirect("index.jsp");
+				}
+			} else if (exitoso == false) {
+				System.out.println("redireccionando a sec subscribe");
+				// si no se pudo hacer la suscripcion, lo manda nuevamente a suscribirse
+				request.getRequestDispatcher("index.jsp?sec=subscribe").forward(request, response);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error creando suscripcion");
 			request.getRequestDispatcher("index.jsp?sec=subscribe").forward(request, response);
-		} else if (exitoso == true) {
-			request.getRequestDispatcher(urlPrevia).forward(request, response);
 		}
 	}
 }
