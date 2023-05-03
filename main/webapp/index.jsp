@@ -67,9 +67,20 @@ Object sus = (Object) session.getAttribute("suscriptor");
 				<a class="user" id="botonPerfil"><i class="ri-user-fill"></i>Sign in</a> 
 				<a href="index.jsp?sec=subscribe" class="suscribirse">Subscribe</a>
 				<script>
-					document.querySelector("#botonPerfil").addEventListener("click", function() {
-					document.querySelector("#caja_login").style.display = "flex";
-					});
+				    var cajaLoginVisible = false;
+				    var botonPerfil = document.getElementById("botonPerfil");
+				    
+				    botonPerfil.addEventListener("click", function() {
+				        cajaLoginVisible = !cajaLoginVisible;
+				        
+				        if (cajaLoginVisible) {
+				            document.querySelector("#caja_login").style.display = "flex";
+				        } else {
+				            document.querySelector("#caja_login").style.display = "none";
+				        }
+				        
+				        document.querySelector("#caja_unirse").style.display = "none";
+				    });
 				</script>
 			<% } %>
 			<div class="bx bx-menu" id="menu-icon"></div>

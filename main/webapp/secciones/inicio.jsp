@@ -12,6 +12,7 @@ try {
 %>
 <link rel="stylesheet" href="css/inicio.css">
 <main>
+	<jsp:include page="../plantillas/unirse.jsp"></jsp:include>
 	<section class="principal">
 		<div id="caja_principal">
 			<h1 class="bilbosk_h1">Experimenta nuestras salas de escape</h1>
@@ -20,10 +21,8 @@ try {
 				virtuales. ¿Estás listo para poner a prueba tus habilidades mentales
 				y tu capacidad de resolución de problemas?</p>
 			<div class="flex_center">
-				<a class="flex_center" href="./salas"><button
-						class="bilboskp_icon_button">Jugar Ahora</button></a> <a
-					class="flex_center" href=#><button
-						class="bilboskp_icon_button_inverted">Unirse a partida</button></a>
+				<a class="flex_center" href="./salas"><button class="bilboskp_icon_button">Jugar Ahora</button></a> 
+				<a class="flex_center" href="#"><button id="boton_unirse" class="bilboskp_icon_button_inverted">Unirse a partida</button></a>
 			</div>
 		</div>
 		<div class="llave">
@@ -85,3 +84,9 @@ try {
 		</div>
 	</section>
 </main>
+<script>
+	document.querySelector("#boton_unirse").addEventListener("click", function() {
+		document.querySelector("#caja_unirse").style.display = "flex";
+		document.querySelector("#caja_login").style.display = "none";
+	});
+</script>
