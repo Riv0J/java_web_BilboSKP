@@ -1,13 +1,14 @@
-#BodyCupones{
-	background-color:white;
+
+.cajaSubseccion{
+	padding:0%;
 	width:65%;
-	padding:2,5%;
-	height:100%;
-    position:absolute;
-    z-index: -1;
+	
+	}
+#caja0{
+	height:65em;
 }
  #Cupones{
-    height: 80%;
+	row-gap: 140%;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 2fr);
@@ -32,6 +33,7 @@
     position:relative;
     margin-top:4%;
     display: flex;
+    margin-bottom: 2%;
     
 }
 .fichaCupones{
@@ -39,20 +41,28 @@
     flex-direction: column;
     background-color: #C60C02;
     width: 80%;
+    height:122%;
     text-align: center;
-    margin-left:22%;
-    margin-top:2%;
-    font-size: 110%;
-    
+    margin-left:11%;
+    padding:5%;
+    margin-top:6%;
+    font-size: 100%;
 }
 
 .CodigoCupon{
-    font-size: 180%;
+    font-size: 160%;
 }
+
+
 
 @media (max-width: 1000px) {
     #Cupones {
       grid-template-columns: repeat(2, 1fr);
+      
+	row-gap: 90%;
+    }
+    #TextosEncabezado {
+    margin-top:10%;
     }
   }
 

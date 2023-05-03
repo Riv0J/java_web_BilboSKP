@@ -11,7 +11,7 @@ System.out.println(rutaJspSeccion);
 <link rel="stylesheet" href="css/perfil.css">
 
 <div id="caja0">
-            <div class="caja1">
+            <div class="cajaPerfil">
             	<h1>Mi perfil</h1>
                 <ul>
 
@@ -23,7 +23,7 @@ System.out.println(rutaJspSeccion);
                     <li><a href="./perfil?sec=inicio">Cerrar sesión</a></li>
                 </ul>
             </div>
-            <div class="caja2">
+            <div class="cajaSubseccion">
             	<jsp:include page="<%=rutaJspSeccion%>"></jsp:include>
             </div>
 </div>

@@ -74,13 +74,13 @@ public class ServletPerfil extends HttpServlet {
 
 			// obtener todos los cupones y guardar
 			try {
-				Vector<Cupon> cupones = BilboSKP.getCuponesSuscriptor(12);
-				System.out.println("Necesito ayuda 1");
+				Vector<Cupon> cupones = BilboSKP.getCuponesSuscriptor(sus.getIdSuscriptor());
 				request.setAttribute("cupones", cupones);
-				System.out.println("Necesito ayuda 2");
+				if(cupones==null) {
+					System.out.println("UPSI PUES VA A SER ESTO");
+				}
 				request.getRequestDispatcher("index.jsp?sec=perfil&sub=cupon").forward(request, response);
 			} catch (Throwable e1) {
-				System.out.println("Error al mostrar cupones aiuda");
 			}
 
 			request.getRequestDispatcher("index.jsp?sec=perfil?sub=cupon");
