@@ -13,7 +13,9 @@ public class SalaOnline extends Sala{
 		super(idSala, nombre, dificultad, tematica, descripcion, tiempoMax, jugadoresMin, jugadoresMax, edad_recomendada);
 		// TODO Auto-generated constructor stub
 	}
-
+	public SalaOnline(int idSala, String nombre, String dificultad, String tematica, String descripcion) {
+		super(idSala,nombre,dificultad,tematica,descripcion);
+	}
 	public static void setSalasCargadas(HashMap<Integer, SalaOnline> salasPorCargar) {
 		salasOnlineCargadas = salasPorCargar;
 	}

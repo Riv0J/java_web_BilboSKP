@@ -150,4 +150,16 @@ public class PartidaOnline extends Partida {
 	public void setVisibleRanking(int visibleRanking) {
 		this.visibleRanking = visibleRanking;
 	}
+
+	public int getCodInvitacion() {
+		return codInvitacion;
+	}
+
+	public void setCodInvitacion(int codInvitacion) {
+		this.codInvitacion = codInvitacion;
+	}
+	
+	
+	
+	
 }

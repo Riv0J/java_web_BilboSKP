@@ -111,6 +111,7 @@ select {
 }
 
 .caja_sala {
+	margin-bottom: 2.5%;
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -218,10 +219,9 @@ select {
 .tematica, .modalidad {
 	padding-left: 2%;
 	padding-right: 5%;
-	width: 40%;
+	width: 42%;
 	height: 40%;
 }
-
 .tematica .caja_text{
 	text-align: left;
 }

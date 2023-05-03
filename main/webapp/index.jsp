@@ -1,5 +1,5 @@
     <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="model.Suscriptor, view.Mensaje"%>
+	pageEncoding="ISO-8859-1" import="view.Mensaje, model.Suscriptor"%>
 <%
 String seccion = request.getParameter("sec");
 Object mensaje = request.getAttribute("mensaje");
@@ -38,7 +38,7 @@ Object sus = (Object) session.getAttribute("suscriptor");
 			<a id="logo_grande" href="./index.jsp?sec=inicio" class="logo"> <img  src="img_web/logos/logo-bilboskp-es.png"></a>
 			<a id="logo_peque" href="./index.jsp?sec=inicio" class="logo"> <img  src="img_web/logos/500x400-cuadrado-2.png"></a>
 		</div>
-
+	
 		<ul class="navbar">
 			<a href="./salas?buscar=todas&m=todas&t=todas&d=todas"><li>Salas de escape</li></a>
 			<a href="./ranking"><li>Ranking</li></a>

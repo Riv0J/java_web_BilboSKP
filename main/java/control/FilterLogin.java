@@ -45,7 +45,7 @@ public class FilterLogin implements Filter {
 				System.out.println("El objeto Suscriptor existe en la sesión");
 				chain.doFilter(request, response);
 			} else {
-				System.out.println("El objeto Suscriptor existe en la sesión pero no es del tipo suscriptor???");
+				System.out.println("El objeto Suscriptor no existe en la sesión");
 				// existe la sesion pero no tiene un objeto suscriptor correcto, lo mandamos al
 				// login
 				/* Suscriptor sus = new Suscriptor(1, 1234, "hola@gmail,com", "pau", "paula", "castillo", "imagen", 1,
