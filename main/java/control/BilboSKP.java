@@ -616,7 +616,6 @@ public class BilboSKP extends DBC {
 				System.out.println("Cupon de " + tipoCupon + " creado");
 			} else {
 				System.out.println("Cupon de " + tipoCupon + " NO SE HA CREADO");
-
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -19,9 +19,6 @@ import model.Sala;
 import model.SalaFisica;
 import model.SalaOnline;
 
-/**
- * Servlet implementation class Ranking
- */
 @WebServlet({ "/ranking" })
 public class ServletRanking extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -103,6 +100,8 @@ public class ServletRanking extends HttpServlet {
 			e.printStackTrace();
 			System.out.println("Error conexion ranking");
 		}
-
+		
+		//TODO reiniciar ranking
+		//TODO dar cupon a ganadores
 	}
 }
