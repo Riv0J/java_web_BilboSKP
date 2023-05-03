@@ -1,6 +1,6 @@
 <%@ page
 	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.io.File, java.text.Normalizer, 
-	model.Suscriptor, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date  "%>
+	model.Suscriptor, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date"%>
 
 <link rel="stylesheet" href="css/gestionCuenta.css">
 <%
@@ -12,7 +12,7 @@ sesion.setAttribute("sus", sus);
 <div class="caja2">
                 <div>
                     <h2>Gestión de la cuenta</h2>
-                    <p>Modifica aquí tus datos personales. Recuerda que tanto como el alias, nombre y apellidos serán
+                    <p>Modifica aquí tus datos personales. Recuerda que tanto como el alias, nombre y apellidos
                     pertenecen a tu perfil público.</p>
                 </div>
                 <form action="">
@@ -69,6 +69,7 @@ sesion.setAttribute("sus", sus);
                             </div>
                         </div>
                     </div>
+                    <%--
                     <div class="form4">
                         <div class="box0">
                             <label for="">Contraseña</label>
@@ -77,15 +78,15 @@ sesion.setAttribute("sus", sus);
                                 <img src="img_web/icons/edit_icon.png" alt="">
                             </div>
                         </div>
-                        <%--<div class="box0">
+                        <div class="box0">
                             <label for="">Télefono:</label>
                             <div class="edit">
                                 <input type="text" name="" id="">
                                	<img src="img_web/icons/edit_icon.png" alt="">
                             </div>
-                        </div> --%>
+                        </div> 
                         
-                    </div>
+                    </div>--%>
                     <div class="form5">
                         <input type="button" value="Guardar cambios">
                     </div>
