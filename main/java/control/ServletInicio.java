@@ -1,6 +1,10 @@
 package control;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Vector;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -9,11 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.SalaOnline;
+
 /**
  * Servlet implementation class ServletInicio
  */
 @WebServlet(
-		urlPatterns = { "/inicio" }, 
+		urlPatterns = { "/index.jsp12313" }, 
 		initParams = { 
 				@WebInitParam(name = "font-title", value = "Verdana", description = "fuente de titulo")
 		})
@@ -34,8 +40,8 @@ public class ServletInicio extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

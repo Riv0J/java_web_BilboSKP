@@ -32,6 +32,14 @@ public abstract class Sala {
 		setEdad_recomendada(edad_recomendada);
 	}
 
+	public Sala(int idSala, String nombre, String dificultad, String tematica, String descripcion) {
+		setIdSala(idSala);
+		setNombre(nombre);
+		setDificultad(dificultad);
+		setTematica(tematica);
+		setDescripcion(descripcion);
+	}
+
 	public String getTematica() {
 		return tematica;
 	}
