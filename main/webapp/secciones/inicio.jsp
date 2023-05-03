@@ -19,7 +19,7 @@ try {
 				virtuales. ¿Estás listo para poner a prueba tus habilidades mentales
 				y tu capacidad de resolución de problemas?</p>
 			<div class="flex_center">
-				<a class="flex_center" href=#><button
+				<a class="flex_center" href="./salas"><button
 						class="bilboskp_icon_button">Jugar Ahora</button></a> <a
 					class="flex_center" href=#><button
 						class="bilboskp_icon_button_inverted">Unirse a partida</button></a>
@@ -30,7 +30,7 @@ try {
 		</div>
 	</section>
 
-	<section class="titulo">
+	<section class="caja_titulo">
 		<h2 class="bilbosk_h2">¡descubre nuestras salas online más
 			jugadas!</h2>
 	</section>
@@ -50,8 +50,8 @@ try {
 		</div>
 		<% } %>
 	</section>
-	<section class="titulo2">
-		<h2 class="bilbosk_h2">¡descubre nuestras salas mas jugadas!</h2>
+	<section class="caja_titulo caja_textura">
+		<h2 class="bilbosk_h2">Salas que te harán desafiar tu capacidad mental</h2>
 	</section>
 	<section class="card-container2">
 		<div class="card">

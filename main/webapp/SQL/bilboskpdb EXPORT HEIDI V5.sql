@@ -16,6 +16,7 @@
 
 
 -- Volcando estructura de base de datos para bilboskpdb
+DROP DATABASE IF EXISTS `bilboskpdb`;
 CREATE DATABASE IF NOT EXISTS `bilboskpdb` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 USE `bilboskpdb`;
 
@@ -42,9 +43,9 @@ INSERT INTO `cupon` (`idCupon`, `idSuscriptor`, `fechaCaducidad`, `estado`, `ree
 	(7, 8, '2023-06-06 00:00:00', 'Disponible', 1),
 	(8, 8, '2023-06-09 00:00:00', 'Disponible', 1),
 	(9, 8, '2023-02-09 00:00:00', 'Caducado', 1),
-	(11, 11, '2077-12-31 00:00:00', 'Disponible', 1),
-	(12, 11, '2077-12-31 00:00:00', 'Disponible', 0),
-	(13, 11, '2023-05-18 00:00:00', 'Disponible', 0);
+	(11, 4, '2077-12-31 00:00:00', 'Disponible', 0),
+	(12, 4, '2077-12-31 00:00:00', 'Disponible', 0),
+	(13, 4, '2023-05-18 00:00:00', 'Disponible', 0);
 
 -- Volcando estructura para tabla bilboskpdb.escenario
 CREATE TABLE IF NOT EXISTS `escenario` (
@@ -247,15 +248,15 @@ CREATE TABLE IF NOT EXISTS `partidaonline` (
   KEY `idAnfitrion` (`idAnfitrion`),
   CONSTRAINT `FK_partidaonline_salaonline` FOREIGN KEY (`idSalaOnline`) REFERENCES `salaonline` (`idSala`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_partidaonline_suscriptor` FOREIGN KEY (`idAnfitrion`) REFERENCES `suscriptor` (`idSuscriptor`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=204 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla bilboskpdb.partidaonline: ~20 rows (aproximadamente)
+-- Volcando datos para la tabla bilboskpdb.partidaonline: ~24 rows (aproximadamente)
 DELETE FROM `partidaonline`;
 INSERT INTO `partidaonline` (`idPartida`, `idSalaOnline`, `idAnfitrion`, `puntaje`, `numeroJugadores`, `nombreGrupo`, `fechaInicio`, `fechaFin`, `visibleRanking`) VALUES
 	(1, 2, 1, 2000, '6', 'Los mosqueteros', '2023-04-09 22:51:02', '2023-04-09 23:51:04', 1),
 	(2, 1, 1, 1800, '3', 'Los mosqueteros', '2023-04-09 22:51:02', '2023-04-09 23:51:04', 1),
 	(3, 3, 5, 1700, '2', 'Los solitarios', '2023-04-13 12:00:00', '2023-04-13 13:45:00', 1),
-	(6, 2, 3, 1400, '5', 'Los aventureros', '2023-04-09 15:30:00', '2023-04-09 17:45:00', 1),
+	(6, 3, 3, 1400, '5', 'Los aventureros', '2023-04-09 15:30:00', '2023-04-09 17:45:00', 1),
 	(7, 1, 2, 1400, '4', 'Los exploradores', '2023-04-10 10:00:00', '2023-04-10 12:30:00', 1),
 	(8, 3, 4, 800, '3', 'Los valientes', '2023-04-11 18:00:00', '2023-04-11 19:45:00', 1),
 	(9, 2, 1, 1200, '6', 'Los caballeros', '2023-04-12 21:00:00', '2023-04-13 00:15:00', 1),
@@ -271,7 +272,36 @@ INSERT INTO `partidaonline` (`idPartida`, `idSalaOnline`, `idAnfitrion`, `puntaj
 	(20, 1, 12, 0, '4', 'PRESTOS', '2023-04-18 00:00:00', '2023-04-18 00:00:00', 1),
 	(21, 1, 12, 0, '4', 'PRESTOS', '2023-04-18 00:00:00', '2023-04-18 00:00:00', 1),
 	(22, 1, 12, 0, '4', 'PRESTOS', '2023-04-18 00:00:00', '2023-04-18 00:00:00', 1),
-	(23, 1, 12, 0, '4', 'PRESTOS', '2023-04-18 00:00:00', '2023-04-18 00:00:00', 1);
+	(23, 1, 12, 0, '4', 'PRESTOS', '2023-04-18 00:00:00', '2023-04-18 00:00:00', 1),
+	(200, 10, 12, 0, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+	(201, 10, 12, 0, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+	(202, 10, 12, 0, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+	(203, 10, 12, 0, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1);
+
+-- Volcando estructura para vista bilboskpdb.partidas_mas_jugadas
+-- Creando tabla temporal para superar errores de dependencia de VIEW
+CREATE TABLE `partidas_mas_jugadas` (
+	`idPartida` INT(11) NOT NULL,
+	`idSalaOnline` INT(11) NOT NULL,
+	`nombre` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`cantidad_jugadores` BIGINT(21) NOT NULL
+) ENGINE=MyISAM;
+
+-- Volcando estructura para vista bilboskpdb.partidas_mas_jugadas2
+-- Creando tabla temporal para superar errores de dependencia de VIEW
+CREATE TABLE `partidas_mas_jugadas2` (
+	`idSala` INT(11) NOT NULL,
+	`nombre` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`cantidad_jugadores` BIGINT(21) NOT NULL
+) ENGINE=MyISAM;
+
+-- Volcando estructura para vista bilboskpdb.partidas_mas_jugadas3
+-- Creando tabla temporal para superar errores de dependencia de VIEW
+CREATE TABLE `partidas_mas_jugadas3` (
+	`idSala` INT(11) NOT NULL,
+	`nombre` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`cantidad_partidas_jugadas` BIGINT(21) NOT NULL
+) ENGINE=MyISAM;
 
 -- Volcando estructura para tabla bilboskpdb.pista
 CREATE TABLE IF NOT EXISTS `pista` (
@@ -414,6 +444,38 @@ INSERT INTO `salaonline` (`idSala`, `nombre`, `dificultad`, `tematica`, `descrip
 	(10, 'Traición en el Espacio', 'Difícil', 'Sci-fi', 'Como tripulante de una nave espacial, tienes la misión de descubrir al impostor que se encuentra entre la tripulación. Resuelve acertijos y tareas mientras tratas de encontrar pistas para descubrir al impostor antes de que sea demasiado tarde.', 90, 4, 8, 16, 1),
 	(11, 'La sala del terror', 'Facil', 'terrrior', 'Sala de pruebas', 45, 1, 8, 18, 1);
 
+-- Volcando estructura para vista bilboskpdb.salas_mas_jugadas
+-- Creando tabla temporal para superar errores de dependencia de VIEW
+CREATE TABLE `salas_mas_jugadas` (
+	`idSala` INT(11) NOT NULL,
+	`nombre` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`dificultad` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`tematica` VARCHAR(30) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`descripcion` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`tiempoMax` INT(3) UNSIGNED NOT NULL COMMENT 'Minutos',
+	`jugadoresMin` INT(2) UNSIGNED NOT NULL,
+	`jugadoresMax` INT(2) UNSIGNED NOT NULL,
+	`edad_recomendada` INT(2) UNSIGNED NOT NULL,
+	`disponible` TINYINT(1) NOT NULL,
+	`cantidad_partidas_jugadas` BIGINT(21) NOT NULL
+) ENGINE=MyISAM;
+
+-- Volcando estructura para vista bilboskpdb.salas_mas_jugadasv3
+-- Creando tabla temporal para superar errores de dependencia de VIEW
+CREATE TABLE `salas_mas_jugadasv3` (
+	`idSala` INT(11) NOT NULL,
+	`nombre` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`dificultad` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`tematica` VARCHAR(30) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`descripcion` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`tiempoMax` INT(3) UNSIGNED NOT NULL COMMENT 'Minutos',
+	`jugadoresMin` INT(2) UNSIGNED NOT NULL,
+	`jugadoresMax` INT(2) UNSIGNED NOT NULL,
+	`edad_recomendada` INT(2) UNSIGNED NOT NULL,
+	`disponible` TINYINT(1) NOT NULL,
+	`cantidad_partidas_jugadas` BIGINT(21) NOT NULL
+) ENGINE=MyISAM;
+
 -- Volcando estructura para tabla bilboskpdb.suscriptor
 CREATE TABLE IF NOT EXISTS `suscriptor` (
   `idSuscriptor` int(11) NOT NULL AUTO_INCREMENT,
@@ -428,9 +490,9 @@ CREATE TABLE IF NOT EXISTS `suscriptor` (
   `activo` tinyint(1) unsigned NOT NULL DEFAULT 1,
   PRIMARY KEY (`idSuscriptor`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla bilboskpdb.suscriptor: ~10 rows (aproximadamente)
+-- Volcando datos para la tabla bilboskpdb.suscriptor: ~11 rows (aproximadamente)
 DELETE FROM `suscriptor`;
 INSERT INTO `suscriptor` (`idSuscriptor`, `email`, `pass`, `alias`, `nombre`, `apellidos`, `fech_nac`, `telefono`, `imagen`, `activo`) VALUES
 	(1, 'JuanjoElCamioneroExtremo@gmail.co.uk', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'JuanjoExtremo', 'Juanjo', 'Perez Agujeros', '1987-10-10', 177565252, 'avatardefault1.png', 1),
@@ -442,7 +504,8 @@ INSERT INTO `suscriptor` (`idSuscriptor`, `email`, `pass`, `alias`, `nombre`, `a
 	(7, 'aventurasenelamazonas@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'AmazonAdventurer', 'María', 'López', '1988-03-15', 741236985, 'avatardefault1.png', 1),
 	(8, 'admin@bilboskp.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'admin', 'admin', 'admin', '1999-10-09', 0, 'avatardefault1.png', 1),
 	(11, 'mlinares@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'mlinares', 'Mikel', 'Linares', '1983-10-10', NULL, 'avatardefault1.png', 1),
-	(12, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'administrador', 'Bilbo', 'SKP', '2023-10-10', 7, 'avatardefault1.png', 1);
+	(12, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'administrador', 'Bilbo', 'SKP', '2023-10-10', 7, 'avatardefault1.png', 1),
+	(24, 'admin@google.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'admina', 'admin', 'admine', '2023-05-02', 123, 'avatardefault1.png', 1);
 
 -- Volcando estructura para vista bilboskpdb.suscriptoresenpartida
 -- Creando tabla temporal para superar errores de dependencia de VIEW
@@ -517,6 +580,49 @@ INSERT INTO `tipos_puzzle` (`idTipo`, `nombre`) VALUES
 	(2, 'Abrir puerta'),
 	(3, 'Click objeto');
 
+-- Volcando estructura para vista bilboskpdb.vista2
+-- Creando tabla temporal para superar errores de dependencia de VIEW
+CREATE TABLE `vista2` (
+	`idSala` INT(11) NOT NULL,
+	`nombre` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`dificultad` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`tematica` VARCHAR(30) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`descripcion` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`tiempoMax` INT(3) UNSIGNED NOT NULL COMMENT 'Minutos',
+	`jugadoresMin` INT(2) UNSIGNED NOT NULL,
+	`jugadoresMax` INT(2) UNSIGNED NOT NULL,
+	`edad_recomendada` INT(2) UNSIGNED NOT NULL,
+	`disponible` TINYINT(1) NOT NULL,
+	`cantidad_partidas_jugadas` BIGINT(21) NOT NULL
+) ENGINE=MyISAM;
+
+-- Volcando estructura para vista bilboskpdb.partidas_mas_jugadas
+-- Eliminando tabla temporal y crear estructura final de VIEW
+DROP TABLE IF EXISTS `partidas_mas_jugadas`;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `partidas_mas_jugadas` AS SELECT p.idPartida, p.idSalaOnline, s.nombre, COUNT(*) AS cantidad_jugadores
+FROM partidaonline p
+JOIN salaonline s ON p.idSalaOnline = s.idSala
+GROUP BY p.idPartida
+ORDER BY cantidad_jugadores DESC ;
+
+-- Volcando estructura para vista bilboskpdb.partidas_mas_jugadas2
+-- Eliminando tabla temporal y crear estructura final de VIEW
+DROP TABLE IF EXISTS `partidas_mas_jugadas2`;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `partidas_mas_jugadas2` AS SELECT s.idSala, s.nombre, COUNT(*) AS cantidad_jugadores
+FROM partidaonline p
+JOIN salaonline s ON p.idSalaOnline = s.idSala
+GROUP BY p.idPartida
+ORDER BY cantidad_jugadores DESC ;
+
+-- Volcando estructura para vista bilboskpdb.partidas_mas_jugadas3
+-- Eliminando tabla temporal y crear estructura final de VIEW
+DROP TABLE IF EXISTS `partidas_mas_jugadas3`;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `partidas_mas_jugadas3` AS SELECT s.idSala, s.nombre, COUNT(p.idPartida) AS cantidad_partidas_jugadas
+FROM salaonline s
+LEFT JOIN partidaonline p ON s.idSala = p.idSalaOnline
+GROUP BY s.idSala
+ORDER BY cantidad_partidas_jugadas DESC ;
+
 -- Volcando estructura para vista bilboskpdb.rankingfisico
 -- Eliminando tabla temporal y crear estructura final de VIEW
 DROP TABLE IF EXISTS `rankingfisico`;
@@ -533,6 +639,20 @@ CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `rankingonline` AS (
     from partidaonline pao, salaonline so
     where  pao.idSalaOnline=so.idSala AND pao.visibleRanking=1 ORDER BY puntaje desc
 	 ) ;
+
+-- Volcando estructura para vista bilboskpdb.salas_mas_jugadas
+-- Eliminando tabla temporal y crear estructura final de VIEW
+DROP TABLE IF EXISTS `salas_mas_jugadas`;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `salas_mas_jugadas` AS SELECT s.*, COUNT(p.idPartida) AS cantidad_partidas_jugadas FROM salaonline s LEFT JOIN partidaonline p ON s.idSala = p.idSalaOnline GROUP BY s.idSala ORDER BY cantidad_partidas_jugadas DESC ;
+
+-- Volcando estructura para vista bilboskpdb.salas_mas_jugadasv3
+-- Eliminando tabla temporal y crear estructura final de VIEW
+DROP TABLE IF EXISTS `salas_mas_jugadasv3`;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `salas_mas_jugadasv3` AS SELECT s.*, COUNT(p.idPartida) AS cantidad_partidas_jugadas
+FROM salaonline s
+LEFT JOIN partidaonline p ON s.idSala = p.idSalaOnline
+GROUP BY s.idSala
+ORDER BY cantidad_partidas_jugadas DESC ;
 
 -- Volcando estructura para vista bilboskpdb.suscriptoresenpartida
 -- Eliminando tabla temporal y crear estructura final de VIEW
@@ -565,6 +685,11 @@ CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `suscriptoresenpartida4` AS
     select alias
     from suscriptor_partidaonline supao, suscriptor su
     where supao.idSuscriptor=su.idSuscriptor) ;
+
+-- Volcando estructura para vista bilboskpdb.vista2
+-- Eliminando tabla temporal y crear estructura final de VIEW
+DROP TABLE IF EXISTS `vista2`;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vista2` AS SELECT s.*, COUNT(p.idPartida) AS cantidad_partidas_jugadas FROM salaonline s LEFT JOIN partidaonline p ON s.idSala = p.idSalaOnline GROUP BY s.idSala ORDER BY cantidad_partidas_jugadas DESC ;
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

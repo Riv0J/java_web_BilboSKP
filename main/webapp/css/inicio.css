@@ -175,12 +175,18 @@ background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(15,3,3,1) 6%, rgba(63
     }
   }
   
-  .titulo h2{
+  .caja_titulo h2{
     text-align: center;
     font-size: 3em;
     font-weight: 600;
-    background-color: black;
-    padding: 5%;
+    padding: 3%;
+  }
+  .caja_textura{
+  	background-image: url(../img_web/texturas_prueba/tela.png);
+    background-size: cover;
+    background-repeat: repeat;
+    border-top: 0.25em solid var(--gray-border-color);
+  	border-bottom: 0.25em solid var(--gray-border-color);
   }
 
   .card-container2 {
