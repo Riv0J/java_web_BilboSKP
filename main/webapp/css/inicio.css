@@ -197,6 +197,18 @@ background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(15,3,3,1) 6%, rgba(63
 	background: linear-gradient(180deg, rgba(106,18,18,1) 0%, rgba(63,11,11,1) 6%, rgba(15,3,3,1) 35%, rgba(0,0,0,1) 100%);
     padding: 5%;
   }
+  
+  .card-container2 img{
+  width: 50%;
+  }
+  
+  .card-container2 .card{
+  display:flex;
+  background-color:#ffffff26;}
+  
+   .card-container2 .card img{
+  	padding: 5%;
+  	}
 
   .principal{
     font-size: 1.4em;

@@ -1,4 +1,4 @@
-<%@ page
+ <%@ page
 	import="model.Suscriptor, model.SalaOnline, control.BilboSKP, view.Mensaje, java.util.Vector, java.io.File"%>
 <%
 session.setAttribute("urlPrevia", "index.jsp");
@@ -55,7 +55,7 @@ try {
 	</section>
 	<section class="card-container2">
 		<div class="card">
-			<img src="img_web/inicio/card2.jpg" alt="Foto del scape room">
+			<img src="img_web/inicio/multijugador.png" alt="Foto del scape room">
 			<div class="card-content">
 				<h2>SOLO O CON AMIGOS</h2>
 				<p>Puedes realizar cualquiera de nuestros escapes de forma
@@ -65,7 +65,7 @@ try {
 			</div>
 		</div>
 		<div class="card">
-			<img src="img_web/inicio/card2.jpg" alt="Foto del scape room">
+			<img src="img_web/inicio/senal.png" alt="Foto del scape room">
 			<div class="card-content">
 				<h2>MÚLTIPLES AVENTURAS</h2>
 				<p>Tenemos actualmente varias historias, y estamos trabajando en
@@ -74,7 +74,7 @@ try {
 			</div>
 		</div>
 		<div class="card">
-			<img src="img_web/inicio/card2.jpg" alt="Foto del scape room">
+			<img src="img_web/inicio/innovacion.png" alt="Foto del scape room">
 			<div class="card-content">
 				<h2>¿CÓMO FUNCIONA?</h2>
 				<p>Resuelve puzzles y encuentra la solución en tiempo limitado.
