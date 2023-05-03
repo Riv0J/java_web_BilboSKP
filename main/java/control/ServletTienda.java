@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Cupon;
 import model.Suscriptor;
 
 /**
@@ -23,6 +24,19 @@ public class ServletTienda extends HttpServlet {
 		
 		HttpSession sesion = request.getSession();
 		Suscriptor sus = (Suscriptor) sesion.getAttribute("suscriptor");
+		
+		if(sus!=null) {
+			//los cupones comprados irán a su cuenta
+			int susID = sus.getIdSuscriptor();
+			try {
+				BilboSKP.otorgarCupon("Regular", susID);
+			} catch (Throwable e) {
+				System.out.println("cupon regular comprado");
+				e.printStackTrace();
+			}
+		}else{
+			System.out.println("suscribirte?");
+		}
 
 	
 	

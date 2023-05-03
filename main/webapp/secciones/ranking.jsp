@@ -3,7 +3,6 @@
 	pageEncoding="ISO-8859-1"
 	import="java.util.HashMap,java.util.ArrayList,java.util.Map, java.util.Vector, java.text.SimpleDateFormat, model.Sala, model.PartidaOnline, model.Partida"%>
 
-<link rel="stylesheet" href="css/ranking.css">
 
 <%
 HashMap<String, Sala> salasAMostrar = (HashMap<String, Sala>) request.getAttribute("salasAMostrar"); //hashmap de salas Online cargadas
@@ -22,6 +21,8 @@ System.out.println(salasAMostrar.size());
 %>
 
 <body>
+<link rel="stylesheet" href="css/ranking.css">
+
 	<h2 class="superior">
 		Sala de escape:<%=salaSeleccionada.getNombre()%>
 	</h2>
@@ -33,7 +34,6 @@ System.out.println(salasAMostrar.size());
 			%>
 			<li><a href="index.jsp?sec=ranking&sala=<%=salas.getKey()%>"> <%=salas.getValue().getNombre()%>
 			</a></li>
-			<br>
 			<%
 			}
 			%>
@@ -140,11 +140,11 @@ System.out.println(salasAMostrar.size());
 					%></li>
 		</ol>
 	</div>
-			<%for (int i = 0; i < partidas.size(); i++) {
+			<% for (int i = 0; i < partidas.size(); i++) {
 				PartidaOnline partida = (PartidaOnline) partidas.get(i);
 			
 			if (i == 0) {
-System.out.println("prueba1");
+			System.out.println("prueba1");
 				posicion1nombre = partida.getNombreGrupo();
 				posicion1puntos = Integer.toString(partida.getPuntaje());
 				posicion1tiempo = Integer.toString(partida.calcularTiempo());
@@ -197,10 +197,6 @@ System.out.println("prueba1");
 	if (i >= 9) {
 		break;
 	}
-
-	
-	}
-	
-	
+}
 	%>
 </body>

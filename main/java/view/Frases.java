@@ -45,7 +45,7 @@ public class Frases {
 		frases.put("ESContactoFAQ1", "¿Como comprar cupones?");
 		frases.put("ENContactoFAQ1", "How I buy coupons?");
 		frases.put("EUContactoFAQ1", "Nola eros dezaket kupoiak?");
-		frases.put("ESContactoFAQ1R", "Quería un perro pero borracho compr� un caballo en una subasta online: El joven de 24 a�os vio que hab�a un caballo muy barato, y quiso subir su valor para que alguien termine pagando m�s por el animal. As� fue que sin recordar mucho, debido al alcohol, acab� por recibir un llamado al d�a siguiente donde le preguntaban cu�ndo iba a buscar el equino.");
+		frases.put("ESContactoFAQ1R", "Quería un perro pero borracho compró un caballo en una subasta online: El joven de 24 años vio que había un caballo muy barato, y quiso subir su valor para que alguien termine pagando más por el animal. As� fue que sin recordar mucho, debido al alcohol, acab� por recibir un llamado al d�a siguiente donde le preguntaban cu�ndo iba a buscar el equino.");
 		frases.put("ENContactoFAQ1R", "Lorem ipsum ipsum lorem");
 		frases.put("EUContactoFAQ1R", "Lorem ipsum ipsum lorem");
 		frases.put("ESContactoFAQ2", "¿Como organizo una partida?");

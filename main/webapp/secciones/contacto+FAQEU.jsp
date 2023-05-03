@@ -73,7 +73,7 @@ Frases frase=new Frases();
 		<ul>
 			<li><p>
 					<img src="../img_web/icons/parking.png" alt=""><span><a href="#"
-						onclick="document.getElementById('mapaParking').style.display='block'"><%=Frases.getFrase("EUContactoParking")%></a></span>?
+						onclick="document.getElementById('mapaParking').style.display='block'"><%=Frases.getFrase("EUContactoParking")%></a></span>
 				</p>
 				<div id="mapaParking" style="display: none">
 					<iframe
