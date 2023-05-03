@@ -24,6 +24,9 @@ public class ServletTienda extends HttpServlet {
 		
 		HttpSession sesion = request.getSession();
 		Suscriptor sus = (Suscriptor) sesion.getAttribute("suscriptor");
+		
+		//comprobar si
+		
 		//comprobar si se está suscrito 
 		if(sus!=null) {
 			//los cupones comprados irán a la cuenta de sus
@@ -36,8 +39,10 @@ public class ServletTienda extends HttpServlet {
 				e.printStackTrace();
 			}
 		}else{
-			
+			//ofrecer registro
 			System.out.println("suscribirte?");
+			request.getRequestDispatcher("./subscribe").forward(request,
+					response);;
 		}
 
 	

@@ -30,7 +30,7 @@ System.out.println(salasAMostrar.size());
 			<%
 			for (Map.Entry<String, Sala> salas : salasAMostrar.entrySet()) {
 			%>
-			<li><%salaSeleccionada=salas.getValue(); %><a href="index.jsp?sec=ranking&sala=<%=salas.getKey()%>">
+			<li><a href="index.jsp?sec=ranking&sala=<%=salas.getKey()%>">
 					<%=salas.getValue().getNombre()%>
 			</a>
 			</li>
@@ -51,6 +51,15 @@ System.out.println(salasAMostrar.size());
 		//String fecha = sdf.format(partida.getFechaInicio());
 		//int contador= 1;
 		 --%>
+		 
+		 <% for (int i=0;i>partidas.size();i++) {
+		 
+			PartidaOnline partida = (PartidaOnline) partidas.get(i);
+
+		 
+		  
+		
+		 %>
 	<div id="podio">
 		<div class="info">
 			<img src="./img_web/icons/copa2.png">
@@ -58,12 +67,17 @@ System.out.println(salasAMostrar.size());
 				<p></p>
 			</div>
 		</div>
-		<div class="info">
+		<%if(i==1){%><div class="info">
 			<img src="./img_web/icons/copa1.png">
 			<div class="caja oro">
-				<p></p>
+				<p><%
+			  partida.getNombreGrupo();
+			  partida.getPuntaje();
+			  partida.getTiempoMinutos();
+		 } %></p>
 			</div>
 		</div>
+		
 		<div class="info">
 			<img src="./img_web/icons/copa3.png">
 			<div class="caja bronce">
@@ -77,11 +91,10 @@ System.out.println(salasAMostrar.size());
 			<li></li>
 			<li></li>
 			<li></li>
-
 			<li></li>
 			<li></li>
 			<li></li>
 		</ol>
 	</div>
-	
+<%	 } %>
 </body>

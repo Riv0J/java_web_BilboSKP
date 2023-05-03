@@ -52,19 +52,82 @@ System.out.println(salasAMostrar.size());
 		//String fecha = sdf.format(partida.getFechaInicio());
 		//int contador= 1;
 		 --%>
+		 
+		 <%for (int i = 0; i < partidas.size(); i++) {
+				PartidaOnline partida = (PartidaOnline) partidas.get(i);
+			
+			if (i == 0) {
+			System.out.println("prueba1");
+				posicion1nombre = partida.getNombreGrupo();
+				posicion1puntos = Integer.toString(partida.getPuntaje());
+				posicion1tiempo = Integer.toString(partida.calcularTiempo());
+			}
+			
+			if (i == 1) {
+
+				posicion2nombre = partida.getNombreGrupo();
+				posicion2puntos = Integer.toString(partida.getPuntaje());
+				posicion2tiempo = Integer.toString(partida.calcularTiempo());
+			}
+			
+	if (i == 2) {
+	}
+		posicion3nombre = partida.getNombreGrupo();
+		posicion3puntos = Integer.toString(partida.getPuntaje());
+		posicion3tiempo = Integer.toString(partida.calcularTiempo());
+	}
+	if (i == 3) {
+		posicion4nombre = partida.getNombreGrupo();
+		posicion4puntos = Integer.toString(partida.getPuntaje());
+		posicion4tiempo = Integer.toString(partida.calcularTiempo());
+	}
+	if (i == 4) {
+		posicion5nombre = partida.getNombreGrupo();
+		posicion5puntos = Integer.toString(partida.getPuntaje());
+		posicion5tiempo = Integer.toString(partida.calcularTiempo());
+	}
+	if (i == 5) {
+		posicion6nombre = partida.getNombreGrupo();
+		posicion6puntos = Integer.toString(partida.getPuntaje());
+		posicion6tiempo = Integer.toString(partida.calcularTiempo());
+	}
+	if (i == 6) {
+		posicion7nombre = partida.getNombreGrupo();
+		posicion7puntos = Integer.toString(partida.getPuntaje());
+		posicion7tiempo = Integer.toString(partida.calcularTiempo());
+	}
+	if (i == 7) {
+		posicion8nombre = partida.getNombreGrupo();
+		posicion8puntos = Integer.toString(partida.getPuntaje());
+		posicion8tiempo = Integer.toString(partida.calcularTiempo());
+	}
+	if (i == 8) {
+		posicion9nombre = partida.getNombreGrupo();
+		posicion9puntos = Integer.toString(partida.getPuntaje());
+		posicion9tiempo = Integer.toString(partida.calcularTiempo());
+	}
+	
+	if (i >= 9) {
+		break;
+	}
+	}
+	}
+	%>
+		 
+		 
 	<div id="podio">
 		<div class="info">
 			<img src="./img_web/icons/copa2.png">
 			<div class="caja plata">
 				<p>
 					<%
-					String posicion2nombre = new String();
+					String posicion2nombre;
 					%><br>
 					<%
-					String posicion2puntos = new String();
+					String posicion2puntos;
 					%><br>
 					<%
-					String posicion2tiempo = new String();
+					String posicion2tiempo;
 					%>
 				</p>
 			</div>
@@ -156,63 +219,5 @@ System.out.println(salasAMostrar.size());
 			</li>
 		</ol>
 	</div>
-	<%for (int i = 0; i < partidas.size(); i++) {
-				PartidaOnline partida = (PartidaOnline) partidas.get(i);
-			
-			if (i == 0) {
-			System.out.println("prueba1");
-				posicion1nombre = partida.getNombreGrupo();
-				posicion1puntos = Integer.toString(partida.getPuntaje());
-				posicion1tiempo = Integer.toString(partida.calcularTiempo());
-			}
-			
-			if (i == 1) {
-
-				posicion2nombre = partida.getNombreGrupo();
-				posicion2puntos = Integer.toString(partida.getPuntaje());
-				posicion2tiempo = Integer.toString(partida.calcularTiempo());
-			}
-			
-	if (i == 2) {
-	}
-		posicion3nombre = partida.getNombreGrupo();
-		posicion3puntos = Integer.toString(partida.getPuntaje());
-		posicion3tiempo = Integer.toString(partida.calcularTiempo());
-	}
-	if (i == 3) {
-		posicion4nombre = partida.getNombreGrupo();
-		posicion4puntos = Integer.toString(partida.getPuntaje());
-		posicion4tiempo = Integer.toString(partida.calcularTiempo());
-	}
-	if (i == 4) {
-		posicion5nombre = partida.getNombreGrupo();
-		posicion5puntos = Integer.toString(partida.getPuntaje());
-		posicion5tiempo = Integer.toString(partida.calcularTiempo());
-	}
-	if (i == 5) {
-		posicion6nombre = partida.getNombreGrupo();
-		posicion6puntos = Integer.toString(partida.getPuntaje());
-		posicion6tiempo = Integer.toString(partida.calcularTiempo());
-	}
-	if (i == 6) {
-		posicion7nombre = partida.getNombreGrupo();
-		posicion7puntos = Integer.toString(partida.getPuntaje());
-		posicion7tiempo = Integer.toString(partida.calcularTiempo());
-	}
-	if (i == 7) {
-		posicion8nombre = partida.getNombreGrupo();
-		posicion8puntos = Integer.toString(partida.getPuntaje());
-		posicion8tiempo = Integer.toString(partida.calcularTiempo());
-	}
-	if (i == 8) {
-		posicion9nombre = partida.getNombreGrupo();
-		posicion9puntos = Integer.toString(partida.getPuntaje());
-		posicion9tiempo = Integer.toString(partida.calcularTiempo());
-	}
 	
-	if (i >= 9) {
-		break;
-	}
-}
-	%>
 </body>
