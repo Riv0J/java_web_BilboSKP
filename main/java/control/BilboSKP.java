@@ -388,7 +388,7 @@ public class BilboSKP extends DBC {
 				vectorPartidas.add(partida);
 			}
 
-			// hacer syso de los horarios obtenidos
+			// syso de los horarios obtenidos
 			System.out.println("Mejores puntos la sala con id " + idSala + ":");
 			if (vectorPartidas.size() > 0) {
 				for (int i = 0; i < vectorPartidas.size(); i++) {

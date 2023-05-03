@@ -39,17 +39,17 @@ p {
 #podio {
 	position: static;
 	display: flex;
-	/*  align-content: center;*/
-	top:-20;
+	 align-content: center;	
+	top:-30;
+	max-height:30vm;
 	align-items: flex-end;
-	width: 65%;
+	width: 70%;
 	height: 22em;
 	margin-left: 25%;
-	/*border: #000 solid 1px;*/
+	border: #074 solid 3px;
 }
 
 .oro {
-	position:absolute;
 	display: flex;
 	justify-content: center;
 	align-items: center;

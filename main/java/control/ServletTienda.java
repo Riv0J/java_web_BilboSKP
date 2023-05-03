@@ -24,17 +24,19 @@ public class ServletTienda extends HttpServlet {
 		
 		HttpSession sesion = request.getSession();
 		Suscriptor sus = (Suscriptor) sesion.getAttribute("suscriptor");
-		
+		//comprobar si se está suscrito 
 		if(sus!=null) {
-			//los cupones comprados irán a su cuenta
+			//los cupones comprados irán a la cuenta de sus
 			int susID = sus.getIdSuscriptor();
 			try {
 				BilboSKP.otorgarCupon("Regular", susID);
-			} catch (Throwable e) {
 				System.out.println("cupon regular comprado");
+			} catch (Throwable e) {
+				System.out.println("cupon regular NO comprado");
 				e.printStackTrace();
 			}
 		}else{
+			
 			System.out.println("suscribirte?");
 		}
 
