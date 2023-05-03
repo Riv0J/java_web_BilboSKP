@@ -16,11 +16,11 @@ System.out.println(rutaJspSeccion);
                 <ul>
 
 
-                    <li class="gc"><a href="<%=subseccion%>">Gestión de la cuenta</a></li>
-                    <li><a href="<%=subseccion%>">Mis reservas</a></li>
+                    <li class="gc"><a href="./perfil?sub=gestionCuenta">Gestión de la cuenta</a></li>
+                    <li><a href="./perfil?sub=reserva">Mis reservas</a></li>
                     <li><a href="./perfil?sub=cupones">Mis cupones</a></li>
 
-                    <li><a href="">Cerrar sesión</a></li>
+                    <li><a href="./perfil?sec=inicio"></a></li>
                 </ul>
             </div>
             <div class="caja2">
