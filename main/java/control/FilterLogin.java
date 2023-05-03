@@ -36,7 +36,7 @@ public class FilterLogin implements Filter {
 			HttpServletRequest req = (HttpServletRequest) request;
 			HttpSession sesion = (req.getSession());
 			// establecer el tiempo de vida de la sesion en 2 min
-			sesion.setMaxInactiveInterval(20);
+			sesion.setMaxInactiveInterval(20000);
 			// Obtener el objeto "Suscriptor" de la sesión
 			Object suscriptor = (Object) sesion.getAttribute("suscriptor");
 
