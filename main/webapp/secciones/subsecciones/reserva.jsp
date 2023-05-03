@@ -3,13 +3,13 @@
 	model.Reserva, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date  "%>   
 <link rel="stylesheet" href="../css/reserva.css">
 
-      <section id="caja0">
-            <section id="caja1">
+      <section id="caja">
+            <section id="cajita1">
                 <h1>Administra tus reservas</h1>
                 <p>Puedes ver o cancelar tus reservas para las salas de escape físicas.Ten en cuenta que tus reservas se mostrarán por orden
                 de fecha de caducidad más cercana.</p>
             </section>
-            <section id="caja2">
+            <section id="cajita2">
                 <div class="title">
                     <p><strong>Próximas reservas</strong></p>
                 </div>
