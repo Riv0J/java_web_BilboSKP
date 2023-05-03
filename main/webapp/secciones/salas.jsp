@@ -41,7 +41,7 @@ if (dificultadesDisponibles != null && tematicasDisponibles != null) {
 						<option value="todas"><%=Frases.getFrase("ESSalasTematicas")%></option>
 						<%
 						for (String tematica : tematicasDisponibles) {
-															String tematicaNormalizada = StringHelper.normalizarTexto(tematica);
+							String tematicaNormalizada = StringHelper.normalizarTexto(tematica);
 						%>
 						<option <%if (t.equals(tematicaNormalizada)) {%> selected <%}%>
 							value="<%=tematicaNormalizada%>"><%=tematica%></option>
@@ -57,7 +57,7 @@ if (dificultadesDisponibles != null && tematicasDisponibles != null) {
 						<option value="todas"><%=Frases.getFrase("ESSalasDificultad")%></option>
 						<%
 						for (String dificultad : dificultadesDisponibles) {
-															String dificultadNormalizada = StringHelper.normalizarTexto(dificultad);
+							String dificultadNormalizada = StringHelper.normalizarTexto(dificultad);
 						%>
 						<option <%if (d.equals(dificultadNormalizada)) {%> selected <%}%>
 							value="<%=dificultadNormalizada%>"><%=dificultad%></option>

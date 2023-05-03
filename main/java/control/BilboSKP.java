@@ -41,7 +41,45 @@ public class BilboSKP extends DBC {
 	protected static boolean getEstadoRanking() {
 		return estadoRanking;
 	}
+	
+	public static Vector<SalaOnline> getSalasMasJugadas(int limit) throws Throwable{
+		Vector<SalaOnline> vectorSalasOnlineTop = new Vector<SalaOnline>();
+		String nombreVista = "salas_mas_jugadas";
+		try {
+			//hacer una vista si no existe
+			String sentenciaSQL = "CREATE VIEW if not exists "+nombreVista+" AS SELECT s.*, COUNT(p.idPartida) AS cantidad_partidas_jugadas FROM salaonline s LEFT JOIN partidaonline p ON s.idSala = p.idSalaOnline GROUP BY s.idSala ORDER BY cantidad_partidas_jugadas DESC;";
+			BilboSKP conexion = new BilboSKP();
+			int filasAfectadas =conexion.SQLUpdate(sentenciaSQL);
+			if(filasAfectadas==0) {
+				System.out.println("La vista de top salas ya existia");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error tratando de crear vista");
+		}
+		try {
+			//obtener las 3 salas mas jugadas de dicha vista
+			String sentenciaSQL2 = "select * from "+nombreVista+" order by cantidad_partidas_jugadas desc limit "+limit;
+			BilboSKP conexion = new BilboSKP();
+			ResultSet resultado = conexion.SQLQuery(sentenciaSQL2);
+			while (resultado.next()) {
+				// obtener los campos de cada columna para esta fila
+				int idSala = resultado.getInt("idSala");
+				String nombre = resultado.getString("nombre");
+				String dificultad = resultado.getString("dificultad");
+				String tematica = resultado.getString("tematica");
+				String descripcion = resultado.getString("descripcion");
 
+				SalaOnline sala = new SalaOnline(idSala, nombre, dificultad, tematica, descripcion);
+				// agregar sala al vector
+				vectorSalasOnlineTop.add(sala);
+			}
+			
+		} catch (Exception e) {
+		}
+		
+		return vectorSalasOnlineTop;
+	}
 	// conectarse a la BD y obtener todas las salas online @Rivo
 	public static Vector<SalaOnline> getSalasOnline() throws Throwable {
 		try {
@@ -581,7 +619,27 @@ public class BilboSKP extends DBC {
 		}
 		return false;
 	}
+	//cambiar el estado de todos los cupones cuya fecha caducidad es ayer @Inigo
+	public static boolean cambiarEstadoCuponesCaducados() throws Throwable {
+		try {
+			LocalDate fechaActual = LocalDate.now();
+			LocalDate fechaAyer = fechaActual.minusDays(1);
+			String sentenciaSQL ="UPDATE cupon SET estado = 'caducado' WHERE fechaCaducidad = '"+fechaAyer+"';";
+			BilboSKP conexion = new BilboSKP();
+			int filasAfectadas= conexion.SQLUpdate(sentenciaSQL);
+			if (filasAfectadas == 1) {
+				System.out.println("Se pudo cambiar el estado de los cupones");
+				return true;
+			} else {
+				System.out.println("NO Se pudo cambiar el estado de los cupones");
+			}
 
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error cambiando el estado de los cupones");
+		}
+		return false;
+	}
 	// otorgar cupon @Rivo
 	public static void otorgarCupon(String tipoCupon, int idSuscriptor) throws Throwable {
 		try {
