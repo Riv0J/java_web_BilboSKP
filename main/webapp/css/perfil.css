@@ -13,6 +13,14 @@
 a:link{
 	color: rgb(255, 255, 255);
 }
+a::after{
+	display:none;
+	content: "";
+	position: absolute;
+	border-top-color: red;
+	border-top-style: solid;
+	border-top-width: 0.125em;
+}
 .cajaPerfil{
     padding: 5%;
     width: 30%;
@@ -24,5 +32,15 @@ a:link{
     background-color: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
 /*aqui irán todas las secciones de jsp */
+}
+
+/*RESPONSIVE*/
+@media screen and(max-width:600px){
+	#caja0{
+	
+		display:flex;
+		flex-direction:colum;
+	
+	}
 }
 

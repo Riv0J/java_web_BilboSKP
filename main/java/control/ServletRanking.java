@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.Partida;
 import model.PartidaOnline;
@@ -38,6 +39,7 @@ public class ServletRanking extends HttpServlet {
 			throws ServletException, IOException {
 		System.out.println("doget ranking");
 		try {
+			
 			// 1. Obtener los parametros necesarios para mostrar la info
 			HashMap<String, Sala> mapaSalas = Sala.getTodasLasSalasCargadas();
 			HashMap<String, SalaOnline> salasAMostrar = new HashMap<String, SalaOnline>();
@@ -45,7 +47,7 @@ public class ServletRanking extends HttpServlet {
 		
 			
 			// Obtener los parametros de la sala que queremos ver el ranking
-			String idSala = request.getParameter("idSala");
+			String idSala = request.getParameter("IDsalaSeleccionada");
 
 			// si no hay sala seleccionada forzar la primera
 
@@ -91,9 +93,16 @@ public class ServletRanking extends HttpServlet {
 			// poner atributos del request, para que la seccion pueda mostrar la info
 			request.setAttribute("partidas", partidas);
 			request.setAttribute("salasAMostrar", salasAMostrar);
+			
+			//redireccionamiento: establecer la url a mandar como url previa en la sesion
+			String urlPrevia = "./ranking?idSala=" + idSala;
+			System.out.println("ServletRanking urlprevia establecida = "+urlPrevia);
+			HttpSession sesion = request.getSession();
+			sesion.setAttribute("urlPrevia", urlPrevia);
+			//---------------------------------------------------------------------------
+			
 			// Enviar la respuesta al usuario
-
-			request.getRequestDispatcher("index.jsp?sec=ranking&sala=" + salaSeleccionada.getIdSala()).forward(request,
+			request.getRequestDispatcher("index.jsp?sec=ranking&sala=" + idSala).forward(request,
 					response);
 
 		} catch (Throwable e) {
@@ -102,6 +111,10 @@ public class ServletRanking extends HttpServlet {
 		}
 		
 		//TODO reiniciar ranking
+		
+		
+		
+		
 		//TODO dar cupon a ganadores
 	}
 }

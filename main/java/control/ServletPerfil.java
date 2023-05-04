@@ -88,18 +88,17 @@ public class ServletPerfil extends HttpServlet {
 		default:
 		}
 
-		// GUARDAR Y EDITAR DATOS
-		if (subseccion.equalsIgnoreCase("editar")) {
-			try {
-
-				BilboSKP.actualizarSuscripcion(null);
-			} catch (Throwable e) {
-
-				e.printStackTrace();
+		//ACTUALIZAR DATOS DEL SUSCRIPTOR
+		try {
+			if (BilboSKP.actualizarSuscripcion(sus).equals(sus)) {
+				
+				
 			}
+		} catch (Throwable e) {
+
+			e.printStackTrace();
 		}
 
-		// CERRAR SESION
 
 		// Enviar la respuesta al usuario
 		request.getRequestDispatcher("index.jsp?sec=perfil").forward(request, response);
