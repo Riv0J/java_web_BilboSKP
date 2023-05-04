@@ -9,10 +9,10 @@ HashMap<String, Sala> salasAMostrar = (HashMap<String, Sala>) request.getAttribu
 Sala salaSeleccionada = (Sala) request.getAttribute("salaSeleccionada"); //una sala
 Vector<PartidaOnline> partidas = (Vector<PartidaOnline>) request.getAttribute("partidas");
 System.out.println("estamos en el jsp ranking");
-System.out.println(salaSeleccionada.getNombre());
-System.out.println(salasAMostrar.size());
+//System.out.println(salaSeleccionada.getNombre());
+//System.out.println(salasAMostrar.size());
 // verificar que hay partidas / vector de partidas
-
+Vector<PartidaOnline> finalistas = new Vector<PartidaOnline>();
 //necesito un array de todas las salas/ un array de todas las partidas de esa sala/
 
 //String salaseleccionada = request.getParameter("salaseleccionada");
@@ -22,7 +22,8 @@ System.out.println(salasAMostrar.size());
 	<link rel="stylesheet" href="css/ranking.css">
 
 	<h2 class="superior">
-		Sala de escape: <%=salaSeleccionada.getNombre()%>
+		Sala de escape:
+		<%=salaSeleccionada.getNombre()%>
 	</h2>
 	<nav class="lateral">
 		<%--recorrer salas hasta que no haya mas --%>
@@ -30,10 +31,9 @@ System.out.println(salasAMostrar.size());
 			<%
 			for (Map.Entry<String, Sala> salas : salasAMostrar.entrySet()) {
 			%>
-			<li><a href="./ranking?IDsalaSeleccionada=<%=salas.getKey()%>">
-					<%=salas.getValue().getNombre()%>
-			</a>
-			</li>
+			<li><a href="./ranking?IDsalaSeleccionada=<%=salas.getKey()%>"
+				style="color: #fff;"> <%=salas.getValue().getNombre()%>
+			</a></li>
 			<%
 			}
 			%>
@@ -51,54 +51,85 @@ System.out.println(salasAMostrar.size());
 		//String fecha = sdf.format(partida.getFechaInicio());
 		//int contador= 1;
 		 --%>
-		 <div id="podio">
-		 <% for (int i=0;i<partidas.size();i++) {
-		 
-			PartidaOnline partida = (PartidaOnline) partidas.get(i);
+	<div id="podio">
+		<%
+		for (int i = 0; i < partidas.size(); i++) {
 
-		 
-		  
-		
-		 %>
-	
-		<%if(i==1){%><div class="info">
+			PartidaOnline partida = (PartidaOnline) partidas.get(i);
+		%>
+
+		<%
+		if (i == 1) {
+		%><div class="info">
 			<img src="./img_web/icons/copa2.png">
 			<div class="caja plata">
-				<p><%= partida.getNombreGrupo()%><br>
-			  <%=partida.getPuntaje()%> puntos<br>
-			  <%=partida.getTiempoMinutos()%> mins</p>
+				<p><%=partida.getNombreGrupo()%><br>
+					<%=partida.getPuntaje()%>
+					puntos<br>
+					<%=partida.getTiempoMinutos()%>
+					mins
+				</p>
 			</div>
 		</div>
-		<% }%>
-		<%if(i==0){%><div class="info">
+		<%
+		}
+		%>
+		<%
+		if (i == 0) {
+		%><div class="info">
 			<img src="./img_web/icons/copa1.png">
 			<div class="caja oro">
-				<p><%= partida.getNombreGrupo()%><br>
-			  <%=partida.getPuntaje()%> puntos<br>
-			  <%=partida.getTiempoMinutos()%> mins</p>
+				<p><%=partida.getNombreGrupo()%><br>
+					<%=partida.getPuntaje()%>
+					puntos<br>
+					<%=partida.getTiempoMinutos()%>
+					mins
+				</p>
 			</div>
 		</div>
-		<% }
-		if(i==2){%><div class="info">
+		<%
+		}
+		if (i == 2) {
+		%><div class="info">
 			<img src="./img_web/icons/copa3.png">
 			<div class="caja bronce">
-				<p><%= partida.getNombreGrupo()%><br>
-			  <%=partida.getPuntaje()%> puntos<br>
-			  <%=partida.getTiempoMinutos()%> mins</p>
+				<p><%=partida.getNombreGrupo()%><br>
+					<%=partida.getPuntaje()%>
+					puntos<br>
+					<%=partida.getTiempoMinutos()%>
+					mins
+				</p>
 			</div>
 		</div>
-		<% }%>
+		<%
+		}
+		%>
 	</div>
 	<div id="finalistas">
 		<ol>
-			<li value="4"></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
+
+			<%
+		// hacer un vector que recoja los finalistas,luego los suelta en una caja
+		if (i >= 3) {
+
+			finalistas.add(partida);
+			PartidaOnline finalista = (PartidaOnline) finalistas.get(i-3);
+		
+		%>
+			<li value="<%=i%>">
+				<%=finalista.getNombreGrupo()%>
+					<%=finalista.getPuntaje()%>
+					puntos ,
+					<%=finalista.getTiempoMinutos()%>
+					mins
+			</li><% 
+		}
+		%>
+
+		
 		</ol>
 	</div>
-<%}%>
+	<%
+		}
+	%>
 </body>

@@ -81,7 +81,7 @@ public class ServletRanking extends HttpServlet {
 			partidas = BilboSKP.obtenerRankingSalaOnline(salaSeleccionada.getIdSala());
 
 			// verificar que hay partidas / vector de partidas
-			for (PartidaOnline partida : partidas) {
+			/*for (PartidaOnline partida : partidas) {
 				Sala sala = partida.getSala();
 				String nombregrupo = partida.getNombreGrupo();
 				String puntos = Integer.toString(partida.getPuntaje());
@@ -89,7 +89,7 @@ public class ServletRanking extends HttpServlet {
 				String fecha = sdf.format(partida.getFechaInicio());
 				System.out.println(sala.getIdSala());
 
-			}
+			}*/
 			// poner atributos del request, para que la seccion pueda mostrar la info
 			request.setAttribute("partidas", partidas);
 			request.setAttribute("salasAMostrar", salasAMostrar);
