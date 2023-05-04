@@ -17,9 +17,9 @@ sesion.setAttribute("sus", sus);
                 </div>
                 <form action="">
                     <div class="subcaja1">
-                   		<img src="img_web/icons/gato.png" <%=sus.getImagen()%> alt="">
+                   		<img src="img_web/icons/<%=sus.getImagen()%>" alt="">
                    		<div class="boton_modificar">
-                   		 	<input class="modificar" type="file">
+                   		<input class="modificar" type="" value="">
                    		</div>
                     </div>
                     <div class="form1">

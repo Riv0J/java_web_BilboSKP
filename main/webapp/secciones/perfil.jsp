@@ -7,7 +7,7 @@ if (subseccion == null)  {
 	response.sendRedirect("./perfil");
 }
 String rutaJspSeccion = "subsecciones/" + subseccion + ".jsp";
-System.out.println(rutaJspSeccion);
+//System.out.println(rutaJspSeccion);
 %>
 
 <link rel="stylesheet" href="css/perfil.css">

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Vector;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,7 +37,8 @@ public class ServletPerfil extends HttpServlet {
 		HttpSession sesion = request.getSession();
 		Suscriptor sus = (Suscriptor) sesion.getAttribute("suscriptor");
 
-		// Object fecha;
+
+
 		switch (subseccion) {
 		case "gestionCuenta":
 			request.getRequestDispatcher("index.jsp?sec=perfil&sub=gestionCuenta").forward(request, response);
@@ -64,8 +66,6 @@ public class ServletPerfil extends HttpServlet {
 				System.out.println("Error al mostrar cupones aiuda");
 			}
 			
-			
-			
 			request.getRequestDispatcher("index.jsp?sec=perfil?sub=reserva");
 			break;
 			
@@ -92,16 +92,21 @@ public class ServletPerfil extends HttpServlet {
 		}
 
 		//ACTUALIZAR DATOS DEL SUSCRIPTOR
-		try {
-			if (BilboSKP.actualizarSuscripcion(sus).equals(sus)) {
-				
+		try {	
+			
+			boolean estado=true;
+			RequestDispatcher dispatcher;
+			if (estado) {
+					
+			}else {
 				
 			}
 		} catch (Throwable e) {
 
 			e.printStackTrace();
 		}
-
+		
+		//DARSE DE BAJA
 
 		// Enviar la respuesta al usuario
 		request.getRequestDispatcher("index.jsp?sec=perfil").forward(request, response);

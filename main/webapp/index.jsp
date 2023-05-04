@@ -75,7 +75,7 @@ String tituloPagina = seccion.substring(0, 1).toUpperCase() + seccion.substring(
 		<%-- <jsp:include page="plantillas/mensaje.jsp"></jsp:include>--%>
 		<jsp:include page="plantillas/login.jsp"></jsp:include>
 		<% if (mostrarMensaje!=null){
-			System.out.println("Mostrando mensaje en el index");%>
+			//System.out.println("Mostrando mensaje en el index");%>
 			<jsp:include page="plantillas/mensaje.jsp"></jsp:include>
 		<% }%>
 		<jsp:include page="<%=rutaJspSeccion%>"></jsp:include>
@@ -109,7 +109,7 @@ String tituloPagina = seccion.substring(0, 1).toUpperCase() + seccion.substring(
     </footer>
 </body>
 <% if(mostrarVentanaLogin == true){
-	System.out.println("Mostrando la ventana de login"); %>
+	//System.out.println("Mostrando la ventana de login"); %>
 	<style>
 		#caja_login{
 			display: flex;
