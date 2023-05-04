@@ -134,7 +134,6 @@ String tituloPagina = seccion.substring(0, 1).toUpperCase() + seccion.substring(
 	    cajaUnirse.style.display = "none";
 	  }
 	}
-	
 	botonPerfil.addEventListener("click", toggleLogin);
 	botonCerrarLogin.addEventListener("click", toggleLogin);
 </script>
