@@ -1,9 +1,9 @@
 <%@ page
 	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.io.File, java.text.Normalizer, 
-	model.Reserva, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date  "%>   
-<link rel="stylesheet" href="../css/reserva.css">
-
-      <section id="caja">
+	model.Reserva, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date  "%>  
+	
+<link rel="stylesheet" href="css/reserva.css">
+<div class="caja2">
             <section id="cajita1">
                 <h1>Administra tus reservas</h1>
                 <p>Puedes ver o cancelar tus reservas para las salas de escape físicas.Ten en cuenta que tus reservas se mostrarán por orden
@@ -64,6 +64,7 @@
                     <input type="button" value="Cancelar reserva">
                 </div>
             </section>
-        </section>  
+
+</div>  
 
 
