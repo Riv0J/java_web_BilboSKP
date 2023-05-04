@@ -124,7 +124,7 @@ header button {
     flex-wrap: wrap;
     justify-content: space-between;
     background: rgb(0,0,0);
-background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(15,3,3,1) 6%, rgba(63,11,11,1) 35%, rgba(106,18,18,1) 100%);
+	background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(15,3,3,1) 6%, rgba(63,11,11,1) 35%, rgba(106,18,18,1) 100%);
     padding: 5%;
   }
   
@@ -172,7 +172,7 @@ background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(15,3,3,1) 6%, rgba(63
     padding: 3%;
   }
   .caja_textura{
-  	background-image: url(../img_web/texturas_prueba/tela.png);
+  	background-image: url(../img_web/texturas/tela.png);
     background-size: cover;
     background-repeat: repeat;
     border-top: 0.25em solid var(--gray-border-color);
@@ -204,7 +204,6 @@ background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(15,3,3,1) 6%, rgba(63
   	padding: 5%;
   	}
   	
-
   .principal{
     font-size: 1.4em;
   }
@@ -215,7 +214,6 @@ background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(15,3,3,1) 6%, rgba(63
 		}
 	
 	}
-
 
   @media screen and (max-width: 1090px) {
     .card {
@@ -262,6 +260,5 @@ background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(15,3,3,1) 6%, rgba(63
  	 margin-top:10%;
  	 }
   }
-  
   
   

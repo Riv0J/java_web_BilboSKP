@@ -46,11 +46,11 @@ public class SalaFisica extends Sala {
 	// tratar de obtener los horarios de una fecha concreta
 	public Vector<Horario> getVectorHorariosDisponibles(LocalDate localDateSeleccionada) {
 		if(localDateSeleccionada==null) { return null; }
-		System.out.println("Obteniendo horarios para "+view.StringHelper.getLocalDateString(localDateSeleccionada)+" en la sala "+this.getNombre());
+		//System.out.println("Obteniendo horarios para "+view.StringHelper.getLocalDateString(localDateSeleccionada)+" en la sala "+this.getNombre());
 	    Vector<Horario> horariosAMostrar = new Vector<Horario>();
 	    for (Horario horario : vectorHorariosDisponibles) {
 	        if (horario.isDisponible()==false) {
-	        	System.out.println("Horario no disponible");
+	        	//System.out.println("Horario no disponible");
 	            continue;
 	        }
 	        LocalDateTime fechaHora = horario.getFechaHora().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();

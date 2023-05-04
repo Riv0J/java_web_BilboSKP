@@ -1,9 +1,16 @@
     <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="view.Mensaje, view.Icon, model.Suscriptor"%>
-<form id="form_subscribe" action="./subscribe" method="post">
+<form id="form_subscribe" class="flex_center" action="./subscribe" method="post">
 	<div id="caja_subscribe">
+		<div id="caja_titulo" class="flex_center">
+			<h2> Regístrate en BilboSKP </h2>
+		</div>
 		<div id="caja_inputs">
 			<div class="bloque">
+				<div class="linea_subscribe">
+					<label for="alias">Alias:</label>
+			  		<input type="text" id="alias" name="alias" required>
+				</div>
 				<div class="linea_subscribe">
 					<label for="email">Email:</label>
 					<input type="email" id="email" name="email" required>
@@ -13,8 +20,8 @@
 				  	<input type="password" id="pass" name="pass" required>
 				</div>
 				<div class="linea_subscribe">
-					<label for="alias">Alias:</label>
-			  		<input type="text" id="alias" name="alias" required>
+					<label for="pass2">Repetir contraseña:</label>
+			  		<input type="password" id="pass2" name="pass2" required>
 				</div>
 			</div>
 			<div class="bloque">
@@ -36,33 +43,45 @@
 				</div>
 			</div>
 		</div>
-		<div id="caja_boton">
+		<div id="caja_boton" class="flex_center">
 			<button id="boton_subscribe" class="bilboskp_icon_button">
-						<i class="<%=Icon.getIconHTMLClass("reserva")%>"></i>
-						<div> Enviar </div>
+					<i class="<%=Icon.getIconHTMLClass("reserva")%>"></i>
+					<div> Enviar </div>
 			</button>
 		</div>
   </div>
 </form>
 <style>
   #form_subscribe {
+  	height: 95vh;
   	width: 100%;
-  	background-color: var(--bg-oscuro);
+  	/*background-color: var(--bg-oscuro);*/
+  	background-size: contain;
+  	background-repeat: no-repeat;
+  	background-image: linear-gradient(90deg, rgba(0,0,0,0.6) 10%, rgba(0,0,0,1) 75%, rgba(0,0,0,1) 80%, rgba(0,0,0,1) 100%), url(img_web/subscribe/pasillo2.png);
   }
   #caja_subscribe{
-  	width:95%;
- 	
+  	width: 60%;
+  	display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 5%;
   }
   #caja_inputs{
   	width: 100%;
   	display:flex;
   	flex-direction: row;
-  	font-size: 1.5em;
+  	font-size: 1.75em;
   }
   .bloque{
-  	width: 35%;
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	flex-wrap: wrap;
   }
   .linea_subscribe{
+  	width: 100%;
   	display: flex;
   	flex-direction: column;
   	justify-content: center;
@@ -78,8 +97,21 @@
     color: var(--text-color);
     font-size: 1-5em;
   }
+  #caja_boton{
+  	padding-top: 5%;
+  	width: 100%;
+  	font-size: 1.3em;
+  }
   #boton_subscribe{
-  	width: 10%;
-  	padding: 0.5%;
+	width: 22%;
+    padding: 1%;
+  }
+  #caja_titulo{
+  	width: 100%;
+    font-size: 2em;
+    text-align: center;
+    color: whitesmoke;
+    padding: 2%;
+    letter-spacing: 0.1em;
   }
 </style>
