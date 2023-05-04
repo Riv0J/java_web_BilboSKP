@@ -31,8 +31,8 @@ try {
 	</section>
 
 	<section class="caja_titulo">
-		<h2 class="bilbosk_h2">¡descubre nuestras salas online más
-			jugadas!</h2>
+		<h2 class="bilbosk_h2"><< ¡Descubre nuestras salas online más
+			jugadas! >></h2>
 	</section>
 	<section class="card-container">
 		<% for (SalaOnline so : vectorSalasMasJugadas) {
