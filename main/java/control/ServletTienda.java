@@ -27,7 +27,7 @@ public class ServletTienda extends HttpServlet {
 		System.out.println("ServletTienda urlprevia establecida = "+urlPrevia);
 		HttpSession sesion = request.getSession();
 		sesion.setAttribute("urlPrevia", urlPrevia);
-		//---------------------------------------------------------------------------
+		//---------------------------------------------------------------------------//
 		
 		
 		Suscriptor sus = (Suscriptor) sesion.getAttribute("suscriptor");
