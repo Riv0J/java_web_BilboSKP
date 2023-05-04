@@ -58,12 +58,6 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaPartida.getTematic
 			<div id="caja_sinopsis">
 				<p><%=salaPartida.getDescripcion()%></p>
 			</div>
-			<div id="caja_jugabilidad">
-				<p>Esta es una sala online, por lo que puedes acceder a ella en
-					cualquier momento, pero eso sí, asegúrate de traer a tus amigos
-					para vencerla rápido, y por supuesto pasar unas buenas risas.
-					Podrás invitar a tus amigos cuando estés organizando la partida.</p>
-			</div>
 			<div id="contenedor_boton">
 				<a href="">
 					<button class="bilboskp_icon_button">
@@ -128,7 +122,7 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaPartida.getTematic
 }
 #wrapper_ver_sala {
 	height: 85vh;
-	background-image: url(<%=rutaImagenPortadaLarga%>);
+	background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(<%=rutaImagenPortadaLarga%>);
 	background-size: cover;
 	color: var(--text-color);
 	animation: fondo 30s infinite;
@@ -145,13 +139,14 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaPartida.getTematic
 	font-size: 1.75em;
 	text-align: center;
 	color: var(--text-color);
+	text-shadow: 1.5px 1.5px 0 black, -1.5px -1.5px 0 black, 1.5px -1.5px 0 black, -1.5px 1.5px 0 black;
 }
 #caja_ver_sala {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 100%;
-	background: linear-gradient(300deg, rgba(2,0,36,0.05) 30%, rgba(255,25,25,0.05) 75%, rgba(198,12,2,0.8) 100%)
+	background: linear-gradient(300deg, rgb(255 255 255 / 0%) 30%, rgb(255 255 255 / 0%) 75%, rgb(255 255 255 / 80%) 100%);
 }
 
 #caja_info, #caja_img {

@@ -2,7 +2,7 @@
 	import="java.util.Vector, java.util.HashMap, java.util.Map, java.util.Locale,java.util.Date, java.time.LocalDate, java.io.File, java.text.Normalizer, 
 	model.Sala, model.SalaOnline, model.SalaFisica, model.Horario, model.Suscriptor, view.StringHelper, view.DateHelper, view.Icon"%>
 <%
-Object sus = (Object) request.getAttribute("suscriptor");
+Object sus = (Object) session.getAttribute("suscriptor");
 Sala salaAMostrar = (Sala) request.getAttribute("salaAMostrar");
 String idSala = (String) request.getParameter("idSala");
 boolean esSalaFisica = (boolean) request.getAttribute("esSalaFisica");
@@ -245,7 +245,7 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 }
 #wrapper_ver_sala {
 	height: 85vh;
-	background-image: url(<%=rutaImagenPortadaLarga%>);
+	background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(<%=rutaImagenPortadaLarga%>);
 	background-size: cover;
 	color: var(--text-color);
 	animation: fondo 30s infinite;
@@ -262,13 +262,14 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 	font-size: 1.75em;
 	text-align: center;
 	color: var(--text-color);
+	text-shadow: 1.5px 1.5px 0 black, -1.5px -1.5px 0 black, 1.5px -1.5px 0 black, -1.5px 1.5px 0 black;
 }
 #caja_ver_sala {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 100%;
-	background: linear-gradient(300deg, rgba(2,0,36,0.05) 30%, rgba(255,25,25,0.05) 75%, rgba(198,12,2,0.8) 100%)
+	background: linear-gradient(300deg, rgb(255 255 255 / 0%) 30%, rgb(255 255 255 / 0%) 75%, rgb(255 255 255 / 80%) 100%);
 }
 
 #caja_info, #caja_img {
