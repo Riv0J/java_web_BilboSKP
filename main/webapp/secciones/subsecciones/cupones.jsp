@@ -26,7 +26,7 @@
        <div class="fichaCupones">
         <p class="CodigoCupon">Estado: <%= cupon.getEstado() %> </p>
         <p><%= cupon.getRembolsable() %></p>
-        <p>Fecha caducidad: <%= cupon.getFechaCaducidad() %></p>
+        <p>Fecha caducidad:<br> <%= cupon.getFechaCaducidad() %></p>
        </div>
             
        <% } %>
