@@ -65,5 +65,20 @@ public class ServletLogin extends HttpServlet {
 			request.setAttribute("mensaje", mensaje);
 			sesion.setAttribute("mostrarLogin", "si");
 		}
+		//redireccionamiento
+		System.out.println("El objeto Suscriptor no existe en la sesión");
+		try {
+			String urlPrevia = (String) sesion.getAttribute("urlPrevia");
+			if (urlPrevia instanceof String) {
+				System.out.println("ServletLogin: habia una url previa: "+urlPrevia);
+				((HttpServletResponse) response).sendRedirect((String) urlPrevia);
+			} else {
+				System.out.println("ServletLogin: NO url previa establecida = "+urlPrevia);
+				((HttpServletResponse) response).sendRedirect("index.jsp");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			((HttpServletResponse) response).sendRedirect("index.jsp");
+		}
 	}
 }

@@ -123,11 +123,15 @@ String tituloPagina = seccion.substring(0, 1).toUpperCase() + seccion.substring(
 	var cajaUnirse = document.querySelector("#caja_unirse");
 	
 	function toggleLogin() {
-	  if (cajaLogin.style.display === "none") {
+	  if (cajaLogin.style.display === "flex") {
+		 cajaLogin.style.display = "none";
+		 cajaUnirse.style.display = "noflexne";
+	  } else if (cajaLogin.style.display === "none") {
 	    cajaLogin.style.display = "flex";
 	    cajaUnirse.style.display = "none";
 	  } else {
-	    cajaLogin.style.display = "none";
+	    cajaLogin.style.display = "flex";
+	    cajaUnirse.style.display = "none";
 	  }
 	}
 	
