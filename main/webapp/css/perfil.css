@@ -33,7 +33,10 @@ a::after{
 
 /*RESPONSIVE*/
 	@media screen and (max-width: 768px) {
-   
+   	 	#caja0 {
+      		display:flex;
+      		flex-direction:column;
+    }
   }
   
   @media screen and (max-width: 480px) {
