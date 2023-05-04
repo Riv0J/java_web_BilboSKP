@@ -109,12 +109,5 @@ public class ServletRanking extends HttpServlet {
 			e.printStackTrace();
 			System.out.println("Error conexion ranking");
 		}
-		
-		//TODO reiniciar ranking
-		
-		
-		
-		
-		//TODO dar cupon a ganadores
 	}
 }
