@@ -1,4 +1,5 @@
-/*SLIDER*/
+
+
 .principal{
     display: flex;
     flex-direction: row;
@@ -139,6 +140,10 @@ background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(15,3,3,1) 6%, rgba(63
     margin-bottom: 2rem;
   }
   
+    .card-container2 .card{
+     border: none;
+    }
+  
   .card img {
     width: 100%;
     height: auto;
@@ -160,19 +165,6 @@ background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(15,3,3,1) 6%, rgba(63
     color: #f2f2f2;
     font-size: 1.1rem;
     line-height: 1.5;
-  }
-  
-  
-  @media screen and (max-width: 768px) {
-    .card {
-      flex-basis: calc(50% - 1rem);
-    }
-  }
-  
-  @media screen and (max-width: 480px) {
-    .card {
-      flex-basis: 100%;
-    }
   }
   
   .caja_titulo h2{
@@ -204,9 +196,12 @@ background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(15,3,3,1) 6%, rgba(63
   }
   
   .card-container2 .card{
-  display:flex;
-  background-color:#ffffff26;}
-  
+  background-color:#ffffff26;
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
    .card-container2 .card img{
   	padding: 5%;
   	}
@@ -215,3 +210,59 @@ background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(15,3,3,1) 6%, rgba(63
   .principal{
     font-size: 1.4em;
   }
+  
+   @media screen and (max-width: 1150px) {
+#caja_principal div a{
+	width: 40%;
+	}
+	
+	}
+
+
+  @media screen and (max-width: 1090px) {
+    .card {
+      flex-basis: calc(50% - 1rem);
+    }
+    section #caja_principal{
+    width: 100%;
+    margin-right: 5%;
+    }
+    
+    div.flex_center{
+ 	width: 100%;
+  }
+  #caja_principal div a{
+	width: 40%;
+	}
+	
+	.principal{
+	background-position:55% 50%;
+	}
+  }
+  
+  @media screen and (max-width: 750px) {
+    .card {
+      flex-basis: 100%;
+    }
+    #caja_principal div a{
+	width: 50%;
+	}
+	.principal{
+	background-position:55% 50%;
+	}
+  }
+  
+  @media screen and (max-width: 500px) {
+   .caja_titulo {
+    font-size: 0.7em;
+ 	 }
+ 	 .principal{
+ 	 font-size: 1.1em;
+ 	 }
+ 	 .principla .bilboskp_p{
+ 	 margin-bottom:10%;
+ 	 margin-top:10%;
+ 	 }
+  
+  
+  
