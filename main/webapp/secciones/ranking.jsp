@@ -31,7 +31,7 @@ Vector<PartidaOnline> finalistas = new Vector<PartidaOnline>();
 			<%
 			for (Map.Entry<String, Sala> salas : salasAMostrar.entrySet()) {
 			%>
-			<li><a href="./ranking?IDsalaSeleccionada=<%=salas.getKey()%>"
+			<li><a href="./ranking?sala=<%=salas.getKey()%>"
 				style="color: #fff;"> <%=salas.getValue().getNombre()%>
 			</a></li>
 			<%
