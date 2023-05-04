@@ -19,7 +19,7 @@ System.out.println(rutaJspSeccion);
                     <li class="gc"><a href="./perfil?sub=gestionCuenta">Gestión de la cuenta</a></li>
                     <li><a href="./perfil?sub=reserva">Mis reservas</a></li>
                     <li><a href="./perfil?sub=cupones">Mis cupones</a></li>
-	                <li><a href="./perfil?sec=inicio">Cerrar sesión</a></li>
+	                <li><a href="./logout">Cerrar sesión</a></li>
                 </ul>
             </div>
             <div class="cajaSubseccion">

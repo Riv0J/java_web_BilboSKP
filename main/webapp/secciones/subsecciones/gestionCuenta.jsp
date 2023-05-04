@@ -10,19 +10,21 @@ sesion.setAttribute("sus", sus);
 %>
 
 <div class="caja2">
-                <div>
+                <div class="parte1">
                     <h2>Gestión de la cuenta</h2>
                     <p>Modifica aquí tus datos personales. Recuerda que tanto como el alias, nombre y apellidos
                     pertenecen a tu perfil público.</p>
                 </div>
                 <form action="">
                     <div class="subcaja1">
-                   	<img src="img/gatitos/<%=sus.getImagen()%>" alt="">
-                        <input type="file">
+                   		<img src="img_web/icons/gato.png" <%=sus.getImagen()%> alt="">
+                   		<div class="boton_modificar">
+                   		 	<input class="modificar" type="file">
+                   		</div>
                     </div>
                     <div class="form1">
                         <div class="box0">
-                            <label for="">Nombre:</label>
+                            <label for=""><strong>Nombre:</strong></label>
                             <div class="edit">
                                 <input type="text" name="" id="" value="<%=sus.getNombre()%>">
                                 <img src="img_web/icons/edit_icon.png" alt="">
