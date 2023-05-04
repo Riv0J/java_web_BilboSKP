@@ -47,7 +47,7 @@ public class ServletRanking extends HttpServlet {
 		
 			
 			// Obtener los parametros de la sala que queremos ver el ranking
-			String idSala = request.getParameter("idSala");
+			String idSala = request.getParameter("IDsalaSeleccionada");
 
 			// si no hay sala seleccionada forzar la primera
 
@@ -111,6 +111,10 @@ public class ServletRanking extends HttpServlet {
 		}
 		
 		//TODO reiniciar ranking
+		
+		
+		
+		
 		//TODO dar cupon a ganadores
 	}
 }
