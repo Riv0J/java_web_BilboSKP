@@ -234,6 +234,10 @@ background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(15,3,3,1) 6%, rgba(63
   #caja_principal div a{
 	width: 40%;
 	}
+	
+	.principal{
+	background-position:55% 50%;
+	}
   }
   
   @media screen and (max-width: 750px) {
@@ -242,6 +246,9 @@ background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(15,3,3,1) 6%, rgba(63
     }
     #caja_principal div a{
 	width: 50%;
+	}
+	.principal{
+	background-position:55% 50%;
 	}
   }
   
