@@ -34,7 +34,7 @@
 		    background-color: #ffffff;
 		    padding: 2%;
 		    padding-bottom: 1%;
-		    width: 25%;
+		    width: 30%;
 		    height: fit-content;
 		    position: relative;
 		    border-radius: 1.5em;

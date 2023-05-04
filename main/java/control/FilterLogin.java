@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Suscriptor;
+import view.Mensaje;
 
 //
 @WebFilter({ "/perfil", "/perfil/*", "/organizar", "/reservar" })
@@ -42,44 +43,37 @@ public class FilterLogin implements Filter {
 
 			// si el objeto obtenido es de clases suscriptor, significa que está logeado!
 			if (suscriptor instanceof Suscriptor) {
+				//dejar pasar
 				System.out.println("El objeto Suscriptor existe en la sesión");
 				chain.doFilter(request, response);
 			} else {
+				//redireccionar
+				Mensaje mensaje = new Mensaje("¡Por favor inicia sesión antes de continuar!.",
+						Mensaje.MENSAJE_ERROR);
+				request.setAttribute("mensaje", mensaje);
 				System.out.println("El objeto Suscriptor no existe en la sesión");
-				// existe la sesion pero no tiene un objeto suscriptor correcto, lo mandamos al
-				// login
-				/* Suscriptor sus = new Suscriptor(1, 1234, "hola@gmail,com", "pau", "paula", "castillo", "imagen", 1,
-						null);
-				sesion.setAttribute("suscriptor", sus);
-				chain.doFilter(request, response);*/
-				request.getRequestDispatcher("index.jsp?sec=incio").forward(request, response);
+				try {
+					sesion.setAttribute("mostrarLogin", "si");
+					String urlPrevia = (String) sesion.getAttribute("urlPrevia");
+					if (urlPrevia instanceof String) {
+						System.out.println("ServletOrganizar: habia una url previa: "+urlPrevia);
+						((HttpServletResponse) response).sendRedirect((String) urlPrevia);
+					} else {
+						System.out.println("ServletOrganizar: NO url previa establecida = "+urlPrevia);
+						((HttpServletResponse) response).sendRedirect("index.jsp");
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					((HttpServletResponse) response).sendRedirect("index.jsp");
+				}
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void init(FilterConfig fConfig) throws ServletException {
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {
+		
 	}
-
-	public static void mostrarJSP(ServletResponse response, String rutajsp) {
-		try {
-			System.out.println(rutajsp);
-			// Obtener el PrintWriter para escribir la respuesta
-			HttpServletResponse httpResponse = (HttpServletResponse) response;
-			PrintWriter out = httpResponse.getWriter();
-
-			// Obtener el contenido del archivo JSP
-			String jspContent = new String(Files.readAllBytes(Paths.get(rutajsp)), StandardCharsets.UTF_8);
-
-			// Escribir el contenido del archivo JSP en la respuesta
-			out.print(jspContent);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Error tratando de devolver jsp");
-		}
-
-	}
-
 }

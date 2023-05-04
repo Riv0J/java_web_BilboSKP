@@ -20,17 +20,9 @@ import model.Suscriptor;
 public class ServletOrganizar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public ServletOrganizar() {
         super();
-        // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Doget Organizar sala");
 		HttpSession sesion = request.getSession();
@@ -47,17 +39,9 @@ public class ServletOrganizar extends HttpServlet {
 			partidaOnline.getCodInvitacion();
 			System.out.println(partidaOnline.getCodInvitacion());
 			request.setAttribute("partidaOnline", partidaOnline);
-		}
-		
-		
-		request.getRequestDispatcher("index.jsp?sec=organizar").forward(request, response);
+			request.getRequestDispatcher("index.jsp?sec=organizar").forward(request, response);
+		} 
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 	}
-
 }
