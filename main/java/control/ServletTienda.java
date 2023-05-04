@@ -20,13 +20,31 @@ public class ServletTienda extends HttpServlet {
        
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doget tienda");
+		System.out.println("Doget tienda");
 		
+		//redireccionamiento: establecer la url a mandar como url previa en la sesion
+		String urlPrevia = "./tienda";
+		System.out.println("ServletTienda urlprevia establecida = "+urlPrevia);
 		HttpSession sesion = request.getSession();
+		sesion.setAttribute("urlPrevia", urlPrevia);
+		//---------------------------------------------------------------------------
+		
+		
 		Suscriptor sus = (Suscriptor) sesion.getAttribute("suscriptor");
-		
+	
+		String accion = request.getParameter("tienda");
+		if (accion==null) {
+			accion ="";
+		}
+		switch (accion) {
+		case "comprar":
+			
+			break;
+
+		default:
+			break;
+		}
 		//comprobar si
-		
 		//comprobar si se está suscrito 
 		if(sus!=null) {
 			//los cupones comprados irán a la cuenta de sus

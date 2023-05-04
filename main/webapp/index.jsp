@@ -117,23 +117,21 @@ Object sus = (Object) session.getAttribute("suscriptor");
 	</style>
 <% } %>
 <script>
-					var cajaLoginVisible = false;
-					var botonPerfil = document.getElementById("botonPerfil");
-					var botonCerrarLogin = document.getElementById("boton_cerrar_login");
+	var cajaLoginVisible = false;
+	var botonPerfil = document.getElementById("botonPerfil");
+	var botonCerrarLogin = document.getElementById("boton_cerrar_login");
 	
-					function toggleLogin() {
-					  cajaLoginVisible = !cajaLoginVisible;
+	function toggleLogin() {
+	cajaLoginVisible = !cajaLoginVisible;
 	
-					  if (cajaLoginVisible) {
-					    document.querySelector("#caja_login").style.display = "flex";
-					  } else {
-					    document.querySelector("#caja_login").style.display = "none";
-					  }
-	
-					  document.querySelector("#caja_unirse").style.display = "none";
-					}
-	
-					botonPerfil.addEventListener("click", toggleLogin);
-					botonCerrarLogin.addEventListener("click", toggleLogin);
-				</script>
+		if (cajaLoginVisible) {
+			document.querySelector("#caja_login").style.display = "flex";
+		} else {
+			document.querySelector("#caja_login").style.display = "none";
+		}
+	document.querySelector("#caja_unirse").style.display = "none";
+	}
+	botonPerfil.addEventListener("click", toggleLogin);
+	botonCerrarLogin.addEventListener("click", toggleLogin);
+</script>
 </html>
