@@ -3,27 +3,24 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    background-color: rgb(255, 255, 255)
+    background-color: rgb(255, 255, 255);
 }
 .cajaPerfil ul li{
     list-style: none;
     margin: 15%;
     font-size:1.5em;
 }
-a:link{
-	color: rgb(255, 255, 255);
-}
 a::after{
 	display:none;
 	content: "";
 	position: absolute;
-	border-top-color: red;
+	color: red;
 	border-top-style: solid;
 	border-top-width: 0.125em;
 }
 .cajaPerfil{
     padding: 5%;
-    width: 30%;
+    width: 35%;
     background-color: #141414;
     color: rgb(255, 255, 255);
 }
@@ -35,12 +32,32 @@ a::after{
 }
 
 /*RESPONSIVE*/
-@media screen and(max-width:600px){
-	#caja0{
-	
-		display:flex;
-		flex-direction:colum;
-	
-	}
-}
+	@media screen and (max-width: 768px) {
+   
+  }
+  
+  @media screen and (max-width: 480px) {
+    #caja0 {
+      display:flex;
+      flex-direction:column;
+    }
+    .cajaPerfil{
+    	width:100%;
+    	padding:5%;
+    }
+    .cajaSubseccion{
+    	width:100%;
+    	padding:5%;
+    }
+    .cajaPerfil ul{
+    	display:flex;
+    	flex-direction:row;
+    	padding:2%;
+    }
+    .cajaPerfil ul li{
+    	margin:3%;
+    	font-size:1.1em;
+    }
+  }
+  
 
