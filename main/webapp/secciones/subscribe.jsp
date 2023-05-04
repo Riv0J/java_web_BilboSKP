@@ -1,65 +1,71 @@
-<form action="./subscribe" method="post">
-  <label for="email">Email:</label>
-  <input type="email" id="email" name="email" required>
-
-  <label for="pass">Contraseña:</label>
-  <input type="password" id="pass" name="pass" required>
-
-  <label for="alias">Alias:</label>
-  <input type="text" id="alias" name="alias" required>
-
-  <label for="telefono">Teléfono:</label>
-  <input type="tel" id="telefono" name="telefono" required>
-
-  <label for="nombre">Nombre:</label>
-  <input type="text" id="nombre" name="nombre" required>
-
-  <label for="apellidos">Apellidos:</label>
-  <input type="text" id="apellidos" name="apellidos" required>
-
-  <label for="fecha_nacimiento">Fecha de nacimiento:</label>
-  <input type="date" id="fecha_nacimiento" name="fech_nac" required>
-
-  <input type="submit" value="Enviar">
+<form id="form_subscribe" action="./subscribe" method="post">
+	<div id="caja_subscribe">
+		<div id="caja_inputs">
+			<div class="bloque">
+				<div class="linea_subscribe">
+					<label for="email">Email:</label>
+					<input type="email" id="email" name="email" required>
+				</div>
+				<div class="linea_subscribe">
+					<label for="pass">Contraseña:</label>
+				  	<input type="password" id="pass" name="pass" required>
+				</div>
+				<div class="linea_subscribe">
+					<label for="alias">Alias:</label>
+			  		<input type="text" id="alias" name="alias" required>
+				</div>
+			</div>
+			<div class="bloque">
+				<div class="linea_subscribe">
+					<label for="nombre">Nombre:</label>
+					<input type="text" id="nombre" name="nombre" required>
+				</div>
+				<div class="linea_subscribe">
+				 	<label for="apellidos">Apellidos:</label>
+			  		<input type="text" id="apellidos" name="apellidos" required>
+				</div>
+				<div class="linea_subscribe">
+					<label for="fecha_nacimiento">Fecha de nacimiento:</label>
+			  		<input type="date" id="fecha_nacimiento" name="fech_nac" required>
+				</div>
+				<div id="linea_subscribe">
+					<label for="telefono">Teléfono:</label>
+			 		<input type="tel" id="telefono" name="telefono" required>
+				</div>
+			</div>
+		</div>
+		<div id="caja_boton">
+			<input class="bilboskp_input" type="submit" value="Enviar">
+		</div>
+  </div>
 </form>
 <style>
-  body {
-    background-color: white;
+  #form_subscribe {
+  	width: 100%;
+  	background-color: var(--bg-oscuro);
   }
-  form {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f2f2f2;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  #caja_subscribe{
+  	width:95%;
+ 	
+  }
+  #caja_inputs{
+  	width: 100%;
+  	display:flex;
+  	flex-direction: row;
+  }
+  .bloque{
+  	width: 35%;
+  }
+  .linea_subscribe{
+  	display: flex;
+  	flex-direction: column;
+  	justify-content: center;
+  	align-items: center;
+  }
+  .linea_subscribe > *{
+  	width: 80%;
   }
   label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  input[type="tel"],
-  input[type="date"] {
-    padding: 10px;
-    width: 100%;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    border: none;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-  }
-  input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  input[type="submit"]:hover {
-    background-color: #3e8e41;
+    color: var(--text-color);
   }
 </style>

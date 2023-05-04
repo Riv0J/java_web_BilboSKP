@@ -16,7 +16,6 @@
 
 
 -- Volcando estructura de base de datos para bilboskpdb
-DROP DATABASE IF EXISTS `bilboskpdb`;
 CREATE DATABASE IF NOT EXISTS `bilboskpdb` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 USE `bilboskpdb`;
 
@@ -30,9 +29,9 @@ CREATE TABLE IF NOT EXISTS `cupon` (
   PRIMARY KEY (`idCupon`) USING BTREE,
   KEY `fk_cupon_suscriptor` (`idSuscriptor`),
   CONSTRAINT `fk_cupon_suscriptor` FOREIGN KEY (`idSuscriptor`) REFERENCES `suscriptor` (`idSuscriptor`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla bilboskpdb.cupon: ~11 rows (aproximadamente)
+-- Volcando datos para la tabla bilboskpdb.cupon: ~22 rows (aproximadamente)
 DELETE FROM `cupon`;
 INSERT INTO `cupon` (`idCupon`, `idSuscriptor`, `fechaCaducidad`, `estado`, `reembolsable`) VALUES
 	(1, 2, '2023-04-30 00:00:00', 'Disponible', 1),
@@ -40,12 +39,23 @@ INSERT INTO `cupon` (`idCupon`, `idSuscriptor`, `fechaCaducidad`, `estado`, `ree
 	(3, 3, '2023-04-30 00:00:00', 'Gastado', 1),
 	(5, 8, '2023-06-08 00:00:00', 'Disponible', 1),
 	(6, 8, '2023-06-09 00:00:00', 'Disponible', 1),
-	(7, 8, '2023-06-06 00:00:00', 'Disponible', 1),
-	(8, 8, '2023-06-09 00:00:00', 'Disponible', 1),
-	(9, 8, '2023-02-09 00:00:00', 'Caducado', 1),
+	(7, 12, '2023-06-06 00:00:00', 'Disponible', 0),
+	(8, 12, '2023-06-09 00:00:00', 'Disponible', 1),
+	(9, 12, '2023-02-09 00:00:00', 'Caducado', 1),
 	(11, 4, '2077-12-31 00:00:00', 'Disponible', 0),
 	(12, 4, '2077-12-31 00:00:00', 'Disponible', 0),
-	(13, 4, '2023-05-18 00:00:00', 'Disponible', 0);
+	(13, 4, '2023-05-18 00:00:00', 'Disponible', 0),
+	(14, 4, '2024-05-18 00:00:00', 'En uso', 0),
+	(15, 1, '2023-06-04 00:00:00', 'Disponible', 1),
+	(16, 1, '2026-06-04 00:00:00', 'Disponible', 1),
+	(17, 1, '2027-06-04 00:00:00', 'Disponible', 1),
+	(18, 1, '2025-06-04 00:00:00', 'Disponible', 1),
+	(19, 1, '2025-06-04 00:00:00', 'Disponible', 1),
+	(20, 1, '2025-06-04 00:00:00', 'Disponible', 1),
+	(21, 1, '2025-06-04 00:00:00', 'Disponible', 1),
+	(22, 1, '2025-06-04 00:00:00', 'Disponible', 1),
+	(23, 1, '2025-06-04 00:00:00', 'Disponible', 1),
+	(24, 1, '2025-06-04 00:00:00', 'Disponible', 1);
 
 -- Volcando estructura para tabla bilboskpdb.escenario
 CREATE TABLE IF NOT EXISTS `escenario` (
