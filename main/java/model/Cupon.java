@@ -18,6 +18,7 @@ public class Cupon {
 		this.idCupon = idCupon;
 		this.estado = estado;
 		this.fechaCaducidad = fechaCaducidad;
+		this.Rembolsable=rembolsabilidad;
 	}
 
 	public int getId() {
@@ -53,17 +54,23 @@ public class Cupon {
 	}
 
 	public String getRembolsable() {
+    	System.out.println("Entramos en el metodo");
         if (Rembolsable == 0) {
+        	
+        	System.out.println("Entramos en el if");
         	String Rembolsabilidad="No rembolsable";
+        	System.out.println("No es rembolsable");
         	return Rembolsabilidad;
         } else {
         	String Rembolsabilidad=" Rembolsable";
+
+        	System.out.println("Es rembolsable");
         	return Rembolsabilidad;
         }
         }
 
-	public void setRembolsable(int reusable) {
-		this.Rembolsable = reusable;
+	public void setRembolsable(int Rembolsable) {
+		this.Rembolsable = Rembolsable;
 	}
 	
 	

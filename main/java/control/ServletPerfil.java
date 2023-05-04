@@ -72,18 +72,21 @@ public class ServletPerfil extends HttpServlet {
 		// CUPONES
 		case "cupones":
 
+			System.out.println("Llegamos a la subsesccion");
 			// obtener todos los cupones y guardar
 			try {
+
+				System.out.println("Entramos en try");
 				Vector<Cupon> cupones = BilboSKP.getCuponesSuscriptor(sus.getIdSuscriptor());
 				request.setAttribute("cupones", cupones);
 				if(cupones==null) {
 					System.out.println("UPSI PUES VA A SER ESTO");
 				}
-				request.getRequestDispatcher("index.jsp?sec=perfil&sub=cupon").forward(request, response);
+				request.getRequestDispatcher("index.jsp?sec=perfil&sub=cupones").forward(request, response);
 			} catch (Throwable e1) {
 			}
 
-			request.getRequestDispatcher("index.jsp?sec=perfil?sub=cupon");
+			request.getRequestDispatcher("index.jsp?sec=perfil?sub=cupones");
 			break;
 		default:
 		}
