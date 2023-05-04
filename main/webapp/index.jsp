@@ -66,22 +66,6 @@ Object sus = (Object) session.getAttribute("suscriptor");
 			<% } else { %>
 				<a class="user" id="botonPerfil"><i class="ri-user-fill"></i>Sign in</a> 
 				<a href="index.jsp?sec=subscribe" class="suscribirse">Subscribe</a>
-				<script>
-				    var cajaLoginVisible = false;
-				    var botonPerfil = document.getElementById("botonPerfil");
-				    
-				    botonPerfil.addEventListener("click", function() {
-				        cajaLoginVisible = !cajaLoginVisible;
-				        
-				        if (cajaLoginVisible) {
-				            document.querySelector("#caja_login").style.display = "flex";
-				        } else {
-				            document.querySelector("#caja_login").style.display = "none";
-				        }
-				        
-				        document.querySelector("#caja_unirse").style.display = "none";
-				    });
-				</script>
 			<% } %>
 			<div class="bx bx-menu" id="menu-icon"></div>
 		</div>
@@ -132,4 +116,24 @@ Object sus = (Object) session.getAttribute("suscriptor");
 		}
 	</style>
 <% } %>
+<script>
+					var cajaLoginVisible = false;
+					var botonPerfil = document.getElementById("botonPerfil");
+					var botonCerrarLogin = document.getElementById("boton_cerrar_login");
+	
+					function toggleLogin() {
+					  cajaLoginVisible = !cajaLoginVisible;
+	
+					  if (cajaLoginVisible) {
+					    document.querySelector("#caja_login").style.display = "flex";
+					  } else {
+					    document.querySelector("#caja_login").style.display = "none";
+					  }
+	
+					  document.querySelector("#caja_unirse").style.display = "none";
+					}
+	
+					botonPerfil.addEventListener("click", toggleLogin);
+					botonCerrarLogin.addEventListener("click", toggleLogin);
+				</script>
 </html>

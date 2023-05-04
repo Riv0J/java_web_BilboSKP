@@ -19,11 +19,6 @@
 	        </div>
 	    </form>
 </section>
-	<script>
-		document.querySelector("#boton_cerrar_login").addEventListener("click", function() {
-			document.querySelector("#caja_login").style.display = "none";
-		});
-	</script>
 	<style>
 		#caja_login {
 			z-index: 300;
