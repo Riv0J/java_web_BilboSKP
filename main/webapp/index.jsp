@@ -4,6 +4,7 @@
 String seccion = request.getParameter("sec");
 Object mensaje = (Object) session.getAttribute("mensaje");
 Object mostrarLogin = (Object) session.getAttribute("mostrarLogin");
+Object sus = (Object) session.getAttribute("suscriptor");
 boolean mostrarVentanaLogin = false;
 Mensaje mostrarMensaje = null;
 if(mostrarLogin instanceof String){
@@ -21,7 +22,6 @@ if (seccion == null) {
 
 String rutaJspSeccion = "secciones/" + seccion + ".jsp";
 String tituloPagina = seccion.substring(0, 1).toUpperCase() + seccion.substring(1) + " | BilboSKP";
-Object sus = (Object) session.getAttribute("suscriptor");
 %>
 <!DOCTYPE html>
 <html>
@@ -117,20 +117,20 @@ Object sus = (Object) session.getAttribute("suscriptor");
 	</style>
 <% } %>
 <script>
-	var cajaLoginVisible = false;
+	var cajaLogin = document.querySelector("#caja_login");
 	var botonPerfil = document.getElementById("botonPerfil");
 	var botonCerrarLogin = document.getElementById("boton_cerrar_login");
+	var cajaUnirse = document.querySelector("#caja_unirse");
 	
 	function toggleLogin() {
-	cajaLoginVisible = !cajaLoginVisible;
-	
-		if (cajaLoginVisible) {
-			document.querySelector("#caja_login").style.display = "flex";
-		} else {
-			document.querySelector("#caja_login").style.display = "none";
-		}
-	document.querySelector("#caja_unirse").style.display = "none";
+	  if (cajaLogin.style.display === "none") {
+	    cajaLogin.style.display = "flex";
+	    cajaUnirse.style.display = "none";
+	  } else {
+	    cajaLogin.style.display = "none";
+	  }
 	}
+	
 	botonPerfil.addEventListener("click", toggleLogin);
 	botonCerrarLogin.addEventListener("click", toggleLogin);
 </script>
