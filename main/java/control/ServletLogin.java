@@ -65,19 +65,5 @@ public class ServletLogin extends HttpServlet {
 			request.setAttribute("mensaje", mensaje);
 			sesion.setAttribute("mostrarLogin", "si");
 		}
-		//redireccionamiento
-		String urlPrevia = (String) sesion.getAttribute("urlPrevia");
-		try {
-			if (urlPrevia instanceof String) {
-				System.out.println("ServletLogin: habia una url previa: "+urlPrevia);
-				response.sendRedirect((String) urlPrevia);
-			} else {
-				System.out.println("ServletLogin: NO url previa establecida = "+urlPrevia);
-				response.sendRedirect("index.jsp");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			response.sendRedirect("index.jsp");
-		}
 	}
 }

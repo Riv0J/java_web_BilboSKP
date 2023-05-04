@@ -11,19 +11,13 @@ body {
 	width: 65%;
 }
 
-#caja0 {
 
-}
 
 #Cupones {
-	flex: 1;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: flex-start;
-	align-content: flex-start;
-	row-gap: 30%;
-	width: 100%;
-	grid-template-columns: repeat(4, 2fr);
+	width: 92%;
+	padding-bottom:2%;
 }
 
 #TextosEncabezado {
@@ -45,6 +39,8 @@ h1 {
 .fichaCupones p {
 	background-color: #C60C02;
 	color: white;
+	padding:4%;
+	witdh:60%;
 }
 
 #MisCuponesTitulo {
@@ -61,13 +57,13 @@ h1 {
 	display: grid;
 	flex-direction: column;
 	background-color: #C60C02;
-	width: 80%;
-	height: 122%;
-	text-align: center;
-	margin-left: 11%;
-	padding: 5%;
+	width: 86%;
+    height: 122%;
+    text-align: center;
+    margin-left: 7%;
+	padding: 1%;
 	margin-top: 6%;
-	font-size: 100%;
+	font-size: 120%;
 }
 
 footer {
@@ -80,21 +76,57 @@ footer {
 }
 
 @media ( max-width : 1000px) {
-	#Cupones {
-		grid-template-columns: repeat(2, 1fr);
-		row-gap: 50%;
-	}
+#Cupones {
+	display: flex;
+	flex-wrap: wrap;
+	width: 120%;
+	padding-bottom:2%;
+	justify-content:center;
+}
 	#TextosEncabezado {
 		margin-top: 10%;
 	}
+	
+.fichaCupones p {
+    color: white;
+    padding-bottom: 4%;
+    width: 84%;
+    height: 122%;
+    padding-right: 6%;
+    padding-top: 4%;
+    text-align: center;
 }
 
+.fichaCupones {
+	padding-right: 8%;
+    margin-top: 6%;
+    font-size: 143%;
+}
+#cajaSubseccion{
+	
+    width: 157%;
+}
+}
 @media ( max-width : 600px) {
-	#Cupones {
-		grid-template-columns: repeat(1, 1fr);
-		row-gap: 20%;
-	}
+	
+#Cupones {
+	display: flex;
+	flex-wrap: wrap;
+	width: 92%;
+	padding-bottom:2%;
+}
 	#TextosEncabezado {
 		padding-top: 10%;
 	}
+	.fichaCupones{padding-bottom:5%;
+	}
+		.fichaCupones p {
+    background-color: #C60C02;
+    color: white;
+    padding-bottom: 4%;
+    width: 108%;
+    padding-right: 6%;
+    padding-top: 4%;
+    text-align: center;
+}
 }

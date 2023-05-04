@@ -1,8 +1,6 @@
 @charset "ISO-8859-1";
-
-
-h1{
-    font-size: 1.5em;
+#cajita2{
+	margin-top:3%;
 }
 .title{
     font-size: 1.2em;
@@ -10,6 +8,7 @@ h1{
 }
 #subcaja2{
     border-bottom: #C60C02 3px solid;
+    margin-top:1.5%;
 }
 #subcaja2 ul{
     list-style: none;
@@ -62,7 +61,7 @@ h1{
 .info{
     display: flex;
     flex-direction: row;
-    margin-left: 14%;
+    margin-left: 5%;
     align-items: center;
 }
 .info input{
@@ -74,7 +73,7 @@ h1{
     flex-direction: row;
 }
 .cajita input{
-    width: 100%;
+	display:flex;
     border-style: none;
     margin-bottom: 3%;
     margin-top: 3%;
@@ -94,10 +93,11 @@ h1{
     background-color:#C60C02;
     display: flex;
     align-items: center;
-    justify-content: right;
+    justify-content: center;
     width: 20%;
     border-radius: 0.35em ;
     border:#C60C02;
     padding: 1%;
     transition: all 0.5s;
+    cursor:pointer;
 }

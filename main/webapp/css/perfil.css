@@ -15,19 +15,19 @@ a::after{
 	content: "";
 	position: absolute;
 	color: red;
-	border-top-style: solid;
-	border-top-width: 0.125em;
 }
 .cajaPerfil{
     padding: 5%;
     width: 35%;
     background-color: #141414;
     color: rgb(255, 255, 255);
+    font-size:1.em;
 }
 .cajaSubseccion{
     padding: 5%;
     background-color: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
+    font-size:1.3em;
 /*aqui irán todas las secciones de jsp */
 }
 

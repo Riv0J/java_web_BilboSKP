@@ -1,3 +1,5 @@
+    <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1" import="view.Mensaje, view.Icon, model.Suscriptor"%>
 <form id="form_subscribe" action="./subscribe" method="post">
 	<div id="caja_subscribe">
 		<div id="caja_inputs">
@@ -28,14 +30,17 @@
 					<label for="fecha_nacimiento">Fecha de nacimiento:</label>
 			  		<input type="date" id="fecha_nacimiento" name="fech_nac" required>
 				</div>
-				<div id="linea_subscribe">
+				<div class="linea_subscribe">
 					<label for="telefono">Teléfono:</label>
 			 		<input type="tel" id="telefono" name="telefono" required>
 				</div>
 			</div>
 		</div>
 		<div id="caja_boton">
-			<input class="bilboskp_input" type="submit" value="Enviar">
+			<button id="boton_subscribe" class="bilboskp_icon_button">
+						<i class="<%=Icon.getIconHTMLClass("reserva")%>"></i>
+						<div> Enviar </div>
+			</button>
 		</div>
   </div>
 </form>
@@ -52,6 +57,7 @@
   	width: 100%;
   	display:flex;
   	flex-direction: row;
+  	font-size: 1.5em;
   }
   .bloque{
   	width: 35%;
@@ -61,11 +67,19 @@
   	flex-direction: column;
   	justify-content: center;
   	align-items: center;
+  	margin-bottom: 3%;
   }
   .linea_subscribe > *{
   	width: 80%;
+  	padding: 2%;
+  	border-radius: 0.5em;
   }
   label {
     color: var(--text-color);
+    font-size: 1-5em;
+  }
+  #boton_subscribe{
+  	width: 10%;
+  	padding: 0.5%;
   }
 </style>
