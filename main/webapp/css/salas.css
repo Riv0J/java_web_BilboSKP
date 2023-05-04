@@ -3,7 +3,7 @@
 }
 #contenedor_buscador {
   padding: 2%;
-  background-image: url("../img_web/texturas/laberinto.jpg");
+  background-image: url("../img_web/texturas/laberinto2.png");
   border-top: 0.4em solid var(--gray-border-color);
   border-bottom: 0.4em solid var(--gray-border-color);
   background-repeat: repeat;

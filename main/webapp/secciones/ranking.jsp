@@ -30,7 +30,7 @@ System.out.println(salasAMostrar.size());
 			<%
 			for (Map.Entry<String, Sala> salas : salasAMostrar.entrySet()) {
 			%>
-			<li><a href="index.jsp?sec=ranking&sala=<%=salas.getKey()%>">
+			<li><a href="./ranking?IDsalaSeleccionada=<%=salas.getKey()%>">
 					<%=salas.getValue().getNombre()%>
 			</a>
 			</li>
@@ -51,8 +51,8 @@ System.out.println(salasAMostrar.size());
 		//String fecha = sdf.format(partida.getFechaInicio());
 		//int contador= 1;
 		 --%>
-		 
-		 <% for (int i=0;i>partidas.size();i++) {
+		 <div id="podio">
+		 <% for (int i=0;i<partidas.size();i++) {
 		 
 			PartidaOnline partida = (PartidaOnline) partidas.get(i);
 
@@ -60,30 +60,34 @@ System.out.println(salasAMostrar.size());
 		  
 		
 		 %>
-	<div id="podio">
-		<div class="info">
+	
+		<%if(i==1){%><div class="info">
 			<img src="./img_web/icons/copa2.png">
 			<div class="caja plata">
-				<p></p>
+				<p><%= partida.getNombreGrupo()%><br>
+			  <%=partida.getPuntaje()%> puntos<br>
+			  <%=partida.getTiempoMinutos()%> mins</p>
 			</div>
 		</div>
-		<%if(i==1){%><div class="info">
+		<% }%>
+		<%if(i==0){%><div class="info">
 			<img src="./img_web/icons/copa1.png">
 			<div class="caja oro">
-				<p><%
-			  partida.getNombreGrupo();
-			  partida.getPuntaje();
-			  partida.getTiempoMinutos();
-		 } %></p>
+				<p><%= partida.getNombreGrupo()%><br>
+			  <%=partida.getPuntaje()%> puntos<br>
+			  <%=partida.getTiempoMinutos()%> mins</p>
 			</div>
 		</div>
-		
-		<div class="info">
+		<% }
+		if(i==2){%><div class="info">
 			<img src="./img_web/icons/copa3.png">
 			<div class="caja bronce">
-				<p></p>
+				<p><%= partida.getNombreGrupo()%><br>
+			  <%=partida.getPuntaje()%> puntos<br>
+			  <%=partida.getTiempoMinutos()%> mins</p>
 			</div>
 		</div>
+		<% }%>
 	</div>
 	<div id="finalistas">
 		<ol>
@@ -96,5 +100,5 @@ System.out.println(salasAMostrar.size());
 			<li></li>
 		</ol>
 	</div>
-<%	 } %>
+<%}%>
 </body>

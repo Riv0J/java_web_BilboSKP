@@ -110,7 +110,7 @@ System.out.println(salasAMostrar.size());
 	if (i >= 9) {
 		break;
 	}
-	}
+	
 	}
 	%>
 		 
