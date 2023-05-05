@@ -57,7 +57,7 @@ h1 {
 	display: grid;
 	flex-direction: column;
 	background-color: #C60C02;
-	width: 86%;
+	width: 26%;
     height: 122%;
     text-align: center;
     margin-left: 7%;
@@ -101,13 +101,41 @@ footer {
 	padding-right: 8%;
     margin-top: 6%;
     font-size: 143%;
+    width:86%;
 }
 #cajaSubseccion{
 	
     width: 157%;
 }
 }
-@media ( max-width : 600px) {
+
+@media ( max-width : 800px) {
+	
+#Cupones {
+	display: flex;
+	flex-wrap: wrap;
+	width: 70%;
+	padding-bottom:2%;
+}
+	#TextosEncabezado {
+		padding-top: 10%;
+	}
+	.fichaCupones{
+		padding-bottom:5%;
+		width: 120%;
+		
+	}
+		.fichaCupones p {
+    background-color: #C60C02;
+    color: white;
+    padding-bottom: 4%;
+    width: 108%;
+    padding-right: 6%;
+    padding-top: 4%;
+    text-align: center;
+}
+}
+@media ( max-width : 680px) {
 	
 #Cupones {
 	display: flex;
@@ -118,7 +146,9 @@ footer {
 	#TextosEncabezado {
 		padding-top: 10%;
 	}
-	.fichaCupones{padding-bottom:5%;
+	.fichaCupones{
+		padding-bottom:5%;
+		width: 120%;
 	}
 		.fichaCupones p {
     background-color: #C60C02;

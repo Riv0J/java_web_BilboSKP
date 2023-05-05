@@ -30,11 +30,10 @@ public class ServletOrganizar extends HttpServlet {
 			Suscriptor anfitrion = (Suscriptor) suscriptor;
 			Sala sala=SalaOnline.getSalaPorId(idSala);
 			PartidaOnline partidaOnline= new PartidaOnline(sala, anfitrion, sala.getJugadoresMax(), idSala);
-			partidaOnline.getCodInvitacion();
-			System.out.println("Organizando nueva partida de sala"+ sala.getNombre());
-			System.out.println("Codigo de invitacion de esta partida"+ partidaOnline.getCodInvitacion());
+			int codInvitacion = partidaOnline.getCodInvitacion();
+			System.out.println("Organizando nueva partida de sala "+ sala.getNombre());
+			System.out.println("Codigo de invitacion de esta partida "+ partidaOnline.getCodInvitacion());
 			request.setAttribute("partidaOnline", partidaOnline);
-			
 			request.getRequestDispatcher("index.jsp?sec=organizar").forward(request, response);
 		} 
 	}
