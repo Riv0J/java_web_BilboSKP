@@ -32,6 +32,7 @@ public class ServletTienda extends HttpServlet {
 		Suscriptor sus = (Suscriptor) sesion.getAttribute("suscriptor");
 
 		String accion = request.getParameter("tienda");
+		int cantidadComprar = Integer.parseInt(request.getParameter(""));
 		if (accion == null) {
 			accion = "";
 		}
@@ -43,9 +44,78 @@ public class ServletTienda extends HttpServlet {
 				int susID = sus.getIdSuscriptor();
 				try {
 					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
-					System.out.println("cupon regular comprado");
+					System.out.println("1 cupon regular comprado");
 				} catch (Throwable e) {
-					System.out.println("cupon regular NO comprado");
+					System.out.println("1 cupon regular NO comprado");
+					e.printStackTrace();
+				}
+			} else {
+				// ofrecer registro
+				System.out.println("suscribirte?");
+				request.getRequestDispatcher("./subscribe").forward(request, response);
+				;
+			}
+			break;
+		case "comprar3":
+			// comprobar si se está suscrito
+			if (sus != null) {
+				// los cupones comprados irán a la cuenta de sus
+				int susID = sus.getIdSuscriptor();
+				try {
+					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
+					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
+					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
+					System.out.println("3 cupon regular comprado");
+				} catch (Throwable e) {
+					System.out.println("3 cupon regular NO comprado");
+					e.printStackTrace();
+				}
+			} else {
+				// ofrecer registro
+				System.out.println("suscribirte?");
+				request.getRequestDispatcher("./subscribe").forward(request, response);
+				;
+			}
+			break;
+		case "comprar5":
+			// comprobar si se está suscrito
+			if (sus != null) {
+				// los cupones comprados irán a la cuenta de sus
+				int susID = sus.getIdSuscriptor();
+				try {
+					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
+					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
+					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
+					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
+					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
+					System.out.println("5 cupon regular comprado");
+				} catch (Throwable e) {
+					System.out.println("5 cupon regular NO comprado");
+					e.printStackTrace();
+				}
+			} else {
+				// ofrecer registro
+				System.out.println("suscribirte?");
+				request.getRequestDispatcher("./subscribe").forward(request, response);
+				;
+			}
+			break;
+		case "comprar7":
+			// comprobar si se está suscrito
+			if (sus != null) {
+				// los cupones comprados irán a la cuenta de sus
+				int susID = sus.getIdSuscriptor();
+				try {
+					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
+					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
+					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
+					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
+					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
+					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
+					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
+					System.out.println("7 cupon regular comprado");
+				} catch (Throwable e) {
+					System.out.println("7 cupon regular NO comprado");
 					e.printStackTrace();
 				}
 			} else {
@@ -58,13 +128,12 @@ public class ServletTienda extends HttpServlet {
 
 		case "regalar":
 			// pedir datos del suscriptor del sus a regalar(susReg) (alias+correo)
-			String susAlias = request.getParameter("alias");
 			String susEmail = request.getParameter("email");
-			String cantidad = request.getParameter("cantidad");
+			int cantidad = Integer.parseInt(request.getParameter("cantidad"));
 			// Suscriptor susReg =BilboSKP.comprobarSuscriptor(susAlias, susEmail);
 			// comprobar si susReg existe
 			try {
-				Suscriptor susReg = BilboSKP.comprobarSuscriptor(susAlias, susEmail);
+				Suscriptor susReg = BilboSKP.comprobarSuscriptor(susEmail);
 				System.out.println("suscriptor existe");
 			} catch (Throwable e) {
 				System.out.println("suscriptor no existe");
