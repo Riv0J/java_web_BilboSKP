@@ -4,13 +4,13 @@
 <body>
 	<link rel="stylesheet" href="../css/tienda.css">
 
-	<form method="get">
+	<form name="formCupones" method="get">
 		
 		<div class="cajaComprar">
             <h2>Comprar cupones</h2>
 			<fieldset class="comprar">
 				<div class="cajaCupon">
-					<img src="../img_web/icons/couponWhite.png" width="40%" height="100px">
+						<img src="../img_web/icons/couponWhite.png" width="40%" height="100px">
 					<h3>1 cupón</h3>
 					<h5>5% de descuento</h5>
 					
@@ -64,7 +64,7 @@
                       <option value="5">5 cupones</option>
                       <option value="7">7 cupones</option>
                       </select>
-
+                      <br>
 					<button name="regalar" class="botonRegalar" type="submit">Regalar
 						cupón</button>
 				</div>
