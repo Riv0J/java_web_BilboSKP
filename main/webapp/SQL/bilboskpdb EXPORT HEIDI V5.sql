@@ -288,31 +288,6 @@ INSERT INTO `partidaonline` (`idPartida`, `idSalaOnline`, `idAnfitrion`, `puntaj
 	(202, 10, 12, 0, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
 	(203, 10, 12, 0, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1);
 
--- Volcando estructura para vista bilboskpdb.partidas_mas_jugadas
--- Creando tabla temporal para superar errores de dependencia de VIEW
-CREATE TABLE `partidas_mas_jugadas` (
-	`idPartida` INT(11) NOT NULL,
-	`idSalaOnline` INT(11) NOT NULL,
-	`nombre` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`cantidad_jugadores` BIGINT(21) NOT NULL
-) ENGINE=MyISAM;
-
--- Volcando estructura para vista bilboskpdb.partidas_mas_jugadas2
--- Creando tabla temporal para superar errores de dependencia de VIEW
-CREATE TABLE `partidas_mas_jugadas2` (
-	`idSala` INT(11) NOT NULL,
-	`nombre` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`cantidad_jugadores` BIGINT(21) NOT NULL
-) ENGINE=MyISAM;
-
--- Volcando estructura para vista bilboskpdb.partidas_mas_jugadas3
--- Creando tabla temporal para superar errores de dependencia de VIEW
-CREATE TABLE `partidas_mas_jugadas3` (
-	`idSala` INT(11) NOT NULL,
-	`nombre` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`cantidad_partidas_jugadas` BIGINT(21) NOT NULL
-) ENGINE=MyISAM;
-
 -- Volcando estructura para tabla bilboskpdb.pista
 CREATE TABLE IF NOT EXISTS `pista` (
   `idPista` int(11) NOT NULL AUTO_INCREMENT,
@@ -470,22 +445,6 @@ CREATE TABLE `salas_mas_jugadas` (
 	`cantidad_partidas_jugadas` BIGINT(21) NOT NULL
 ) ENGINE=MyISAM;
 
--- Volcando estructura para vista bilboskpdb.salas_mas_jugadasv3
--- Creando tabla temporal para superar errores de dependencia de VIEW
-CREATE TABLE `salas_mas_jugadasv3` (
-	`idSala` INT(11) NOT NULL,
-	`nombre` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`dificultad` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`tematica` VARCHAR(30) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`descripcion` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`tiempoMax` INT(3) UNSIGNED NOT NULL COMMENT 'Minutos',
-	`jugadoresMin` INT(2) UNSIGNED NOT NULL,
-	`jugadoresMax` INT(2) UNSIGNED NOT NULL,
-	`edad_recomendada` INT(2) UNSIGNED NOT NULL,
-	`disponible` TINYINT(1) NOT NULL,
-	`cantidad_partidas_jugadas` BIGINT(21) NOT NULL
-) ENGINE=MyISAM;
-
 -- Volcando estructura para tabla bilboskpdb.suscriptor
 CREATE TABLE IF NOT EXISTS `suscriptor` (
   `idSuscriptor` int(11) NOT NULL AUTO_INCREMENT,
@@ -500,9 +459,9 @@ CREATE TABLE IF NOT EXISTS `suscriptor` (
   `activo` tinyint(1) unsigned NOT NULL DEFAULT 1,
   PRIMARY KEY (`idSuscriptor`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla bilboskpdb.suscriptor: ~11 rows (aproximadamente)
+-- Volcando datos para la tabla bilboskpdb.suscriptor: ~12 rows (aproximadamente)
 DELETE FROM `suscriptor`;
 INSERT INTO `suscriptor` (`idSuscriptor`, `email`, `pass`, `alias`, `nombre`, `apellidos`, `fech_nac`, `telefono`, `imagen`, `activo`) VALUES
 	(1, 'JuanjoElCamioneroExtremo@gmail.co.uk', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'JuanjoExtremo', 'Juanjo', 'Perez Agujeros', '1987-10-10', 177565252, 'avatardefault1.png', 1),
@@ -515,7 +474,8 @@ INSERT INTO `suscriptor` (`idSuscriptor`, `email`, `pass`, `alias`, `nombre`, `a
 	(8, 'admin@bilboskp.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'admin', 'admin', 'admin', '1999-10-09', 0, 'avatardefault1.png', 1),
 	(11, 'mlinares@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'mlinares', 'Mikel', 'Linares', '1983-10-10', NULL, 'avatardefault1.png', 1),
 	(12, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'administrador', 'Bilbo', 'SKP', '2023-10-10', 7, 'avatardefault1.png', 1),
-	(24, 'admin@google.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'admina', 'admin', 'admine', '2023-05-02', 123, 'avatardefault1.png', 1);
+	(24, 'admin@google.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'admina', 'admin', 'admine', '2023-05-02', 123, 'avatardefault1.png', 1),
+	(25, 'e@gmail.com', 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 'ALO', 'Rivo', 'Molina', '2023-05-26', 1, 'avatardefault1.png', 1);
 
 -- Volcando estructura para vista bilboskpdb.suscriptoresenpartida
 -- Creando tabla temporal para superar errores de dependencia de VIEW
@@ -606,33 +566,6 @@ CREATE TABLE `vista2` (
 	`cantidad_partidas_jugadas` BIGINT(21) NOT NULL
 ) ENGINE=MyISAM;
 
--- Volcando estructura para vista bilboskpdb.partidas_mas_jugadas
--- Eliminando tabla temporal y crear estructura final de VIEW
-DROP TABLE IF EXISTS `partidas_mas_jugadas`;
-CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `partidas_mas_jugadas` AS SELECT p.idPartida, p.idSalaOnline, s.nombre, COUNT(*) AS cantidad_jugadores
-FROM partidaonline p
-JOIN salaonline s ON p.idSalaOnline = s.idSala
-GROUP BY p.idPartida
-ORDER BY cantidad_jugadores DESC ;
-
--- Volcando estructura para vista bilboskpdb.partidas_mas_jugadas2
--- Eliminando tabla temporal y crear estructura final de VIEW
-DROP TABLE IF EXISTS `partidas_mas_jugadas2`;
-CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `partidas_mas_jugadas2` AS SELECT s.idSala, s.nombre, COUNT(*) AS cantidad_jugadores
-FROM partidaonline p
-JOIN salaonline s ON p.idSalaOnline = s.idSala
-GROUP BY p.idPartida
-ORDER BY cantidad_jugadores DESC ;
-
--- Volcando estructura para vista bilboskpdb.partidas_mas_jugadas3
--- Eliminando tabla temporal y crear estructura final de VIEW
-DROP TABLE IF EXISTS `partidas_mas_jugadas3`;
-CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `partidas_mas_jugadas3` AS SELECT s.idSala, s.nombre, COUNT(p.idPartida) AS cantidad_partidas_jugadas
-FROM salaonline s
-LEFT JOIN partidaonline p ON s.idSala = p.idSalaOnline
-GROUP BY s.idSala
-ORDER BY cantidad_partidas_jugadas DESC ;
-
 -- Volcando estructura para vista bilboskpdb.rankingfisico
 -- Eliminando tabla temporal y crear estructura final de VIEW
 DROP TABLE IF EXISTS `rankingfisico`;
@@ -654,15 +587,6 @@ CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `rankingonline` AS (
 -- Eliminando tabla temporal y crear estructura final de VIEW
 DROP TABLE IF EXISTS `salas_mas_jugadas`;
 CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `salas_mas_jugadas` AS SELECT s.*, COUNT(p.idPartida) AS cantidad_partidas_jugadas FROM salaonline s LEFT JOIN partidaonline p ON s.idSala = p.idSalaOnline GROUP BY s.idSala ORDER BY cantidad_partidas_jugadas DESC ;
-
--- Volcando estructura para vista bilboskpdb.salas_mas_jugadasv3
--- Eliminando tabla temporal y crear estructura final de VIEW
-DROP TABLE IF EXISTS `salas_mas_jugadasv3`;
-CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `salas_mas_jugadasv3` AS SELECT s.*, COUNT(p.idPartida) AS cantidad_partidas_jugadas
-FROM salaonline s
-LEFT JOIN partidaonline p ON s.idSala = p.idSalaOnline
-GROUP BY s.idSala
-ORDER BY cantidad_partidas_jugadas DESC ;
 
 -- Volcando estructura para vista bilboskpdb.suscriptoresenpartida
 -- Eliminando tabla temporal y crear estructura final de VIEW
