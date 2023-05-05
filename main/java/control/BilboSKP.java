@@ -1,5 +1,7 @@
 package control;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -33,7 +35,7 @@ public class BilboSKP extends DBC {
 	public BilboSKP() throws Throwable {
 		super(DBC.DRIVER_MYSQL, dbUrl, user, pass);
 	}
-
+	
 	protected static void setEstadoRanking(boolean nuevoEstado) {
 		estadoRanking = nuevoEstado;
 	}
