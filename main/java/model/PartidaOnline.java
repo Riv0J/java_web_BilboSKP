@@ -46,7 +46,7 @@ public class PartidaOnline extends Partida {
 		setVisibleRanking(visibleRanking);
 	}
 
-	// un cliente proorciona un codigo, y la clase PartidaOnline determinará si se
+	// un cliente proporciona un codigo, y la clase PartidaOnline determinará si se
 	public static boolean usarCodigoInvitacion(int codProporcionado) {
 		// si se encuentra una partida organizando en el hashmap con el codProporcionado
 		// devuelve true, de lo contrario false;

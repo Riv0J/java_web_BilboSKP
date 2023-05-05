@@ -69,53 +69,51 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaPartida.getTematic
 				</a>
 			</div>
 		</div>
-		<div id="caja_img">
+		<div id="caja_organizar">
 			<div id="caja_jugadores"> 
-				<% for(Jugador jugador: partidaOnline.getJugadores()){ %>
+				<% //for(Jugador jugador: partidaOnline.getJugadores()){
+					for(int i =0; i<9; i++){%>
 					<div class="caja_jugador">
-						<div class="caja_img_perfil">
-							<img href="">
-						
+						<div class="caja_organizar_perfil">
+							<img src="img_suscriptores/avatardefault1.png">
 						</div>
-						</div class="caja_alias">
-						
+						<div class="caja_alias">
+							SOY JUANJO EXTREMO
 						</div>
 					</div>
 				<% } %>
 			</div>
 		</div>
-		<style>
-			#caja_img{
-				height: 100%;
-				background: rgb(2,0,36);
-				background: linear-gradient(135deg, rgba(2,0,36,0) 0%, rgba(2,0,36,0) 55%, rgba(0,0,0,0.85) 100%);
-				animation: fondo2 15s infinite;
-				animation-timing-function: ease;
-				opacity: 1;
-			}
-		
-			@keyframes fondo2 {
-			  0% {
-			  opacity: 1;
-			    background-position: 0 0;
-			  }
-			  50% {
-			  opacity: 0.2;
-			    background-position: 50% 50%;
-			  }
-			  75%{
-			  opacity:0.4;}
-			  100% {
-			  opacity: 1;
-			    background-position: 0 0;
-			  }
-			}
-		</style>
-		</div>
 	</div>
 </section>
 
 <style>
+	#caja_organizar{
+		height: 100%;
+		background: rgb(2,0,36);
+		background: linear-gradient(135deg, rgba(2,0,36,0) 0%, rgba(2,0,36,0) 55%, rgba(0,0,0,0.85) 100%);
+		animation: fondo2 15s infinite;
+		animation-timing-function: ease;
+		opacity: 1;
+	}
+		
+	@keyframes fondo2 {
+		0% {
+			opacity: 1;
+			background-position: 0 0;
+		}
+		50% {
+			opacity: 0.2;
+			background-position: 50% 50%;
+		}
+		75%{
+			opacity:0.4;
+		}
+		100% {
+			opacity: 1;
+			background-position: 0 0;
+		}
+	}
 .linea_form{
 	display: flex;
 	flex-direction: row;
@@ -163,7 +161,7 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaPartida.getTematic
 	background: linear-gradient(300deg, rgb(255 255 255 / 0%) 30%, rgb(255 255 255 / 0%) 75%, rgb(255 255 255 / 80%) 100%);
 }
 
-#caja_info, #caja_img {
+#caja_info, #caja_organizar {
 	width: 50%;
 }
 
@@ -271,6 +269,29 @@ i{
 	padding: 0.5%;
 	border-radius: 0.25em;
 }
+#caja_organizar{
+	display: flex;
+    justify-content: flex-end;
+}
+#caja_jugadores{
+	width: 30%;
+	display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+.caja_jugador{
+	display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1%;
+    font-size: 1.5em;
+    
+}
+.caja_jugador img{
+	width: 60%;
+}
 @keyframes fondo {
   0% {
   	background-position: -1% 4%;
@@ -307,7 +328,7 @@ i{
 	}
 	#caja_ver_sala{
 	}
-	#caja_img{
+	#caja_organizar{
 	}
 	#caja_info{
 		gap: 1%;
@@ -340,7 +361,7 @@ i{
 	}
 	#caja_ver_sala{
 	}
-	#caja_img{
+	#caja_organizar{
 		width: 35%;
 	}
 	#caja_info{
@@ -381,7 +402,7 @@ i{
 	}
 	#caja_ver_sala{
 	}
-	#caja_img{
+	#caja_organizar{
 		display:none;
 	}
 	#caja_info{
