@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.PartidaOnline;
 import model.Suscriptor;
 
 @WebServlet("/logout")
@@ -24,8 +25,13 @@ public class ServletLogout extends HttpServlet {
 		Object urlPrevia = (Object) sesion.getAttribute("urlPrevia");
 
 		if (sus instanceof Suscriptor) {
+			//intentar quitar la partida en curso del suscriptor, si la hay
+			PartidaOnline.cancelarPartida(((Suscriptor) sus).getAlias());
+			//quitar el sus de la sesion
 			sesion.removeAttribute("suscriptor");
 		}
+		
+		//redireccionamiento
 		try {
 			if (urlPrevia instanceof String) {
 				System.out.println("ServletLogout: habia una url previa: "+urlPrevia);
@@ -38,6 +44,7 @@ public class ServletLogout extends HttpServlet {
 			e.printStackTrace();
 			response.sendRedirect("index.jsp");
 		}
+		//--------------------------------------------------------------------------------------
 	
 	}
 

@@ -8,6 +8,8 @@
 
 		<div class="cajaComprar">
 			<h2>Comprar cupones</h2>
+			<p>Cada cupón te servirá para organizar una partida en la sala de
+				escape que tu prefieras.</p>
 			<fieldset class="comprar">
 				<div class="cajaCupon">
 					<img src="./img_web/icons/couponWhite.png" width="40%"
@@ -59,9 +61,9 @@
 					Quieres regalar un cupón? Introduce los datos del <em><strong>suscriptor</strong></em>
 					al que quieras mandarle el regalo.
 				</h4>
-				<input name="alias" type="text" placeholder="Alias"> <input
-					name="email" type="email" placeholder="Email del destinatario">
-				<select name="cantidad" id="cantidad">
+				<input name="email" type="email"
+					placeholder="Email del destinatario"> <select
+					name="cantidad" id="cantidad">
 					<option value="selecciona">Selecciona oferta</option>
 					<option value="1">1 cupón</option>
 					<option value="3">3 cupones</option>

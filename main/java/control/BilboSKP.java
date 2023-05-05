@@ -407,17 +407,17 @@ public class BilboSKP extends DBC {
 	}
 
 	// comprobar si un suscriptor existe mediante su alias y correo
-	public static Suscriptor comprobarSuscriptor(String alias, String email) throws Throwable {
+	public static Suscriptor comprobarSuscriptor(String email) throws Throwable {
 
 		// sentencia sql que compruebe si existe
-		String sentenciaSQL = "Select * from 'suscriptor' where alias='" + alias + "'and email='" + email + "';";
+		String sentenciaSQL = "Select * from 'suscriptor' where email='" + email + "';";
 		// hacer conexion
 		BilboSKP conexion;
 		conexion = new BilboSKP();
-		Suscriptor resultado = (Suscriptor) conexion.SQLQuery(sentenciaSQL);
+		Suscriptor sus = (Suscriptor) conexion.SQLQuery(sentenciaSQL);
 		// como el resultado tiene que ser unico podemos sacar el id del suscriptor
-		if (resultado != null) {
-			return resultado;
+		if (sus != null) {
+			return sus;
 		} else {
 			System.out.println("suscriptor no existe");
 			return null;
