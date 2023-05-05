@@ -11,7 +11,6 @@ public class SalaOnline extends Sala{
 	public SalaOnline(int idSala, String nombre, String dificultad, String tematica, String descripcion,
 			int tiempoMax, int jugadoresMin, int jugadoresMax, int edad_recomendada) {
 		super(idSala, nombre, dificultad, tematica, descripcion, tiempoMax, jugadoresMin, jugadoresMax, edad_recomendada);
-		// TODO Auto-generated constructor stub
 	}
 	public SalaOnline(int idSala, String nombre, String dificultad, String tematica, String descripcion) {
 		super(idSala,nombre,dificultad,tematica,descripcion);
