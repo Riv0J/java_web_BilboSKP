@@ -1,19 +1,17 @@
 <%@ page
 	import="java.util.Vector, java.util.HashMap, java.util.Map, java.util.Locale,java.util.Date, java.time.LocalDate, java.io.File, java.text.Normalizer, 
-	model.Sala, model.SalaOnline, model.SalaFisica, model.Horario,view.StringHelper, view.DateHelper, view.Icon, model.PartidaOnline, model.Suscriptor"%>
+	model.Sala, model.SalaOnline, control.BilboSKP, model.SalaFisica, model.Horario, model.Jugador, view.StringHelper, view.DateHelper, view.Icon, model.PartidaOnline, model.Suscriptor"%>
 <%
 PartidaOnline partidaOnline = (PartidaOnline) request.getAttribute("partidaOnline");
-
 Sala salaPartida = partidaOnline.getSala();
 String idSala = (String) request.getParameter("idSala");
 int codInvitacion = partidaOnline.getCodInvitacion();
+String enlaceInvitacion = "http://172.26.22.1/PRET/unirse?idSala="+idSala+"&codInvitacion="+codInvitacion+partidaOnline.getCodInvitacion();
 Suscriptor anfitrion = partidaOnline.getAnfitrion();
 
 String rutaImagenPortadaLarga = "./img_salas/portadas_largas/"+idSala+".png";
 String rutaIconoTematica = "img_web/iconos_salas/" + StringHelper.normalizarTexto(salaPartida.getTematica()) + ".svg";
 String tematicaNormalizada = StringHelper.normalizarTexto(salaPartida.getTematica());
-
-
 %>
 <section id="wrapper_ver_sala">
 	<div id="caja_ver_sala">
@@ -45,7 +43,7 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaPartida.getTematic
 				</div>
 				<div class="etiqueta modalidad" title="Modo de acceso a la sala">
 					<i class="<%=Icon.getIconHTMLClass("online")%>"></i>
-					<div class="caja_text">"online"</div>
+					<div class="caja_text">Modalidad</div>
 				</div>
 				<div class="etiqueta edad" title="Edad recomendada de la sala">
 					<i class="<%=Icon.getIconHTMLClass("age")%>"></i>
@@ -58,6 +56,38 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaPartida.getTematic
 			<div id="caja_sinopsis">
 				<p><%=salaPartida.getDescripcion()%></p>
 			</div>
+			<div id="caja_invitaciones" class="flex_center">
+				<div onclick="copyToClipboard('<%=codInvitacion%>')" id="caja_invitacion">
+					<h2 class="bilboskp_h2"> Invitar con código </h2>
+					<div id="caja_codigo" class="flex_center">
+						<div><%=codInvitacion%></div>
+						<i class="<%=Icon.getIconHTMLClass("copy")%>"></i>
+					</div>
+				</div>
+				<div onclick="copyToClipboard('<%=enlaceInvitacion%>')" id="caja_invitacion">
+					<h2 class="bilboskp_h2"> Invitar con enlace </h2>
+					<div id="caja_codigo" class="flex_center">
+						<div id = "caja_enlace"><%=enlaceInvitacion%></div>
+						<i class="<%=Icon.getIconHTMLClass("copy")%>"></i>
+					</div>
+				</div>	
+			</div>
+		</div>
+		<div id="caja_organizar">
+			<h2 id="caja_subtitulo_organizar" class="bilboskp_h2"> Jugadores en espera</h2>
+			<div id="caja_jugadores"> 
+				<% //for(Jugador jugador: partidaOnline.getJugadores()){
+					for(int i =0; i<8; i++){%>
+					<div class="caja_jugador">
+						<div class="caja_organizar_perfil">
+							<img src="img_suscriptores/avatardefault1.png">
+						</div>
+						<div class="caja_alias">
+							SOY JUANJO EXTREMO
+						</div>
+					</div>
+				<% } %>
+			</div>
 			<div id="contenedor_boton">
 				<a href="">
 					<button class="bilboskp_icon_button">
@@ -69,56 +99,109 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaPartida.getTematic
 				</a>
 			</div>
 		</div>
-		<div id="caja_img">
-		<style>
-			#caja_img{
-				height: 100%;
-				background: rgb(2,0,36);
-				background: linear-gradient(135deg, rgba(2,0,36,0) 0%, rgba(2,0,36,0) 55%, rgba(0,0,0,0.85) 100%);
-				animation: fondo2 15s infinite;
-				animation-timing-function: ease;
-				opacity: 1;
-			}
-		
-			@keyframes fondo2 {
-			  0% {
-			  opacity: 1;
-			    background-position: 0 0;
-			  }
-			  50% {
-			  opacity: 0.2;
-			    background-position: 50% 50%;
-			  }
-			  75%{
-			  opacity:0.4;}
-			  100% {
-			  opacity: 1;
-			    background-position: 0 0;
-			  }
-			}
-		</style>
-		</div>
 	</div>
 </section>
-
+<script>
+	function copyToClipboard(text) {
+	  var textarea = document.createElement("textarea");
+	  textarea.value = text;
+	  document.body.appendChild(textarea);
+	  textarea.select();
+	  document.execCommand("copy");
+	  document.body.removeChild(textarea);
+	  alert("¡Invitación copiada!");
+	}
+</script>
 <style>
-.linea_form{
+	#caja_organizar{
+		display:none;
+		width: 35%;
+		display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    flex-direction: column;
+		height: 100%;
+		background: rgb(2,0,36);
+		background: linear-gradient(135deg, rgba(2,0,36,0) 0%, rgba(2,0,36,0) 55%, rgba(0,0,0,0.85) 100%);
+		/*animation: fondo2 15s infinite;*/
+		animation-timing-function: ease;
+		opacity: 1;
+	}
+	#caja_jugadores {
+		height: 40%;
+	}
+	#caja_invitaciones{
+		margin-top: 5%;
+		width: 100%;
+	}
+	#caja_invitaciones > *{
+		width: 50%;
+		height:100%;
+	}
+	#caja_codigo{
+		gap: 5%;
+		padding-top: 5%;
+		font-size: 2.2em;
+		cursor: pointer;	
+	}
+	#caja_codigo i{
+		padding: 1%;
+		border: 0.03em solid var(--text-color);
+		border-radius: 0.22em;
+		font-size: 1em;
+	}
+	#caja_codigo i:hover{
+		background-color: var(--bg-oscuro);
+		color: var(--main-color);
+	}
+	#contenedor_boton {
+		width: 100%;
+		padding-top: 2%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	#caja_enlace{
+		white-space: nowrap;
+	    text-overflow: ellipsis;
+	    width: 60%;
+	    overflow: hidden;
+	    font-size: 0.7em;
+	}
+#contenedor_boton a{
+	width: 35%;
 	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	gap:3%;
-	margin-top:1%;
-	
+    justify-content: center;
+}
+#contenedor_boton button{
+	font-size: 1.45em;
+	width: 100%;
+}
+#contenedor_boton i{
+	font-size: 2em;
+}
+@keyframes fondo2 {
+		0% {
+			opacity: 1;
+			background-position: 0 0;
+		}
+		50% {
+			opacity: 0.2;
+			background-position: 50% 50%;
+		}
+		75%{
+			opacity:0.4;
+		}
+		100% {
+			opacity: 1;
+			background-position: 0 0;
+		}
+	}
+i{
+	font-size: 1.25em;
 }
 #num_jugadores{
 	width:6%;
-}
-#horarios{
-	text-align: center;
-	width:30%;
-}
-#fechas{
 }
 #wrapper_ver_sala {
 	height: 85vh;
@@ -149,7 +232,7 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaPartida.getTematic
 	background: linear-gradient(300deg, rgb(255 255 255 / 0%) 30%, rgb(255 255 255 / 0%) 75%, rgb(255 255 255 / 80%) 100%);
 }
 
-#caja_info, #caja_img {
+#caja_info, #caja_organizar {
 	width: 50%;
 }
 
@@ -166,34 +249,11 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaPartida.getTematic
 	width: 70%;
 }
 
-#contenedor_boton {
-	padding-top: 2%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-#contenedor_boton a{
-	width: 50%;
-	display: flex;
-    justify-content: center;
-}
-#contenedor_boton button{
-	font-size: 1.45em;
-	width: 100%;
-}
-i{
-	font-size: 1.25em;
-}
-#contenedor_boton i{
-	font-size: 2em;
-}
-
 #caja_titulo {
 	font-size: 2em;
 	letter-spacing: 0.1em;
 	text-stroke: 0.5em solid red;
 }
-
 .caja_subtitulo {
 	font-size: 2em;
 	display: none;
@@ -257,6 +317,41 @@ i{
 	padding: 0.5%;
 	border-radius: 0.25em;
 }
+#caja_jugadores{
+	margin: 5%;
+	width: 100%;
+	height: 50%;
+	display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2%;
+}
+.caja_jugador{
+	height: 10%;
+	width: 45%;
+	display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1%;
+    font-size: 1.5em;
+    
+}
+.caja_jugador img{
+	width: 60%;
+}
+.caja_organizar_perfil{
+	width: 30%;
+	text-align:center;
+}
+caja_organizar_perfil img{
+	object-fit:cover;
+}
+.caja_alias{
+	width: 70%;
+}
 @keyframes fondo {
   0% {
   	background-position: -1% 4%;
@@ -291,10 +386,6 @@ i{
 	    text-align: justify;
 	    font-size: 1.75em;
 	}
-	#caja_ver_sala{
-	}
-	#caja_img{
-	}
 	#caja_info{
 		gap: 1%;
 	}
@@ -324,13 +415,8 @@ i{
 	    font-size: 1.5em;
 
 	}
-	#caja_ver_sala{
-	}
-	#caja_img{
-		width: 35%;
-	}
 	#caja_info{
-		width: 65%;
+		width: 50%;
 		gap: 1%;
 	}
 	.etiqueta{
@@ -365,13 +451,8 @@ i{
 	    text-align: justify;
 	    font-size: 1.5em;
 	}
-	#caja_ver_sala{
-	}
-	#caja_img{
-		display:none;
-	}
 	#caja_info{
-		width: 70%;
+		width: 100%;
 		gap: 1%;
 	}
 	.etiqueta{
@@ -408,7 +489,7 @@ i{
 		padding: 0.5%;
 	}*/
 	#caja_info{
-		width: 80%;
+		width: 100%;
 		gap: 1%;
 	}
 	

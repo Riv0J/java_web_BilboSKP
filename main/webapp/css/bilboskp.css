@@ -69,7 +69,6 @@
 	/* Font smoothing. That was taken from TWBS */
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-
 	/* Uncomment for 3D effect */
 	/* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
@@ -194,4 +193,9 @@
 	font-size: 1.5em;
     line-height: 1.25em;
     text-align: left;
+}
+.bilboskp_h3{
+	color: var(--text-color);
+	font-size: 1.2em;
+	margin-bottom: 1%;
 }

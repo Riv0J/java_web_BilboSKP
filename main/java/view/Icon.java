@@ -23,6 +23,7 @@ public class Icon {
 		mapaIconClasses.put("age", "ri-body-scan-fill");
 		mapaIconClasses.put("cupon", "ri-coupon-line");
 		mapaIconClasses.put("logout", "ri-logout-box-r-line");
+		mapaIconClasses.put("copy", "ri-file-copy-2-line");
 	}
 	public static String getIconHTMLClass(String key) {
 		if(mapaIconClasses==null) {

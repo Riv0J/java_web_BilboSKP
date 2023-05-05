@@ -29,7 +29,6 @@ public class ServletTienda extends HttpServlet {
 		sesion.setAttribute("urlPrevia", urlPrevia);
 		//---------------------------------------------------------------------------//
 		
-		
 		Suscriptor sus = (Suscriptor) sesion.getAttribute("suscriptor");
 	
 		String accion = request.getParameter("tienda");
@@ -38,19 +37,12 @@ public class ServletTienda extends HttpServlet {
 		}
 		switch (accion) {
 		case "comprar":
-			
-			break;
-
-		default:
-			break;
-		}
-		//comprobar si
-		//comprobar si se está suscrito 
+			//comprobar si se está suscrito 
 		if(sus!=null) {
 			//los cupones comprados irán a la cuenta de sus
 			int susID = sus.getIdSuscriptor();
 			try {
-				BilboSKP.otorgarCupon("Regular", susID);
+				BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
 				System.out.println("cupon regular comprado");
 			} catch (Throwable e) {
 				System.out.println("cupon regular NO comprado");
@@ -62,6 +54,41 @@ public class ServletTienda extends HttpServlet {
 			request.getRequestDispatcher("./subscribe").forward(request,
 					response);;
 		}
+			break;
+
+		case "regalar":
+			//pedir datos del suscriptor del sus a regalar(susReg) (alias+correo)
+			String susAlias = request.getParameter("alias");
+			String susEmail = request.getParameter("email");
+			String cantidad =request.getParameter("cantidad");
+			//Suscriptor susReg =BilboSKP.comprobarSuscriptor(susAlias, susEmail);
+			//comprobar si susReg existe 
+			try {
+				Suscriptor susReg =BilboSKP.comprobarSuscriptor(susAlias, susEmail);
+				System.out.println("suscriptor existe");
+			} catch (Throwable e) {
+				System.out.println("suscriptor no existe");
+				e.printStackTrace();
+			}
+			//pagar(¿xD?)
+			//enviar cupones a susReg
+			Suscriptor susReg = null;
+			int susRegID=susReg.getIdSuscriptor();
+			try {
+				BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR,susRegID);
+				System.out.println("Se envió el cupon con exito");
+			} catch (Throwable e) {
+				System.out.println("No se pudo enviar el cupon");
+				e.printStackTrace();
+			}
+
+			
+			
+			
+			break;
+		}
+	
+		
 
 	
 	
