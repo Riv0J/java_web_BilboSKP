@@ -42,7 +42,7 @@ public class ServletSubscribe extends HttpServlet {
 
 		// Parsear la fecha a un objeto java.util.date
 		LocalDate fecha = LocalDate.parse(fech_nac);
-
+		//Suscriptor solicitudSuscripcion = new Suscriptor(0,telefono,email,alias,nombre,apellidos,"avatardefault1",0, newDate);
 		// Convertir a java.sql.date
 		java.sql.Date sqlDate = java.sql.Date.valueOf(fecha);
 		boolean exitoso = false;

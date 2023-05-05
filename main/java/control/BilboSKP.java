@@ -41,7 +41,7 @@ public class BilboSKP extends DBC {
 	protected static boolean getEstadoRanking() {
 		return estadoRanking;
 	}
-	
+	//obtener las salas con mas partidas jugadas
 	public static Vector<SalaOnline> getSalasMasJugadas(int limit) throws Throwable{
 		Vector<SalaOnline> vectorSalasOnlineTop = new Vector<SalaOnline>();
 		String nombreVista = "salas_mas_jugadas";

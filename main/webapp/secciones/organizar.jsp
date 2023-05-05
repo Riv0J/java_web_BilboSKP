@@ -1,6 +1,6 @@
 <%@ page
 	import="java.util.Vector, java.util.HashMap, java.util.Map, java.util.Locale,java.util.Date, java.time.LocalDate, java.io.File, java.text.Normalizer, 
-	model.Sala, model.SalaOnline, model.SalaFisica, model.Horario,view.StringHelper, view.DateHelper, view.Icon, model.PartidaOnline, model.Suscriptor"%>
+	model.Sala, model.SalaOnline, model.SalaFisica, model.Horario, model.Jugador, view.StringHelper, view.DateHelper, view.Icon, model.PartidaOnline, model.Suscriptor"%>
 <%
 PartidaOnline partidaOnline = (PartidaOnline) request.getAttribute("partidaOnline");
 
@@ -70,6 +70,20 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaPartida.getTematic
 			</div>
 		</div>
 		<div id="caja_img">
+			<div id="caja_jugadores"> 
+				<% for(Jugador jugador: partidaOnline.getJugadores()){ %>
+					<div class="caja_jugador">
+						<div class="caja_img_perfil">
+							<img href="">
+						
+						</div>
+						</div class="caja_alias">
+						
+						</div>
+					</div>
+				<% } %>
+			</div>
+		</div>
 		<style>
 			#caja_img{
 				height: 100%;

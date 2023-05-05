@@ -133,7 +133,6 @@ public class ServletSalas extends HttpServlet {
 			System.out.println("hubo un error en serv salas");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
-
 	}
 
 	@Override

@@ -26,9 +26,9 @@ public class ServletOrganizar extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Doget Organizar sala");
 		HttpSession sesion = request.getSession();
-
 		String idSala = request.getParameter("idSala");
 		Object suscriptor = (Object) sesion.getAttribute("suscriptor");
+		
 		if(suscriptor instanceof Suscriptor) {
 			Suscriptor anfitrion = (Suscriptor) suscriptor;
 			System.out.println(anfitrion.getAlias());
@@ -37,8 +37,9 @@ public class ServletOrganizar extends HttpServlet {
 			System.out.println(sala.getNombre());
 			PartidaOnline partidaOnline= new PartidaOnline(sala, anfitrion, sala.getJugadoresMax(), idSala);
 			partidaOnline.getCodInvitacion();
-			System.out.println(partidaOnline.getCodInvitacion());
+			System.out.println("Codigo de invitacion de esta partida"+ partidaOnline.getCodInvitacion());
 			request.setAttribute("partidaOnline", partidaOnline);
+			
 			request.getRequestDispatcher("index.jsp?sec=organizar").forward(request, response);
 		} 
 	}

@@ -21,5 +21,10 @@ public class Security {
         }
         return passwordEncriptada;
     }
+    //proporcionar el input text de un texto y limpiarlo para hacerlo a prueba de sqlinjection
+    protected static String HTMLinputCleaner(String input) {
+		return input.replaceAll("[^\\w\\s@.-]", "");
+    	
+    }
 
 }
