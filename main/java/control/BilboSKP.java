@@ -41,16 +41,18 @@ public class BilboSKP extends DBC {
 	protected static boolean getEstadoRanking() {
 		return estadoRanking;
 	}
-	//obtener las salas con mas partidas jugadas
-	public static Vector<SalaOnline> getSalasMasJugadas(int limit) throws Throwable{
+
+	// obtener las salas con mas partidas jugadas
+	public static Vector<SalaOnline> getSalasMasJugadas(int limit) throws Throwable {
 		Vector<SalaOnline> vectorSalasOnlineTop = new Vector<SalaOnline>();
 		String nombreVista = "salas_mas_jugadas";
 		try {
-			//hacer una vista si no existe
-			String sentenciaSQL = "CREATE VIEW if not exists "+nombreVista+" AS SELECT s.*, COUNT(p.idPartida) AS cantidad_partidas_jugadas FROM salaonline s LEFT JOIN partidaonline p ON s.idSala = p.idSalaOnline GROUP BY s.idSala ORDER BY cantidad_partidas_jugadas DESC;";
+			// hacer una vista si no existe
+			String sentenciaSQL = "CREATE VIEW if not exists " + nombreVista
+					+ " AS SELECT s.*, COUNT(p.idPartida) AS cantidad_partidas_jugadas FROM salaonline s LEFT JOIN partidaonline p ON s.idSala = p.idSalaOnline GROUP BY s.idSala ORDER BY cantidad_partidas_jugadas DESC;";
 			BilboSKP conexion = new BilboSKP();
-			int filasAfectadas =conexion.SQLUpdate(sentenciaSQL);
-			if(filasAfectadas==0) {
+			int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
+			if (filasAfectadas == 0) {
 				System.out.println("La vista de top salas ya existia");
 			}
 		} catch (Exception e) {
@@ -58,8 +60,9 @@ public class BilboSKP extends DBC {
 			System.out.println("Error tratando de crear vista");
 		}
 		try {
-			//obtener las 3 salas mas jugadas de dicha vista
-			String sentenciaSQL2 = "select * from "+nombreVista+" order by cantidad_partidas_jugadas desc limit "+limit;
+			// obtener las 3 salas mas jugadas de dicha vista
+			String sentenciaSQL2 = "select * from " + nombreVista + " order by cantidad_partidas_jugadas desc limit "
+					+ limit;
 			BilboSKP conexion = new BilboSKP();
 			ResultSet resultado = conexion.SQLQuery(sentenciaSQL2);
 			while (resultado.next()) {
@@ -74,12 +77,13 @@ public class BilboSKP extends DBC {
 				// agregar sala al vector
 				vectorSalasOnlineTop.add(sala);
 			}
-			
+
 		} catch (Exception e) {
 		}
-		
+
 		return vectorSalasOnlineTop;
 	}
+
 	// conectarse a la BD y obtener todas las salas online @Rivo
 	public static Vector<SalaOnline> getSalasOnline() throws Throwable {
 		try {
@@ -193,12 +197,11 @@ public class BilboSKP extends DBC {
 				int edad_recomendada = resultado.getInt("edad_recomendada");
 				String direccion = resultado.getString("direccion");
 				int telefono = resultado.getInt("telefono");
-				
-				
+
 				SalaFisica sala = new SalaFisica(idSala, nombre, dificultad, tematica, descripcion, tiempoMax,
 						jugadoresMin, jugadoresMax, edad_recomendada, direccion, telefono);
-				
-				//intentar obtener los horarios de esta sala física
+
+				// intentar obtener los horarios de esta sala física
 				Vector<Horario> vectorHorarios = BilboSKP.obtenerHorariosSalaFisica(idSala);
 				sala.setVectorHorariosDisponibles(vectorHorarios);
 				// agregar sala al vector
@@ -267,8 +270,9 @@ public class BilboSKP extends DBC {
 			// crear el vector que vamos a devolver
 			Vector<Horario> vectorFechasSalasFisicas = new Vector<Horario>();
 
-			// hacer sentencia sql select todas los horarios de la sala que queremos, exluyendo fechas pasadas
-			String sentenciaSQL = "SELECT * FROM horario WHERE idSalaFisica='" + idSala 
+			// hacer sentencia sql select todas los horarios de la sala que queremos,
+			// exluyendo fechas pasadas
+			String sentenciaSQL = "SELECT * FROM horario WHERE idSalaFisica='" + idSala
 					+ "' AND disponible=1 AND fechaHora >= '" + SQLHelper.getFechaAhoraSQL() + "' ORDER BY fechaHora;";
 			// hacer una conexion
 			BilboSKP conexion = new BilboSKP();
@@ -397,6 +401,24 @@ public class BilboSKP extends DBC {
 		}
 	}
 
+	// comprobar si un suscriptor existe mediante su alias y correo
+	public static Suscriptor comprobarSuscriptor(String alias, String email) throws Throwable {
+
+		// sentencia sql que compruebe si existe
+		String sentenciaSQL = "Select * from 'suscriptor' where alias='" + alias + "'and email='" + email + "';";
+		// hacer conexion
+		BilboSKP conexion;
+		conexion = new BilboSKP();
+		Suscriptor resultado = (Suscriptor) conexion.SQLQuery(sentenciaSQL);
+		// como el resultado tiene que ser unico podemos sacar el id del suscriptor
+		if (resultado != null) {
+			return resultado;
+		} else {
+			System.out.println("suscriptor no existe");
+			return null;
+		}
+	}
+
 	// obtener ranking dado un id sala online @Urko
 	public static Vector<PartidaOnline> obtenerRankingSalaOnline(int idSala) throws Throwable {
 		try {
@@ -434,7 +456,8 @@ public class BilboSKP extends DBC {
 					Partida pa = vectorPartidas.get(i);
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 					String fechaHoraString = sdf.format(pa.getFechaInicio());
-					//System.out.println(pa.getNombreGrupo() + ", " + pa.getPuntaje() + " puntos, " + fechaHoraString);
+					// System.out.println(pa.getNombreGrupo() + ", " + pa.getPuntaje() + " puntos, "
+					// + fechaHoraString);
 				}
 			}
 			conexion.cerrarFlujo();
@@ -498,16 +521,16 @@ public class BilboSKP extends DBC {
 
 	public static boolean ReiniciarRanking(int idSala) throws Throwable {
 		try {
-			String sentenciaSQL ="DELETE * FROM partidaonline WHERE idSala = "+idSala+";";
+			String sentenciaSQL = "DELETE * FROM partidaonline WHERE idSala = " + idSala + ";";
 			BilboSKP conexion = new BilboSKP();
 			int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
 			if (filasAfectadas >= 1) {
 				System.out.println(sentenciaSQL);
 				System.out.println("Se han borrado datos de ranking con exito");
-			}else {
+			} else {
 				System.out.println("No se han borrado datos de ranking");
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Error al reiniciar ranking");
 		}
@@ -594,7 +617,7 @@ public class BilboSKP extends DBC {
 			int idCupon = resultado.getInt("idCupon");
 			Date fechaCaducidad = resultado.getDate("fechaCaducidad");
 			String Estado = resultado.getString("estado");
-			int reembolsable=resultado.getInt("reembolsable");
+			int reembolsable = resultado.getInt("reembolsable");
 			System.out.println(idCupon);
 			Cupon cupon = new Cupon(idCupon, Estado, fechaCaducidad, reembolsable);
 			vectorCupones.add(cupon);
@@ -620,14 +643,15 @@ public class BilboSKP extends DBC {
 		}
 		return false;
 	}
-	//cambiar el estado de todos los cupones cuya fecha caducidad es ayer @Inigo
+
+	// cambiar el estado de todos los cupones cuya fecha caducidad es ayer @Inigo
 	public static boolean cambiarEstadoCuponesCaducados() throws Throwable {
 		try {
 			LocalDate fechaActual = LocalDate.now();
 			LocalDate fechaAyer = fechaActual.minusDays(1);
-			String sentenciaSQL ="UPDATE cupon SET estado = 'caducado' WHERE fechaCaducidad = '"+fechaAyer+"';";
+			String sentenciaSQL = "UPDATE cupon SET estado = 'caducado' WHERE fechaCaducidad = '" + fechaAyer + "';";
 			BilboSKP conexion = new BilboSKP();
-			int filasAfectadas= conexion.SQLUpdate(sentenciaSQL);
+			int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
 			if (filasAfectadas == 1) {
 				System.out.println("Se pudo cambiar el estado de los cupones");
 				return true;
@@ -641,6 +665,7 @@ public class BilboSKP extends DBC {
 		}
 		return false;
 	}
+
 	// otorgar cupon @Rivo
 	public static void otorgarCupon(String tipoCupon, int idSuscriptor) throws Throwable {
 		try {
@@ -751,18 +776,18 @@ public class BilboSKP extends DBC {
 		}
 	}
 
-	//Eliminar una reserva de la BD
+	// Eliminar una reserva de la BD
 	public static void eliminarReserva(int idReserva) throws Throwable {
-		String sql = "DELETE from reserva WHERE id="+idReserva+";";
+		String sql = "DELETE from reserva WHERE id=" + idReserva + ";";
 	}
-		
+
 	// obtener las reservas de un suscriptor de la bd @Paula
 	public static Vector<Reserva> obtenerReserva(int idSuscriptor) throws Throwable {
 		Vector<Reserva> reservas = new Vector<Reserva>();
 		String sentenciaSQL = "SELECT * FROM reserva WHERE idSuscriptor=" + idSuscriptor + " order by fechaHora ";
 		BilboSKP conexion = new BilboSKP();
 		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
-		//por cada fila, crear un objeto reserva
+		// por cada fila, crear un objeto reserva
 		while (resultado.next()) {
 			int idReserva = resultado.getInt("idReserva");
 			int idSalaFisica = resultado.getInt("idSalaFisica");
@@ -810,7 +835,8 @@ public class BilboSKP extends DBC {
 	// TODO cambiar estado reserva dado su id @Paula
 	public static Reserva cambiarEstadoReserva(int nuevoEstado, int idSuscriptor, int idReserva) throws Throwable {
 		try {
-			String sentenciaSQL = "UPDATE reserva SET estado="+nuevoEstado+" WHERE idSuscriptor=" + idSuscriptor + " and idReserva="+idReserva+";";
+			String sentenciaSQL = "UPDATE reserva SET estado=" + nuevoEstado + " WHERE idSuscriptor=" + idSuscriptor
+					+ " and idReserva=" + idReserva + ";";
 			BilboSKP conexion = new BilboSKP();
 			int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
 			if (filasAfectadas == 1) {
@@ -822,7 +848,8 @@ public class BilboSKP extends DBC {
 
 		return null;
 	}
-	//cargar todas las tematicas disponibles @Rivo
+
+	// cargar todas las tematicas disponibles @Rivo
 	public static void cargarTematicas() {
 		ArrayList<String> tematicasCargadas = new ArrayList<String>();
 		HashMap<String, Sala> mapaSalas = Sala.getTodasLasSalasCargadas();
@@ -837,7 +864,8 @@ public class BilboSKP extends DBC {
 		}
 		Sala.setTematicasCargadas(tematicasCargadas);
 	}
-	//cargar todas las dificultades disponibles @Rivo
+
+	// cargar todas las dificultades disponibles @Rivo
 	public static void cargarDificultades() {
 		ArrayList<String> dificultadesCargadas = new ArrayList<String>();
 		HashMap<String, Sala> mapaSalas = Sala.getTodasLasSalasCargadas();
@@ -852,7 +880,8 @@ public class BilboSKP extends DBC {
 		}
 		Sala.setDificultadesCargadas(dificultadesCargadas);
 	}
-	//cargar toda la info relacionada con salas @Rivo
+
+	// cargar toda la info relacionada con salas @Rivo
 	public static void cargarInfoSalas() {
 		try {
 			BilboSKP.cargarSalasFisicas();
