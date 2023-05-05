@@ -5,45 +5,43 @@
 	<link rel="stylesheet" href="../css/tienda.css">
 
 	<form method="get">
-		<h2>Comprar cupones</h2>
-		<div id="cajaComprar">
+		
+		<div class="cajaComprar">
+            <h2>Comprar cupones</h2>
 			<fieldset class="comprar">
 				<div class="cajaCupon">
-					<img src="../img_web/icons/coupon.png" width="40%" height="100px">
-					<h3>1 cupon</h3>
+					<img src="../img_web/icons/couponWhite.png" width="40%" height="100px">
+					<h3>1 cupón</h3>
 					<h5>5% de descuento</h5>
-					<div class>
+					
 						<button name="comprar1" class="botonCompra" type="submit">Comprar
 							ya</button>
 
 					</div>
 
 					<div class="cajaCupon">
-						<img src="../img_web/icons/coupon.png" width="40%" height="100px">
+						<img src="../img_web/icons/couponWhite.png" width="40%" height="100px">
 						<h3>3 cupones</h3>
 						<h5>11% de descuento</h5>
-						<div id="root"></div>
 						<button name="comprar3" class="botonCompra" type="submit">Comprar
 							ya</button>
 
 					</div>
 
 					<div class="cajaCupon">
-						<img src="../img_web/icons/coupon.png" width="40%" height="100px">
+						<img src="../img_web/icons/couponWhite.png" width="40%" height="100px">
 						<h3>5 cupones</h3>
 						<h5>17% de descuento</h5>
-						<div id="root"></div>
 						<button name="comprar5" class="botonCompra" type="submit">Comprar
 							ya</button>
 
 					</div>
 
 					<div class="cajaCupon">
-						<img src="../img_web/icons/coupon.png" width="40%" height="100px">
+						<img src="../img_web/icons/couponWhite.png" width="40%" height="100px">
 
 						<h3>7 cupones</h3>
 						<h5>25% de descuento</h5>
-						<div id="root"></div>
 						<button name="comprar7" class="botonCompra" type="submit">Comprar
 							ya</button>
 
@@ -52,6 +50,7 @@
 			</fieldset>
 			<fieldset class="regalar">
 				<div class="cajaRegalar">
+                    <h2>Regalar cupones</h2>
 					<h4>
 						Quieres regalar un cupón? Introduce los datos del <strong>suscriptor</strong>
 						al que quieras mandarle el regalo.
