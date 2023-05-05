@@ -8,12 +8,12 @@ align-items: center;
 
 }
 
-img {
+#ranking img {
 	width: 80px;
 	height: 80px;
 }
 
-p {
+#ranking p {
 	width: 100%;
 	text-align: center;
 }

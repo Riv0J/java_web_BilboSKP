@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
 import java.util.Vector;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -379,8 +380,8 @@ public class BilboSKP extends DBC {
 		 * + email + "', '" + pass + "', '" + alias + "', '" + nombre + "', '" +
 		 * apellidos + "', '" + fech_nac + "', '" + telefono + "');";
 		 */
-		String[] arrayColumnas = { "email", "pass", "alias", "nombre", "apellidos", "fech_nac", "telefono" };
-		Object[] arrayValores = { email, Security.encriptarPass(pass), alias, nombre, apellidos, fech_nac, telefono };
+		String[] arrayColumnas = { "email", "pass", "alias", "nombre", "apellidos", "fech_nac", "telefono", "imagen" };
+		Object[] arrayValores = { email, Security.encriptarPass(pass), alias, nombre, apellidos, fech_nac, telefono, generarRutaImagenDefault() };
 		String sentenciaSQL = SQLHelper.obtenerSentenciaSQLInsert("suscriptor", arrayColumnas, arrayValores);
 		System.out.println(sentenciaSQL);
 		// hacer una conexion
@@ -894,4 +895,13 @@ public class BilboSKP extends DBC {
 			e.printStackTrace();
 		}
 	}
+	public static String generarRutaImagenDefault() {
+		return "defaults/"+generarNumeroImagen()+".png";
+		
+	}
+    public static int generarNumeroImagen() {
+        Random rand = new Random();
+        int numero = rand.nextInt(8) + 1; // genera un número aleatorio entre 1 y 8
+        return numero;
+    }
 }

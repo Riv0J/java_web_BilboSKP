@@ -17,7 +17,7 @@ Vector<PartidaOnline> finalistas = new Vector<PartidaOnline>();
 //String salaseleccionada = request.getParameter("salaseleccionada");
 %>
 
-<body>
+<body id="ranking">
 	<link rel="stylesheet" href="css/ranking.css">
 
 	<h2 class="superior">

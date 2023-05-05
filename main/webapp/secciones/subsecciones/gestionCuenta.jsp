@@ -17,7 +17,7 @@ sesion.setAttribute("sus", sus);
                 </div>
                 <form action="">
                     <div class="subcaja1">
-                   		<img src="img_web/icons/<%=sus.getImagen()%>" alt="">
+                   		<img src="img_suscriptores/<%=sus.getImagen()%>" alt="">
                    		<div class="boton_modificar">
                    		<input class="modificar" type="" value="">
                    		</div>
