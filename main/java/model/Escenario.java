@@ -52,6 +52,4 @@ public class Escenario {
 	public void setPuzzles(Puzzle[] puzzles) {
 		this.puzzles = puzzles;
 	}
-	
-
 }

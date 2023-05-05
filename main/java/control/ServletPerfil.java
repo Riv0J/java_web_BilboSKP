@@ -37,8 +37,6 @@ public class ServletPerfil extends HttpServlet {
 		HttpSession sesion = request.getSession();
 		Suscriptor sus = (Suscriptor) sesion.getAttribute("suscriptor");
 
-
-
 		switch (subseccion) {
 		case "gestionCuenta":
 			request.getRequestDispatcher("index.jsp?sec=perfil&sub=gestionCuenta").forward(request, response);

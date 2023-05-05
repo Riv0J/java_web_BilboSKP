@@ -2,12 +2,10 @@ package model;
 
 public class Anfitrion extends Jugador{
 
-	public Anfitrion(String alias) {
-		super(alias);
+	public Anfitrion(Suscriptor sus) {
+		super(sus.getAlias(), sus.getImagen());
 	}
 	//iniciar partida
 	//Solicitar pista
 	//cancelar Partida
-	
-
 }

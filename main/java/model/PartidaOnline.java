@@ -40,7 +40,7 @@ public class PartidaOnline extends Partida {
 		this.inventario = new Inventario();
 
 		partidasOrganizando.put(this.codInvitacion, this);
-		Anfitrion anfitrion = new Anfitrion(suscriptorAnfitrion.getAlias());
+		Anfitrion anfitrion = new Anfitrion(suscriptorAnfitrion);
 		agregarJugador(anfitrion);
 		iniciarTimer();
 	}
