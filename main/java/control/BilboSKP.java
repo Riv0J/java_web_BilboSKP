@@ -391,7 +391,7 @@ public class BilboSKP extends DBC {
 		if (filasAfectadas == 1) {
 			Suscriptor sus = loginSuscriptor(email, pass);
 			if (sus != null) {
-				// TODO crear cupon de bienvenida
+				otorgarCupon(Cupon.CUPON_BIENVENIDA,sus.getIdSuscriptor());
 				sus.getIdSuscriptor();
 				return sus;
 			}
