@@ -39,27 +39,23 @@ public class ServletRanking extends HttpServlet {
 			throws ServletException, IOException {
 		System.out.println("doget ranking");
 		try {
-			
 			// 1. Obtener los parametros necesarios para mostrar la info
 			HashMap<String, Sala> mapaSalas = Sala.getTodasLasSalasCargadas();
 			HashMap<String, SalaOnline> salasAMostrar = new HashMap<String, SalaOnline>();
-			
-		
-			
+
 			// Obtener los parametros de la sala que queremos ver el ranking
 			String idSala = request.getParameter("sala");
 
 			// si no hay sala seleccionada forzar la primera
-
 			if (idSala == null) {
 				idSala = "SO1";
 			}
-			System.out.println("idSala= " + idSala);
+			System.out.println("ServletRanking: idSala = " + idSala);
 
 			for (Map.Entry<String, Sala> par : mapaSalas.entrySet()) {
 				par.getKey();
 				System.out.println(par.getKey());
-				if(par.getValue() instanceof SalaOnline) {
+				if (par.getValue() instanceof SalaOnline) {
 					salasAMostrar.put(par.getKey(), (SalaOnline) par.getValue());
 					System.out.println(par.getValue().getNombre());
 				}
@@ -67,11 +63,11 @@ public class ServletRanking extends HttpServlet {
 
 			// sala viendose en este momento
 			Sala salaSeleccionada = Sala.getSalaPorId(idSala);
-			if(salaSeleccionada instanceof SalaFisica)
-				salaSeleccionada =Sala.getSalaPorId("SO1");
-					System.out.println("Era una sala Fisica");
+			if (salaSeleccionada instanceof SalaFisica) {
+				salaSeleccionada = Sala.getSalaPorId("SO1");
+			}
 			request.setAttribute("salaSeleccionada", salaSeleccionada);
-			System.out.println("Sala seleccionada: " + salaSeleccionada.getNombre());
+			System.out.println("ServletRanking: Sala seleccionada: " + salaSeleccionada.getNombre());
 
 			// partidas que se jugaron
 			// todo esto ira como setAttribute[]
@@ -81,29 +77,28 @@ public class ServletRanking extends HttpServlet {
 			partidas = BilboSKP.obtenerRankingSalaOnline(salaSeleccionada.getIdSala());
 
 			// verificar que hay partidas / vector de partidas
-			/*for (PartidaOnline partida : partidas) {
-				Sala sala = partida.getSala();
-				String nombregrupo = partida.getNombreGrupo();
-				String puntos = Integer.toString(partida.getPuntaje());
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-				String fecha = sdf.format(partida.getFechaInicio());
-				System.out.println(sala.getIdSala());
-
-			}*/
+			/*
+			 * for (PartidaOnline partida : partidas) { Sala sala = partida.getSala();
+			 * String nombregrupo = partida.getNombreGrupo(); String puntos =
+			 * Integer.toString(partida.getPuntaje()); SimpleDateFormat sdf = new
+			 * SimpleDateFormat("yyyy-MM-dd HH:mm"); String fecha =
+			 * sdf.format(partida.getFechaInicio()); System.out.println(sala.getIdSala());
+			 * 
+			 * }
+			 */
 			// poner atributos del request, para que la seccion pueda mostrar la info
 			request.setAttribute("partidas", partidas);
 			request.setAttribute("salasAMostrar", salasAMostrar);
-			
-			//redireccionamiento: establecer la url a mandar como url previa en la sesion
+
+			// redireccionamiento: establecer la url a mandar como url previa en la sesion
 			String urlPrevia = "./ranking?idSala=" + idSala;
-			System.out.println("ServletRanking urlprevia establecida = "+urlPrevia);
+			System.out.println("ServletRanking urlprevia establecida = " + urlPrevia);
 			HttpSession sesion = request.getSession();
 			sesion.setAttribute("urlPrevia", urlPrevia);
-			//---------------------------------------------------------------------------
-			
+			// ---------------------------------------------------------------------------
+
 			// Enviar la respuesta al usuario
-			request.getRequestDispatcher("index.jsp?sec=ranking&sala=" + idSala).forward(request,
-					response);
+			request.getRequestDispatcher("index.jsp?sec=ranking&sala=" + idSala).forward(request, response);
 
 		} catch (Throwable e) {
 			e.printStackTrace();

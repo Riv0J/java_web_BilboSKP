@@ -13,9 +13,6 @@ import model.Sala;
 import model.SalaOnline;
 import model.Suscriptor;
 
-/**
- * Servlet implementation class ServletOrganizar
- */
 @WebServlet("/organizar")
 public class ServletOrganizar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,12 +28,10 @@ public class ServletOrganizar extends HttpServlet {
 		
 		if(suscriptor instanceof Suscriptor) {
 			Suscriptor anfitrion = (Suscriptor) suscriptor;
-			System.out.println(anfitrion.getAlias());
-			System.out.println(idSala);
 			Sala sala=SalaOnline.getSalaPorId(idSala);
-			System.out.println(sala.getNombre());
 			PartidaOnline partidaOnline= new PartidaOnline(sala, anfitrion, sala.getJugadoresMax(), idSala);
 			partidaOnline.getCodInvitacion();
+			System.out.println("Organizando nueva partida de sala"+ sala.getNombre());
 			System.out.println("Codigo de invitacion de esta partida"+ partidaOnline.getCodInvitacion());
 			request.setAttribute("partidaOnline", partidaOnline);
 			

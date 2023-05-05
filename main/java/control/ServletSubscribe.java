@@ -28,8 +28,8 @@ public class ServletSubscribe extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession sesion = request.getSession();
 		System.out.println("Dopost subscribe");
+		HttpSession sesion = request.getSession();
 		String pass = request.getParameter("pass");
 		String email = request.getParameter("email");
 		String alias = request.getParameter("alias");

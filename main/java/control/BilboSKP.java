@@ -289,17 +289,17 @@ public class BilboSKP extends DBC {
 			}
 
 			// hacer syso de los horarios obtenidos
-			System.out.println("Horarios disponibles en la sala con id " + idSala + ":");
+			//System.out.println("Horarios disponibles en la sala con id " + idSala + ":");
 			if (vectorFechasSalasFisicas.size() > 0) {
 				for (int i = 0; i < vectorFechasSalasFisicas.size(); i++) {
 					Horario ho = vectorFechasSalasFisicas.get(i);
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 					String fechaHoraString = sdf.format(ho.getFechaHora());
-					System.out.println(fechaHoraString);
+					//System.out.println(fechaHoraString);
 					// System.out.println(HO.getFechaHora());
 				}
 			}
-			System.out.println("-----------------------------------");
+			//System.out.println("-----------------------------------");
 			conexion.cerrarFlujo();
 			return vectorFechasSalasFisicas;
 		} catch (Exception e) {
