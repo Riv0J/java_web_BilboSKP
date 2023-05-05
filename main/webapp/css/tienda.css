@@ -1,49 +1,51 @@
 * {
-    text-align: center;
+	text-align: center;
 	/*box-sizing: border-box;*/
 }
-body{
-    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,2,9,1) 35%, rgb(29, 0, 11) 100%);     color: #f5f5f5;
-    display: flex;
+
+.background {
+	background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%,
+		rgba(0, 2, 9, 1) 35%, rgb(29, 0, 11) 100%);
+	
+	color: #f5f5f5;
+	display: flex;
 	justify-content: center;
-    height: 101%;
+	height: 101%;
+	width:100%;
 }
 
 form {
-    
 	flex-direction: row;
-   
 	width: 90%;
 	height: 30em;
 }
 
-
-.Comprar{
-	width:95%;
-   /* border: green 2px solid;*/
-    display: flex; 
-  flex-direction: row; 
-flex-wrap: wrap;
-  justify-content: space-evenly; 
-    margin: 5 auto;
+.comprar {
+	width: 95%;
+	/* border: green 2px solid;*/
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	margin: 5 auto;
 }
-.regalar{
-    width:95%;
-   /* border: green 2px solid;*/
-    display: flex; 
-  flex-direction: row; 
-  justify-content: center;
-  
-  margin: 5 auto;
 
+.regalar {
+	width: 95%;
+	/* border: green 2px solid;*/
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin: 5 auto;
 }
+
 .cajaCupon {
 	padding-top: 0.3em;
 	padding-bottom: 3.2em;
 	margin: 1em;
 	border-radius: 8%;
 	border: 1px solid #e0e0e0;
-    background-color: #C60C02;
+	background-color: #C60C02;
 	width: 13em;
 	height: 12em;
 	display: flex;
@@ -79,7 +81,8 @@ button {
 .botonCompra:active {
 	transform: scale(1.05);
 }
-.botonRegalar{
+
+.botonRegalar {
 	background-color: #404663;
 	color: #fff;
 	border: 0;
@@ -90,7 +93,8 @@ button {
 	z-index: 999;
 	position: relative;
 	display: flex;
-    margin: 5 auto;
+	align-items: center;
+	margin: 5 auto;
 	gap: 0.5em;
 	box-shadow: 0px 1.7px 2.2px rgba(0, 0, 0, 0.02), 0px 4px 5.3px
 		rgba(0, 0, 0, 0.028), 0px 7.5px 10px rgba(0, 0, 0, 0.035), 0px 13.4px
