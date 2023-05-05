@@ -486,30 +486,6 @@ CREATE TABLE `suscriptoresenpartida` (
 	`fechaInicio` DATETIME NOT NULL
 ) ENGINE=MyISAM;
 
--- Volcando estructura para vista bilboskpdb.suscriptoresenpartida2
--- Creando tabla temporal para superar errores de dependencia de VIEW
-CREATE TABLE `suscriptoresenpartida2` (
-	`alias` VARCHAR(30) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`nombreGrupo` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`nombre` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`fechaInicio` DATETIME NOT NULL
-) ENGINE=MyISAM;
-
--- Volcando estructura para vista bilboskpdb.suscriptoresenpartida3
--- Creando tabla temporal para superar errores de dependencia de VIEW
-CREATE TABLE `suscriptoresenpartida3` (
-	`alias` VARCHAR(30) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`nombreGrupo` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`nombre` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`fechaInicio` DATETIME NOT NULL
-) ENGINE=MyISAM;
-
--- Volcando estructura para vista bilboskpdb.suscriptoresenpartida4
--- Creando tabla temporal para superar errores de dependencia de VIEW
-CREATE TABLE `suscriptoresenpartida4` (
-	`alias` VARCHAR(30) NOT NULL COLLATE 'utf8mb4_general_ci'
-) ENGINE=MyISAM;
-
 -- Volcando estructura para tabla bilboskpdb.suscriptor_partidaonline
 CREATE TABLE IF NOT EXISTS `suscriptor_partidaonline` (
   `idSuscriptor` int(11) NOT NULL,
@@ -595,30 +571,6 @@ CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `suscriptoresenpartida` AS 
 	select alias, nombreGrupo, so.nombre, fechaInicio
 	from suscriptor_partidaonline supao, suscriptor su, salaonline so, partidaonline po
     where supao.idSuscriptor=su.idSuscriptor and supao.idPartidaonline=po.idPartida and po.idSalaOnline=so.idSala) ;
-
--- Volcando estructura para vista bilboskpdb.suscriptoresenpartida2
--- Eliminando tabla temporal y crear estructura final de VIEW
-DROP TABLE IF EXISTS `suscriptoresenpartida2`;
-CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `suscriptoresenpartida2` AS (
-    select alias, nombreGrupo, so.nombre, fechaInicio
-    from suscriptor_partidaonline supao, suscriptor su, salaonline so, partidaonline po
-	where supao.idSuscriptor=su.idSuscriptor and supao.idPartidaonline=po.idPartida and su.idSuscriptor=po.idAnfitrion and po.idSalaOnline=so.idSala) ;
-
--- Volcando estructura para vista bilboskpdb.suscriptoresenpartida3
--- Eliminando tabla temporal y crear estructura final de VIEW
-DROP TABLE IF EXISTS `suscriptoresenpartida3`;
-CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `suscriptoresenpartida3` AS (
-    select alias, nombreGrupo, so.nombre, fechaInicio
-    from suscriptor_partidaonline supao, suscriptor su, salaonline so, partidaonline po
-	where supao.idPartidaonline=po.idPartida and po.idSalaOnline=so.idSala) ;
-
--- Volcando estructura para vista bilboskpdb.suscriptoresenpartida4
--- Eliminando tabla temporal y crear estructura final de VIEW
-DROP TABLE IF EXISTS `suscriptoresenpartida4`;
-CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `suscriptoresenpartida4` AS (
-    select alias
-    from suscriptor_partidaonline supao, suscriptor su
-    where supao.idSuscriptor=su.idSuscriptor) ;
 
 -- Volcando estructura para vista bilboskpdb.vista2
 -- Eliminando tabla temporal y crear estructura final de VIEW
