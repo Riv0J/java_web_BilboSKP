@@ -105,12 +105,11 @@ select {
 	width: 90%;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
+	justify-content: space-evenly;
 	gap: 2.5%;
 }
 
 .caja_sala {
-	margin-bottom: 2.5%;
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -301,7 +300,6 @@ select {
 #caja_buscador img {
 	background-color: var(--bg-color2);
 }
-
 select {
 	color: var(--bg-color2);
 }
@@ -356,8 +354,13 @@ select:focus {
 	0% {transform: rotate(0deg);}
 	100%{transform:rotate(360deg);}
 }
+@media (max-width: 1700px) {
+}
 
 @media (max-width: 1590px) {
+		#contenedor_buscador{
+		padding-top: 2%;
+	}
 }
 
 @media (max-width: 1350px) {
@@ -369,9 +372,6 @@ select:focus {
 @media (max-width: 1280px) {
 	#contenedor_salas{
 		padding-bottom: 12%;
-	}
-	#contenedor_salas_wrapper {
-		gap: 2%;
 	}
     .caja_sala{
 		width: 30%;
@@ -389,6 +389,9 @@ select:focus {
 }
 
 @media (max-width: 900px){
+	#contenedor_buscador{
+		padding-top: 5%;
+	}
 	.caja_sala{
 		width: 35%;
 		margin-bottom: 2%;
@@ -408,8 +411,17 @@ select:focus {
 }
 
 @media (max-width: 700px){
-	#caja_salas_wrapper{
-		padding-bottom: 100%;
+	#contenedor_buscador{
+		padding-top: 5%;
+	}
+		#caja_buscador{
+		width: 75%;
+	}
+	#contenedor_salas_wrapper{
+		overflow: auto;
+	}
+	#contenedor_salas_wrapper{
+		gap: 0.5%;
 	}
 	#caja_filtros{
 		flex-direction: column;
@@ -420,7 +432,6 @@ select:focus {
 	}
     .caja_sala{
 		width: 70%;
-		margin-bottom: 2%;
 	}
 	.caja_sala:hover {
 		box-shadow:none;
@@ -435,10 +446,14 @@ select:focus {
 	}
 }
 @media (max-width: 600px){
-	#caja_salas_wrapper{
-		gap: 0.5%;
+	#contenedor_buscador{
+		padding-top: 12%;
+	}
+	#caja_buscador{
+		width: 85%;
 	}
     .caja_sala{
-		width: 90%;
+    	width: 80%;
+    	margin-bottom: 5%;
 	}
 }

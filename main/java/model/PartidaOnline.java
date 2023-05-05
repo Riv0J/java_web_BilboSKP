@@ -5,7 +5,10 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 
@@ -21,21 +24,25 @@ public class PartidaOnline extends Partida {
 	private Vector<Jugador> vectorJugadores;
 	private Vector<Pista> vectorpistasUtilizadas;
 	private Inventario inventario;
-
+	private Timer timer;
+	int segundosTranscurridos = 0;
+	int segundosObjetivo = 0;
 	private static HashMap<Integer, PartidaOnline> partidasOrganizando = new HashMap<Integer, PartidaOnline>();
 
 	// el sistema usara este constructor para el inicio de una nueva partida
 	public PartidaOnline(Sala sala, Suscriptor suscriptorAnfitrion, int numJugadores, String nombreGrupo) {
 		super(sala, suscriptorAnfitrion, numJugadores, nombreGrupo);
+		timer = new Timer();
 		this.vectorJugadores = new Vector<Jugador>();
 		this.vectorpistasUtilizadas = new Vector<Pista>();
 		this.estado = PARTIDA_ORGANIZANDO;
 		this.codInvitacion = generarCodInvitacion();
 		this.inventario = new Inventario();
-		partidasOrganizando.put(this.codInvitacion, this);
 
+		partidasOrganizando.put(this.codInvitacion, this);
 		Anfitrion anfitrion = new Anfitrion(suscriptorAnfitrion.getAlias());
 		agregarJugador(anfitrion);
+		iniciarTimer();
 	}
 
 	// el sistema usara este constructor para recibir una partida online jugada
@@ -125,13 +132,16 @@ public class PartidaOnline extends Partida {
 		// guardar la partida online en la base de datos
 		BilboSKP.guardarPartidaOnline(this);
 
-		//TODO guardar los jugadores suscriptores como participantes de la partida online
+		// TODO guardar los jugadores suscriptores como participantes de la partida
+		// online
 	}
 
 	public void cancelarPartida() {
 		// quitar la partida de la coleccion de partidas en organizando
 		partidasOrganizando.remove(codInvitacion);
 
+		// establecer el estado
+		this.estado = PARTIDA_FINALIZANDO;
 		// quitar de las sesiones los objetos jugador(invitados y anfitrion)
 	}
 
@@ -158,8 +168,46 @@ public class PartidaOnline extends Partida {
 	public void setCodInvitacion(int codInvitacion) {
 		this.codInvitacion = codInvitacion;
 	}
-	
-	
-	
-	
+
+	public void iniciarTimer() {
+		setSegundosObjetivo();
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				// Incrementa los segundos cada segundo
+				segundosTranscurridos++;
+				System.out.println("Segundos: " + segundosTranscurridos);
+				if (segundosTranscurridos == segundosObjetivo || estado.equals(PARTIDA_FINALIZANDO)) {
+					segundosTranscurridos = 0;
+					cancelarPartida(); // Ejecuta el método si se ha llegado al número variable de segundos
+					timer.cancel(); // Cancela el timer después de alcanzar el objetivo
+				}
+			}
+		}, 0, 1000); // El segundo parámetro especifica el retraso antes de iniciar el timer, y el
+						// tercer parámetro especifica el intervalo de tiempo entre cada ejecución del
+						// timer (en milisegundos)
+	}
+
+	private void setSegundosObjetivo() {
+		switch (this.estado) {
+		case PartidaOnline.PARTIDA_ORGANIZANDO:
+			segundosObjetivo = 20 * 60;
+			break;
+		case PartidaOnline.PARTIDA_EN_CURSO:
+			int tiempoMaxSala = this.getSala().getTiempoMax();
+			segundosObjetivo = tiempoMaxSala * 60;
+			break;
+		default:
+			break;
+		}
+	}
+
+	public static void cancelarPartida(String aliasCerrandoSesion) {
+		for (Map.Entry<Integer, PartidaOnline> par : partidasOrganizando.entrySet()) {
+			PartidaOnline po = par.getValue();
+			if (po.getAnfitrion().getAlias().equals(aliasCerrandoSesion)) {
+				po.cancelarPartida();
+			}
+		}
+	}
 }

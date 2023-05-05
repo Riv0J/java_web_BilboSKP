@@ -282,7 +282,7 @@ header button {
 
 @media (max-width: 1090px) {
 	main{
-		margin-top: 8%;
+		margin-top: 7.5%;
 	}
 	#caja_logo{
 		width: 10%;
@@ -304,7 +304,6 @@ header button {
         top: 100%;
         right: -100%;
         width: 270px;
-        height: 43vh;
         background-color: var(--main-color);
         display: flex;
         flex-direction: column;
@@ -334,7 +333,14 @@ header button {
         align-items: center;
         justify-content: center;
     }
-    
+    a li:after {
+	  display: none;
+	}
+	a li:hover::after {
+	  display: none;
+	  animation: none;
+	  animation-timing-function: ease-out;
+	}
 }
 
 @media (max-width: 900px){

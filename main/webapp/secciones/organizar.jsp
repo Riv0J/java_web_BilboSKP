@@ -43,7 +43,7 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaPartida.getTematic
 				</div>
 				<div class="etiqueta modalidad" title="Modo de acceso a la sala">
 					<i class="<%=Icon.getIconHTMLClass("online")%>"></i>
-					<div class="caja_text">Modalidad</div>
+					<div class="caja_text">Online</div>
 				</div>
 				<div class="etiqueta edad" title="Edad recomendada de la sala">
 					<i class="<%=Icon.getIconHTMLClass("age")%>"></i>
@@ -80,10 +80,10 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaPartida.getTematic
 					for(int i =0; i<8; i++){%>
 					<div class="caja_jugador">
 						<div class="caja_organizar_perfil">
-							<img src="img_suscriptores/avatardefault1.png">
+							<img src="img_suscriptores/<%=anfitrion.getImagen()%>">
 						</div>
 						<div class="caja_alias">
-							SOY JUANJO EXTREMO
+							<%=anfitrion.getAlias()%>
 						</div>
 					</div>
 				<% } %>
