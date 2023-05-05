@@ -111,6 +111,7 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 				<% if (fechaSeleccionada != null){ 
 					if(horariosAMostrar!=null  && horariosAMostrar != null && horariosAMostrar.size()>0){ %>
 						<form action="./reservar" method="POST">
+						<input type="hidden" name="idSala" value="<%=idSala%>">
 							<div id="caja_horarios" class="linea_form">
 								<label for="horarios">Horarios disponibles:</label>
 								<select id="horarios" class="bilboskp_select" name="horarios">

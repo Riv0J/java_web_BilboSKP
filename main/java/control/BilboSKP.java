@@ -12,8 +12,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Vector;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import connection.DBC;
 import connection.SQLHelper;
@@ -814,25 +816,42 @@ public class BilboSKP extends DBC {
 	}
 
 	// hacer una nueva reserva de una sala física @Paula
-	public static Reserva crearReserva(int idReserva, int idSalaFisica, int idSuscriptor, int numeroJugadores,
-			Date fechaHora, int estado) throws Throwable {
+	public static boolean crearReserva(int idSala, int idSuscriptor, int numeroJugadores,
+			LocalDateTime fecha, int estado) throws Throwable {
 		// hacer sentencia SQL
-		String sentenciaSQL = "INSERT INTO reserva ('idReserva', 'idSalaFisica', 'idSuscriptor', 'numeroJugadores', 'fechaHora', 'estado') VALUES('"
-				+ idReserva + "','" + idSalaFisica + "','" + idSuscriptor + "','" + numeroJugadores + "','" + fechaHora
-				+ "', '" + estado + "');";
+		String sentenciaSQL = "INSERT INTO reserva ('idSalaFisica', 'idSuscriptor', 'numJugadores', 'fechaHora', 'estado') VALUES("
+				 + idSala + "," + idSuscriptor + "," + numeroJugadores + ",'" + fecha
+				+ "', " + estado + ");";
+		System.out.println(sentenciaSQL);
 		// hacer una conexion
 		BilboSKP conexion = new BilboSKP();
-		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
 		int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
 
 		if (filasAfectadas == 0) {
-			Reserva r = new Reserva(filasAfectadas, filasAfectadas, filasAfectadas, filasAfectadas, fechaHora,
-					filasAfectadas);
+			return false;
 		} else {
 			System.out.println("Ya exsite una reserva");
+			return true;
 		}
+	}
+	//este es un metodo que recibe string en vez de localdate @rivo
+	public static boolean crearReserva(int idSala, int idSuscriptor, int numeroJugadores,
+			String fecha, int estado) throws Throwable {
+		// hacer sentencia SQL
+		String sentenciaSQL = "INSERT INTO reserva (idSalaFisica, idSuscriptor, numJugadores, fechaHora, estado) VALUES("
+				 + idSala + "," + idSuscriptor + "," + numeroJugadores + ",'" + fecha
+				+ "', " + estado + ");";
+		System.out.println(sentenciaSQL);
+		// hacer una conexion
+		BilboSKP conexion = new BilboSKP();
+		int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
 
-		return null;
+		if (filasAfectadas == 0) {
+			return false;
+		} else {
+			System.out.println("Ya exsite una reserva");
+			return true;
+		}
 	}
 
 	// TODO cambiar estado reserva dado su id @Paula
@@ -904,4 +923,5 @@ public class BilboSKP extends DBC {
         int numero = rand.nextInt(8) + 1; // genera un número aleatorio entre 1 y 8
         return numero;
     }
+    
 }
