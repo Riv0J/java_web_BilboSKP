@@ -4,7 +4,7 @@
 <div class="background">
 	<link rel="stylesheet" href="./css/tienda.css">
 
-	<form name="formCupones" method="get">
+	<form name="formComprar" action="./tienda" method="get">
 
 		<div class="cajaComprar">
 			<h2>Comprar cupones</h2>
@@ -17,8 +17,8 @@
 					<h3>1 cupón</h3>
 					<h5>5% de descuento</h5>
 
-					<button name="comprar1" class="botonCompra" type="submit">Comprar
-						ya</button>
+					<button name="tienda" class="botonCompra" type="submit">Comprar
+						ya<%String tienda = "comprar"; %></button>
 
 				</div>
 
@@ -54,6 +54,9 @@
 				</div>
 		</div>
 		</fieldset>
+	</form>
+	<form name="formRegalar" action="./tienda" method="get">
+
 		<fieldset class="regalar">
 			<div class="cajaRegalar">
 				<h2>Regalar cupones</h2>

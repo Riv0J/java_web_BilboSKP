@@ -12,6 +12,10 @@ try {
 %>
 <link rel="stylesheet" href="css/inicio.css">
 <main>
+<div class="lamp">
+  <div class="lampara" id="lampara"></div>
+  <div class="luz" id="luz"></div>
+</div>
 	<jsp:include page="../plantillas/unirse.jsp"></jsp:include>
 	<section class="principal">
 		<div id="caja_principal">
@@ -85,8 +89,112 @@ try {
 	</section>
 </main>
 <script>
+/*script para unirse*/
 	document.querySelector("#boton_unirse").addEventListener("click", function() {
 		document.querySelector("#caja_unirse").style.display = "flex";
 		document.querySelector("#caja_login").style.display = "none";
 	});
-</script>
+/*script para lampara*/
+document.querySelector('.luz').addEventListener('click', function() {
+  this.classList.add('clicked');
+  lampara.classList.add('clicked');
+});</script>
+<style>  /* Estilos para la lámpara */
+.lampara {
+position: absolute;
+top: 0;
+left: 80%;
+transform: translateX(-50%);
+width: 100px;
+height: 400px;
+  background-image: url('././img_web/inicio/lamparaCandil.png');
+background-size: cover;
+transform-origin: top center;
+animation: vaiven 2.5s cubic-bezier(0.5, 0, 0.5, 1) infinite alternate;}
+
+@keyframes vaiven {
+  0% {
+  transform: translateX(-50%) rotate(-7deg);
+}
+100% {
+  transform: translateX(-50%) rotate(7deg);
+}
+}
+.luz {
+position: absolute;
+top: -5;
+left: 50%;
+transform:  translateX(-50%);
+max-width: 150%;
+width: 130%;
+min-height:70em;
+height: 110%;
+background: radial-gradient(circle at 80% 40%, rgba(0, 0, 0, 0) 0%, rgba(206, 212, 0, 0.1) 15%, rgba(91, 93, 0, 0.3) 25%, rgba(0, 0, 0, 0.705)35%, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 1) 100%);
+z-index: 1;
+overflow: hidden;
+animation: vaivenLuz 2.5s cubic-bezier(0.5, 0, 0.5, 1) infinite alternate;
+}
+@keyframes vaivenLuz {
+  0% {
+  transform: translateX(-48%) ;
+}
+100% {
+  transform: translateX(-52%) ;
+}
+}
+
+/* Estilos para la Luz */
+.luz::before {
+content: '';
+position: initial;
+top: -50%;
+left: -50%;
+transform: translateX(-50%);
+width: 140%;
+height: 110%;
+background: radial-gradient(circle at 80% 40%, rgba(0, 0, 0, 0) 0%, rgba(206, 212, 0, 0.1) 15%, rgba(91, 93, 0, 0.3) 25%, rgba(0, 0, 0, 0.705)35%, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 1) 100%);
+opacity: 0.8;
+z-index: -2;
+animation: tintineo 2s ease-in-out infinite alternate;
+}
+.lamp{
+position:relative;
+}
+
+@keyframes tintineo {
+0%, 100% {
+  opacity: 0.8;
+}
+25%, 75% {
+  opacity: 0.6;
+}
+50% {
+  opacity: 0.4;
+}
+}
+@keyframes subir{
+0%{
+  transform: translateY(0%);
+}
+100%{
+  transform: translateY(-100%);
+}
+}
+@keyframes desvanecer {
+0%{
+  opacity: 0.5;
+}
+100% {
+  opacity: 0;
+}
+}
+.luz.clicked {
+display:none;
+  animation: subir 0.5s ease-out forwards, desvanecer 0.5s ease-out forwards;
+}
+.lampara.clicked {
+  animation: subir 0.5s ease-out forwards, desvanecer 0.5s ease-out forwards, vaivenLuz 2.5s cubic-bezier(0.5, 0, 0.5, 1) infinite alternate;
+  transform-origin: top center;
+  
+}
+  </style>

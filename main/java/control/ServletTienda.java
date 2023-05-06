@@ -52,103 +52,42 @@ public class ServletTienda extends HttpServlet {
 			} else {
 				// ofrecer registro
 				System.out.println("suscribirte?");
-				request.getRequestDispatcher("./subscribe").forward(request, response);
-				;
-			}
-			break;
-		case "comprar3":
-			// comprobar si se está suscrito
-			if (sus != null) {
-				// los cupones comprados irán a la cuenta de sus
-				int susID = sus.getIdSuscriptor();
-				try {
-					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
-					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
-					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
-					System.out.println("3 cupon regular comprado");
-				} catch (Throwable e) {
-					System.out.println("3 cupon regular NO comprado");
-					e.printStackTrace();
-				}
-			} else {
-				// ofrecer registro
-				System.out.println("suscribirte?");
-				request.getRequestDispatcher("./subscribe").forward(request, response);
-				;
-			}
-			break;
-		case "comprar5":
-			// comprobar si se está suscrito
-			if (sus != null) {
-				// los cupones comprados irán a la cuenta de sus
-				int susID = sus.getIdSuscriptor();
-				try {
-					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
-					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
-					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
-					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
-					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
-					System.out.println("5 cupon regular comprado");
-				} catch (Throwable e) {
-					System.out.println("5 cupon regular NO comprado");
-					e.printStackTrace();
-				}
-			} else {
-				// ofrecer registro
-				System.out.println("suscribirte?");
-				request.getRequestDispatcher("./subscribe").forward(request, response);
-				;
-			}
-			break;
-		case "comprar7":
-			// comprobar si se está suscrito
-			if (sus != null) {
-				// los cupones comprados irán a la cuenta de sus
-				int susID = sus.getIdSuscriptor();
-				try {
-					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
-					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
-					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
-					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
-					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
-					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
-					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
-					System.out.println("7 cupon regular comprado");
-				} catch (Throwable e) {
-					System.out.println("7 cupon regular NO comprado");
-					e.printStackTrace();
-				}
-			} else {
-				// ofrecer registro
-				System.out.println("suscribirte?");
-				request.getRequestDispatcher("./subscribe").forward(request, response);
+				request.getRequestDispatcher("/subscribe").forward(request, response);
 				;
 			}
 			break;
 
 		case "regalar":
-			// pedir datos del suscriptor del sus a regalar(susReg) (alias+correo)
-			String susEmail = request.getParameter("email");
-			int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-			// Suscriptor susReg =BilboSKP.comprobarSuscriptor(susAlias, susEmail);
-			// comprobar si susReg existe
-			try {
-				Suscriptor susReg = BilboSKP.comprobarSuscriptor(susEmail);
-				System.out.println("suscriptor existe");
-			} catch (Throwable e) {
-				System.out.println("suscriptor no existe");
-				e.printStackTrace();
-			}
-			// pagar(¿xD?)
-			// enviar cupones a susReg
-			Suscriptor susReg = null;
-			int susRegID = susReg.getIdSuscriptor();
-			try {
-				BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susRegID);
-				System.out.println("Se envió el cupon con exito");
-			} catch (Throwable e) {
-				System.out.println("No se pudo enviar el cupon");
-				e.printStackTrace();
+			// comprobar si se está suscrito
+			if (sus != null) {
+				// pedir datos del suscriptor del sus a regalar(susReg) (alias+correo)
+				String susEmail = request.getParameter("email");
+				int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+				// Suscriptor susReg =BilboSKP.comprobarSuscriptor(susAlias, susEmail);
+				// comprobar si susReg existe
+				try {
+					Suscriptor susReg = BilboSKP.comprobarSuscriptor(susEmail);
+					System.out.println("suscriptor existe");
+				} catch (Throwable e) {
+					System.out.println("suscriptor no existe");
+					e.printStackTrace();
+				}
+				// pagar(¿xD?)
+				// enviar cupones a susReg
+				Suscriptor susReg = null;
+				int susRegID = susReg.getIdSuscriptor();
+				try {
+					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susRegID);
+					System.out.println("Se envió el cupon con exito");
+				} catch (Throwable e) {
+					System.out.println("No se pudo enviar el cupon");
+					e.printStackTrace();
+				}
+			} else {
+				// ofrecer registro
+				System.out.println("suscribirte?");
+				request.getRequestDispatcher("/index.jsp?sec=subscribe").forward(request, response);
+				;
 			}
 
 			break;
