@@ -325,6 +325,10 @@ header button {
 
     .navbar.open{
         right: 2%;
+        padding: 1%;
+	    padding-top: 4%;
+	    padding-bottom: 4%;
+	    gap: 1.1em;
     }
 
     .principal{
@@ -374,4 +378,5 @@ header button {
 		width: 170%;
 	}
 }
+
 

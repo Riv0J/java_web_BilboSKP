@@ -38,7 +38,7 @@ public class BilboSKP extends DBC {
 	public BilboSKP() throws Throwable {
 		super(DBC.DRIVER_MYSQL, dbUrl, user, pass);
 	}
-	
+
 	protected static void setEstadoRanking(boolean nuevoEstado) {
 		estadoRanking = nuevoEstado;
 	}
@@ -294,17 +294,17 @@ public class BilboSKP extends DBC {
 			}
 
 			// hacer syso de los horarios obtenidos
-			//System.out.println("Horarios disponibles en la sala con id " + idSala + ":");
+			// System.out.println("Horarios disponibles en la sala con id " + idSala + ":");
 			if (vectorFechasSalasFisicas.size() > 0) {
 				for (int i = 0; i < vectorFechasSalasFisicas.size(); i++) {
 					Horario ho = vectorFechasSalasFisicas.get(i);
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 					String fechaHoraString = sdf.format(ho.getFechaHora());
-					//System.out.println(fechaHoraString);
+					// System.out.println(fechaHoraString);
 					// System.out.println(HO.getFechaHora());
 				}
 			}
-			//System.out.println("-----------------------------------");
+			// System.out.println("-----------------------------------");
 			conexion.cerrarFlujo();
 			return vectorFechasSalasFisicas;
 		} catch (Exception e) {
@@ -383,7 +383,8 @@ public class BilboSKP extends DBC {
 		 * apellidos + "', '" + fech_nac + "', '" + telefono + "');";
 		 */
 		String[] arrayColumnas = { "email", "pass", "alias", "nombre", "apellidos", "fech_nac", "telefono", "imagen" };
-		Object[] arrayValores = { email, Security.encriptarPass(pass), alias, nombre, apellidos, fech_nac, telefono, generarRutaImagenDefault() };
+		Object[] arrayValores = { email, Security.encriptarPass(pass), alias, nombre, apellidos, fech_nac, telefono,
+				generarRutaImagenDefault() };
 		String sentenciaSQL = SQLHelper.obtenerSentenciaSQLInsert("suscriptor", arrayColumnas, arrayValores);
 		System.out.println(sentenciaSQL);
 		// hacer una conexion
@@ -394,7 +395,7 @@ public class BilboSKP extends DBC {
 		if (filasAfectadas == 1) {
 			Suscriptor sus = loginSuscriptor(email, pass);
 			if (sus != null) {
-				otorgarCupon(Cupon.CUPON_BIENVENIDA,sus.getIdSuscriptor());
+				otorgarCupon(Cupon.CUPON_BIENVENIDA, sus.getIdSuscriptor());
 				sus.getIdSuscriptor();
 				return sus;
 			}
@@ -631,24 +632,95 @@ public class BilboSKP extends DBC {
 	}
 
 	// cambiar estado de un cupon @Inigo
-	public static boolean cambiarEstadoCupon(int nuevoEstado, int idCupon) throws Throwable {
+	public static boolean cambiarEstadoCupon(String nuevoEstado, int idCupon) throws Throwable {
 		try {
 			String sentenciaSQL = "UPDATE cupon SET estado=" + nuevoEstado + " WHERE idCupon=" + idCupon + ";";
 			BilboSKP conexion = new BilboSKP();
 			int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
 			if (filasAfectadas == 1) {
-				System.out.println("Se pudo cambiar el estado del cupon");
+				System.out.println("BilboSKP: Se pudo cambiar el estado del cupon");
 				return true;
 			} else {
-				System.out.println("NO Se pudo cambiar el estado del cupon");
+				System.out.println("BilboSKP: NO Se pudo cambiar el estado del cupon");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Error cambiando el estado del cupon");
+			System.out.println("BilboSKP: Error cambiando el estado del cupon");
 		}
 		return false;
 	}
-
+	//obtener el cupon de menor caducidad con estado disponible @Rivo
+	public static Cupon comprobarCupon(String estadoAComprobar, int idSuscriptor) throws Throwable {
+		try {
+			String sentenciaSQL = "select * from cupon where idSuscriptor = '"+idSuscriptor+"' and estado = '"+estadoAComprobar+"' order by fechaCaducidad limit 1;";
+			BilboSKP conexion = new BilboSKP();
+			ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
+			// hacer un bucle de cada fila que tiene el resultset resultado
+			if (resultado.next()) {
+				// obtener los campos de cada columna para esta fila
+				int idCupon = resultado.getInt("idCupon");
+				Date fechaCaducidad = resultado.getDate("fechaCaducidad");
+				String Estado = resultado.getString("estado");
+				int reembolsable = resultado.getInt("reembolsable");
+				System.out.println(idCupon);
+				return new Cupon(idCupon, Estado, fechaCaducidad, reembolsable);
+			} else {
+				System.out.println("BilboSKP: El sucriptor con id "+idSuscriptor+" no tiene cupon disponible.");
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("BilboSKP: Error cambiando el estado del cupon");
+		}
+		return null;
+	}
+	// usar cupon de menor caducidad @Rivo
+	public static boolean usarCupon(int idSuscriptor) throws Throwable {
+		try {
+			//obtener cupon disponible con menor caducidad
+			Cupon cuponMenorCaducidad = comprobarCupon("Disponible", idSuscriptor);
+			if (cuponMenorCaducidad !=null) {
+				//cambiar estado a en uso
+				boolean cambiarEstado = cambiarEstadoCupon("En uso",cuponMenorCaducidad.getId());
+				if (cambiarEstado==true) {
+					System.out.println("BilboSKP: Utilizado un cupon");
+					return true;
+				} else {
+					System.out.println("BilboSKP: Error al utilizar el cupon");
+					return false;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("BilboSKP: Error cambiando el estado del cupon");
+		}
+		return false;
+	}
+	//gastar cupon de menor caducidad @Rivo
+	public static boolean gastarCupon(int idSuscriptor) throws Throwable {
+		try {
+			//obtener cupon en uso con menor caducidad
+			Cupon cuponMenorCaducidad = comprobarCupon("En uso", idSuscriptor);
+			if (cuponMenorCaducidad !=null) {
+				//cambiar estado a gastado
+				boolean cambiarEstado = cambiarEstadoCupon("Gastado",cuponMenorCaducidad.getId());
+				if (cambiarEstado==true) {
+					System.out.println("BilboSKP: Gastado un cupon");
+					return true;
+				} else {
+					System.out.println("BilboSKP: Error al gastar cupon");
+					return false;
+				}
+			} else {
+				System.out.println("BilboSKP: ERROR: no hay cupones en uso");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("BilboSKP: Error cambiando el estado del cupon");
+		}
+		return false;
+	}
+	
 	// cambiar el estado de todos los cupones cuya fecha caducidad es ayer @Inigo
 	public static boolean cambiarEstadoCuponesCaducados() throws Throwable {
 		try {
@@ -816,12 +888,11 @@ public class BilboSKP extends DBC {
 	}
 
 	// hacer una nueva reserva de una sala física @Paula
-	public static boolean crearReserva(int idSala, int idSuscriptor, int numeroJugadores,
-			LocalDateTime fecha, int estado) throws Throwable {
+	public static boolean crearReserva(int idSala, int idSuscriptor, int numeroJugadores, LocalDateTime fecha,
+			int estado) throws Throwable {
 		// hacer sentencia SQL
 		String sentenciaSQL = "INSERT INTO reserva ('idSalaFisica', 'idSuscriptor', 'numJugadores', 'fechaHora', 'estado') VALUES("
-				 + idSala + "," + idSuscriptor + "," + numeroJugadores + ",'" + fecha
-				+ "', " + estado + ");";
+				+ idSala + "," + idSuscriptor + "," + numeroJugadores + ",'" + fecha + "', " + estado + ");";
 		System.out.println(sentenciaSQL);
 		// hacer una conexion
 		BilboSKP conexion = new BilboSKP();
@@ -834,13 +905,13 @@ public class BilboSKP extends DBC {
 			return true;
 		}
 	}
-	//este es un metodo que recibe string en vez de localdate @rivo
-	public static boolean crearReserva(int idSala, int idSuscriptor, int numeroJugadores,
-			String fecha, int estado) throws Throwable {
+
+	// este es un metodo que recibe string en vez de localdate @rivo
+	public static boolean crearReserva(int idSala, int idSuscriptor, int numeroJugadores, String fecha, int estado)
+			throws Throwable {
 		// hacer sentencia SQL
 		String sentenciaSQL = "INSERT INTO reserva (idSalaFisica, idSuscriptor, numJugadores, fechaHora, estado) VALUES("
-				 + idSala + "," + idSuscriptor + "," + numeroJugadores + ",'" + fecha
-				+ "', " + estado + ");";
+				+ idSala + "," + idSuscriptor + "," + numeroJugadores + ",'" + fecha + "', " + estado + ");";
 		System.out.println(sentenciaSQL);
 		// hacer una conexion
 		BilboSKP conexion = new BilboSKP();
@@ -914,14 +985,32 @@ public class BilboSKP extends DBC {
 			e.printStackTrace();
 		}
 	}
+
 	public static String generarRutaImagenDefault() {
-		return "defaults/"+generarNumeroImagen()+".png";
-		
+		return "defaults/" + generarNumeroImagen() + ".png";
+
 	}
-    public static int generarNumeroImagen() {
-        Random rand = new Random();
-        int numero = rand.nextInt(8) + 1; // genera un número aleatorio entre 1 y 8
-        return numero;
-    }
-    
+
+	public static int generarNumeroImagen() {
+		Random rand = new Random();
+		int numero = rand.nextInt(8) + 1; // genera un número aleatorio entre 1 y 8
+		return numero;
+	}
+
+	public static boolean ocultarHoraReservada(int idSala, String fechaSQL) throws Throwable {
+		String sentenciaSQL = "UPDATE horario SET disponible = 0  WHERE fechaHora = '" + fechaSQL + "' and idSalaFisica =" + idSala+ ";";
+		// hacer una conexion
+		BilboSKP conexion = new BilboSKP();
+		// se hace una consulta sql con la conexion y se guarda en el int
+		int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
+		if (filasAfectadas >= 1) {
+			System.out.println("Se pudo reservar");
+			return true;
+		} else {
+			System.out.println("No se pudo reservar");
+			return false;
+		}
+
+	}
+
 }

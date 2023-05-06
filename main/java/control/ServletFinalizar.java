@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ServletFinalizar
  */
-@WebServlet("/ServletFinalizar")
+@WebServlet("/finalizar")
 public class ServletFinalizar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Anfitrion;
+import model.Cupon;
 import model.PartidaOnline;
 import model.Sala;
 import model.SalaOnline;
@@ -37,18 +38,27 @@ public class ServletOrganizar extends HttpServlet {
 				//redireccionar y mandarlo a su partida
 				request.getRequestDispatcher("./unirse?codInvitacion="+po.getCodInvitacion()).forward(request, response);
 			} else {
-				//si no se habia encontrado una partida a su nombre, se crea una nueva
-				Sala sala=SalaOnline.getSalaPorId(idSala);
-				PartidaOnline partidaOnline= new PartidaOnline(sala, suscriptorAnfitrion, sesion, sala.getJugadoresMax(), idSala);
-				int codInvitacion = partidaOnline.getCodInvitacion();
+				try {
+					//checar si el sus tiene un cupon disponible:
+					Cupon cupon = BilboSKP.comprobarCupon("Disponible", suscriptorAnfitrion.getIdSuscriptor());
+					if(cupon!=null) {
+						//si no se habia encontrado una partida a su nombre, se crea una nueva
+						Sala sala=SalaOnline.getSalaPorId(idSala);
+						PartidaOnline partidaOnline= new PartidaOnline(sala, suscriptorAnfitrion, sesion, sala.getJugadoresMax(), idSala);
+						int codInvitacion = partidaOnline.getCodInvitacion();
 
-				System.out.println("Organizando nueva partida de sala "+ sala.getNombre());
-				System.out.println("Codigo de invitacion de esta partida "+ codInvitacion);
-				
-				sesion.setAttribute("jugador", new Anfitrion(suscriptorAnfitrion));
-				request.setAttribute("partidaOnline", partidaOnline);
-				request.getRequestDispatcher("index.jsp?sec=organizar&codInvitacion="+codInvitacion).forward(request, response);
-				
+						System.out.println("Organizando nueva partida de sala "+ sala.getNombre());
+						System.out.println("Codigo de invitacion de esta partida "+ codInvitacion);
+						
+						sesion.setAttribute("jugador", new Anfitrion(suscriptorAnfitrion));
+						request.setAttribute("partidaOnline", partidaOnline);
+						request.getRequestDispatcher("index.jsp?sec=organizar&codInvitacion="+codInvitacion).forward(request, response);
+					} else {
+						request.getRequestDispatcher("index.jsp?sec=verSala&idSala="+idSala).forward(request, response);
+					}
+				} catch (Throwable e) {
+					
+				}
 			}
 		} 
 	}

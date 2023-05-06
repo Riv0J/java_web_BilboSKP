@@ -20,7 +20,7 @@ import model.Reserva;
 import model.Suscriptor;
 import view.Mensaje;
 
-@WebServlet("/perfil")
+@WebServlet({"/perfil","/perfil*"})
 public class ServletPerfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -49,8 +49,8 @@ public class ServletPerfil extends HttpServlet {
 				Vector<Reserva> reservas = BilboSKP.obtenerReserva(12);
 				System.out.println("Necesito ayuda 1");
 				request.setAttribute("reservas", reservas);
-				System.out.println("Necesito ayuda 2");
-				request.getRequestDispatcher("index.jsp?sec=perfil?sub=reserva").forward(request, response);
+				System.out.println("rivo, AYUUUUUDAAAaaaaaaAaaaAaAaAa");
+				request.getRequestDispatcher("index.jsp?sec=perfil&sub=reserva").forward(request, response);
 				
 				//ELIMINAR UNA RESERVA
 				if (request.getParameter("borrar") != null) {
