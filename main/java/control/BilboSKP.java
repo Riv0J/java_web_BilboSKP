@@ -631,24 +631,95 @@ public class BilboSKP extends DBC {
 	}
 
 	// cambiar estado de un cupon @Inigo
-	public static boolean cambiarEstadoCupon(int nuevoEstado, int idCupon) throws Throwable {
+	public static boolean cambiarEstadoCupon(String nuevoEstado, int idCupon) throws Throwable {
 		try {
 			String sentenciaSQL = "UPDATE cupon SET estado=" + nuevoEstado + " WHERE idCupon=" + idCupon + ";";
 			BilboSKP conexion = new BilboSKP();
 			int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
 			if (filasAfectadas == 1) {
-				System.out.println("Se pudo cambiar el estado del cupon");
+				System.out.println("BilboSKP: Se pudo cambiar el estado del cupon");
 				return true;
 			} else {
-				System.out.println("NO Se pudo cambiar el estado del cupon");
+				System.out.println("BilboSKP: NO Se pudo cambiar el estado del cupon");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Error cambiando el estado del cupon");
+			System.out.println("BilboSKP: Error cambiando el estado del cupon");
 		}
 		return false;
 	}
-
+	//obtener el cupon de menor caducidad con estado disponible @Rivo
+	public static Cupon comprobarCupon(String estadoAComprobar, int idSuscriptor) throws Throwable {
+		try {
+			String sentenciaSQL = "select * from cupon where idSuscriptor = '"+idSuscriptor+"' and estado = '"+estadoAComprobar+"' order by fechaCaducidad limit 1;";
+			BilboSKP conexion = new BilboSKP();
+			ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
+			// hacer un bucle de cada fila que tiene el resultset resultado
+			if (resultado.next()) {
+				// obtener los campos de cada columna para esta fila
+				int idCupon = resultado.getInt("idCupon");
+				Date fechaCaducidad = resultado.getDate("fechaCaducidad");
+				String Estado = resultado.getString("estado");
+				int reembolsable = resultado.getInt("reembolsable");
+				System.out.println(idCupon);
+				return new Cupon(idCupon, Estado, fechaCaducidad, reembolsable);
+			} else {
+				System.out.println("BilboSKP: El sucriptor con id "+idSuscriptor+" no tiene cupon disponible.");
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("BilboSKP: Error cambiando el estado del cupon");
+		}
+		return null;
+	}
+	// usar cupon de menor caducidad @Rivo
+	public static boolean usarCupon(int idSuscriptor) throws Throwable {
+		try {
+			//obtener cupon disponible con menor caducidad
+			Cupon cuponMenorCaducidad = comprobarCupon("Disponible", idSuscriptor);
+			if (cuponMenorCaducidad !=null) {
+				//cambiar estado a en uso
+				boolean cambiarEstado = cambiarEstadoCupon("En uso",cuponMenorCaducidad.getId());
+				if (cambiarEstado==true) {
+					System.out.println("BilboSKP: Utilizado un cupon");
+					return true;
+				} else {
+					System.out.println("BilboSKP: Error al utilizar el cupon");
+					return false;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("BilboSKP: Error cambiando el estado del cupon");
+		}
+		return false;
+	}
+	//gastar cupon de menor caducidad @Rivo
+	public static boolean gastarCupon(int idSuscriptor) throws Throwable {
+		try {
+			//obtener cupon en uso con menor caducidad
+			Cupon cuponMenorCaducidad = comprobarCupon("En uso", idSuscriptor);
+			if (cuponMenorCaducidad !=null) {
+				//cambiar estado a gastado
+				boolean cambiarEstado = cambiarEstadoCupon("Gastado",cuponMenorCaducidad.getId());
+				if (cambiarEstado==true) {
+					System.out.println("BilboSKP: Gastado un cupon");
+					return true;
+				} else {
+					System.out.println("BilboSKP: Error al gastar cupon");
+					return false;
+				}
+			} else {
+				System.out.println("BilboSKP: ERROR: no hay cupones en uso");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("BilboSKP: Error cambiando el estado del cupon");
+		}
+		return false;
+	}
+	
 	// cambiar el estado de todos los cupones cuya fecha caducidad es ayer @Inigo
 	public static boolean cambiarEstadoCuponesCaducados() throws Throwable {
 		try {
