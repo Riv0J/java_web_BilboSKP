@@ -92,6 +92,9 @@ public class ServletReservar extends HttpServlet {
 					BilboSKP.crearReserva(idSalaSinLetras, idSuscrptor, num_jugadores, fechaSQL, 1);
 					request.getRequestDispatcher("./verSala?idSala="+idSala);
 					//hacer otra consulta de update para poner en no disponible osea 0, ese horario
+					BilboSKP.ocultarHoraReservada(idSalaSinLetras, fechaSQL);
+					request.getRequestDispatcher()
+					
 				
 				} catch (Throwable e) {
 					// TODO Auto-generated catch block

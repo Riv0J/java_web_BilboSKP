@@ -25,9 +25,6 @@ try {
 				<a class="flex_center" href="#"><button id="boton_unirse" class="bilboskp_icon_button_inverted">Unirse a partida</button></a>
 			</div>
 		</div>
-		<div class="llave">
-			<img src="img_web/inicio/lampara.png" alt="">
-		</div>
 	</section>
 
 	<section class="caja_titulo">
