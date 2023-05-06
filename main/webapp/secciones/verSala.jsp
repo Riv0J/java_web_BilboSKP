@@ -259,7 +259,6 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 	justify-content: center;
 	align-items: center;
 	height: 100%;
-	background: linear-gradient(300deg, rgb(255 255 255 / 0%) 30%, rgb(255 255 255 / 0%) 75%, rgb(255 255 255 / 80%) 100%);
 }
 
 #caja_info, #caja_img {
@@ -423,6 +422,7 @@ i{
 		line-height: 1.1;
 	    text-align: justify;
 	    font-size: 1.75em;
+
 	}
 	#caja_ver_sala{
 	}
@@ -500,11 +500,10 @@ i{
 	}
 	#wrapper_ver_sala {
 		height: 85vh;
-		background-image: url(<%=rutaImagenPortadaLarga%>);
+		background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(<%=rutaImagenPortadaLarga%>);
 		background-size: cover;
 		color: var(--text-color);
-		animation: fondo 30s infinite;
-		animation-timing-function: ease;
+		
 	}
 	#wrapper_ver_sala p{
 		line-height: 1.2;
@@ -523,7 +522,6 @@ i{
 		justify-content: center;
 		align-items: center;
 		height: 100%;
-		background: linear-gradient(300deg, rgba(2,0,36,0.05) 30%, rgba(255,25,25,0.05) 75%, rgba(198,12,2,0.8) 100%)
 	}
 	
 	#caja_info, #caja_img {
@@ -773,6 +771,7 @@ i{
 			animation: none;
 			height: 95vh;
 			background-position: 50%;
+			background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(<%=rutaImagenPortadaLarga%>);
 		}
 		#wrapper_ver_sala p{
 			line-height: 1.1;
@@ -821,6 +820,7 @@ i{
 			animation: none;
 			height: 95vh;
 			background-position: 65%;
+			background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(<%=rutaImagenPortadaLarga%>);
 		}
 		#wrapper_ver_sala h2{
 			font-size: 1.5em;
@@ -844,6 +844,7 @@ i{
 	@media (max-width: 600px){
 		#wrapper_ver_sala{
 			background-position: 65%;
+			background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(<%=rutaImagenPortadaLarga%>);
 		}
 		#wrapper_ver_sala h2{
 			font-size: 1.3em;
