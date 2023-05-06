@@ -20,7 +20,7 @@ import model.Reserva;
 import model.Suscriptor;
 import view.Mensaje;
 
-@WebServlet("/perfil")
+@WebServlet({"/perfil","/perfil*"})
 public class ServletPerfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

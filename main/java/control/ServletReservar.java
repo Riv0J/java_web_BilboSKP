@@ -68,32 +68,18 @@ public class ServletReservar extends HttpServlet {
 				String fechaSQL = fecha.format(nuevoFormatter);
 				System.out.println(fechaSQL);
 				
-				
-
-				
-
-
-				
-				
 				System.out.println(idSala);
 				int idSuscrptor =((Suscriptor) sus).getIdSuscriptor();
 				System.out.println(num_jugadores);
 				System.out.println(idSalaSinLetras);
 				
-
-
-				
-				
-				
-				
 				Sala sala=SalaFisica.getSalaPorId(idSala);
 				
 				try {
 					BilboSKP.crearReserva(idSalaSinLetras, idSuscrptor, num_jugadores, fechaSQL, 1);
-					request.getRequestDispatcher("./verSala?idSala="+idSala);
 					//hacer otra consulta de update para poner en no disponible osea 0, ese horario
 					BilboSKP.ocultarHoraReservada(idSalaSinLetras, fechaSQL);
-					request.getRequestDispatcher()
+					request.getRequestDispatcher("./perfil?sub=reservas").forward(request, response);
 					
 				
 				} catch (Throwable e) {
