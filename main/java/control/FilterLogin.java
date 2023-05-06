@@ -21,7 +21,7 @@ import model.Suscriptor;
 import view.Mensaje;
 
 //
-@WebFilter({ "/perfil", "/perfil/*", "/organizar", "/reservar" })
+@WebFilter({ "/perfil", "/perfil/*", "/organizar", "/reservar", "/tienda" })
 public class FilterLogin implements Filter {
 
 	public FilterLogin() {
@@ -36,8 +36,8 @@ public class FilterLogin implements Filter {
 			System.out.println("Petición filtrada en FilterLogin");
 			HttpServletRequest req = (HttpServletRequest) request;
 			HttpSession sesion = (req.getSession());
-			// establecer el tiempo de vida de la sesion en 2 min
-			sesion.setMaxInactiveInterval(20000);
+			// establecer el tiempo de vida de la sesion en 10 min
+			sesion.setMaxInactiveInterval(1200);
 			// Obtener el objeto "Suscriptor" de la sesión
 			Object suscriptor = (Object) sesion.getAttribute("suscriptor");
 

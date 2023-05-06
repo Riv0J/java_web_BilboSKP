@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.util.HashMap;
 
 public class AppConfig {
-	
+	//ESTA CLASE NO SE UTILIZA
 	private static HashMap<String,String> mapaConfig = null;
-
+	
 	public static HashMap<String, String> getMapaConfig() {
 		if(mapaConfig==null) {
 			mapaConfig = new HashMap<String,String>();

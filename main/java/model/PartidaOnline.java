@@ -1,8 +1,5 @@
 package model;
 
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +7,9 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
-import java.util.concurrent.TimeUnit;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import control.BilboSKP;
 
@@ -21,7 +20,7 @@ public class PartidaOnline extends Partida {
 	private int visibleRanking;
 	private String estado;
 	private int codInvitacion;
-	private Vector<Jugador> vectorJugadores;
+	private Vector<HttpSession> vectorJugadores;
 	private Vector<Pista> vectorpistasUtilizadas;
 	private Inventario inventario;
 	private Timer timer;
@@ -30,18 +29,18 @@ public class PartidaOnline extends Partida {
 	private static HashMap<Integer, PartidaOnline> partidasOrganizando = new HashMap<Integer, PartidaOnline>();
 
 	// el sistema usara este constructor para el inicio de una nueva partida
-	public PartidaOnline(Sala sala, Suscriptor suscriptorAnfitrion, int numJugadores, String nombreGrupo) {
+	public PartidaOnline(Sala sala, Suscriptor suscriptorAnfitrion, HttpSession sesionAnfitrion, int numJugadores, String nombreGrupo) {
 		super(sala, suscriptorAnfitrion, numJugadores, nombreGrupo);
 		timer = new Timer();
-		this.vectorJugadores = new Vector<Jugador>();
+		this.vectorJugadores = new Vector<HttpSession>();
 		this.vectorpistasUtilizadas = new Vector<Pista>();
 		this.estado = PARTIDA_ORGANIZANDO;
 		this.codInvitacion = generarCodInvitacion();
 		this.inventario = new Inventario();
 
 		partidasOrganizando.put(this.codInvitacion, this);
-		Anfitrion anfitrion = new Anfitrion(suscriptorAnfitrion);
-		agregarJugador(anfitrion);
+		agregarJugador(sesionAnfitrion);
+		System.out.println(vectorJugadores.size());
 		iniciarTimer();
 	}
 
@@ -54,31 +53,31 @@ public class PartidaOnline extends Partida {
 	}
 
 	// un cliente proporciona un codigo, y la clase PartidaOnline determinará si se
-	public static boolean usarCodigoInvitacion(int codProporcionado) {
+	public static PartidaOnline usarCodigoInvitacion(int codProporcionado) {
 		// si se encuentra una partida organizando en el hashmap con el codProporcionado
-		// devuelve true, de lo contrario false;
-		if (partidasOrganizando.containsKey(codProporcionado)) {
-			return true;
-		}
-		return false;
+		PartidaOnline po = partidasOrganizando.get(codProporcionado);
+		return po;
 	}
 
-	public boolean agregarJugador(Jugador jugador) {
-		// asegurarse de que el tamaño del vector de jugadores de la partida no exceda
-		// el
-		// max de jugadores
-		if (vectorJugadores.size() < this.getSala().getJugadoresMax()) {
-			vectorJugadores.add(jugador);
-			System.out.println("Jugador agregado con éxito");
-			return true;
-		} else {
-			System.out.println("Sala " + codInvitacion + " llena");
-			return false;
-		}
-
+	public String agregarJugador(HttpSession sesion) {
+	    //asegurarse que no se sobrepase el maximo de la sala
+	    if (vectorJugadores.size() < this.getSala().getJugadoresMax()) {
+	        //checar de que la sesion por agregar no esté ya en el vector
+	        if (!vectorJugadores.contains(sesion)) {
+	            vectorJugadores.add(sesion);
+	            System.out.println("Nuevo jugador agregado");
+	            return "Agregado";
+	        } else {
+	            System.out.println("Sesión no agregada; repetida");
+	            return "Ya estaba agregado";
+	        }
+	    } else {
+	        System.out.println("Sala "+this.codInvitacion+" llena");
+	    }
+	    return "Lleno";
 	}
 
-	public Vector<Jugador> getJugadores() {
+	public Vector<HttpSession> getJugadores() {
 		return vectorJugadores;
 	}
 
@@ -93,7 +92,7 @@ public class PartidaOnline extends Partida {
 		return invite;
 	}
 
-	public boolean iniciarPartida() {
+	public boolean iniciarPartida(HttpServletRequest requestAnfitrion) {
 		// asegurarse antes de iniciar, que los jugadores son más o igual al minimo
 		// requerido por la sala
 		if (vectorJugadores.size() >= this.getSala().getJugadoresMin()) {
@@ -103,6 +102,8 @@ public class PartidaOnline extends Partida {
 			this.estado = PartidaOnline.PARTIDA_EN_CURSO;
 			// establecer el tiempo de inicio de la partida
 			this.fechaInicio = new Date();
+			//iniciar el timer
+			iniciarTimer();
 			// establecer el estado del cupón del anfitrion a en "en uso" para el cupón con
 			// la caducidad máx próxima
 			// mandar a todos los jugadores al escenario inicial correspondiente a la sala
@@ -113,7 +114,7 @@ public class PartidaOnline extends Partida {
 		return false;
 	}
 
-	public void finalizarPartida() {
+	public void finalizarPartida() throws Throwable {
 		// quitar la partida de la coleccion de partidas en organizando
 		partidasOrganizando.remove(codInvitacion);
 
@@ -132,8 +133,21 @@ public class PartidaOnline extends Partida {
 		// guardar la partida online en la base de datos
 		BilboSKP.guardarPartidaOnline(this);
 
-		// TODO guardar los jugadores suscriptores como participantes de la partida
-		// online
+		//guardar los jugadores suscriptores como participantes de la partida online
+		for (HttpSession httpSession : vectorJugadores) {
+			try {
+				Object jugador = (Object) httpSession.getAttribute("jugador");
+				if (jugador instanceof Invitado) {
+					Suscriptor suscriptorInvitado = ((Invitado) jugador).getSuscriptor();
+					if (suscriptorInvitado!=null) {
+						BilboSKP.agregarSuscriptorParticipante(suscriptorInvitado.getIdSuscriptor(),1);
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
 	}
 
 	public void cancelarPartida() {
@@ -143,16 +157,41 @@ public class PartidaOnline extends Partida {
 		// establecer el estado
 		this.estado = PARTIDA_FINALIZANDO;
 		// quitar de las sesiones los objetos jugador(invitados y anfitrion)
+		for (HttpSession sesion : vectorJugadores) {
+			sesion.removeAttribute("jugador");
+		}
+		System.out.println("Se ha cancelado la partida");
+		try {
+			this.finalizarPartida();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
 	}
 
 	public int calcularPuntaje() {
-		int puntaje = 0;
-		if (puntaje < 0) {
-			puntaje = 0;
+		int puntajeBase = 0;
+		int penalizacionPistas = calcularPenalizacionPistas();
+		int puntajeBonus = calcularPuntajeBonus();
+		System.out.println(puntajeBonus);
+		int puntajeTotal = puntajeBase - penalizacionPistas + puntajeBonus;
+		if (puntajeTotal < 0) {
+			puntajeTotal = 0;
 		}
-		return puntaje;
+		return puntajeTotal;
 	}
-
+	public int calcularPenalizacionPistas() {
+		int penalizacionPistas = 0;
+		for (Pista pista : vectorpistasUtilizadas) {
+			penalizacionPistas += pista.getPenalizacion();
+		}
+		return penalizacionPistas;
+	}
+	
+	public int calcularPuntajeBonus() {
+		System.out.println(getSala().getTiempoMax()+" - "+getTiempoMinutos());
+		return (getSala().getTiempoMax() - getTiempoMinutos()) * 60;
+	}
+	
 	public int getVisibleRanking() {
 		return visibleRanking;
 	}
@@ -176,12 +215,23 @@ public class PartidaOnline extends Partida {
 			public void run() {
 				// Incrementa los segundos cada segundo
 				segundosTranscurridos++;
-				System.out.println("Segundos: " + segundosTranscurridos);
-				if (segundosTranscurridos == segundosObjetivo || estado.equals(PARTIDA_FINALIZANDO)) {
+				System.out.println("Segundos en organizando: " + segundosTranscurridos);
+				if (segundosTranscurridos >= segundosObjetivo || estado.equals(PARTIDA_FINALIZANDO)) {
 					segundosTranscurridos = 0;
 					cancelarPartida(); // Ejecuta el método si se ha llegado al número variable de segundos
 					timer.cancel(); // Cancela el timer después de alcanzar el objetivo
 				}
+				//cada 5 segundos, este timer se asegura que la sesion del anfitrión esta activa, y si no lo está cancela la partida en curso
+				 if (segundosTranscurridos % 5 == 0) {
+			         HttpSession sesionAnfitrion = getSessionJugadorAnfitrion();
+			         long tiempoInactivo = System.currentTimeMillis() - sesionAnfitrion.getLastAccessedTime();
+			         int tiempoEspera = sesionAnfitrion.getMaxInactiveInterval() * 1000; // convertir a milisegundos
+			         if (tiempoInactivo > tiempoEspera) {
+			             //System.out.println("La sesión anfitriona ha expirado. Cancelando la partida en curso");
+			             cancelarPartida();
+			             timer.cancel();
+			         }
+			     }
 			}
 		}, 0, 1000); // El segundo parámetro especifica el retraso antes de iniciar el timer, y el
 						// tercer parámetro especifica el intervalo de tiempo entre cada ejecución del
@@ -201,13 +251,25 @@ public class PartidaOnline extends Partida {
 			break;
 		}
 	}
-
-	public static void cancelarPartida(String aliasCerrandoSesion) {
+	public static PartidaOnline buscarPartidaPorAlias(String alias) {
 		for (Map.Entry<Integer, PartidaOnline> par : partidasOrganizando.entrySet()) {
 			PartidaOnline po = par.getValue();
-			if (po.getAnfitrion().getAlias().equals(aliasCerrandoSesion)) {
+			if (po.getAnfitrion().getAlias().equals(alias)) {
+				return po;
+			}
+		}
+		return null;
+	}
+	public static void cancelarPartida(String alias) {
+		for (Map.Entry<Integer, PartidaOnline> par : partidasOrganizando.entrySet()) {
+			PartidaOnline po = par.getValue();
+			if (po.getAnfitrion().getAlias().equals(alias)) {
 				po.cancelarPartida();
 			}
 		}
+	}
+	
+	public HttpSession getSessionJugadorAnfitrion() {
+		return vectorJugadores.get(0);
 	}
 }

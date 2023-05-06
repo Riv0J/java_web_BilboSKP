@@ -13,12 +13,12 @@ import javax.servlet.annotation.WebFilter;
  * Servlet Filter implementation class FilterIdioma
  */
 @WebFilter("/FilterIdioma")
-public class FilterIdioma implements Filter {
+public class FilterLenguaje implements Filter {
 
     /**
      * Default constructor. 
      */
-    public FilterIdioma() {
+    public FilterLenguaje() {
         // TODO Auto-generated constructor stub
     }
 

@@ -1,5 +1,5 @@
 <section id="caja_unirse">
-		<form action="./unirse" method="post">
+		<form action="./unirse" method="get">
 	        <div class="linea_unirse" id="linea_logo">
 	            <h2>Introduce un código de partida</h2>
 	            <button id="boton_cerrar_unirse" type="button" >&times;</button>

@@ -133,7 +133,11 @@
 	padding-right: 5%;
 	transition: all 0.5s;
 }
-
+.bilboskp_icon_button:hover {
+	background-color: var(--bg-oscuro);
+	color: var(--text-color-main);
+	outline: 1px solid var(--outline-color-main);
+}
 .bilboskp_icon_button_inverted{
 	font-size: 1.75em;
 	border: none;
@@ -157,10 +161,16 @@
 	color: var(--text-color);
 	outline: 1px solid var(--outline-color-main);
 }
-.bilboskp_icon_button:hover {
-	background-color: var(--bg-oscuro);
-	color: var(--text-color-main);
-	outline: 1px solid var(--outline-color-main);
+
+.bilboskp_icon_button.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  color: var(--text-color);
+}
+
+.bilboskp_icon_button.disabled:hover {
+  color: var(--text-color);
+  outline: none;
 }
 
 .bilboskp_select{

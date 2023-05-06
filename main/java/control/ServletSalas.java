@@ -31,22 +31,22 @@ public class ServletSalas extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("Doget Salas");
-		//establecer la urlPrevia de la sesion, como la actual
-		//String urlPrevia = request.getRequestURL().toString();
-		//HttpSession sesion = request.getSession();
-		//System.out.println("ServletSalas urlprevia establecida = "+urlPrevia);
-		//sesion.setAttribute("urlPrevia", urlPrevia);
 		try {
 			HashMap<String, Sala> mapaSalas = Sala.getTodasLasSalasCargadas();
 			HashMap<String, Sala> salasAMostrar = new HashMap<String, Sala>();
 
 			// Obtener los parámetros de búsqueda de la solicitud HTTP
 			String paramBuscar = request.getParameter("buscar");
-			String busquedaNormalizada = null;
+			
 			String paramModalidad = request.getParameter("m");
 			String paramTematica = request.getParameter("t");
 			String paramDificultad = request.getParameter("d");
-
+			
+			if(paramBuscar==null) { paramBuscar = "todas"; }
+			if(paramTematica==null) { paramTematica = "todas"; }
+			if(paramModalidad==null) { paramModalidad = "todas"; }
+			if(paramDificultad==null) { paramDificultad = "todas"; }
+			
 			if (paramBuscar != null) {
 				// normalizar(quitar acentos y poner minusculas)
 				paramBuscar = StringHelper.normalizarTexto(paramBuscar);
@@ -111,7 +111,7 @@ public class ServletSalas extends HttpServlet {
 				salasAMostrar.put(entry.getKey(), sala);
 			}
 
-			// Agregar los atributos necesarios a la solicitud HTTP
+			// agregar los atributos al request
 			request.setAttribute("mapaSalas", salasAMostrar);
 			request.setAttribute("tematicasDisponibles", Sala.getTematicasCargadas());
 			request.setAttribute("dificultadesDisponibles", Sala.getDificultadesCargadas());

@@ -1,8 +1,6 @@
 package control;
 
 import java.io.IOException;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.Vector;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -17,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import model.Horario;
 import model.Sala;
 import model.SalaFisica;
-import view.StringHelper;
 
 @WebServlet({"/verSala"})
 public class ServletVerSala extends HttpServlet {

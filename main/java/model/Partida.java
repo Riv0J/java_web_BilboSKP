@@ -40,6 +40,9 @@ public class Partida {
 	}
 
 	public static int calcularTiempo(Date fechaInicio, Date fechaFin) {
+		if(fechaInicio==null) {
+			fechaInicio = new Date();
+		}
 	    long tiempoMillis = fechaFin.getTime() - fechaInicio.getTime();
 	    int tiempoMinutos = (int) TimeUnit.MILLISECONDS.toMinutes(tiempoMillis);
 	    return tiempoMinutos;

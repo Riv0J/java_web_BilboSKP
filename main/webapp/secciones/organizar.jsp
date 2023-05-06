@@ -1,15 +1,21 @@
 <%@ page
 	import="java.util.Vector, java.util.HashMap, java.util.Map, java.util.Locale,java.util.Date, java.time.LocalDate, java.io.File, java.text.Normalizer, 
-	model.Sala, model.SalaOnline, control.BilboSKP, model.SalaFisica, model.Horario, model.Jugador, view.StringHelper, view.DateHelper, view.Icon, model.PartidaOnline, model.Suscriptor"%>
+	model.Sala, model.SalaOnline, control.BilboSKP, model.Invitado, model.Anfitrion, model.Jugador, view.StringHelper, view.DateHelper, view.Icon, model.PartidaOnline, model.Suscriptor"%>
 <%
 PartidaOnline partidaOnline = (PartidaOnline) request.getAttribute("partidaOnline");
+if(partidaOnline==null){
+	response.sendRedirect("index.jsp");
+}
 Sala salaPartida = partidaOnline.getSala();
-String idSala = (String) request.getParameter("idSala");
 int codInvitacion = partidaOnline.getCodInvitacion();
-String enlaceInvitacion = "http://172.26.22.1/PRET/unirse?idSala="+idSala+"&codInvitacion="+codInvitacion+partidaOnline.getCodInvitacion();
+//String ipPort = "172.26.22.1:8080";
+String ipPort = "localhost:8080";
+String enlaceInvitacion = "http://"+ipPort+"/PRET/unirse?codInvitacion="+codInvitacion;
 Suscriptor anfitrion = partidaOnline.getAnfitrion();
 
-String rutaImagenPortadaLarga = "./img_salas/portadas_largas/"+idSala+".png";
+/*verificar si quien pide el jsp es el jugador anfitrion o invitados*/
+Object jugador = (Object) session.getAttribute("jugador");
+String rutaImagenPortadaLarga = "./img_salas/portadas_largas/SO"+salaPartida.getIdSala()+".png";
 String rutaIconoTematica = "img_web/iconos_salas/" + StringHelper.normalizarTexto(salaPartida.getTematica()) + ".svg";
 String tematicaNormalizada = StringHelper.normalizarTexto(salaPartida.getTematica());
 %>
@@ -76,21 +82,35 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaPartida.getTematic
 		<div id="caja_organizar">
 			<h2 id="caja_subtitulo_organizar" class="bilboskp_h2"> Jugadores en espera</h2>
 			<div id="caja_jugadores"> 
-				<% for(Jugador jugador: partidaOnline.getJugadores()){
-					//for(int i =0; i<8; i++){%>
-					<div class="caja_jugador">
-						<div class="caja_organizar_perfil">
-							<img src="img_suscriptores/<%=jugador.getImagen()%>">
+				<%for(HttpSession sesion: partidaOnline.getJugadores()){
+					//for(int i =0; i<8; i++){
+					if (jugador instanceof Anfitrion){
+						Anfitrion anfi = (Anfitrion) jugador; %>
+						<div id="caja_anfitrion" class="caja_jugador">
+							<div class="caja_organizar_perfil">
+								<img src="img_suscriptores/<%=anfi.getImagen()%>">
+							</div>
+							<div class="caja_alias">
+								<%=anfi.getAlias()%>
+							</div>
 						</div>
-						<div class="caja_alias">
-							<%=jugador.getAlias()%>
+					<% } else if (jugador instanceof Invitado){
+						Invitado invitado = (Invitado) jugador; %>
+						<div class="caja_jugador <%if(invitado.getSuscriptor() instanceof Suscriptor){%>caja_suscriptor<%}%>">
+							<div class="caja_organizar_perfil">
+								<img src="img_suscriptores/<%=invitado.getImagen()%>">
+							</div>
+							<div class="caja_alias">
+								<%=invitado.getAlias()%>
+							</div>
 						</div>
-					</div>
+					<% } %>
 				<% } %>
 			</div>
 			<div id="contenedor_boton">
-				<a href="">
-					<button class="bilboskp_icon_button">
+				<a <%if(jugador instanceof Anfitrion){%>href="./jugar?codInvitacion=<%=codInvitacion%>"<%}%>
+				<%if(!(jugador instanceof Anfitrion)){%>title="Espera que el anfitrión inicie la partida"<%}%>>
+					<button class="bilboskp_icon_button <%if(!(jugador instanceof Anfitrion)){%>disabled"<%}%>>
 						<i class="<%=Icon.getIconHTMLClass("online")%>"></i>
 						<div>
 							Iniciar partida
