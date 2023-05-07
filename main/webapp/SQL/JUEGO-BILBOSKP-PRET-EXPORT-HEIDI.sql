@@ -34,17 +34,17 @@ CREATE TABLE IF NOT EXISTS `cupon` (
 -- Dumping data for table bilboskpdb.cupon: ~22 rows (approximately)
 INSERT INTO `cupon` (`idCupon`, `idSuscriptor`, `fechaCaducidad`, `estado`, `reembolsable`) VALUES
 	(1, 2, '2023-04-30 00:00:00', 'Disponible', 1),
-	(2, 1, '2023-02-03 00:00:00', 'Caducado', 1),
-	(3, 3, '2023-04-30 00:00:00', 'Gastado', 1),
+	(2, 1, '2023-02-03 00:00:00', 'Disponible', 1),
+	(3, 3, '2023-04-30 00:00:00', 'Disponible', 1),
 	(5, 8, '2023-06-08 00:00:00', 'Disponible', 1),
 	(6, 8, '2023-06-09 00:00:00', 'Disponible', 1),
 	(7, 12, '2023-06-06 00:00:00', 'Disponible', 0),
 	(8, 12, '2023-06-09 00:00:00', 'Disponible', 1),
-	(9, 12, '2023-02-09 00:00:00', 'Caducado', 1),
+	(9, 12, '2023-02-09 00:00:00', 'Disponible', 1),
 	(11, 4, '2077-12-31 00:00:00', 'Disponible', 0),
 	(12, 4, '2077-12-31 00:00:00', 'Disponible', 0),
 	(13, 4, '2023-05-18 00:00:00', 'Disponible', 0),
-	(14, 4, '2024-05-18 00:00:00', 'En uso', 0),
+	(14, 4, '2024-05-18 00:00:00', 'Disponible\r\n', 0),
 	(15, 1, '2023-06-04 00:00:00', 'Disponible', 1),
 	(16, 1, '2026-06-04 00:00:00', 'Disponible', 1),
 	(17, 1, '2027-06-04 00:00:00', 'Disponible', 1),
@@ -116,7 +116,7 @@ INSERT INTO `escenario_flecha` (`idObjeto`, `nombreEscenario`, `nombreEscenarioD
 	(0, 'ConfesionarioCerrado', 'Dormitorio', 'derecha', 85, 50, 5, 10, NULL, NULL),
 	(0, 'ConfesionarioCerrado', 'Entrada', 'izquierda', 5, 50, 5, 10, NULL, NULL),
 	(0, 'Nave', 'Entrada', 'derecha', 85, 50, 5, 10, NULL, NULL),
-	(0, 'Nave', 'Entrada', 'izquierda', 5, 50, 5, 10, NULL, NULL);
+	(0, 'Entrada', 'Nave', 'izquierda', 5, 50, 5, 10, NULL, NULL);
 
 -- Dumping structure for table bilboskpdb.horario
 CREATE TABLE IF NOT EXISTS `horario` (
@@ -227,7 +227,7 @@ CREATE TABLE IF NOT EXISTS `partidaonline` (
   KEY `idAnfitrion` (`idAnfitrion`),
   CONSTRAINT `FK_partidaonline_salaonline` FOREIGN KEY (`idSalaOnline`) REFERENCES `salaonline` (`idSala`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_partidaonline_suscriptor` FOREIGN KEY (`idAnfitrion`) REFERENCES `suscriptor` (`idSuscriptor`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=214 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=217 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table bilboskpdb.partidaonline: ~34 rows (approximately)
 INSERT INTO `partidaonline` (`idPartida`, `idSalaOnline`, `idAnfitrion`, `puntaje`, `numeroJugadores`, `nombreGrupo`, `fechaInicio`, `fechaFin`, `visibleRanking`) VALUES
@@ -264,7 +264,10 @@ INSERT INTO `partidaonline` (`idPartida`, `idSalaOnline`, `idAnfitrion`, `puntaj
 	(210, 10, 12, 5400, '8', 'SO10', '2023-05-06 00:00:00', '2023-05-06 00:00:00', 1),
 	(211, 10, 12, 5400, '8', 'SO10', '2023-05-06 00:00:00', '2023-05-06 00:00:00', 1),
 	(212, 2, 12, 3600, '8', 'SO2', '2023-05-06 00:00:00', '2023-05-06 00:00:00', 1),
-	(213, 2, 12, 3600, '8', 'SO2', '2023-05-06 00:00:00', '2023-05-06 00:00:00', 1);
+	(213, 2, 12, 3600, '8', 'SO2', '2023-05-06 00:00:00', '2023-05-06 00:00:00', 1),
+	(214, 3, 12, 2700, '8', 'SO3', '2023-05-07 00:00:00', '2023-05-07 00:00:00', 1),
+	(215, 3, 12, 2700, '8', 'SO3', '2023-05-07 00:00:00', '2023-05-07 00:00:00', 1),
+	(216, 1, 12, 2700, '8', 'SO1', '2023-05-07 00:00:00', '2023-05-07 00:00:00', 1);
 
 -- Dumping structure for table bilboskpdb.pista
 CREATE TABLE IF NOT EXISTS `pista` (
@@ -422,7 +425,7 @@ CREATE TABLE IF NOT EXISTS `suscriptor` (
   `idSuscriptor` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(100) NOT NULL DEFAULT '',
   `pass` varchar(64) NOT NULL,
-  `alias` varchar(30) NOT NULL,
+  `alias` varchar(20) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `apellidos` varchar(255) NOT NULL,
   `fech_nac` date NOT NULL,
@@ -440,8 +443,8 @@ INSERT INTO `suscriptor` (`idSuscriptor`, `email`, `pass`, `alias`, `nombre`, `a
 	(3, 'rosamargarita@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'RosaMarg', 'Rosa', 'Margarita', '1995-02-28', 987654321, 'defaults/1.png', 1),
 	(4, 'aventurasconpepe@yahoo.es', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'PepeAventuras', 'José', 'González', '1985-07-12', 741258963, 'defaults/1.png', 1),
 	(5, 'exploradoraindigo@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'IndigoExplorer', 'Lucía', 'Gómez', '1998-11-05', 365874123, 'defaults/1.png', 1),
-	(6, 'travesiasalvaje@hotmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'AventureroSalvaje', 'Pedro', 'Ramírez', '1972-09-20', 987654789, 'defaults/1.png', 1),
-	(7, 'aventurasenelamazonas@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'AmazonAdventurer', 'María', 'López', '1988-03-15', 741236985, 'defaults/1.png', 1),
+	(6, 'travesiasalvaje@hotmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'AventureroSalva', 'Pedro', 'Ramírez', '1972-09-20', 987654789, 'defaults/1.png', 1),
+	(7, 'aventurasenelamazonas@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'AmazonAdventure', 'María', 'López', '1988-03-15', 741236985, 'defaults/1.png', 1),
 	(8, 'admin@bilboskp.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'admin', 'admin', 'admin', '1999-10-09', 0, 'defaults/1.png', 1),
 	(11, 'mlinares@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'mlinares', 'Mikel', 'Linares', '1983-10-10', NULL, 'defaults/1.png', 1),
 	(12, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'administrador', 'Bilbo', 'SKP', '2023-10-10', 7, 'defaults/1.png', 1),
@@ -450,7 +453,7 @@ INSERT INTO `suscriptor` (`idSuscriptor`, `email`, `pass`, `alias`, `nombre`, `a
 -- Dumping structure for view bilboskpdb.suscriptoresenpartida
 -- Creating temporary table to overcome VIEW dependency errors
 CREATE TABLE `suscriptoresenpartida` (
-	`alias` VARCHAR(30) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`alias` VARCHAR(20) NOT NULL COLLATE 'utf8mb4_general_ci',
 	`nombreGrupo` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
 	`nombre` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
 	`fechaInicio` DATETIME NOT NULL
