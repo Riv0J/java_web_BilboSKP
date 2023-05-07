@@ -682,8 +682,11 @@ public class BilboSKP extends DBC {
 
 	// Conseguir los cupones de un suscriptor por su id public static @Inigo
 	public static Vector<Cupon> getCuponesSuscriptor(int idSuscriptor) throws Throwable {
+		//Creamos cupones
 		Vector<Cupon> vectorCupones = new Vector<Cupon>();
+		//Hacemos la sentencia sql, donde cogemos todos los datos de los cupones que tienen la idSuscriptor almacenada en sesion 
 		String sentenciaSQL = "select * from cupon where idSuscriptor = " + idSuscriptor + " order by fechaCaducidad;";
+		//Hacemos una nueva conexion
 		BilboSKP conexion = new BilboSKP();
 		// se hace una consulta sql con la conexion y se guarda en el resultset
 		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
@@ -694,8 +697,11 @@ public class BilboSKP extends DBC {
 			Date fechaCaducidad = resultado.getDate("fechaCaducidad");
 			String Estado = resultado.getString("estado");
 			int reembolsable = resultado.getInt("reembolsable");
+			//Comprobamos que funciona
 			System.out.println(idCupon);
+			//Declaramos el nuevo cupon que llenamos con las campos anteriormente declarados
 			Cupon cupon = new Cupon(idCupon, Estado, fechaCaducidad, reembolsable);
+			//Metemos el cupon en el vectorCupones
 			vectorCupones.add(cupon);
 		}
 		return vectorCupones;
@@ -878,6 +884,11 @@ public class BilboSKP extends DBC {
 		}
 
 	}
+	// Eliminar un cupon de la BD
+	public static void eliminarCupon(int idCupon) throws Throwable {
+		String sql = "DELETE * from cupon WHERE id=" + idCupon + ";";
+	}
+
 
 	// dado un suscriptor, actualizar los datos en la BD @Torni
 	public static Suscriptor actualizarSuscripcion(Suscriptor suscriptor) throws Throwable {

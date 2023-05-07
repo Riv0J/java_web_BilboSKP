@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ page
-	import="model.Suscriptor,  model.SalaOnline, java.time.*, model.Cupon, java.util.Vector"%>
+	import="model.Suscriptor,  model.SalaOnline, java.time.*, model.Cupon, java.util.Vector, control.BilboSKP"%>
  	 <link rel="stylesheet" href="css/EstilosCupones.css"> 
 <%
 			%>
@@ -25,9 +25,17 @@
       %>
        <div class="fichaCupones">
         <p class="CodigoCupon">Estado: <%= cupon.getEstado() %> </p>
-        <p><%= cupon.getRembolsable() %></p>
         <p>Fecha caducidad:<br> <%= cupon.getFechaCaducidad() %></p>
+        <p><%= cupon.getRembolsable() %></p>
+        <input type="button" value="Rembolsar" onclick="alert('Tu cupón ha sido devuelto, espera un plazo maximo de una semana para recibir el importe en tu cuenta' )">
+        <% 
+        int idElminarCupon=cupon.getId();
+        BilboSKP.eliminarCupon(idElminarCupon);
+
+		%></input>
        </div>
+       
+       
             
        <% } %>
       
