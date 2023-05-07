@@ -44,7 +44,7 @@ public class FilterJuego implements Filter {
 			sesion.setAttribute("suscriptor", sus);
 			sesion.setAttribute("ADMIN", "ADMIN");
 			chain.doFilter(request, response);*/
-			((HttpServletRequest)request).getRequestDispatcher("index.jsp");
+			((HttpServletRequest)request).getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}
 

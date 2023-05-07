@@ -108,7 +108,7 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaPartida.getTematic
 				<% } %>
 			</div>
 			<div id="contenedor_boton">
-				<a <%if(jugador instanceof Anfitrion){%>href="./jugar?codInvitacion=<%=codInvitacion%>"<%}%>
+				<a <%if(jugador instanceof Anfitrion){%>href="./jugar?accion=iniciar&codInvitacion=<%=codInvitacion%>"<%}%>
 				<%if(!(jugador instanceof Anfitrion)){%>title="Espera que el anfitrión inicie la partida"<%}%>>
 					<button class="bilboskp_icon_button <%if(!(jugador instanceof Anfitrion)){%>disabled"<%}%>>
 						<i class="<%=Icon.getIconHTMLClass("online")%>"></i>
