@@ -29,9 +29,9 @@ CREATE TABLE IF NOT EXISTS `cupon` (
   PRIMARY KEY (`idCupon`) USING BTREE,
   KEY `fk_cupon_suscriptor` (`idSuscriptor`),
   CONSTRAINT `fk_cupon_suscriptor` FOREIGN KEY (`idSuscriptor`) REFERENCES `suscriptor` (`idSuscriptor`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table bilboskpdb.cupon: ~22 rows (approximately)
+-- Dumping data for table bilboskpdb.cupon: ~26 rows (approximately)
 INSERT INTO `cupon` (`idCupon`, `idSuscriptor`, `fechaCaducidad`, `estado`, `reembolsable`) VALUES
 	(1, 2, '2023-04-30 00:00:00', 'Disponible', 1),
 	(2, 1, '2023-02-03 00:00:00', 'Disponible', 1),
@@ -54,7 +54,11 @@ INSERT INTO `cupon` (`idCupon`, `idSuscriptor`, `fechaCaducidad`, `estado`, `ree
 	(21, 1, '2025-06-04 00:00:00', 'Disponible', 1),
 	(22, 1, '2025-06-04 00:00:00', 'Disponible', 1),
 	(23, 1, '2025-06-04 00:00:00', 'Disponible', 1),
-	(24, 1, '2025-06-04 00:00:00', 'Disponible', 1);
+	(24, 1, '2025-06-04 00:00:00', 'Disponible', 1),
+	(25, 12, '2023-02-09 00:00:00', 'En uso', 1),
+	(26, 12, '2023-02-09 00:00:00', 'En uso', 1),
+	(27, 12, '2023-02-09 00:00:00', 'En uso', 1),
+	(28, 12, '2023-02-09 00:00:00', 'En uso', 1);
 
 -- Dumping structure for table bilboskpdb.escenario
 CREATE TABLE IF NOT EXISTS `escenario` (
@@ -227,9 +231,9 @@ CREATE TABLE IF NOT EXISTS `partidaonline` (
   KEY `idAnfitrion` (`idAnfitrion`),
   CONSTRAINT `FK_partidaonline_salaonline` FOREIGN KEY (`idSalaOnline`) REFERENCES `salaonline` (`idSala`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_partidaonline_suscriptor` FOREIGN KEY (`idAnfitrion`) REFERENCES `suscriptor` (`idSuscriptor`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=217 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=218 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table bilboskpdb.partidaonline: ~34 rows (approximately)
+-- Dumping data for table bilboskpdb.partidaonline: ~38 rows (approximately)
 INSERT INTO `partidaonline` (`idPartida`, `idSalaOnline`, `idAnfitrion`, `puntaje`, `numeroJugadores`, `nombreGrupo`, `fechaInicio`, `fechaFin`, `visibleRanking`) VALUES
 	(1, 2, 1, 2000, '6', 'Los mosqueteros', '2023-04-09 22:51:02', '2023-04-09 23:51:04', 1),
 	(2, 1, 1, 1800, '3', 'Los mosqueteros', '2023-04-09 22:51:02', '2023-04-09 23:51:04', 1),
@@ -267,7 +271,8 @@ INSERT INTO `partidaonline` (`idPartida`, `idSalaOnline`, `idAnfitrion`, `puntaj
 	(213, 2, 12, 3600, '8', 'SO2', '2023-05-06 00:00:00', '2023-05-06 00:00:00', 1),
 	(214, 3, 12, 2700, '8', 'SO3', '2023-05-07 00:00:00', '2023-05-07 00:00:00', 1),
 	(215, 3, 12, 2700, '8', 'SO3', '2023-05-07 00:00:00', '2023-05-07 00:00:00', 1),
-	(216, 1, 12, 2700, '8', 'SO1', '2023-05-07 00:00:00', '2023-05-07 00:00:00', 1);
+	(216, 1, 12, 2700, '8', 'SO1', '2023-05-07 00:00:00', '2023-05-07 00:00:00', 1),
+	(217, 1, 12, 1380, '8', 'SO1', '2023-05-07 00:00:00', '2023-05-07 00:00:00', 1);
 
 -- Dumping structure for table bilboskpdb.pista
 CREATE TABLE IF NOT EXISTS `pista` (
