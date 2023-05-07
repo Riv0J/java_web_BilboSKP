@@ -30,7 +30,6 @@ String tituloPagina = seccion.substring(0, 1).toUpperCase() + seccion.substring(
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title><%=tituloPagina%></title>
-	<link rel="stylesheet" href="css/colores.css">
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/footer.css">
 	<link rel="stylesheet" href="css/bilboskp.css">
@@ -43,7 +42,6 @@ String tituloPagina = seccion.substring(0, 1).toUpperCase() + seccion.substring(
 	<link rel="icon" type="image/x-icon" href="img_web/logos/500x400-cuadrado-2.png">
 </head>
 <body>
-	<%--<%@include file="plantillas/nav.jsp"--%>
 	<jsp:include page="css/colores.jsp"></jsp:include>
 	<header>
 		<div id=caja_logo>
@@ -116,6 +114,7 @@ String tituloPagina = seccion.substring(0, 1).toUpperCase() + seccion.substring(
 		}
 	</style>
 <% } %>
+<% if (!(sus instanceof Suscriptor)){ %>
 <script>
 	var cajaLogin = document.querySelector("#caja_login");
 	var botonPerfil = document.getElementById("botonPerfil");
@@ -137,4 +136,5 @@ String tituloPagina = seccion.substring(0, 1).toUpperCase() + seccion.substring(
 	botonPerfil.addEventListener("click", toggleLogin);
 	botonCerrarLogin.addEventListener("click", toggleLogin);
 </script>
+<% } %>
 </html>

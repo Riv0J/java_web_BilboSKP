@@ -78,7 +78,18 @@ public class PartidaOnline extends Partida {
 	    }
 	    return "Lleno";
 	}
-
+	public boolean quitarJugador(HttpSession sesion) {
+		for(int i= 0; i<vectorJugadores.size(); i++) {
+			HttpSession sesionJugadora = vectorJugadores.get(i);
+			if(sesionJugadora.equals(sesion)) {
+				System.out.println("Se ha encontrado el jugador, se procederá a quitarlo");
+				vectorJugadores.remove(i);
+				return true;
+			}
+		}
+		System.out.println("No se ha encontrado ese jugador en el vector jugadores");
+		return false;
+	}
 	public Vector<HttpSession> getJugadores() {
 		return vectorJugadores;
 	}

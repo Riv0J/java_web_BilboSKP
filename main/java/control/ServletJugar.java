@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import model.Cupon;
 import model.Escenario;
+import model.Jugador;
 import model.PartidaOnline;
 import model.SalaOnline;
 import model.Suscriptor;
@@ -22,61 +23,106 @@ public class ServletJugar extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("Doget jugar");
-		// obtener partida del request
-		String codString = request.getParameter("codInvitacion");
-		int codInvitacion = Integer.parseInt(codString);
-		PartidaOnline po = PartidaOnline.getPartidaOnline(codInvitacion);
-		
-		if (po!=null) {
-			System.out.println("Se ha encontrado una partida");
-			// obtener la sesion
+		try {
+			// obtener partida del request
+			String codString = request.getParameter("codInvitacion");
+			String accion = request.getParameter("accion");
+			int codInvitacion = Integer.parseInt(codString);
+			PartidaOnline po = PartidaOnline.getPartidaOnline(codInvitacion);
+			System.out.println(accion + " + " + codInvitacion);
 			HttpSession sesion = request.getSession();
 			// verificar que el que quiere iniciar la partida es el anfitrion
 			Object sus = sesion.getAttribute("suscriptor");
-			Suscriptor suscriptorAnfitrion = po.getAnfitrion();
-			if (sus.equals(suscriptorAnfitrion)) {
-				System.out.println("El anfitrion es correcto");
-				// verificar que el suscriptor tiene un cupon, y si lo tiene cambiar a su estado
-				// en uso, de lo contrario redireccionar
-				try {
-					Cupon cupon = BilboSKP.comprobarCupon("Disponible", suscriptorAnfitrion.getIdSuscriptor());
-					if (cupon != null) {
-						BilboSKP.usarCupon(suscriptorAnfitrion.getIdSuscriptor(), cupon.getId());
-						// si el estado de la partida es organizando, comenzarla
-						if (po.getEstado().equals(PartidaOnline.PARTIDA_ORGANIZANDO)) {
-							po.iniciarPartida();
-							//mandar al sus al juego
-							SalaOnline so = (SalaOnline) po.getSala();
-							Escenario escenarioAMostrar = so.getEscenarioInicio();
-							if(escenarioAMostrar==null) {
-								Mensaje m = new Mensaje("Esta sala no está disponible actualmente, ¡por favor disfruta pregunta al staff!",Mensaje.MENSAJE_INFO);
-								sesion.setAttribute("mensaje", m);
-								request.getRequestDispatcher("./salas").forward(request, response);
-							} else {
-								request.setAttribute("escenarioAMostrar", escenarioAMostrar);
-								request.setAttribute("partidaOnline", po);
-								request.getRequestDispatcher("juego.jsp").forward(request, response);
+			if (po != null) {
+				System.out.println("Se ha encontrado una partida");
+				switch (accion) {
+				case "iniciar":
+					//si el estado de la partida era organizando continua
+					if(po.getEstado().equals(PartidaOnline.PARTIDA_ORGANIZANDO)) {
+						Suscriptor suscriptorAnfitrion = po.getAnfitrion();
+						// verificar que el suscriptor tiene un cupon, y si lo tiene cambiar a su estado
+						// en uso, de lo contrario redireccionar
+						if (sus.equals(suscriptorAnfitrion)) {
+							System.out.println("El anfitrion es correcto");
+							Cupon cupon = BilboSKP.comprobarCupon("Disponible", suscriptorAnfitrion.getIdSuscriptor());
+							if (cupon != null) {
+								BilboSKP.usarCupon(suscriptorAnfitrion.getIdSuscriptor(), cupon.getId());
+								// si el estado de la partida es organizando, comenzarla
+								if (po.getEstado().equals(PartidaOnline.PARTIDA_ORGANIZANDO)) {
+									po.iniciarPartida();
+									// mandar al sus al juego
+									SalaOnline so = (SalaOnline) po.getSala();
+									Escenario escenarioAMostrar = so.getEscenarioInicio();
+									if (escenarioAMostrar == null) {
+										Mensaje m = new Mensaje(
+												"Esta sala no está disponible actualmente, ¡por favor disfruta pregunta al staff!",
+												Mensaje.MENSAJE_INFO);
+										sesion.setAttribute("mensaje", m);
+										request.getRequestDispatcher("./salas").forward(request, response);
+									} else {
+										request.setAttribute("escenarioAMostrar", escenarioAMostrar);
+										request.setAttribute("partidaOnline", po);
+										request.getRequestDispatcher("juego.jsp").forward(request, response);
+									}
+								}
 							}
 						}
 					}
-				} catch (Throwable e) {
-					e.printStackTrace();
-					System.out.println("ServletJugar: Error utilizando cupon");
+					break;
+				case "salir":
+					po.quitarJugador(sesion);
+					// si la sesion que se quita es el anfitrion, termina la partida
+					if (sesion.equals(po.getSessionJugadorAnfitrion())) {
+						po.finalizarPartida();
+					}
+					// redireccionar a salas
+					response.sendRedirect("./salas");
+					break;
+				case "cambioEscenario":
+					String idEscenarioDestino = request.getParameter("idEscenarioDestino");
+					// obtener sala
+					SalaOnline so = (SalaOnline) po.getSala();
+					// obtener el escenario concreto a dibujar
+					// Escenario escenario = SalaOnline
+					// insertar escenario en el request
+					// redireccionar al juego.jsp
+					request.getRequestDispatcher("juego.jsp").forward(request, response);
+					break;
+				default:
+					response.sendRedirect("./salas");
+					break;
 				}
 			}
+		} catch(Throwable e) {
+			e.printStackTrace();
+			response.sendRedirect("./salas");
 		}
 	}
 
+	// este dopost atenderá todas las peticiones
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// obtener la sala
-		String idSala = request.getParameter("idSala");
-		String idEscenarioDestino = request.getParameter("idEscenarioDestino");
-		// obtener el escenario concreto a dibujar
+		try {
+			String accion = request.getParameter("accion");
+			String stringCodInvitacion = request.getParameter("codInvitacion");
 
-		// insertar en el request
+			int codInvitacion = Integer.parseInt(stringCodInvitacion);
+			PartidaOnline po = PartidaOnline.getPartidaOnline(codInvitacion);
+			HttpSession sesion = request.getSession();
 
-		// edireccionar al juego.jsp
+			switch (accion) {
+			case "salir":
 
+				break;
+			
+			case "chatear":
+				break;
+			default:
+				break;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.sendRedirect("./salas");
+		}
 	}
 }
