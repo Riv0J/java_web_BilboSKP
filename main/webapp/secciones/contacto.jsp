@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<link rel="stylesheet" href="../css/contacto.css">
+<link rel="stylesheet" href="css/contacto.css">
 <main>
         <div class="cajatexto1">
             <h1>Aquí nos tienes ¿Hablamos?</h1>
