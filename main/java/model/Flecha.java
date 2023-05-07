@@ -1,29 +1,36 @@
 package model;
 
 public class Flecha{
-	private int idEscenarioDestino;
+	private String nombreEscenarioDestino;
 	private Integer idObjetoQueDesbloqueaFlecha;
 	private String imagen, mensajeError;
 	//porcentaje
-	private int coordX, coordY, posicionX, posicionY;
+	private int dimensionX, dimensionY, posicionX, posicionY;
 	
-	public Flecha(int idEscenarioDestino, Integer idObjetoQueDesbloqueaFlecha, String imagen, String mensajeError,
-			int coordX, int coordY, int posicionX, int posicionY) {
-		super();
-		setIdEscenarioDestino(idEscenarioDestino);
+	public Flecha(String nombreEscenarioDestino, Integer idObjetoQueDesbloqueaFlecha, String imagen, String mensajeError,
+			int dimensionX, int dimensionY, int posicionX, int posicionY) {
+		setIdEscenarioDestino(nombreEscenarioDestino);
 		setIdObjetoQueDesbloqueaFlecha(idObjetoQueDesbloqueaFlecha);
 		setImagen(imagen);
 		setMensajeError(mensajeError);
-		setCoordX(coordX);
-		setCoordY(coordY);
+		setdimensionX(dimensionX);
+		setdimensionY(dimensionY);
 		setPosicionX(posicionX);
 		setPosicionY(posicionY);
 	}
-	public int getIdEscenarioDestino() {
-		return idEscenarioDestino;
+	public Flecha(String nombreEscenarioDestino, String imagen, int dimensionX, int dimensionY, int posicionX, int posicionY) {
+		setIdEscenarioDestino(nombreEscenarioDestino);
+		setImagen(imagen);
+		setdimensionX(dimensionX);
+		setdimensionY(dimensionY);
+		setPosicionX(posicionX);
+		setPosicionY(posicionY);
 	}
-	public void setIdEscenarioDestino(int idEscenarioDestino) {
-		this.idEscenarioDestino = idEscenarioDestino;
+	public String getIdEscenarioDestino() {
+		return nombreEscenarioDestino;
+	}
+	public void setIdEscenarioDestino(String idEscenarioDestino) {
+		this.nombreEscenarioDestino = idEscenarioDestino;
 	}
 	public Integer getIdObjetoQueDesbloqueaFlecha() {
 		return idObjetoQueDesbloqueaFlecha;
@@ -43,17 +50,17 @@ public class Flecha{
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}
-	public int getCoordX() {
-		return coordX;
+	public int getdimensionX() {
+		return dimensionX;
 	}
-	public void setCoordX(int coordX) {
-		this.coordX = coordX;
+	public void setdimensionX(int dimensionX) {
+		this.dimensionX = dimensionX;
 	}
-	public int getCoordY() {
-		return coordY;
+	public int getdimensionY() {
+		return dimensionY;
 	}
-	public void setCoordY(int coordY) {
-		this.coordY = coordY;
+	public void setdimensionY(int dimensionY) {
+		this.dimensionY = dimensionY;
 	}
 	public int getPosicionX() {
 		return posicionX;

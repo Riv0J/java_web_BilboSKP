@@ -46,7 +46,7 @@ public class DBC {
 				break;
 			default:
 			}
-			System.out.println("DBC: Connection Success");
+			//System.out.println("DBC: Connection Success");
 			return true;
 		} catch (ClassNotFoundException e) {
 			System.out.println("DBC: Connection error");

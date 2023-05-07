@@ -31,7 +31,7 @@ public class ServletVerSala extends HttpServlet {
 		String idSala = request.getParameter("idSala");
 		String fechaSeleccionada = request.getParameter("fechaSeleccionada");
 		if (idSala != null) {
-			System.out.println("Servlet ver sala: Sala a mostrar = " + idSala);
+			System.out.println("ServletVerSala: Sala a mostrar = " + idSala);
 			Sala salaAMostrar = Sala.getSalaPorId(idSala);
 			if (salaAMostrar != null) {
 				// determinar si la sala es fisica

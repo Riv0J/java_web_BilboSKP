@@ -20,9 +20,13 @@ import java.time.LocalDateTime;
 import connection.DBC;
 import connection.SQLHelper;
 import model.Cupon;
+import model.Escenario;
+import model.Flecha;
 import model.Horario;
+import model.Objeto;
 import model.Partida;
 import model.PartidaOnline;
+import model.Puzzle;
 import model.Reserva;
 import model.Sala;
 import model.SalaFisica;
@@ -85,7 +89,6 @@ public class BilboSKP extends DBC {
 
 		} catch (Exception e) {
 		}
-
 		return vectorSalasOnlineTop;
 	}
 
@@ -100,10 +103,12 @@ public class BilboSKP extends DBC {
 			BilboSKP conexion = new BilboSKP();
 			ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
 			// hacer un bucle de cada fila que tiene el resultset
+			System.out.println("BilboSKP: Obteniendo salas online:");
 			while (resultado.next()) {
 				// obtener los campos de cada columna para esta fila
 				int idSala = resultado.getInt("idSala");
 				String nombre = resultado.getString("nombre");
+				System.out.println(idSala+" > "+nombre);
 				String dificultad = resultado.getString("dificultad");
 				String tematica = resultado.getString("tematica");
 				String descripcion = resultado.getString("descripcion");
@@ -111,22 +116,16 @@ public class BilboSKP extends DBC {
 				int jugadoresMin = resultado.getInt("jugadoresMin");
 				int jugadoresMax = resultado.getInt("jugadoresMax");
 				int edadRecomendada = resultado.getInt("edad_Recomendada");
-
+				// obtener el escenario de inicio de esta sala
+				Escenario escenarioInicio = getEscenarioInicio(idSala);
+				// obtener hashmap de escenarios de esta sala
+				HashMap<String, Escenario> mapaEscenarios = getEscenarios(idSala);
 				SalaOnline sala = new SalaOnline(idSala, nombre, dificultad, tematica, descripcion, tiempoMax,
-						jugadoresMin, jugadoresMax, edadRecomendada);
+						jugadoresMin, jugadoresMax, edadRecomendada, escenarioInicio, mapaEscenarios);
 				// agregar sala al vector
 				vectorSalasOnline.add(sala);
 			}
-
-			// hacer syso de las salas obtenidas
-			System.out.println("Salas obtenidas:");
-			if (vectorSalasOnline.size() > 0) {
-				for (int i = 0; i < vectorSalasOnline.size(); i++) {
-					Sala SO = vectorSalasOnline.get(i);
-					System.out.println(SO.getIdSala() + " > " + SO.getNombre());
-				}
-			}
-			System.out.println("-----");
+			System.out.println("------------------------------");
 			conexion.cerrarFlujo();
 			return vectorSalasOnline;
 		} catch (Exception e) {
@@ -136,10 +135,81 @@ public class BilboSKP extends DBC {
 		return null;
 	}
 
+	// obtener el escenario de inicio de una sala concreta @Rivo
+	public static Escenario getEscenarioInicio(int idSala) throws Throwable {
+		String sentenciaSQL = "select * from escenario e, escenarios_inicio s where e.idSala="+idSala+" and e.idSala = s.idSala and e.nombreEscenario = s.nombreEscenario;";
+		BilboSKP conexion = new BilboSKP();
+		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
+		if (resultado.next()) {
+			String nombreEscenario = resultado.getString("nombreEscenario");
+			String descripcion = resultado.getString("descripcion");
+			String imagen = resultado.getString("imagen");
+			System.out.println("> Obtenido un escenario de inicio:" + nombreEscenario);
+			return new Escenario(nombreEscenario, imagen, descripcion, null, null, null);
+		}
+		return null;
+	}
+
+	// obtener una coleccion de escenarios de una sala concreta @Rivo
+	public static HashMap<String, Escenario> getEscenarios(int idSalaOnline) throws Throwable {
+		try {
+			HashMap<String, Escenario> mapaEscenarios = new HashMap<String, Escenario>();
+			String sentenciaSQL = "select * from escenario where idSala =" + idSalaOnline + ";";
+			BilboSKP conexion = new BilboSKP();
+			ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
+			while (resultado.next()) {
+				String nombreEscenario = resultado.getString("nombreEscenario");
+				String descripcion = resultado.getString("descripcion");
+				String imagen = resultado.getString("imagen");
+				//obtener las flechas de este escenario
+				Vector<Flecha> vectorFlechas = getFlechas(nombreEscenario);
+				//TODO obtener los objetos de este escenario
+				Vector<Objeto> vectorObjetos = null;
+				//TODO obtener los puzzles de este escenario
+				Vector<Puzzle> vectorPuzzle = null;
+				System.out.println(">> Obtenido escenario de sala " + idSalaOnline + ": " + nombreEscenario);
+				Escenario escenario = new Escenario(nombreEscenario, imagen, descripcion, vectorFlechas, vectorObjetos, vectorPuzzle);
+				mapaEscenarios.put(nombreEscenario, escenario);
+			}
+			return mapaEscenarios;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	//obtener las flechas de un escenario concreto @Rivo
+	public static Vector<Flecha> getFlechas(String nombreEscenario) throws Throwable {
+		Vector<Flecha> vectorFlechas= new Vector<Flecha>();
+		try {
+			String sentenciaSQL = "select * from escenario_flecha where nombreEscenario ='" + nombreEscenario + "';";
+			BilboSKP conexion = new BilboSKP();
+			ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
+			while (resultado.next()) {
+				String nombreEscenarioDestino = resultado.getString("nombreEscenarioDestino");
+				String imagen = resultado.getString("imagen");
+				int dimensionX = resultado.getInt("dimensionX");
+				int dimensionY = resultado.getInt("dimensionX");
+				int posicionX = resultado.getInt("posicionX");
+				int posicionY = resultado.getInt("posicionY");
+				System.out.println(">>> Obtenido flecha de escenario " + nombreEscenario + " hacia " + nombreEscenarioDestino);
+				Flecha flecha = new Flecha(nombreEscenarioDestino, imagen, dimensionX, dimensionY, posicionX, posicionY);
+				vectorFlechas.add(flecha);
+			}
+			return vectorFlechas;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	// actualizar las salas en una coleccion clave-valor en el hashmap de la clase
 	// @Rivo
 	public static boolean cargarSalasOnline() throws Throwable {
 		try {
+			System.out.println("CargarSalasOnline");
 			// limpiar todas las salas cargadas anteriormente
 			SalaOnline.clearSalasCargadas();
 
@@ -634,7 +704,7 @@ public class BilboSKP extends DBC {
 	// cambiar estado de un cupon @Inigo
 	public static boolean cambiarEstadoCupon(String nuevoEstado, int idCupon) throws Throwable {
 		try {
-			String sentenciaSQL = "UPDATE cupon SET estado=" + nuevoEstado + " WHERE idCupon=" + idCupon + ";";
+			String sentenciaSQL = "UPDATE cupon SET estado='" + nuevoEstado + "' WHERE idCupon=" + idCupon + ";";
 			BilboSKP conexion = new BilboSKP();
 			int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
 			if (filasAfectadas == 1) {
@@ -649,10 +719,12 @@ public class BilboSKP extends DBC {
 		}
 		return false;
 	}
-	//obtener el cupon de menor caducidad con estado disponible @Rivo
+
+	// obtener el cupon de menor caducidad con estado disponible @Rivo
 	public static Cupon comprobarCupon(String estadoAComprobar, int idSuscriptor) throws Throwable {
 		try {
-			String sentenciaSQL = "select * from cupon where idSuscriptor = '"+idSuscriptor+"' and estado = '"+estadoAComprobar+"' order by fechaCaducidad limit 1;";
+			String sentenciaSQL = "select * from cupon where idSuscriptor = '" + idSuscriptor + "' and estado = '"
+					+ estadoAComprobar + "' order by fechaCaducidad limit 1;";
 			BilboSKP conexion = new BilboSKP();
 			ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
 			// hacer un bucle de cada fila que tiene el resultset resultado
@@ -665,7 +737,7 @@ public class BilboSKP extends DBC {
 				System.out.println(idCupon);
 				return new Cupon(idCupon, Estado, fechaCaducidad, reembolsable);
 			} else {
-				System.out.println("BilboSKP: El sucriptor con id "+idSuscriptor+" no tiene cupon disponible.");
+				System.out.println("BilboSKP: El sucriptor con id " + idSuscriptor + " no tiene cupon disponible.");
 				return null;
 			}
 		} catch (Exception e) {
@@ -674,15 +746,16 @@ public class BilboSKP extends DBC {
 		}
 		return null;
 	}
+
 	// usar cupon de menor caducidad @Rivo
 	public static boolean usarCupon(int idSuscriptor) throws Throwable {
 		try {
-			//obtener cupon disponible con menor caducidad
+			// obtener cupon disponible con menor caducidad
 			Cupon cuponMenorCaducidad = comprobarCupon("Disponible", idSuscriptor);
-			if (cuponMenorCaducidad !=null) {
-				//cambiar estado a en uso
-				boolean cambiarEstado = cambiarEstadoCupon("En uso",cuponMenorCaducidad.getId());
-				if (cambiarEstado==true) {
+			if (cuponMenorCaducidad != null) {
+				// cambiar estado a en uso
+				boolean cambiarEstado = cambiarEstadoCupon("En uso", cuponMenorCaducidad.getId());
+				if (cambiarEstado == true) {
 					System.out.println("BilboSKP: Utilizado un cupon");
 					return true;
 				} else {
@@ -696,15 +769,35 @@ public class BilboSKP extends DBC {
 		}
 		return false;
 	}
-	//gastar cupon de menor caducidad @Rivo
+
+	// usar cupon dado su id @Rivo
+	public static boolean usarCupon(int idSuscriptor, int idCupon) throws Throwable {
+		try {
+			// cambiar estado a en uso
+			boolean cambiarEstado = cambiarEstadoCupon("En uso", idCupon);
+			if (cambiarEstado == true) {
+				System.out.println("BilboSKP: Utilizado un cupon");
+				return true;
+			} else {
+				System.out.println("BilboSKP: Error al utilizar el cupon");
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("BilboSKP: Error cambiando el estado del cupon");
+		}
+		return false;
+	}
+
+	// gastar cupon de menor caducidad @Rivo
 	public static boolean gastarCupon(int idSuscriptor) throws Throwable {
 		try {
-			//obtener cupon en uso con menor caducidad
+			// obtener cupon en uso con menor caducidad
 			Cupon cuponMenorCaducidad = comprobarCupon("En uso", idSuscriptor);
-			if (cuponMenorCaducidad !=null) {
-				//cambiar estado a gastado
-				boolean cambiarEstado = cambiarEstadoCupon("Gastado",cuponMenorCaducidad.getId());
-				if (cambiarEstado==true) {
+			if (cuponMenorCaducidad != null) {
+				// cambiar estado a gastado
+				boolean cambiarEstado = cambiarEstadoCupon("Gastado", cuponMenorCaducidad.getId());
+				if (cambiarEstado == true) {
 					System.out.println("BilboSKP: Gastado un cupon");
 					return true;
 				} else {
@@ -720,7 +813,7 @@ public class BilboSKP extends DBC {
 		}
 		return false;
 	}
-	
+
 	// cambiar el estado de todos los cupones cuya fecha caducidad es ayer @Inigo
 	public static boolean cambiarEstadoCuponesCaducados() throws Throwable {
 		try {
@@ -998,7 +1091,8 @@ public class BilboSKP extends DBC {
 	}
 
 	public static boolean ocultarHoraReservada(int idSala, String fechaSQL) throws Throwable {
-		String sentenciaSQL = "UPDATE horario SET disponible = 0  WHERE fechaHora = '" + fechaSQL + "' and idSalaFisica =" + idSala+ ";";
+		String sentenciaSQL = "UPDATE horario SET disponible = 0  WHERE fechaHora = '" + fechaSQL
+				+ "' and idSalaFisica =" + idSala + ";";
 		// hacer una conexion
 		BilboSKP conexion = new BilboSKP();
 		// se hace una consulta sql con la conexion y se guarda en el int

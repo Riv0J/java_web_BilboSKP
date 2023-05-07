@@ -1,26 +1,26 @@
 package model;
 
+import java.util.Vector;
+
 public class Escenario {
-	private int idEscenario;
-	private String imagen, descripcion;
-	private Flecha[] flechas;
-	private Objeto[] objetos;
-	private Puzzle[] puzzles;
-	public Escenario(int idEscenario, String imagen, String descripcion, Flecha[] flechas, Objeto[] objetos,
-			Puzzle[] puzzles) {
-		super();
-		this.idEscenario = idEscenario;
-		this.imagen = imagen;
-		this.descripcion = descripcion;
-		this.flechas = flechas;
-		this.objetos = objetos;
-		this.puzzles = puzzles;
+	private String nombreEscenario, imagen, descripcion;
+	private Vector<Flecha> flechas;
+	private Vector<Objeto> objetos;
+	private Vector<Puzzle> puzzles;
+	public Escenario(String nombreEscenario, String imagen, String descripcion, Vector<Flecha> vectorFlechas, Vector<Objeto> vectorObjetos,
+			Vector<Puzzle> vectorPuzzle) {
+		setNombreEscenario(nombreEscenario);
+		setImagen(imagen);
+		setDescripcion(descripcion);
+		setFlechas(vectorFlechas);
+		setObjetos(vectorObjetos);
+		setPuzzles(vectorPuzzle);
 	}
-	public int getIdEscenario() {
-		return idEscenario;
-	}
-	public void setIdEscenario(int idEscenario) {
-		this.idEscenario = idEscenario;
+	//constructor alternativo
+	public Escenario(String nombreEscenario, String imagen, String descripcion) {
+		setNombreEscenario(nombreEscenario);
+		setImagen(imagen);
+		setDescripcion(descripcion);
 	}
 	public String getImagen() {
 		return imagen;
@@ -34,22 +34,28 @@ public class Escenario {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public Flecha[] getFlechas() {
+	public Vector<Flecha> getFlechas() {
 		return flechas;
 	}
-	public void setFlechas(Flecha[] flechas) {
-		this.flechas = flechas;
+	public void setFlechas(Vector<Flecha> vectorFlechas) {
+		this.flechas = vectorFlechas;
 	}
-	public Objeto[] getObjetos() {
+	public Vector<Objeto> getObjetos() {
 		return objetos;
 	}
-	public void setObjetos(Objeto[] objetos) {
-		this.objetos = objetos;
+	public void setObjetos(Vector<Objeto> vectorObjetos) {
+		this.objetos = vectorObjetos;
 	}
-	public Puzzle[] getPuzzles() {
+	public Vector<Puzzle> getPuzzles() {
 		return puzzles;
 	}
-	public void setPuzzles(Puzzle[] puzzles) {
-		this.puzzles = puzzles;
+	public void setPuzzles(Vector<Puzzle> vectorPuzzle) {
+		this.puzzles = vectorPuzzle;
+	}
+	public String getNombreEscenario() {
+		return nombreEscenario;
+	}
+	public void setNombreEscenario(String nombreEscenario) {
+		this.nombreEscenario = nombreEscenario;
 	}
 }

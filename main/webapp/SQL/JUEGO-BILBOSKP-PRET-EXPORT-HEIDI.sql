@@ -67,26 +67,14 @@ CREATE TABLE IF NOT EXISTS `escenario` (
   CONSTRAINT `escenario_ibfk_1` FOREIGN KEY (`idSala`) REFERENCES `salaonline` (`idSala`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table bilboskpdb.escenario: ~18 rows (approximately)
+-- Dumping data for table bilboskpdb.escenario: ~6 rows (approximately)
 INSERT INTO `escenario` (`nombreEscenario`, `idSala`, `descripcion`, `imagen`) VALUES
-	('AlmacenCajaAbierta', 1, '¿Qué puede haber en esa caja fuerte?', 'almacenCajaAbierta.png'),
-	('AlmacenCajaCerrada', 1, '¿Qué puede haber en esa caja fuerte?', 'almacenCajaCerrada.png'),
-	('CajaFuerte', 1, '¿Eso es una caja fuerte? ¿Se puede abrir con esos botones?', 'cajaFuerte.png'),
 	('CampanarioAbajo', 1, 'Esta es una sala bien espaciosa, hay un campanario ahí arriba.', 'campanarioAbajo.png'),
 	('CampanarioArriba', 1, '¿Podré ver el exterior desde aquí?', 'campanarioArriba.png'),
-	('ConfesionarioAbierto', 1, 'Parece ser el antiguo confesionario de la iglesia', 'confesionarioAbierto.png'),
 	('ConfesionarioCerrado', 1, 'Parece ser el antiguo confesionario de la iglesia', 'confesionarioCerrado.png'),
-	('Cripta', 1, 'Parece ser que los sectarios se reunirán aquí', 'cripta.png'),
-	('CriptaPeriodico', 1, 'Este periódico depicta personas desaparecidas', 'criptaPeriodico.png'),
-	('Cuarto Oscuro', 1, 'Está muy oscuro. Hay una rendija casi al nivel del suelo.', 'cuartoOscuro.png'),
-	('Despacho', 1, '¿¿Cómo?? ¿Como es posible que haya una oficina en estas ruinas? Alguien debe habitar este lugar.', 'Despacho.png'),
 	('Dormitorio', 1, 'Qué hacía yo en un dormitorio?', 'dormitorio.png'),
 	('Entrada', 1, 'Esta sala tiene unas rocas que bloquean la puerta. Talvez pueda moverlas con algo.', 'entrada.png'),
-	('FinBueno', 1, 'Has destruido el lugar sectario y salido ileso del lugar. Aún no sabes que te dejó inconsciente, pero te dispones a llamar a las autoridades.', 'finBueno.png'),
-	('FinMalo', 1, 'Has activado el explosivo y la estructura ha colapsado sobre ti, parece que no has podido salir de esta.', 'finMalo.png'),
-	('Nave', 1, 'Increible pensar que este era un lugar de culto, antes...', 'nave.png'),
-	('Nota', 1, 'Creo que esta nota indica que hoy había una reunión sectaria en este lugar.', 'nota.png'),
-	('Pasillo', 1, 'Alto pasillo bro', 'pasillo.png');
+	('Nave', 1, 'Increible pensar que este era un lugar de culto, antes...', 'nave.png');
 
 -- Dumping structure for table bilboskpdb.escenarios_inicio
 CREATE TABLE IF NOT EXISTS `escenarios_inicio` (
@@ -122,27 +110,13 @@ CREATE TABLE IF NOT EXISTS `escenario_flecha` (
   CONSTRAINT `FK_escenario_flecha_objeto` FOREIGN KEY (`idObjeto`) REFERENCES `objeto` (`idObjeto`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table bilboskpdb.escenario_flecha: ~19 rows (approximately)
+-- Dumping data for table bilboskpdb.escenario_flecha: ~5 rows (approximately)
 INSERT INTO `escenario_flecha` (`idObjeto`, `nombreEscenario`, `nombreEscenarioDestino`, `imagen`, `posicionX`, `posicionY`, `dimensionX`, `dimensionY`, `comentario`, `mensajeError`) VALUES
 	(0, 'Dormitorio', 'ConfesionarioCerrado', 'izquierda', 5, 50, 5, 10, NULL, NULL),
 	(0, 'ConfesionarioCerrado', 'Dormitorio', 'derecha', 85, 50, 5, 10, NULL, NULL),
 	(0, 'ConfesionarioCerrado', 'Entrada', 'izquierda', 5, 50, 5, 10, NULL, NULL),
 	(0, 'Nave', 'Entrada', 'derecha', 85, 50, 5, 10, NULL, NULL),
-	(0, 'Nave', 'Entrada', 'izquierda', 5, 50, 5, 10, NULL, NULL),
-	(0, 'Entrada', 'Nave', 'izquierda', 5, 50, 5, 10, NULL, NULL),
-	(0, 'Nave', 'Pasillo', 'izquierda', 5, 50, 5, 10, NULL, NULL),
-	(0, 'Pasillo', 'Nave', 'abajo', 30, 30, 10, 5, NULL, NULL),
-	(0, 'Entrada', 'ConfesionarioCerrado', 'derecha', 85, 50, 5, 10, NULL, NULL),
-	(0, 'Pasillo', 'CampanarioAbajo', 'arriba', 40, 45, 10, 5, NULL, NULL),
-	(0, 'Pasillo', 'Cuarto Oscuro', 'derecha', 55, 45, 5, 10, NULL, NULL),
-	(0, 'Pasillo', 'AlmacenCajaCerrada', 'derecha', 70, 45, 5, 10, NULL, NULL),
-	(0, 'Pasillo', 'Despacho', 'derecha', 85, 45, 5, 10, NULL, NULL),
-	(0, 'Despacho', 'Pasillo', 'izquierda', 5, 50, 5, 10, NULL, NULL),
-	(0, 'AlmacenCajaCerrada', 'Pasillo', 'izquierda', 5, 50, 5, 10, NULL, NULL),
-	(0, 'Cuarto Oscuro', 'Pasillo', 'izquierda', 5, 50, 5, 10, NULL, NULL),
-	(0, 'CampanarioAbajo', 'Pasillo', 'derecha', 85, 50, 5, 10, NULL, NULL),
-	(0, 'CampanarioAbajo', 'CampanarioArriba', 'arriba', 50, 60, 10, 5, NULL, NULL),
-	(0, 'CampanarioArriba', 'CampanarioAbajo', 'abajo', 35, 30, 10, 5, NULL, NULL);
+	(0, 'Nave', 'Entrada', 'izquierda', 5, 50, 5, 10, NULL, NULL);
 
 -- Dumping structure for table bilboskpdb.horario
 CREATE TABLE IF NOT EXISTS `horario` (
@@ -199,20 +173,20 @@ CREATE TABLE IF NOT EXISTS `objeto` (
 
 -- Dumping data for table bilboskpdb.objeto: ~14 rows (approximately)
 INSERT INTO `objeto` (`idObjeto`, `nombreEscenario`, `nombre`, `idObjetoADesbloquear`, `descripcion`, `imagen`, `visibleInicio`, `visibleInventario`, `desapareceAlUsar`, `dimensionX`, `dimenxionY`, `posicionX`, `posicionY`) VALUES
-	(1, 'CampanarioAbajo', 'Llave dorada', NULL, 'Esta llave parece vieja, deberían poder abrir una de las antiguas puertas de este lugar', 'llaveDorada.png', 0, 1, 1, 0, 0, 0, 0),
+	(1, 'Dormitorio', 'Llave dorada', NULL, 'Esta llave parece vieja, deberían poder abrir una de las antiguas puertas de este lugar', 'llaveDorada.png', 0, 1, 1, 0, 0, 0, 0),
 	(2, 'Dormitorio', 'Rosa roja', NULL, 'Una bonita rosa, es como si hubiera estado aquí mucho tiempo, pero no parece haberse marchitado', 'rosa.png', 1, 1, 1, 0, 0, 0, 0),
-	(3, 'Despacho', 'Aguja minutero', NULL, 'Un Minutero, esto sin duda debe servir para desbloquear algo…', 'minutero.png', 1, 1, 1, 10, 25, 30, 40),
-	(4, 'Nave', 'Aguja segundero', NULL, 'El Segundero, todo reloj debe tener siempre dos manijas', 'segundero.png', 1, 1, 1, 0, 0, 0, 0),
-	(5, 'Cripta', 'Explosivo', NULL, '¿Esto es una bomba? Estaré loco pero si uso esto, fijo salgo de aquí, vivo o muerto...', 'explosivo.png', 1, 1, 1, 0, 0, 0, 0),
-	(6, 'Despacho', 'Maquina de humo', NULL, 'Una maquina de humo.', 'maquinaHumo.png', 1, 1, 1, 0, 0, 0, 0),
-	(7, 'AlmacenCajaAbierta', 'Llave plateada', NULL, 'Llave plateada casi intacta. Tiene un estilo antiguo particular pero parece moderna.', 'llavePlateada.png', 1, 1, 1, 0, 0, 0, 0),
-	(8, 'ConfesionarioCerrado', 'PuertaConfesionario', NULL, 'Está cerrada.', '\r\n', 1, 0, 0, 0, 0, 0, 0),
+	(3, 'Dormitorio', 'Aguja minutero', NULL, 'Un Minutero, esto sin duda debe servir para desbloquear algo…', 'minutero.png', 1, 1, 1, 10, 25, 30, 40),
+	(4, 'Dormitorio', 'Aguja segundero', NULL, 'El Segundero, todo reloj debe tener siempre dos manijas', 'segundero.png', 1, 1, 1, 0, 0, 0, 0),
+	(5, 'Dormitorio', 'Explosivo', NULL, '¿Esto es una bomba? Estaré loco pero si uso esto, fijo salgo de aquí, vivo o muerto...', 'explosivo.png', 1, 1, 1, 0, 0, 0, 0),
+	(6, 'Dormitorio', 'Maquina de humo', NULL, 'Una maquina de humo.', 'maquinaHumo.png', 1, 1, 1, 0, 0, 0, 0),
+	(7, 'Dormitorio', 'Llave plateada', NULL, 'Llave plateada casi intacta. Tiene un estilo antiguo particular pero parece moderna.', 'llavePlateada.png', 1, 1, 1, 0, 0, 0, 0),
+	(8, 'Dormitorio', 'PuertaConfesionario', NULL, 'Está cerrada.', '\r\n', 1, 0, 0, 0, 0, 0, 0),
 	(9, 'Dormitorio', 'JudasCama', 9, 'Qué extraño muñeco, ¿qué podría hacer aquí?', 'judasCama.png', 1, 0, 1, 0, 0, 15, 20),
-	(10, 'CampanarioAbajo', 'Nota', NULL, 'Una nota vieja. Creo que es sobre una reunión de la secta a esta hora, no dice una fecha específica, pero estoy seguro que debe ser en este lugar.', 'nota.png', 1, 1, 0, 0, 0, 0, 0),
-	(11, 'Cripta', 'Periodico', NULL, 'Vaya, un periodico ¿Que dira?', 'periodico.png', 1, 1, 0, 0, 0, 0, 0),
-	(12, 'CampanarioAbajo', 'CuerdaAbajo', NULL, 'Creo que deberia mirar a donde lleva esta cuerda.', 'cuerdaAbajo.png', 1, 0, 1, 0, 0, 0, 0),
-	(13, 'CampanarioArriba', 'CuerdaArriba', 1, 'Creo que deberia mirar a donde lleva esta cuerda.', 'cuerdaArriba.png', 1, 0, 1, 0, 0, 0, 0),
-	(14, 'CampanarioAbajo', 'CuerdaSuelo', NULL, 'Creo que no me servirá de nada', 'cuerdaSuelo.png', 0, 0, 1, 0, 0, 0, 0);
+	(10, 'Dormitorio', 'Nota', NULL, 'Una nota vieja. Creo que es sobre una reunión de la secta a esta hora, no dice una fecha específica, pero estoy seguro que debe ser en este lugar.', 'nota.png', 1, 1, 0, 0, 0, 0, 0),
+	(11, 'Dormitorio', 'Periodico', NULL, 'Vaya, un periodico ¿Que dira?', 'periodico.png', 1, 1, 0, 0, 0, 0, 0),
+	(12, 'Dormitorio', 'CuerdaAbajo', NULL, 'Creo que deberia mirar a donde lleva esta cuerda.', 'cuerdaAbajo.png', 1, 0, 1, 0, 0, 0, 0),
+	(13, 'Dormitorio', 'CuerdaArriba', 1, 'Creo que deberia mirar a donde lleva esta cuerda.', 'cuerdaArriba.png', 1, 0, 1, 0, 0, 0, 0),
+	(14, 'Dormitorio', 'CuerdaSuelo', NULL, 'Creo que no me servirá de nada', 'cuerdaSuelo.png', 0, 0, 1, 0, 0, 0, 0);
 
 -- Dumping structure for table bilboskpdb.partidafisica
 CREATE TABLE IF NOT EXISTS `partidafisica` (

@@ -14,9 +14,9 @@ import javax.servlet.http.HttpSession;
 import control.BilboSKP;
 
 public class PartidaOnline extends Partida {
-	private static final String PARTIDA_ORGANIZANDO = "Organizando";
-	private static final String PARTIDA_EN_CURSO = "En Curso";
-	private static final String PARTIDA_FINALIZANDO = "Finalizando";
+	public static final String PARTIDA_ORGANIZANDO = "Organizando";
+	public static final String PARTIDA_EN_CURSO = "En Curso";
+	public static final String PARTIDA_FINALIZANDO = "Finalizando";
 	private int visibleRanking;
 	private String estado;
 	private int codInvitacion;
@@ -27,6 +27,7 @@ public class PartidaOnline extends Partida {
 	int segundosTranscurridos = 0;
 	int segundosObjetivo = 0;
 	private static HashMap<Integer, PartidaOnline> partidasOrganizando = new HashMap<Integer, PartidaOnline>();
+	private Vector<Chat> lineasChat;
 
 	// el sistema usara este constructor para el inicio de una nueva partida
 	public PartidaOnline(Sala sala, Suscriptor suscriptorAnfitrion, HttpSession sesionAnfitrion, int numJugadores, String nombreGrupo) {
@@ -34,13 +35,13 @@ public class PartidaOnline extends Partida {
 		timer = new Timer();
 		this.vectorJugadores = new Vector<HttpSession>();
 		this.vectorpistasUtilizadas = new Vector<Pista>();
+		this.setLineasChat(new Vector<Chat>());
 		this.estado = PARTIDA_ORGANIZANDO;
 		this.codInvitacion = generarCodInvitacion();
-		this.inventario = new Inventario();
+		this.setInventario(new Inventario());
 
 		partidasOrganizando.put(this.codInvitacion, this);
 		agregarJugador(sesionAnfitrion);
-		System.out.println(vectorJugadores.size());
 		iniciarTimer();
 	}
 
@@ -55,10 +56,11 @@ public class PartidaOnline extends Partida {
 	// un cliente proporciona un codigo, y la clase PartidaOnline determinará si se
 	public static PartidaOnline usarCodigoInvitacion(int codProporcionado) {
 		// si se encuentra una partida organizando en el hashmap con el codProporcionado
-		PartidaOnline po = partidasOrganizando.get(codProporcionado);
-		return po;
+		return partidasOrganizando.get(codProporcionado);
 	}
-
+	public static PartidaOnline getPartidaOnline(int codInvitacion) {
+		return usarCodigoInvitacion(codInvitacion);
+	}
 	public String agregarJugador(HttpSession sesion) {
 	    //asegurarse que no se sobrepase el maximo de la sala
 	    if (vectorJugadores.size() < this.getSala().getJugadoresMax()) {
@@ -92,7 +94,7 @@ public class PartidaOnline extends Partida {
 		return invite;
 	}
 
-	public boolean iniciarPartida(HttpServletRequest requestAnfitrion) {
+	public boolean iniciarPartida() {
 		// asegurarse antes de iniciar, que los jugadores son más o igual al minimo
 		// requerido por la sala
 		if (vectorJugadores.size() >= this.getSala().getJugadoresMin()) {
@@ -104,9 +106,6 @@ public class PartidaOnline extends Partida {
 			this.fechaInicio = new Date();
 			//iniciar el timer
 			iniciarTimer();
-			// establecer el estado del cupón del anfitrion a en "en uso" para el cupón con
-			// la caducidad máx próxima
-			// mandar a todos los jugadores al escenario inicial correspondiente a la sala
 			System.out.println("Se ha iniciado una partida online");
 			return true;
 		}
@@ -114,7 +113,7 @@ public class PartidaOnline extends Partida {
 		return false;
 	}
 
-	public void finalizarPartida() throws Throwable {
+	public void finalizarPartida(){
 		// quitar la partida de la coleccion de partidas en organizando
 		partidasOrganizando.remove(codInvitacion);
 
@@ -145,8 +144,9 @@ public class PartidaOnline extends Partida {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
+			} catch (Throwable e) {
+				e.printStackTrace();
 			}
-			
 		}
 	}
 
@@ -210,15 +210,32 @@ public class PartidaOnline extends Partida {
 
 	public void iniciarTimer() {
 		setSegundosObjetivo();
+		timer.cancel();
+		timer = new Timer();
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				// Incrementa los segundos cada segundo
 				segundosTranscurridos++;
-				System.out.println("Segundos en organizando: " + segundosTranscurridos);
-				if (segundosTranscurridos >= segundosObjetivo || estado.equals(PARTIDA_FINALIZANDO)) {
+				switch (estado) {
+				case PARTIDA_ORGANIZANDO:
+					System.out.println("Partida organizándose: " + segundosTranscurridos);
+					break;
+				case PARTIDA_EN_CURSO:
+					System.out.println("Partida en curso: " + segundosTranscurridos);
+					break;
+
+				default:
+					break;
+				}
+				if (segundosTranscurridos>= segundosObjetivo && estado.equals(PARTIDA_ORGANIZANDO)) {
 					segundosTranscurridos = 0;
 					cancelarPartida(); // Ejecuta el método si se ha llegado al número variable de segundos
+					timer.cancel(); // Cancela el timer después de alcanzar el objetivo
+				}
+				if (segundosTranscurridos >= segundosObjetivo || estado.equals(PARTIDA_FINALIZANDO)) {
+					segundosTranscurridos = 0;
+					finalizarPartida(); // Ejecuta el método si se ha llegado al número variable de segundos
 					timer.cancel(); // Cancela el timer después de alcanzar el objetivo
 				}
 				//cada 5 segundos, este timer se asegura que la sesion del anfitrión esta activa, y si no lo está cancela la partida en curso
@@ -237,7 +254,6 @@ public class PartidaOnline extends Partida {
 						// tercer parámetro especifica el intervalo de tiempo entre cada ejecución del
 						// timer (en milisegundos)
 	}
-
 	private void setSegundosObjetivo() {
 		switch (this.estado) {
 		case PartidaOnline.PARTIDA_ORGANIZANDO:
@@ -268,8 +284,80 @@ public class PartidaOnline extends Partida {
 			}
 		}
 	}
-	
+	public static void cancelarPartida(int codInvitacion) {
+		PartidaOnline po = partidasOrganizando.get(codInvitacion);
+		if(po!=null) {
+			po.cancelarPartida();
+		}
+	}
 	public HttpSession getSessionJugadorAnfitrion() {
 		return vectorJugadores.get(0);
+	}
+
+	public Vector<Chat> getLineasChat() {
+		return lineasChat;
+	}
+
+	private void setLineasChat(Vector<Chat> lineasChat) {
+		this.lineasChat = lineasChat;
+		this.lineasChat.add(new Chat(new Jugador("Sistema", null),"Este es el chat de la partida, ¡comunícate con los demas jugadores!"));
+	}
+	public void addChat(Jugador jugador, String texto) {
+		lineasChat.add(new Chat(jugador, texto));
+	}
+
+	public Inventario getInventario() {
+		return inventario;
+	}
+
+	public void setInventario(Inventario inventario) {
+		this.inventario = inventario;
+	}
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public Vector<HttpSession> getVectorJugadores() {
+		return vectorJugadores;
+	}
+
+	public void setVectorJugadores(Vector<HttpSession> vectorJugadores) {
+		this.vectorJugadores = vectorJugadores;
+	}
+
+	public Vector<Pista> getVectorpistasUtilizadas() {
+		return vectorpistasUtilizadas;
+	}
+
+	public void setVectorpistasUtilizadas(Vector<Pista> vectorpistasUtilizadas) {
+		this.vectorpistasUtilizadas = vectorpistasUtilizadas;
+	}
+
+	public Timer getTimer() {
+		return timer;
+	}
+
+	public void setTimer(Timer timer) {
+		this.timer = timer;
+	}
+
+	public int getSegundosTranscurridos() {
+		return segundosTranscurridos;
+	}
+
+	public void setSegundosTranscurridos(int segundosTranscurridos) {
+		this.segundosTranscurridos = segundosTranscurridos;
+	}
+
+	public int getSegundosObjetivo() {
+		return segundosObjetivo;
+	}
+
+	public void setSegundosObjetivo(int segundosObjetivo) {
+		this.segundosObjetivo = segundosObjetivo;
 	}
 }

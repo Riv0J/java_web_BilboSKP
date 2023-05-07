@@ -54,9 +54,10 @@ public class ServletOrganizar extends HttpServlet {
 						request.setAttribute("partidaOnline", partidaOnline);
 						request.getRequestDispatcher("index.jsp?sec=organizar&codInvitacion="+codInvitacion).forward(request, response);
 					} else {
-						request.getRequestDispatcher("index.jsp?sec=verSala&idSala="+idSala).forward(request, response);
+						request.getRequestDispatcher("index.jsp?sec=tienda").forward(request, response);
 					}
 				} catch (Throwable e) {
+					e.printStackTrace();
 					
 				}
 			}

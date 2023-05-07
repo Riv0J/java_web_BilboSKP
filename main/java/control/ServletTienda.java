@@ -34,7 +34,7 @@ public class ServletTienda extends HttpServlet {
 		String accion = request.getParameter("tienda");
 		int cantidadComprar = Integer.parseInt(request.getParameter(""));
 		if (accion == null) {
-			accion = "";
+			accion = "comprar";
 		}
 		switch (accion) {
 		case "comprar":

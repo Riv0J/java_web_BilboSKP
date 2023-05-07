@@ -89,6 +89,7 @@ align-items: center;
 
 .navbar{
     display: flex;
+    gap: 2em;
 }
 
 .navbar a{
@@ -99,23 +100,19 @@ align-items: center;
     margin: 0px 30px;
     transition: all 0.50 ease;
 }
-
 .navbar a:hover{
     color: var(--main-color);
 }
-
-
 .navbar a:onclick{
     color: var(--main-color);
 }
-
 .navbar .active{
     color: var(--main-color);
 }
-
 .main{
     display: flex;
     align-items: center;
+    gap: 1em;
 }
 
 .main a{
@@ -259,6 +256,9 @@ header button {
         padding: 5px 0;
         margin: 0px 15px;
     }
+    .navbar{
+    	gap: 0.5em;
+    }
     
 }
 
@@ -376,6 +376,9 @@ header button {
 	}
 	#caja_logo img {
 		width: 170%;
+	}
+	.main {
+		gap:0;
 	}
 }
 

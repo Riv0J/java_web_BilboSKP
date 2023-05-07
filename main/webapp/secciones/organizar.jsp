@@ -1,5 +1,5 @@
 <%@ page
-	import="java.util.Vector, java.util.HashMap, java.util.Map, java.util.Locale,java.util.Date, java.time.LocalDate, java.io.File, java.text.Normalizer, 
+	import="java.util.Vector, java.util.HashMap, java.util.Map, java.util.Locale,java.util.Date, java.time.LocalDate, 
 	model.Sala, model.SalaOnline, control.BilboSKP, model.Invitado, model.Anfitrion, model.Jugador, view.StringHelper, view.DateHelper, view.Icon, model.PartidaOnline, model.Suscriptor"%>
 <%
 PartidaOnline partidaOnline = (PartidaOnline) request.getAttribute("partidaOnline");
@@ -181,13 +181,13 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaPartida.getTematic
 		align-items: center;
 		justify-content: center;
 	}
-	#caja_enlace{
-		white-space: nowrap;
-	    text-overflow: ellipsis;
-	    width: 60%;
-	    overflow: hidden;
-	    font-size: 0.7em;
-	}
+#caja_enlace{
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: 60%;
+	overflow: hidden;
+	font-size: 0.7em;
+}
 #contenedor_boton a{
 	width: 35%;
 	display: flex;
@@ -196,6 +196,7 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaPartida.getTematic
 #contenedor_boton button{
 	font-size: 1.45em;
 	width: 100%;
+	padding: 4%;
 }
 #contenedor_boton i{
 	font-size: 2em;
