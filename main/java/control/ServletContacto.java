@@ -15,7 +15,7 @@ public class ServletContacto extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		System.out.println("Doget tienda");
+		System.out.println("Doget contacto");
 		String urlPrevia = "./Contacto";
 		System.out.println("ServletContacto urlprevia establecida = " + urlPrevia);
 		HttpSession sesion = request.getSession();
