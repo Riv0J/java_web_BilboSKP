@@ -2,6 +2,7 @@
 main {
 	background-color: #111010;
 	color: #ffffff;
+	font-size:1.2em;
 }
 section{
 	display: flex;
@@ -11,8 +12,13 @@ section{
 	background: linear-gradient(0deg, 
 	rgb(103, 17, 17,1) 0%,
 	rgb(0, 0, 0, 1) 100%
-	);
-	
+	);	
+}
+#sec2{
+	background: linear-gradient(0deg, 
+	rgb(0, 0, 0, 1) 0%
+	rgb(103, 17, 17,1) 100%,
+	);	
 }
 .cajatexto1 {
 	/*background-image: url("../img_web/texturas/laberinto.jpg");*/
@@ -25,41 +31,49 @@ iframe{
 	width: 90%;
 	height: 150px;
 }
-.logo{
+.brand{
 	text-align: left;
 	border-bottom: 2px solid #111010 ;
 	margin-bottom: 5%;
 	padding-bottom: 2%;
 }
-.logo img{
+.brand img{
 	width: 25%;
 	height: 50px;
-	
 }
 .caja_info {
 	display: flex;
 	flex-direction: row;
+	align-items:center;
+}
+.caja_info img {
+	width: 8%;
+	margin-right: 3%;
+	margin-bottom: 3%;
 }
 
+.FAQ{
+	margin-top:5%;
+	margin-bottom:5%;
+}
+.faq{
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+}
+.faq img{
+	width:7%;
+	margin-left:1.5%;
+}
 .social_media{
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: right;
+	margin-top:3%;
 }
 .social_media img{
-	width: 8%;
-}
-.social_media img:hover{
-	background-color: #C60C02;
-}
-.RS {
-	display: flex;
-	flex-direction: row;
-}
-
-.RS p {
-	margin-left: 5%;
+	width: 6%;
 }
 .contacto {
 	width:50%;
@@ -80,6 +94,10 @@ iframe{
 	color: #000000;
 	padding:3%;
 }
+#formulario p{
+	margin-top:3%;
+	margin-bottom:5%;
+}
 /*FORMUARIO*/
 form{
 	background-color: #e0dfdf;
@@ -89,7 +107,8 @@ form{
 	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
 }
 .box{
-	width: 50%;
+	display:flex;
+	flex-direction:column;
 }
 .box_form1{
 	display: flex;
@@ -108,11 +127,14 @@ form{
 	display: flex;
 	flex-direction: row;
 }
+.box label{
+	width:50%;
+}
 .box input{
+	width:95%;
 	border-radius: 3em;
-	height: 30px;
+	height: 35px;
 	border-style:none;
-	width: 90%;
 	padding: 2%;
 }
 .cajagrande {
@@ -128,17 +150,10 @@ button:hover {
 	color: #C60C02;
 	border: 3px solid #C60C02;
 }
-
-.caja_info img {
-	width: 35px;
-	height: 35px;
-	margin-right: 3%;
-	margin-top: 1%;
-}
-
 .container {
 	width: 600px;
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+	margin-top:5%;
 }
 
 #question1 p,
@@ -175,8 +190,6 @@ button:hover {
 	padding: 10px;
 }
 
-
-
 button {
 	color: white;
 	height: 35px;
@@ -189,7 +202,7 @@ button {
 	border: #C60C02;
 	padding: 1%;
 	transition: all 0.5s;
-	margin-top: 2%;
+	margin-top: 4%;
 }
 
 button:hover {
@@ -235,7 +248,7 @@ button:hover {
 		background-color: #ffffff;
 		border-style: none;
 	}
-
+}
 @media screen and (max-width:600px) {
 	.logo{
 		visibility: hidden;
@@ -272,5 +285,4 @@ button:hover {
 		background-color: #ffffff;
 		border-style: none;
 	}
-
 }

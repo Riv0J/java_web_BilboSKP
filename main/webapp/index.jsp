@@ -56,7 +56,7 @@ String tituloPagina = seccion.substring(0, 1).toUpperCase() + seccion.substring(
 			<a href="./ranking"><li>Ranking</li></a>
 			<a href="./index.jsp?sec=tienda"><li>Tienda</li></a>
 			<!--  <a href="./salas"><li>Unirse a partida</li></a>-->
-			<a href="./index.jsp?sec=contacto+FAQES"><li>Contacto</li></a>
+			<a href="./index.jsp?sec=contacto"><li>Contacto</li></a>
 		</ul>
 		<div class="main">
 			<% if(sus instanceof Suscriptor){ Suscriptor suscriptor = (Suscriptor) sus; %>
