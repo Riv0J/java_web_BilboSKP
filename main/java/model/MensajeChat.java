@@ -1,7 +1,7 @@
 package model;
 
-public class Chat {
-	public Chat(Jugador jugador, String texto) {
+public class MensajeChat {
+	public MensajeChat(Jugador jugador, String texto) {
 		super();
 		this.jugador = jugador;
 		this.texto = texto;

@@ -99,10 +99,10 @@ public class ServletRanking extends HttpServlet {
 
 			// Enviar la respuesta al usuario
 			request.getRequestDispatcher("index.jsp?sec=ranking&sala=" + idSala).forward(request, response);
-
+		
 		} catch (Throwable e) {
 			e.printStackTrace();
-			System.out.println("Error conexion ranking");
+			System.out.println("Error servlet ranking");
 		}
 	}
 }

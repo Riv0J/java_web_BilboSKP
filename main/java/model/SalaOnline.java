@@ -1,6 +1,7 @@
 package model;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import control.BilboSKP;
 
@@ -52,5 +53,12 @@ public class SalaOnline extends Sala{
 	}
 	public void setMapaEscenarios(HashMap<String,Escenario> mapaEscenarios) {
 		this.mapaEscenarios = mapaEscenarios;
+		/*System.out.println("Escenarios establecidos: ");
+		for(Map.Entry<String, Escenario> par :mapaEscenarios.entrySet()) {
+			System.out.println(par.getKey());
+		}*/
+	}
+	public Escenario getEscenarioPorNombre(String nombreEscenario) {
+		return mapaEscenarios.get(nombreEscenario);
 	}
 }

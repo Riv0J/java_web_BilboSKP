@@ -1,3 +1,4 @@
+<%@page import="jdk.internal.misc.FileSystemOption"%>
 <%@ page
 	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.io.File, java.text.Normalizer, 
 	model.Reserva, model.Sala,  view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date, java.util.Vector "%>  
@@ -56,6 +57,10 @@
                              <p><%=reserva.getNumJugadores()%> jugadores</p>
                         </div>
                     </div>
+                    
+                  
+                    
+                  
                     <div class="info">
                        <p><%=reserva.getIdReserva()%></p>
                        <p><%=reserva.getFechaHora() %></p>

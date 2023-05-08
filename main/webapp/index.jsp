@@ -12,8 +12,8 @@ if(mostrarLogin instanceof String){
 	mostrarVentanaLogin = true;
 }
 if(mensaje instanceof Mensaje){
-	session.setAttribute("mensaje", null);
 	mostrarMensaje = (Mensaje) mensaje;
+	session.setAttribute("mensaje", null);
 }
 
 if (seccion == null) {
