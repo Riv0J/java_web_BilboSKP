@@ -51,7 +51,7 @@ public class ServletTienda extends HttpServlet {
 						BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
 						System.out.println("1 cupon regular comprado");
 					}
-					Mensaje mensaje = new Mensaje("Has comprado "+cantidadComprar+" cupones", Mensaje.MENSAJE_EXITO);
+					Mensaje mensaje = new Mensaje("Has comprado "+cantidadComprar+" cupon/es", Mensaje.MENSAJE_EXITO);
 					sesion.setAttribute("mensaje", mensaje);
 				} catch (Throwable e) {
 					System.out.println("1 cupon regular NO comprado");
@@ -68,30 +68,29 @@ public class ServletTienda extends HttpServlet {
 		case "regalar":
 			// comprobar si se está suscrito
 			if (sus != null) {
-				// pedir datos del suscriptor del sus a regalar(susReg) (alias+correo)
+				// pedir datos del suscriptor de sus a regalar(susReg) (correo)
 				String susEmail = request.getParameter("email");
 				int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-				// Suscriptor susReg =BilboSKP.comprobarSuscriptor(susAlias, susEmail);
 				// comprobar si susReg existe
 				try {
-					Suscriptor susReg = BilboSKP.comprobarSuscriptor(susEmail);
-					System.out.println("suscriptor existe");
-				} catch (Throwable e) {
-					System.out.println("suscriptor no existe");
-					e.printStackTrace();
-				}
+					int susReg = BilboSKP.comprobarSuscriptor(susEmail);
+					System.out.println("suscriptor existe "+ susReg);
+				
 				// pagar(¿xD?)
 				// enviar cupones a susReg
-				Suscriptor susReg = null;
-				int susRegID = susReg.getIdSuscriptor();
+				//Suscriptor susReg = null;
+				//int susRegID = susReg.getIdSuscriptor();
 				try {
 					for (int i = 0; cantidad > i; i++) {
 
-						BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susRegID);
+						BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susReg);
 						System.out.println("Se envió el cupon con exito");
-						Mensaje mensaje = new Mensaje("Has regalado "+cantidad+" cupones al suscriptor con email "+susEmail+"", Mensaje.MENSAJE_EXITO);
+						Mensaje mensaje = new Mensaje("Has regalado "+cantidad+" cupones al suscriptor al email "+susEmail+"", Mensaje.MENSAJE_EXITO);
 
-					}
+					}} catch (Throwable e) {
+					System.out.println("suscriptor no existe");
+					e.printStackTrace();
+				}
 				} catch (Throwable e) {
 					System.out.println("No se pudo enviar el cupon");
 					e.printStackTrace();

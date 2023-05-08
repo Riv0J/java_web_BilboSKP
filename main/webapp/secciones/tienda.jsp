@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="model.Cupon"%>
+	pageEncoding="ISO-8859-1" import="model.Cupon, model.Suscriptor" %>
 
 <div class="background">
 	<link rel="stylesheet" href="./css/tienda.css">
