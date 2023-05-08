@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import model.Cupon;
 import model.Suscriptor;
+import view.Mensaje;
 
 /**
  * Servlet implementation class ServletTienda
@@ -31,8 +32,11 @@ public class ServletTienda extends HttpServlet {
 
 		Suscriptor sus = (Suscriptor) sesion.getAttribute("suscriptor");
 
-		String accion = request.getParameter("tienda");
-		int cantidadComprar = Integer.parseInt(request.getParameter(""));
+		String accion = request.getParameter("accion");
+		System.out.println(accion);
+		int cantidadComprar = Integer.parseInt(request.getParameter("cantidad"));
+		System.out.println(cantidadComprar);
+
 		if (accion == null) {
 			accion = "comprar";
 		}
@@ -43,8 +47,12 @@ public class ServletTienda extends HttpServlet {
 				// los cupones comprados irán a la cuenta de sus
 				int susID = sus.getIdSuscriptor();
 				try {
-					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
-					System.out.println("1 cupon regular comprado");
+					for (int i = 0; cantidadComprar > i; i++) {
+						BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susID);
+						System.out.println("1 cupon regular comprado");
+					}
+					Mensaje mensaje = new Mensaje("Has comprado "+cantidadComprar+" cupon/es", Mensaje.MENSAJE_EXITO);
+					sesion.setAttribute("mensaje", mensaje);
 				} catch (Throwable e) {
 					System.out.println("1 cupon regular NO comprado");
 					e.printStackTrace();
@@ -60,25 +68,29 @@ public class ServletTienda extends HttpServlet {
 		case "regalar":
 			// comprobar si se está suscrito
 			if (sus != null) {
-				// pedir datos del suscriptor del sus a regalar(susReg) (alias+correo)
+				// pedir datos del suscriptor de sus a regalar(susReg) (correo)
 				String susEmail = request.getParameter("email");
 				int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-				// Suscriptor susReg =BilboSKP.comprobarSuscriptor(susAlias, susEmail);
 				// comprobar si susReg existe
 				try {
-					Suscriptor susReg = BilboSKP.comprobarSuscriptor(susEmail);
-					System.out.println("suscriptor existe");
-				} catch (Throwable e) {
+					int susReg = BilboSKP.comprobarSuscriptor(susEmail);
+					System.out.println("suscriptor existe "+ susReg);
+				
+				// pagar(¿xD?)
+				// enviar cupones a susReg
+				//Suscriptor susReg = null;
+				//int susRegID = susReg.getIdSuscriptor();
+				try {
+					for (int i = 0; cantidad > i; i++) {
+
+						BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susReg);
+						System.out.println("Se envió el cupon con exito");
+						Mensaje mensaje = new Mensaje("Has regalado "+cantidad+" cupones al suscriptor al email "+susEmail+"", Mensaje.MENSAJE_EXITO);
+
+					}} catch (Throwable e) {
 					System.out.println("suscriptor no existe");
 					e.printStackTrace();
 				}
-				// pagar(¿xD?)
-				// enviar cupones a susReg
-				Suscriptor susReg = null;
-				int susRegID = susReg.getIdSuscriptor();
-				try {
-					BilboSKP.otorgarCupon(Cupon.CUPON_REGULAR, susRegID);
-					System.out.println("Se envió el cupon con exito");
 				} catch (Throwable e) {
 					System.out.println("No se pudo enviar el cupon");
 					e.printStackTrace();
