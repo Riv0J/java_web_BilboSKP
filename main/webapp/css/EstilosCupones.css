@@ -15,7 +15,7 @@ body {
 	display: flex;
 	flex-wrap: wrap;
 	width: 92%;
-	padding-bottom: 2%;
+	padding-bottom: 1%;
 }
 
 #TextosEncabezado {
@@ -62,6 +62,9 @@ h1 {
 	padding: 1%;
 	margin-top: 6%;
 	font-size: 120%;
+	border: 3px solid #C60C02;
+	border-radius: 28px 28px 28px 28px;
+	padding-bottom:5%;
 }
 
 footer {
@@ -71,6 +74,9 @@ footer {
 
 .CodigoCupon {
 	font-size: 160%;
+}
+#botonRembolso{
+	margin-top:6%;
 }
 
 @media ( max-width : 1000px) {
@@ -98,6 +104,8 @@ footer {
 		margin-top: 6%;
 		font-size: 143%;
 		width: 86%;
+		border: 3px solid #C60C02;
+		border-radius: 28px 28px 28px 28px;
 	}
 	#cajaSubseccion {
 		width: 157%;
@@ -158,4 +166,8 @@ footer {
 		padding-top: 4%;
 		text-align: center;
 	}
+	
+#botonRembolso{
+    margin-left: 10%;
+}
 }

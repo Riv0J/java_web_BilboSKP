@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
@@ -108,7 +109,7 @@ public class BilboSKP extends DBC {
 				// obtener los campos de cada columna para esta fila
 				int idSala = resultado.getInt("idSala");
 				String nombre = resultado.getString("nombre");
-				System.out.println(idSala+" > "+nombre);
+				System.out.println(idSala + " > " + nombre);
 				String dificultad = resultado.getString("dificultad");
 				String tematica = resultado.getString("tematica");
 				String descripcion = resultado.getString("descripcion");
@@ -137,7 +138,8 @@ public class BilboSKP extends DBC {
 
 	// obtener el escenario de inicio de una sala concreta @Rivo
 	public static Escenario getEscenarioInicio(int idSala) throws Throwable {
-		String sentenciaSQL = "select * from escenario e, escenarios_inicio s where e.idSala="+idSala+" and e.idSala = s.idSala and e.nombreEscenario = s.nombreEscenario;";
+		String sentenciaSQL = "select * from escenario e, escenarios_inicio s where e.idSala=" + idSala
+				+ " and e.idSala = s.idSala and e.nombreEscenario = s.nombreEscenario;";
 		BilboSKP conexion = new BilboSKP();
 		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
 		if (resultado.next()) {
@@ -161,14 +163,15 @@ public class BilboSKP extends DBC {
 				String nombreEscenario = resultado.getString("nombreEscenario");
 				String descripcion = resultado.getString("descripcion");
 				String imagen = resultado.getString("imagen");
-				//obtener las flechas de este escenario
-				Vector<Flecha> vectorFlechas = getFlechas(nombreEscenario);
-				//TODO obtener los objetos de este escenario
+				// obtener las flechas de este escenario
+				Vector<Flecha> vectorFlechas = cargarFlechasEscenario(nombreEscenario);
+				// TODO obtener los objetos de este escenario
 				Vector<Objeto> vectorObjetos = null;
-				//TODO obtener los puzzles de este escenario
+				// TODO obtener los puzzles de este escenario
 				Vector<Puzzle> vectorPuzzle = null;
 				System.out.println(">> Obtenido escenario de sala " + idSalaOnline + ": " + nombreEscenario);
-				Escenario escenario = new Escenario(nombreEscenario, imagen, descripcion, vectorFlechas, vectorObjetos, vectorPuzzle);
+				Escenario escenario = new Escenario(nombreEscenario, imagen, descripcion, vectorFlechas, vectorObjetos,
+						vectorPuzzle);
 				mapaEscenarios.put(nombreEscenario, escenario);
 			}
 			return mapaEscenarios;
@@ -180,7 +183,7 @@ public class BilboSKP extends DBC {
 		return null;
 	}
 	//obtener las flechas de un escenario concreto @Rivo
-	public static Vector<Flecha> getFlechas(String nombreEscenario) throws Throwable {
+	public static Vector<Flecha> cargarFlechasEscenario(String nombreEscenario) throws Throwable {
 		Vector<Flecha> vectorFlechas= new Vector<Flecha>();
 		try {
 			String sentenciaSQL = "select * from escenario_flecha where nombreEscenario ='" + nombreEscenario + "';";
@@ -193,8 +196,10 @@ public class BilboSKP extends DBC {
 				int dimensionY = resultado.getInt("dimensionX");
 				int posicionX = resultado.getInt("posicionX");
 				int posicionY = resultado.getInt("posicionY");
-				System.out.println(">>> Obtenido flecha de escenario " + nombreEscenario + " hacia " + nombreEscenarioDestino);
-				Flecha flecha = new Flecha(nombreEscenarioDestino, imagen, dimensionX, dimensionY, posicionX, posicionY);
+				System.out.println(
+						">>> Obtenido flecha de escenario " + nombreEscenario + " hacia " + nombreEscenarioDestino);
+				Flecha flecha = new Flecha(nombreEscenarioDestino, imagen, dimensionX, dimensionY, posicionX,
+						posicionY);
 				vectorFlechas.add(flecha);
 			}
 			return vectorFlechas;
@@ -205,6 +210,7 @@ public class BilboSKP extends DBC {
 		}
 		return null;
 	}
+
 	// actualizar las salas en una coleccion clave-valor en el hashmap de la clase
 	// @Rivo
 	public static boolean cargarSalasOnline() throws Throwable {
@@ -477,21 +483,21 @@ public class BilboSKP extends DBC {
 		}
 	}
 
-	// comprobar si un suscriptor existe mediante su alias y correo
-	public static Suscriptor comprobarSuscriptor(String email) throws Throwable {
+	// comprobar si un suscriptor existe mediante su correo @Urko
+	public static int comprobarSuscriptor(String email) throws Throwable {
 
 		// sentencia sql que compruebe si existe
-		String sentenciaSQL = "Select * from 'suscriptor' where email='" + email + "';";
+		String sentenciaSQL = "Select idSuscriptor from suscriptor where email='" + email + "';";
 		// hacer conexion
 		BilboSKP conexion;
 		conexion = new BilboSKP();
-		Suscriptor sus = (Suscriptor) conexion.SQLQuery(sentenciaSQL);
-		// como el resultado tiene que ser unico podemos sacar el id del suscriptor
-		if (sus != null) {
-			return sus;
-		} else {
-			System.out.println("suscriptor no existe");
-			return null;
+		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
+		if (resultado.next()) {
+	        int idSuscriptor = resultado.getInt("idSuscriptor");
+	        return idSuscriptor;
+	    } else {
+	        System.out.println("suscriptor no existe");
+	        return 0; 
 		}
 	}
 
@@ -682,11 +688,12 @@ public class BilboSKP extends DBC {
 
 	// Conseguir los cupones de un suscriptor por su id public static @Inigo
 	public static Vector<Cupon> getCuponesSuscriptor(int idSuscriptor) throws Throwable {
-		//Creamos cupones
+		// Creamos cupones
 		Vector<Cupon> vectorCupones = new Vector<Cupon>();
-		//Hacemos la sentencia sql, donde cogemos todos los datos de los cupones que tienen la idSuscriptor almacenada en sesion 
+		// Hacemos la sentencia sql, donde cogemos todos los datos de los cupones que
+		// tienen la idSuscriptor almacenada en sesion
 		String sentenciaSQL = "select * from cupon where idSuscriptor = " + idSuscriptor + " order by fechaCaducidad;";
-		//Hacemos una nueva conexion
+		// Hacemos una nueva conexion
 		BilboSKP conexion = new BilboSKP();
 		// se hace una consulta sql con la conexion y se guarda en el resultset
 		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
@@ -697,11 +704,12 @@ public class BilboSKP extends DBC {
 			Date fechaCaducidad = resultado.getDate("fechaCaducidad");
 			String Estado = resultado.getString("estado");
 			int reembolsable = resultado.getInt("reembolsable");
-			//Comprobamos que funciona
+			// Comprobamos que funciona
 			System.out.println(idCupon);
-			//Declaramos el nuevo cupon que llenamos con las campos anteriormente declarados
+			// Declaramos el nuevo cupon que llenamos con las campos anteriormente
+			// declarados
 			Cupon cupon = new Cupon(idCupon, Estado, fechaCaducidad, reembolsable);
-			//Metemos el cupon en el vectorCupones
+			// Metemos el cupon en el vectorCupones
 			vectorCupones.add(cupon);
 		}
 		return vectorCupones;
@@ -884,11 +892,17 @@ public class BilboSKP extends DBC {
 		}
 
 	}
+
 	// Eliminar un cupon de la BD
 	public static void eliminarCupon(int idCupon) throws Throwable {
-		String sql = "DELETE * from cupon WHERE id=" + idCupon + ";";
+		try {
+			String sentenciaSQL = "DELETE * from cupon WHERE id=" + idCupon + ";";
+			BilboSKP conexion = new BilboSKP();
+			System.out.println(sentenciaSQL);
+		} catch (Exception e) {
+			System.out.println("Error eliminando cupon");
+		}
 	}
-
 
 	// dado un suscriptor, actualizar los datos en la BD @Torni
 	public static Suscriptor actualizarSuscripcion(Suscriptor suscriptor) throws Throwable {
@@ -964,8 +978,11 @@ public class BilboSKP extends DBC {
 
 	// obtener las reservas de un suscriptor de la bd @Paula
 	public static Vector<Reserva> obtenerReserva(int idSuscriptor) throws Throwable {
+		//creamos un vector de reservas 
 		Vector<Reserva> reservas = new Vector<Reserva>();
+		//setencia
 		String sentenciaSQL = "SELECT * FROM reserva WHERE idSuscriptor=" + idSuscriptor + " order by fechaHora ";
+		//Conexion
 		BilboSKP conexion = new BilboSKP();
 		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
 		// por cada fila, crear un objeto reserva
@@ -979,6 +996,7 @@ public class BilboSKP extends DBC {
 			Reserva reserva = new Reserva(idReserva, idSalaFisica, numJugadores, numJugadores, fechaHora, estado);
 			reservas.add(reserva);
 		}
+		/*
 		if (reservas.size() > 0) {
 			for (int i = 0; i < reservas.size(); i++) {
 				Reserva r = reservas.get(i);
@@ -987,7 +1005,7 @@ public class BilboSKP extends DBC {
 			return reservas;
 		} else {
 
-		}
+		}*/
 		return reservas;
 	}
 

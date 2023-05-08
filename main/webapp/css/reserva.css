@@ -64,15 +64,16 @@
     margin-left: 5%;
     align-items: center;
 }
-.info input{
+.info p{
     text-align: center;
     border-style: none;
+    margin-right:49%;
 }
 .cajita{
     display: flex;
     flex-direction: row;
 }
-.cajita input{
+.cajita p{
 	display:flex;
     border-style: none;
     margin-bottom: 3%;
@@ -80,7 +81,7 @@
     margin-left: 5%;
 }
 .cajita label{
-    width: 160%;
+    width: 30%;
     border-style: none;
     margin-bottom: 3%;
     margin-top: 3%;
@@ -100,4 +101,8 @@
     padding: 1%;
     transition: all 0.5s;
     cursor:pointer;
+}
+.subcaja4 input:hover{
+	background-color: #111010;
+	color: #C60C02;
 }

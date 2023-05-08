@@ -52,9 +52,18 @@ public class Reserva {
 	public void setFechaHora(Date fechaHora) {
 		this.fechaHora = fechaHora;
 	}
-	public int getEstado() {
-		return estado;
-	}
+	public String getEstado() {
+    	System.out.println("Entramos en el metodo");
+        if (estado == 0) {       	       
+        	String estado="Cancelada";
+        	System.out.println("Reserva cancelada");
+        	return estado;
+        } else {
+        	String estado="Confirmada";
+        	System.out.println("Reserva confirmada");
+        	return estado;
+        }
+    }
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}

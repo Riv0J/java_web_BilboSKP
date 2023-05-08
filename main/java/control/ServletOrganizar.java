@@ -49,7 +49,11 @@ public class ServletOrganizar extends HttpServlet {
 
 						System.out.println("Organizando nueva partida de sala "+ sala.getNombre());
 						System.out.println("Codigo de invitacion de esta partida "+ codInvitacion);
-						
+						//establecer la url a otorgar como url previa
+						String urlPrevia = "index.jsp?sec=organizar&codInvitacion="+codInvitacion;
+						System.out.println("ServletOrganizar urlprevia establecida = "+urlPrevia);
+						sesion.setAttribute("urlPrevia", urlPrevia);
+						//-------------------------------------------
 						sesion.setAttribute("jugador", new Anfitrion(suscriptorAnfitrion));
 						request.setAttribute("partidaOnline", partidaOnline);
 						request.getRequestDispatcher("index.jsp?sec=organizar&codInvitacion="+codInvitacion).forward(request, response);

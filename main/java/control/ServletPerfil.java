@@ -38,33 +38,42 @@ public class ServletPerfil extends HttpServlet {
 		Suscriptor sus = (Suscriptor) sesion.getAttribute("suscriptor");
 
 		switch (subseccion) {
+		//GUARDAR DATOS MODIFICADOS EN LA BD
 		case "gestionCuenta":
-			request.getRequestDispatcher("index.jsp?sec=perfil&sub=gestionCuenta").forward(request, response);
-			return;
-
-		// RESERVAS
-		case "reservas":
-			// obtener todas las reservas del suscriptor
 			try {
-				Vector<Reserva> reservas = BilboSKP.obtenerReserva(12);
-				System.out.println("Necesito ayuda 1");
-				request.setAttribute("reservas", reservas);
-				System.out.println("rivo, AYUUUUUDAAAaaaaaaAaaaAaAaAa");
-				request.getRequestDispatcher("index.jsp?sec=perfil&sub=reserva").forward(request, response);
 				
-				//ELIMINAR UNA RESERVA
-				if (request.getParameter("borrar") != null) {
-					int idReserva = Integer.parseInt(request.getParameter("borrar"));
-					BilboSKP.eliminarReserva(idReserva);
-					Mensaje m = new Mensaje("Tu reserva ha sido eliminda", Mensaje.MENSAJE_EXITO);
-					request.setAttribute("mensaje", m);
-				}
+				
+				
+				
+				request.getRequestDispatcher("index.jsp?sec=perfil&sub=gestionCuenta").forward(request, response);
 				
 			} catch (Throwable e1) {
-				System.out.println("Error al mostrar cupones aiuda");
+				
 			}
 			
-			request.getRequestDispatcher("index.jsp?sec=perfil?sub=reserva");
+		
+			
+			
+			
+			
+			
+			break;
+
+		// RESERVAS
+		case "reserva":
+			// obtener todas las reservas del suscriptor
+			try {
+				Vector<Reserva> reservas = BilboSKP.obtenerReserva(sus.getIdSuscriptor());
+				request.setAttribute("reservas", reservas);
+				if(reservas==null) {
+					System.out.println("UPSI PUES VA A SER ESTO");
+				}
+				request.getRequestDispatcher("index.jsp?sec=perfil&sub=reserva").forward(request, response);				
+				
+				
+			} catch (Throwable e1) {
+				System.out.println("No tienes ninguna reserva :(");
+			}
 			break;
 			
 		// CUPONES
@@ -73,7 +82,6 @@ public class ServletPerfil extends HttpServlet {
 			System.out.println("Llegamos a la subsesccion");
 			// obtener todos los cupones y guardar
 			try {
-
 				System.out.println("Entramos en try");
 				Vector<Cupon> cupones = BilboSKP.getCuponesSuscriptor(sus.getIdSuscriptor());
 				request.setAttribute("cupones", cupones);
@@ -83,31 +91,18 @@ public class ServletPerfil extends HttpServlet {
 				request.getRequestDispatcher("index.jsp?sec=perfil&sub=cupones").forward(request, response);
 			} catch (Throwable e1) {
 			}
-
-			request.getRequestDispatcher("index.jsp?sec=perfil?sub=cupones");
 			break;
 		default:
 		}
 
-		//ACTUALIZAR DATOS DEL SUSCRIPTOR
-		try {	
-			
-			boolean estado=true;
-			RequestDispatcher dispatcher;
-			if (estado) {
-					
-			}else {
-				
-			}
-		} catch (Throwable e) {
-
-			e.printStackTrace();
-		}
 		
-		//DARSE DE BAJA
-
-		// Enviar la respuesta al usuario
-		request.getRequestDispatcher("index.jsp?sec=perfil").forward(request, response);
+		/*//ELIMINAR UNA RESERVA
+		if (request.getParameter("borrar") != null) {
+			int idReserva = Integer.parseInt(request.getParameter("borrar"));
+			BilboSKP.eliminarReserva(idReserva);
+			Mensaje m = new Mensaje("Tu reserva ha sido eliminda", Mensaje.MENSAJE_EXITO);
+			request.setAttribute("mensaje", m);
+		}*/
 
 	}
 
