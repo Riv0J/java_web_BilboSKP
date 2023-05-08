@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import model.Cupon;
 import model.Escenario;
 import model.Jugador;
+import model.MensajeChat;
 import model.PartidaOnline;
 import model.SalaOnline;
 import model.Suscriptor;
@@ -28,72 +29,81 @@ public class ServletJugar extends HttpServlet {
 			String codString = request.getParameter("codInvitacion");
 			String accion = request.getParameter("accion");
 			int codInvitacion = Integer.parseInt(codString);
-			PartidaOnline po = PartidaOnline.getPartidaOnline(codInvitacion);
-			System.out.println(accion + " + " + codInvitacion);
+			System.out.println("Jugar accion = " + accion + " cod = " + codInvitacion);
 			HttpSession sesion = request.getSession();
 			// verificar que el que quiere iniciar la partida es el anfitrion
-			Object sus = sesion.getAttribute("suscriptor");
-			if (po != null) {
-				System.out.println("Se ha encontrado una partida");
-				switch (accion) {
-				case "iniciar":
-					//si el estado de la partida era organizando continua
-					if(po.getEstado().equals(PartidaOnline.PARTIDA_ORGANIZANDO)) {
-						Suscriptor suscriptorAnfitrion = po.getAnfitrion();
-						// verificar que el suscriptor tiene un cupon, y si lo tiene cambiar a su estado
-						// en uso, de lo contrario redireccionar
-						if (sus.equals(suscriptorAnfitrion)) {
-							System.out.println("El anfitrion es correcto");
-							Cupon cupon = BilboSKP.comprobarCupon("Disponible", suscriptorAnfitrion.getIdSuscriptor());
-							if (cupon != null) {
-								BilboSKP.usarCupon(suscriptorAnfitrion.getIdSuscriptor(), cupon.getId());
-								// si el estado de la partida es organizando, comenzarla
-								if (po.getEstado().equals(PartidaOnline.PARTIDA_ORGANIZANDO)) {
-									po.iniciarPartida();
-									// mandar al sus al juego
-									SalaOnline so = (SalaOnline) po.getSala();
-									Escenario escenarioAMostrar = so.getEscenarioInicio();
-									if (escenarioAMostrar == null) {
-										Mensaje m = new Mensaje(
-												"Esta sala no está disponible actualmente, ¡por favor disfruta pregunta al staff!",
-												Mensaje.MENSAJE_INFO);
-										sesion.setAttribute("mensaje", m);
-										request.getRequestDispatcher("./salas").forward(request, response);
-									} else {
-										request.setAttribute("escenarioAMostrar", escenarioAMostrar);
-										request.setAttribute("partidaOnline", po);
-										request.getRequestDispatcher("juego.jsp").forward(request, response);
-									}
-								}
+			Jugador jugador = (Jugador) sesion.getAttribute("jugador");
+			String nombreEscenarioDestino = "";
+			PartidaOnline po = null;
+			SalaOnline so = null;
+			switch (accion) {
+			case "iniciar":
+				// en caso de que sea iniciar se busca partida organizando
+				po = PartidaOnline.getPartidaOrganizando(codInvitacion);
+				if (po.getEstado().equals(PartidaOnline.PARTIDA_ORGANIZANDO)) {
+					Suscriptor suscriptorAnfitrion = po.getAnfitrion();
+					// verificar que el suscriptor tiene un cupon, y si lo tiene cambiar a su estado
+					// en uso, de lo contrario redireccionar
+					if (sesion.equals(po.getSessionJugadorAnfitrion())) {
+						System.out.println("ServletJugar: El anfitrion es correcto");
+						Cupon cupon = BilboSKP.comprobarCupon("Disponible", suscriptorAnfitrion.getIdSuscriptor());
+						if (cupon != null) {
+							BilboSKP.usarCupon(suscriptorAnfitrion.getIdSuscriptor(), cupon.getId());
+							boolean iniciada = po.iniciarPartida();
+							if (iniciada == false) {
+								Mensaje m = new Mensaje("No se cumplen los jugadores mínimos para iniciar la partida",Mensaje.MENSAJE_ERROR);
+								sesion.setAttribute("mensaje", m);
+								request.getRequestDispatcher("index.jsp?sec=organizar&codInvitacion="+codInvitacion).forward(request, response);
+								return;
+							}
+							// mandar al sus al juego
+							so = (SalaOnline) po.getSala();
+							Escenario escenarioAMostrar = so.getEscenarioInicio();
+							if (escenarioAMostrar == null) {
+								Mensaje m = new Mensaje("Esta sala no está disponible actualmente, ¡por favor disfruta pregunta al staff!", Mensaje.MENSAJE_INFO);
+								sesion.setAttribute("mensaje", m);
+								request.getRequestDispatcher("./salas").forward(request, response);
+							} else {
+								request.setAttribute("escenarioAMostrar", escenarioAMostrar);
+								request.setAttribute("partidaOnline", po);
+								request.getRequestDispatcher("juego.jsp").forward(request, response);
 							}
 						}
 					}
-					break;
-				case "salir":
-					po.quitarJugador(sesion);
-					// si la sesion que se quita es el anfitrion, termina la partida
-					if (sesion.equals(po.getSessionJugadorAnfitrion())) {
-						po.finalizarPartida();
-					}
-					// redireccionar a salas
-					response.sendRedirect("./salas");
-					break;
-				case "cambioEscenario":
-					String idEscenarioDestino = request.getParameter("idEscenarioDestino");
-					// obtener sala
-					SalaOnline so = (SalaOnline) po.getSala();
-					// obtener el escenario concreto a dibujar
-					// Escenario escenario = SalaOnline
-					// insertar escenario en el request
-					// redireccionar al juego.jsp
-					request.getRequestDispatcher("juego.jsp").forward(request, response);
-					break;
-				default:
-					response.sendRedirect("./salas");
-					break;
 				}
+				break;
+			case "salir":
+				po = PartidaOnline.getPartidaEnCurso(codInvitacion);
+				Mensaje mensaje;
+				// si la sesion que se quita es el anfitrion, termina la partida
+				if (sesion.equals(po.getSessionJugadorAnfitrion())) {
+					po.finalizarPartida();
+					mensaje = new Mensaje("La partida ha finalizado, eras el anfitrión.",Mensaje.MENSAJE_INFO);
+				} else {
+					mensaje = new Mensaje("Has salido de la partida.",Mensaje.MENSAJE_INFO);
+					po.quitarJugador(sesion);
+				}
+				// en cualquier caso, redireccionar a salas
+				sesion.setAttribute("mensaje", mensaje);
+				request.getRequestDispatcher("./salas").forward(request, response);
+				break;
+			case "cambioEscenario":
+				po= PartidaOnline.getPartidaEnCurso(codInvitacion);
+				nombreEscenarioDestino = request.getParameter("idEscenarioDestino");
+				// obtener sala
+				so = (SalaOnline) po.getSala();
+				// obtener el escenario concreto a dibujar
+				// Escenario escenario = SalaOnline
+				// insertar escenario en el request
+				// redireccionar al juego.jsp
+				request.setAttribute("partidaOnline", po);
+				request.getRequestDispatcher("juego.jsp").forward(request, response);
+				break;
+			default:
+				response.sendRedirect("./salas");
+				break;
 			}
-		} catch(Throwable e) {
+		} catch (Throwable e) {
 			e.printStackTrace();
 			response.sendRedirect("./salas");
 		}
@@ -103,19 +113,40 @@ public class ServletJugar extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
+			// obtener partida del request
+			String codString = request.getParameter("codInvitacion");
 			String accion = request.getParameter("accion");
-			String stringCodInvitacion = request.getParameter("codInvitacion");
-
-			int codInvitacion = Integer.parseInt(stringCodInvitacion);
-			PartidaOnline po = PartidaOnline.getPartidaOnline(codInvitacion);
+			int codInvitacion = Integer.parseInt(codString);
+			System.out.println("Do Post Jugar accion = " + accion + " cod = " + codInvitacion);
 			HttpSession sesion = request.getSession();
+			// verificar que el que quiere iniciar la partida es el anfitrion
+			Jugador jugador = (Jugador) sesion.getAttribute("jugador");
+			String nombreEscenarioDestino = "";
+			PartidaOnline po = null;
+			SalaOnline so = null;
 
 			switch (accion) {
-			case "salir":
-
-				break;
-			
 			case "chatear":
+				po = PartidaOnline.getPartidaEnCurso(codInvitacion);
+			    String cacheControlHeader = request.getHeader("Cache-Control");
+			    if (cacheControlHeader != null && cacheControlHeader.contains("max-age=0")) {
+			        // La solicitud se realizó mediante un refresco de página
+			    	//crear el mensaje de chat
+					String mensajeChat = request.getParameter("mensajeChat");
+					System.out.println("Nuevo mensaje de chat de "+jugador.getAlias()+": "+mensajeChat);
+					po.addChat(jugador, mensajeChat);
+			    } else {
+			    }
+				// obtener el escenario concreto a dibujar
+				nombreEscenarioDestino = request.getParameter("escenarioAMostrar");
+				so = (SalaOnline) po.getSala();
+				Escenario escenarioAMostrar = so.getEscenarioPorNombre(nombreEscenarioDestino);
+				System.out.println("Escenario destino ="+nombreEscenarioDestino);
+				// insertar datos en el request
+				request.setAttribute("partidaOnline", po);
+				request.setAttribute("escenarioAMostrar", escenarioAMostrar);
+				// redireccionar al juego.jsp
+				request.getRequestDispatcher("juego.jsp").forward(request, response);
 				break;
 			default:
 				break;

@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
@@ -163,7 +164,7 @@ public class BilboSKP extends DBC {
 				String descripcion = resultado.getString("descripcion");
 				String imagen = resultado.getString("imagen");
 				// obtener las flechas de este escenario
-				Vector<Flecha> vectorFlechas = getFlechas(nombreEscenario);
+				Vector<Flecha> vectorFlechas = cargarFlechasEscenario(nombreEscenario);
 				// TODO obtener los objetos de este escenario
 				Vector<Objeto> vectorObjetos = null;
 				// TODO obtener los puzzles de este escenario
@@ -181,10 +182,9 @@ public class BilboSKP extends DBC {
 		}
 		return null;
 	}
-
-	// obtener las flechas de un escenario concreto @Rivo
-	public static Vector<Flecha> getFlechas(String nombreEscenario) throws Throwable {
-		Vector<Flecha> vectorFlechas = new Vector<Flecha>();
+	//obtener las flechas de un escenario concreto @Rivo
+	public static Vector<Flecha> cargarFlechasEscenario(String nombreEscenario) throws Throwable {
+		Vector<Flecha> vectorFlechas= new Vector<Flecha>();
 		try {
 			String sentenciaSQL = "select * from escenario_flecha where nombreEscenario ='" + nombreEscenario + "';";
 			BilboSKP conexion = new BilboSKP();

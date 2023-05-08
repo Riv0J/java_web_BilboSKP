@@ -29,6 +29,7 @@ public class ServletUnirse extends HttpServlet {
 			System.out.println("Intento de unirse a partida con el codigo "+codInvitacion);
 			PartidaOnline po = PartidaOnline.usarCodigoInvitacion(Integer.parseInt(codInvitacion));
 			if(po!=null) {
+				//solo se intenta agrega ris habia una partida organizandose
 				String agregarJugador = po.agregarJugador(sesion);
 				switch (agregarJugador) {
 				case "Agregado":
