@@ -477,11 +477,11 @@ public class BilboSKP extends DBC {
 		}
 	}
 
-	// comprobar si un suscriptor existe mediante su alias y correo
+	// comprobar si un suscriptor existe mediante su correo @Urko
 	public static Suscriptor comprobarSuscriptor(String email) throws Throwable {
 
 		// sentencia sql que compruebe si existe
-		String sentenciaSQL = "Select * from 'suscriptor' where email='" + email + "';";
+		String sentenciaSQL = "Select * from suscriptor where email='" + email + "';";
 		// hacer conexion
 		BilboSKP conexion;
 		conexion = new BilboSKP();
