@@ -43,7 +43,6 @@ public class PartidaOnline extends Partida {
 		this.estado = PARTIDA_ORGANIZANDO;
 		this.codInvitacion = generarCodInvitacion();
 		this.setInventario(new Inventario());
-
 		partidasOrganizando.put(this.codInvitacion, this);
 		agregarJugador(sesionAnfitrion);
 		iniciarTimer();
@@ -72,7 +71,7 @@ public class PartidaOnline extends Partida {
 	}
 
 	public String agregarJugador(HttpSession sesion) {
-		if(this.estado.equals(PARTIDA_ORGANIZANDO)) {
+		if(this.estado.equals(PARTIDA_EN_CURSO)) {
 			return "Comenzada";
 		}
 		// asegurarse que no se sobrepase el maximo de la sala
