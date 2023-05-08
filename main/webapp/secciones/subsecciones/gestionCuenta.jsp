@@ -15,25 +15,22 @@ sesion.setAttribute("sus", sus);
                     <p>Modifica aquí tus datos personales. Recuerda que tanto como el alias, nombre y apellidos
                     pertenecen a tu perfil público.</p>
                 </div>
-                <form action="">
+                <form action="./perfil" method="post">
                     <div class="subcaja1">
-                   		<img src="img_suscriptores/<%=sus.getImagen()%>" alt="">
-                   		<div class="boton_modificar">
-                   		<input class="modificar" type="" value="">
-                   		</div>
+                   		<img src="img_suscriptores/<%=sus.getImagen()%>" alt="">                   	
                     </div>
                     <div class="form1">
                         <div class="box0">
                             <label for=""><strong>Nombre:</strong></label>
                             <div class="edit">
-                                <input type="text" name="" id="" value="<%=sus.getNombre()%>">
+                                <input type="text" name="nombre" id="nombre" value="<%=sus.getNombre()%>">
                                 <img src="img_web/icons/edit_icon.png" alt="">
                             </div>
                         </div>
                         <div class="box0">
                             <label for="">Apellido:</label>
                             <div class="edit">
-                                <input type="text" name="" id="" value="<%=sus.getApellidos()%>">
+                                <input type="text" name="apellido" id="apellido" value="<%=sus.getApellidos()%>">
                             	<img src="img_web/icons/edit_icon.png" alt="">	
                             </div>
                         </div>
@@ -42,7 +39,7 @@ sesion.setAttribute("sus", sus);
                         <div class="box0">
                             <label for="">Email:</label>
                             <div class="edit">
-                                <input type="email" name="" id="" value="<%=sus.getEmail()%>">
+                                <input type="email" name="email" id="email" value="<%=sus.getEmail()%>">
                                 <img src="img_web/icons/edit_icon.png" alt="">
                             </div>
                             
@@ -50,7 +47,7 @@ sesion.setAttribute("sus", sus);
                         <div class="box0">
                             <label for="">Alias:</label>
                             <div class="edit">
-                                <input type="text" name="" id="" value="<%=sus.getAlias()%>">
+                                <input type="text" name="alias" id="alias" value="<%=sus.getAlias()%>">
                                <img src="img_web/icons/edit_icon.png" alt="">
                             </div>
                         </div>
@@ -59,14 +56,14 @@ sesion.setAttribute("sus", sus);
                         <div class="box0">
                             <label for="">Fecha de nacimiento</label>
                             <div class="edit">
-                                <input type="date" name="" id="" value="">
+                                <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="">
                                 <img src="img_web/icons/edit_icon.png" alt="">
                             </div>
                         </div>
                         <div class="box0">
                             <label for="">Télefono:</label>
                             <div class="edit">
-                                <input type="text" name="" id="" value="<%=sus.getTelefono()%>">
+                                <input type="text" name="telefono" id="telefono" value="<%=sus.getTelefono()%>">
                                 <img src="img_web/icons/edit_icon.png" alt="">
                             </div>
                         </div>
@@ -89,8 +86,8 @@ sesion.setAttribute("sus", sus);
                         </div> 
                         
                     </div>--%>
-                    <div class="form5">
-                        <input type="button" value="Guardar cambios">
+                    <div class="form5" >
+                        <input type="submit" value="Guardar cambios"  >
                     </div>
                 </form>
                 <!--<form class="caja4">

@@ -40,11 +40,8 @@ public class ServletPerfil extends HttpServlet {
 		switch (subseccion) {
 		//GUARDAR DATOS MODIFICADOS EN LA BD
 		case "gestionCuenta":
-			try {
-				
-				
-				
-				
+			try {				
+				BilboSKP.actualizarSuscripcion(sus);
 				request.getRequestDispatcher("index.jsp?sec=perfil&sub=gestionCuenta").forward(request, response);
 				
 			} catch (Throwable e1) {
@@ -52,7 +49,7 @@ public class ServletPerfil extends HttpServlet {
 			}
 			
 		
-			
+		//Darse de baja	
 			
 			
 			
@@ -108,7 +105,11 @@ public class ServletPerfil extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		System.out.println("Dopost perfil");		
+		String nombreNuevo= request.getParameter("nombre");	
+		System.out.println(nombreNuevo);
+		
 	}
 
 }
