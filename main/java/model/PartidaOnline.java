@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import control.BilboSKP;
 
 public class PartidaOnline extends Partida {
-	public static final int TIMEOUT_SECONDS = 10;
+	public static final int TIMEOUT_SECONDS = 120;
 	public static final String PARTIDA_ORGANIZANDO = "Organizando";
 	public static final String PARTIDA_EN_CURSO = "En Curso";
 	public static final String PARTIDA_FINALIZANDO = "Finalizando";
