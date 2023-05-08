@@ -964,8 +964,11 @@ public class BilboSKP extends DBC {
 
 	// obtener las reservas de un suscriptor de la bd @Paula
 	public static Vector<Reserva> obtenerReserva(int idSuscriptor) throws Throwable {
+		//creamos un vector de reservas 
 		Vector<Reserva> reservas = new Vector<Reserva>();
+		//setencia
 		String sentenciaSQL = "SELECT * FROM reserva WHERE idSuscriptor=" + idSuscriptor + " order by fechaHora ";
+		//Conexion
 		BilboSKP conexion = new BilboSKP();
 		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
 		// por cada fila, crear un objeto reserva
@@ -979,6 +982,7 @@ public class BilboSKP extends DBC {
 			Reserva reserva = new Reserva(idReserva, idSalaFisica, numJugadores, numJugadores, fechaHora, estado);
 			reservas.add(reserva);
 		}
+		/*
 		if (reservas.size() > 0) {
 			for (int i = 0; i < reservas.size(); i++) {
 				Reserva r = reservas.get(i);
@@ -987,7 +991,7 @@ public class BilboSKP extends DBC {
 			return reservas;
 		} else {
 
-		}
+		}*/
 		return reservas;
 	}
 

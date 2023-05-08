@@ -1,18 +1,29 @@
 <%@ page
 	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.io.File, java.text.Normalizer, 
-	model.Reserva, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date  "%>  
+	model.Reserva, model.Sala,  view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date, java.util.Vector "%>  
 	
-<link rel="stylesheet" href="css/reserva.css">
+<link rel="stylesheet" href="css/reserva.css">	
+	
 <div class="caja2">
-            <section id="cajita1">
+			<section id="cajita1">
                 <h1>Administra tus reservas</h1>
                 <p>Puedes ver o cancelar tus reservas para las salas de escape físicas.Ten en cuenta que tus reservas se mostrarán por orden
                 de fecha de caducidad más cercana.</p>
-            </section>
-            <section id="cajita2">
+                
                 <div class="title">
                     <p><strong>Próximas reservas</strong></p>
-                </div>
+            	</div>
+            </section>
+            
+<% 
+        Vector<Reserva> reservas=(Vector<Reserva>)request.getAttribute("reservas");
+        // Recorre cada cupón en el ArrayList
+    for (Reserva reserva : reservas) {
+    	SalaFisica sf= (SalaFisica) Sala.getSalaPorId("SF"+reserva.getIdSalaFisica());
+    	
+		
+%>           
+            <section id="cajita2">
                 <div id="subcaja2">
                     <ul class="menu">
                         <div class="menu1">
@@ -22,10 +33,7 @@
                             <li>Nºreserva</li>
                         </div>
                         <div class="menu3">
-                         <li>Fecha</li>
-                        </div>
-                        <div class="menu3">
-                            <li>Hora</li>
+                         <li>Fecha y hora</li>
                         </div>
                         <div class="menu3">
                             <li>Estado</li>
@@ -36,35 +44,34 @@
                     <div class="info1"> 
                         <div class="cajita">
                             <label for="">Sala de escape:</label>
-                            <input type="text" value="Sala de escape">
+                            <p><%=sf.getNombre() %></p>
                         </div>
                         <div class="cajita">
                             <label for="">Tématica:</label>
-                            <input type="text" value="Tématica">
+                          <p><%=sf.getTematica() %></p>
                         </div>
                         <div class="cajita">
                             <label for="">Duración:</label>
-                            <input type="text" value="Duración">
+                            <p><%=sf.getTiempoMax()%> minutos</p>
                         </div>
                         <div class="cajita">
                             <label for="">Nº jugadores:</label>
-                            <input type="text" value="Nºreserva">
+                             <p><%=reserva.getNumJugadores()%> jugadores</p>
                         </div>
                     </div>
                     <div class="info">
-                        <input type="text" value="Nºreserva">
-                        <input type="text" value="Fecha">
-                        <input type="text" value="Hora">
-                        <input type="text" value="Estado">
+                       <p><%=reserva.getIdReserva()%></p>
+                       <p><%=reserva.getFechaHora() %></p>
+                       <p><%=reserva.getEstado()%></p>
                     </div>
                 </div>
             </section>
             <section id="caja4">
                 <div class="subcaja4">
-                    <input type="button" value="Cancelar reserva">
+                    <input type="button" value="Cancelar reserva" onclick="alert(Tu reserva ha sido cancelada)">
                 </div>
             </section>
 
 </div>  
 
-
+ <% } %>
