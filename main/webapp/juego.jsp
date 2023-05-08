@@ -2,22 +2,21 @@
 	import="java.util.Vector, java.util.HashMap, java.util.Map, model.Flecha,java.util.Date, model.Escenario, 
 	model.Sala, model.SalaOnline,model.MensajeChat,model.Invitado,model.Anfitrion,model.Jugador,view.StringHelper,view.DateHelper,view.Icon,model.PartidaOnline,model.Suscriptor"%>
 <%
+//obtener datos del request/sesion
 PartidaOnline partidaOnline = (PartidaOnline) request.getAttribute("partidaOnline");
-//obtener el escenario
 Escenario escenarioAMostrar = (Escenario) request.getAttribute("escenarioAMostrar");
 
 if (partidaOnline == null) {
 	response.sendRedirect("index.jsp");
 	System.out.println("NO hay partida en el request");
 }
+//obtener mas datos de los objetos
 int codInvitacion = partidaOnline.getCodInvitacion();
-System.out.println("Escenario a mostrar= "+escenarioAMostrar.getImagen());
+
 Vector<MensajeChat> vectorLineasChat = partidaOnline.getLineasChat();
 //obtener el vec de flechas
 Vector<Flecha> vectorFlechas = escenarioAMostrar.getFlechas();
-for(Flecha flecha: vectorFlechas){
-	System.out.println("Cargado flecha:"+escenarioAMostrar.getNombreEscenario()+" hacia "+flecha.getIdEscenarioDestino());
-}
+System.out.println("Escenario a mostrar "+escenarioAMostrar.getImagen()+" tiene "+vectorFlechas.size()+" flechas.");
 /*obtener el vec de objetos
 Vector<Flecha> vectorFlechas = (Vector<Flecha>) request.getAttribute("vectorFlechas");
 */
@@ -33,47 +32,33 @@ Vector<Flecha> vectorFlechas = (Vector<Flecha>) request.getAttribute("vectorFlec
 <link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/bilboskp.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
-<link rel="stylesheet"
-	href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+<link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap"
-	rel="stylesheet">
-<link rel="icon" type="image/x-icon"
-	href="img_web/logos/500x400-cuadrado-2.png">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/x-icon" href="img_web/logos/500x400-cuadrado-2.png">
 </head>
 <body>
 	<main>
 		<jsp:include page="css/colores.jsp"></jsp:include>
 		<section id="escenario">
-		<% %>
-			<div class="flecha">
-				<img src="img_salas/flechas/izquierda.png">
-			</div>
-			<div class="objeto">
-				<img src="img_salas/objetos/cuadrado.png">
-			</div>
 		</section>
 		<section id=interfaz>
 			<div id="menu_arriba" class="menu background-image_cuero">
 				<h1 id="temporizador">00:00</h1>
 				<!--<a id="Ajustes" href="#"><i class="ri-settings-4-line"></i></a>-->
-				<a id="salir" href="./jugar?accion=salir&codInvitacion=<%=codInvitacion%>" title="Quit/Salir"><i
-					class="ri-logout-box-r-line"></i></a>
+				<a id="salir" href="./jugar?accion=salir&codInvitacion=<%=codInvitacion%>" title="Quit/Salir"><i class="ri-logout-box-r-line"></i></a>
 			</div>
 			<div id="menu_abajo" class="menu">
-				<a id="Pistas" href="#" title="Pistas"
-					class="background-image_cuero"><i class="ri-question-line"></i></a>
-				<a id="botonInventario" title="Inventario"
-					class="background-image_cuero"><i class="ri-red-packet-line"></i></a>
+				<a id="Pistas" href="#" title="Pistas" class="background-image_cuero"><i class="ri-question-line"></i></a>
+				<a id="botonInventario" title="Inventario" class="background-image_cuero"><i class="ri-red-packet-line"></i></a>
 			</div>
 			<form action="./jugar" method="post" id="caja_chat" class="menu">
 				<input type="hidden" name="accion" value="chatear">
 				<input type="hidden" name="escenarioAMostrar" value="<%=escenarioAMostrar.getNombreEscenario()%>">
 				<input type="hidden" name="codInvitacion" value="<%=codInvitacion%>">
 				<div id="caja_mensajes" class="background_transparent">
-				<%for(MensajeChat mensajeChat : vectorLineasChat) {%>
+				<% for(MensajeChat mensajeChat : vectorLineasChat) {%>
 					<div class="caja_mensaje">
 						<div class="caja_mensaje_texto"><%=mensajeChat.jugador.getAlias()%>: <%=mensajeChat.texto%></div>
 					</div>
@@ -91,6 +76,20 @@ Vector<Flecha> vectorFlechas = (Vector<Flecha>) request.getAttribute("vectorFlec
 				<div class="objeto">
 					<img src="img_salas/objetos/cuadrado.png">
 				</div>
+			</div>
+			<%for(Flecha flecha : vectorFlechas){ 
+				int posX = flecha.getPosicionX(); int posY = flecha.getPosicionY(); int dimX = flecha.getdimensionX(); int dimY =flecha.getdimensionY();
+				String imagenFlecha = flecha.getImagen(); %>
+				<a href="./jugar?accion=cambioEscenario&codInvitacion=<%=codInvitacion%>&idEscenarioDestino=<%=flecha.getIdEscenarioDestino()%>" class="flecha" style="position: fixed; 
+				bottom: <%=posX%>%; left: <%=posY%>%; /*width: <%=dimX%>%;*/ height:<%=dimY%>%;">
+					<img src="img_salas/flechas/<%=imagenFlecha%>.png">
+				</a>
+			<% } %>
+		</section>
+		<section id="caja_interactibles">
+
+			<div class="objeto">
+				<img src="img_salas/objetos/cuadrado.png">
 			</div>
 		</section>
 	</main>
@@ -122,25 +121,26 @@ a {
 	color: inherit;
 	cursor: pointer;
 }
-
-.flecha {
-	position: fixed;
-	top: 0%;
-	left: 0%;
-	/*width: 15%;*/
-	height: 20%;
+.flecha{
+	display: flex;
 }
-
-.flecha img {
+.flecha a {
+	width: 100%;
+	height: 100%;
 	max-width: 100%;
 	max-height: 100%;
 }
-
+.flecha a img{
+	width: 100%;
+	height: 100%;
+	max-width: 100%;
+	max-height: 100%;
+}
 body {
 	height: 100vh;
 }
 
-#escenario {
+#escenario, #caja_interactibles{
 	background-image: url(img_salas/escenarios/<%=escenarioAMostrar.getImagen()%>.png);
 	background-size: cover;
 	height: 100%;

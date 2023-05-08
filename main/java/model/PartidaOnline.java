@@ -68,13 +68,13 @@ public class PartidaOnline extends Partida {
 	}
 
 	public static PartidaOnline getPartidaEnCurso(int codInvitacion) {
-		for(Map.Entry<Integer, PartidaOnline> par : partidasEnCurso.entrySet()) {
-			System.out.println(par.getValue().codInvitacion);
-		}
 		return partidasEnCurso.get(codInvitacion);
 	}
 
 	public String agregarJugador(HttpSession sesion) {
+		if(this.estado.equals(PARTIDA_ORGANIZANDO)) {
+			return "Comenzada";
+		}
 		// asegurarse que no se sobrepase el maximo de la sala
 		if (vectorJugadores.size() < this.getSala().getJugadoresMax()) {
 			// checar de que la sesion por agregar no esté ya en el vector

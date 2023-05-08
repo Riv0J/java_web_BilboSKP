@@ -40,6 +40,9 @@ public class ServletJugar extends HttpServlet {
 			case "iniciar":
 				// en caso de que sea iniciar se busca partida organizando
 				po = PartidaOnline.getPartidaOrganizando(codInvitacion);
+				if (po == null) {
+					po = PartidaOnline.getPartidaEnCurso(codInvitacion);
+				}
 				if (po.getEstado().equals(PartidaOnline.PARTIDA_ORGANIZANDO)) {
 					Suscriptor suscriptorAnfitrion = po.getAnfitrion();
 					// verificar que el suscriptor tiene un cupon, y si lo tiene cambiar a su estado
@@ -69,6 +72,8 @@ public class ServletJugar extends HttpServlet {
 								request.getRequestDispatcher("juego.jsp").forward(request, response);
 							}
 						}
+					} else {
+						
 					}
 				}
 				break;
@@ -93,10 +98,11 @@ public class ServletJugar extends HttpServlet {
 				// obtener sala
 				so = (SalaOnline) po.getSala();
 				// obtener el escenario concreto a dibujar
-				// Escenario escenario = SalaOnline
-				// insertar escenario en el request
-				// redireccionar al juego.jsp
+				Escenario escenarioAMostrar = so.getEscenarioPorNombre(nombreEscenarioDestino);
+				// insertar datos en el request
+				request.setAttribute("escenarioAMostrar", escenarioAMostrar);
 				request.setAttribute("partidaOnline", po);
+				// redireccionar al juego.jsp
 				request.getRequestDispatcher("juego.jsp").forward(request, response);
 				break;
 			default:
@@ -109,7 +115,7 @@ public class ServletJugar extends HttpServlet {
 		}
 	}
 
-	// este dopost atenderá todas las peticiones
+	// este dopost atenderá algunas las peticiones
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {

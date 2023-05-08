@@ -147,7 +147,13 @@ public class BilboSKP extends DBC {
 			String descripcion = resultado.getString("descripcion");
 			String imagen = resultado.getString("imagen");
 			System.out.println("> Obtenido un escenario de inicio:" + nombreEscenario);
-			return new Escenario(nombreEscenario, imagen, descripcion, null, null, null);
+			// obtener las flechas de este escenario
+			Vector<Flecha> vectorFlechas = cargarFlechasEscenario(nombreEscenario);
+			// TODO obtener los objetos de este escenario
+			Vector<Objeto> vectorObjetos = new Vector<Objeto>();
+			// TODO obtener los puzzles de este escenario
+			Vector<Puzzle> vectorPuzzle = new Vector<Puzzle>();
+			return new Escenario(nombreEscenario, imagen, descripcion, vectorFlechas, vectorObjetos, vectorPuzzle);
 		}
 		return null;
 	}
@@ -161,17 +167,16 @@ public class BilboSKP extends DBC {
 			ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
 			while (resultado.next()) {
 				String nombreEscenario = resultado.getString("nombreEscenario");
+				System.out.println(">> Obteniendo escenario de sala " + idSalaOnline + ": " + nombreEscenario);
 				String descripcion = resultado.getString("descripcion");
 				String imagen = resultado.getString("imagen");
 				// obtener las flechas de este escenario
 				Vector<Flecha> vectorFlechas = cargarFlechasEscenario(nombreEscenario);
 				// TODO obtener los objetos de este escenario
-				Vector<Objeto> vectorObjetos = null;
+				Vector<Objeto> vectorObjetos = new Vector<Objeto>();
 				// TODO obtener los puzzles de este escenario
-				Vector<Puzzle> vectorPuzzle = null;
-				System.out.println(">> Obtenido escenario de sala " + idSalaOnline + ": " + nombreEscenario);
-				Escenario escenario = new Escenario(nombreEscenario, imagen, descripcion, vectorFlechas, vectorObjetos,
-						vectorPuzzle);
+				Vector<Puzzle> vectorPuzzle = new Vector<Puzzle>();
+				Escenario escenario = new Escenario(nombreEscenario, imagen, descripcion, vectorFlechas, vectorObjetos, vectorPuzzle);
 				mapaEscenarios.put(nombreEscenario, escenario);
 			}
 			return mapaEscenarios;
@@ -193,15 +198,14 @@ public class BilboSKP extends DBC {
 				String nombreEscenarioDestino = resultado.getString("nombreEscenarioDestino");
 				String imagen = resultado.getString("imagen");
 				int dimensionX = resultado.getInt("dimensionX");
-				int dimensionY = resultado.getInt("dimensionX");
+				int dimensionY = resultado.getInt("dimensionY");
 				int posicionX = resultado.getInt("posicionX");
 				int posicionY = resultado.getInt("posicionY");
-				System.out.println(
-						">>> Obtenido flecha de escenario " + nombreEscenario + " hacia " + nombreEscenarioDestino);
-				Flecha flecha = new Flecha(nombreEscenarioDestino, imagen, dimensionX, dimensionY, posicionX,
-						posicionY);
+				System.out.println(">>> Obtenido flecha de escenario " + nombreEscenario + " hacia " + nombreEscenarioDestino);
+				Flecha flecha = new Flecha(nombreEscenarioDestino, imagen, dimensionX, dimensionY, posicionX, posicionY);
 				vectorFlechas.add(flecha);
 			}
+			System.out.println("--- Tamaño del vector de flechas: "+vectorFlechas.size());
 			return vectorFlechas;
 		} catch (SQLException e) {
 			e.printStackTrace();

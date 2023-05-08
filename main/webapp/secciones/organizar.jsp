@@ -5,6 +5,7 @@
 PartidaOnline partidaOnline = (PartidaOnline) request.getAttribute("partidaOnline");
 if(partidaOnline==null){
 	response.sendRedirect("index.jsp");
+	return;
 }
 Sala salaPartida = partidaOnline.getSala();
 int codInvitacion = partidaOnline.getCodInvitacion();

@@ -59,13 +59,14 @@ Vector<PartidaOnline> finalistas = new Vector<PartidaOnline>();
 			<% for(int i = 0; i<partidas.size(); i++){
 				PartidaOnline partida = partidas.get(i); 
 				System.out.println(partidas.size());
+				double animation_duration = (0.15*i)+0.2;
 				%>
-				<li> 
-				<div><%="#"+(i+1)%></div>
-				<div><img src="img_suscriptores/<%=partida.getAnfitrion().getImagen()%>"></div>
-				<div><%=partida.getAnfitrion().getAlias()%></div>
-				<div><%=partida.getPuntaje()%> puntos</div>
-				<div><%=partida.getTiempoMinutos()%> mins</div>
+				<li class="caja_linea_ranking" style="animation-delay: <%=animation_duration%>s"> 
+					<div><%="#"+(i+1)%></div>
+					<div><img src="img_suscriptores/<%=partida.getAnfitrion().getImagen()%>"></div>
+					<div><%=partida.getAnfitrion().getAlias()%></div>
+					<div><%=partida.getPuntaje()%> puntos</div>
+					<div><%=partida.getTiempoMinutos()%> mins</div>
 				</li>
 			<%}%>
 		</ol>
