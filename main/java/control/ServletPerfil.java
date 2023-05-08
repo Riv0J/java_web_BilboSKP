@@ -106,19 +106,42 @@ public class ServletPerfil extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		
+		HttpSession sesion = request.getSession();
+		Suscriptor sus = (Suscriptor) sesion.getAttribute("suscriptor");
+
+		
 		System.out.println("Dopost perfil");		
 		String nombreNuevo= request.getParameter("nombre");	
 		System.out.println("El nombre nuevo es " + nombreNuevo);
+		
 		String apellidoNuevo= request.getParameter("apellido");	
 		System.out.println("El apellido nuevo es " + apellidoNuevo);
+		
 		String aliasNuevo= request.getParameter("alias");	
 		System.out.println("El alias nuevo es " + aliasNuevo);
-		String emailNuevo= request.getParameter("apellido");	
+		
+		String emailNuevo= request.getParameter("email");	
 		System.out.println("El email nuevo es " + emailNuevo);
+		
 		String fecha_nacimientoNueva= request.getParameter("fecha_nacimiento");	
 		System.out.println("La fecha de nacimiento nueva es " + fecha_nacimientoNueva);
+		
 		String telefonoNuevo= request.getParameter("telefono");	
 		System.out.println("El telefono nuevo es " + telefonoNuevo);
+		
+		try {
+			BilboSKP.actualizarSuscripcion(sus);
+			System.out.println(sus.getNombre());
+		} catch (Throwable e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+		request.getRequestDispatcher("index.jsp?sec=perfil&sub=gestionCuenta").forward(request, response);
+		
+		
 	}
 
 }
