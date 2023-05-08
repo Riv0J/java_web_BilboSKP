@@ -27,11 +27,12 @@
         <p class="CodigoCupon">Estado: <%= cupon.getEstado() %> </p>
         <p>Fecha caducidad:<br> <%= cupon.getFechaCaducidad() %></p>
         <p><%= cupon.getRembolsable() %></p>
-        <input type="button" value="Rembolsar" onclick="alert('Tu cupón ha sido devuelto, espera un plazo maximo de una semana para recibir el importe en tu cuenta' )">
+        <input id="botonRembolso" type="button" value="Rembolsar" onclick="alert('Tu cupón ha sido devuelto, espera un plazo maximo de una semana para recibir el importe en tu cuenta' )">
         <% 
-        int idElminarCupon=cupon.getId();
-        BilboSKP.eliminarCupon(idElminarCupon);
-
+        	 int idElminarCupon=cupon.getId();
+        
+       		 BilboSKP.eliminarCupon(idElminarCupon);
+      
 		%></input>
        </div>
        

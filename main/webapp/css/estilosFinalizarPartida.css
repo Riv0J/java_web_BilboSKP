@@ -1,100 +1,117 @@
-body{
-	background-color: #282828;
-	overflow-x:hidden; 
-}
-  #fondoFinalizarPartida {
-    background-image: url("../img_web/texturas/laberinto2.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content:center;
-    align-self:center;
-    position: absolute;
-  }
-
-
-h1 {
-	text-align: center;
-	color: #C60C02;
-	font-size: 1.5em;
-	width: 90%;
-	max-width: 500px;
-	margin: 0 auto;
-}
-
-#Estadisticas {
-	text-align: center;
-	width: 70%;
-	color: white;
-	background-color: #0C0C0C;
-	font-size: 2em;
-	padding: 2%;
-	box-shadow: 0em 0em 1em #C60C02;
-	align-content: center
-}
-
-#Estadisticas p {
+#fondoFinalizarPartida {
+	align-items: center;
 	width: 100%;
+	height: 100%;
+	padding-bottom: 5%;
+	padding-top: 3%;
+	background-color: var(- -bg-color2);
+	background-image: url("../img_web/texturas/laberinto2.png");
+	background-size: cover;
+	background-position: 5%;
 }
 
-#Botones {
-	padding-top: 2%;
-	justify-content: space-between;
+#caja_principal {
+	padding: 5%;
+	margin-left: 15%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 5%;
+	background-color: #030303;
+	box-shadow: 0em 0em 1em #C60C02;
+	align-content: center;
+}
+
+.bilbosk_h1 {
+	color: #C60C02;
+	padding-bottom: 2%;
+}
+
+.bilboskp_p {
+	color: white;
+}
+
+#SalaBoton {
+	padding-left: 17%;
+	padding-right: 17%;
 }
 
 .bilboskp_icon_button {
-	text-decoration: none;
-	color: white;
-	background-color: #C60C02;
-	border-radius: 12px;
-	border: 1px solid #C60C02;
-	transition-duration: 0.5s;
-	padding: 16px 31px;
-	width: 100%;
-	margin-bottom: 10%;
-	font-size:180%
+	margin-right: 50%;
 }
 
-#BotonIrRanking {
-	align-self: flex-start;
-	width: 128%;
-	
-	
+header button {
+	padding: 10px 20px;
+	border-radius: 5px;
+	background-color: var(- -main-color);
+	color: var(- -bg-color2);
+	font-size: 24px;
+	border: none;
+	margin-top: 50px;
+	cursor: pointer;
+	width: 300px;
 }
 
-#BotonIrSalas {
+section .principal {
+	display: flex;
+	flex-direction: column;
+}
+
+.principal {
+	font-size: 1.4em;
+}
+
+#Botones {
+	width: 50%;
+	display: flex;
+	margin-left: 10%;
+}
+
+footer {
 	align-self: flex-end;
-	
-	width: 128%;
 }
 
-.bilboskp_icon_button:hover {
-	background-color: #000000;
-	color: #FF7070;
-	border: 3px solid #C60C02;
+@media screen and (max-width: 1150px) {
+	#caja_principal div a {
+		width: 40%;
+	}
 }
 
-@media (min-width:900px){
-	#Botones{
-		width: 60%;
+@media screen and (max-width: 1090px) {
+	.card {
+		flex-basis: calc(50% - 1rem);
 	}
-	
-	
-}
-@media ( max-width : 800px) {
-	#Botones {
-		width:5%;
+	section #caja_principal {
+		margin-right: 5%;
 	}
-	#BotonIrRanking, #BotonIrSalas {
+	div.flex_center {
 		width: 100%;
-		margin-bottom: 1em;
 	}
-	  #Estadisticas {
-        margin-top: 8%;
-    }
+	#caja_principal div a {
+		width: 40%;
+	}
+	.principal {
+		background-position: 55% 50%;
+	}
+	
+	#Botones {
+		margin-top: 2%;
+	}
+}
+
+@media screen and (max-width: 750px) {
+	.principal {
+		background-position: 55% 50%;
+	}
+	
+}
+
+@media screen and (max-width: 500px) {
+	.principal {
+		font-size: 1.1em;
+	}
+	.principal .bilboskp_p {
+		margin-bottom: 10%;
+		margin-top: 10%;
+	}
 }
