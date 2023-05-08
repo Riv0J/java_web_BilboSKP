@@ -35,6 +35,14 @@ public class Escenario {
 		this.descripcion = descripcion;
 	}
 	public Vector<Flecha> getFlechas() {
+		if( flechas==null || flechas.size() == 0  ) {
+			System.out.println("Flechas es null");
+		} else {
+			for (Flecha flecha : flechas) {
+				System.out.println("ENCONTRADO FLECHA HACIA "+flecha.getIdEscenarioDestino());
+			}
+		}
+		
 		return flechas;
 	}
 	public void setFlechas(Vector<Flecha> vectorFlechas) {

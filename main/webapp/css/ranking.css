@@ -8,7 +8,7 @@ align-items: center;
 
 }
 
-#ranking img {
+#finalistas img {
 	width: 80px;
 	height: 80px;
 }
@@ -49,59 +49,6 @@ align-items: center;
 	height: 100%;
 	border: #074 solid 3px;
 }
-#plata{
-	order:1;
-}
-#bronce{
-	order:3;
-}
-#oro{
-	order:2;
-}
-.oro {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction:column;
-	border: 3px solid #ffd700;
-	height: 5em;
-	width: 8em;
-	/*padding: 0 auto;*/
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	font-size: x-large;
-	font-weight: 700;
-	background-color: #F5DF68;
-}
-
-.plata {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction:column;
-	border: 3px solid #C0C0C0;
-	height: 5em;
-	width: 8em;
-	
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	font-size: large;
-	font-weight: 600;
-	background-color: #D8D8D8;
-}
-
-.bronce {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction:column;
-	border: 3px solid #8F5732;
-	height: 5em;
-	width: 8em;
-	
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	font-size: large;
-	font-weight: 500;
-	background-color: #C68358;
-}
 
 #finalistas {
 	color:#fff;
@@ -112,12 +59,63 @@ main{
 	margin-top:20%
 }
 
+ol{
+	display:flex;
+	justify-content:center;
+	align-items: center;
+	flex-direction:column;
+	padding: 6%;
+}
+
 ol li{
 	border: 1px solid white;
-}
-li{
-	display: flex;
-	flex-direction: row;
-	justify-content:space-around;
+	display:flex;
+	justify:content;
+	align-items: center;
+	width:100%
 	
 }
+
+#finalistas li{
+	    display: flex;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+	
+}
+
+#finalistas li div:nth-child(1) {
+	 margin-left:1%;
+	min-width:7%;
+    font-size: 2em;
+}
+#finalistas li div:nth-child(2) {
+	
+	min-width:7%;
+	margin-right:1%;
+	
+}
+#finalistas li div:nth-child(3) {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+	min-width:30%;
+	font-size: 2em;
+	
+}
+#finalistas li div:nth-child(4) {
+	
+	min-width:25%;
+	font-size: 2em;
+	
+}
+#finalistas li div:nth-child(5) {
+	
+	min-width:25%;
+	font-size: 2em;
+	
+}
+
+
+	
+
