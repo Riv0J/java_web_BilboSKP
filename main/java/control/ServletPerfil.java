@@ -108,8 +108,17 @@ public class ServletPerfil extends HttpServlet {
 		
 		System.out.println("Dopost perfil");		
 		String nombreNuevo= request.getParameter("nombre");	
-		System.out.println(nombreNuevo);
-		
+		System.out.println("El nombre nuevo es " + nombreNuevo);
+		String apellidoNuevo= request.getParameter("apellido");	
+		System.out.println("El apellido nuevo es " + apellidoNuevo);
+		String aliasNuevo= request.getParameter("alias");	
+		System.out.println("El alias nuevo es " + aliasNuevo);
+		String emailNuevo= request.getParameter("apellido");	
+		System.out.println("El email nuevo es " + emailNuevo);
+		String fecha_nacimientoNueva= request.getParameter("fecha_nacimiento");	
+		System.out.println("La fecha de nacimiento nueva es " + fecha_nacimientoNueva);
+		String telefonoNuevo= request.getParameter("telefono");	
+		System.out.println("El telefono nuevo es " + telefonoNuevo);
 	}
 
 }
