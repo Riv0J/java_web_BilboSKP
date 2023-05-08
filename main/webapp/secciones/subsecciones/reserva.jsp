@@ -10,9 +10,7 @@
                 <p>Puedes ver o cancelar tus reservas para las salas de escape físicas.Ten en cuenta que tus reservas se mostrarán por orden
                 de fecha de caducidad más cercana.</p>
                 
-                <div class="title">
-                    <p><strong>Próximas reservas</strong></p>
-            	</div>
+                
             </section>
             
 <% 
@@ -21,8 +19,7 @@
     for (Reserva reserva : reservas) {
     	SalaFisica sf= (SalaFisica) Sala.getSalaPorId("SF"+reserva.getIdSalaFisica());
     	
-		
-%>           
+		    	%>           
             <section id="cajita2">
                 <div id="subcaja2">
                     <ul class="menu">

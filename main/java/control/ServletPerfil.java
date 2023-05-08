@@ -38,12 +38,25 @@ public class ServletPerfil extends HttpServlet {
 		Suscriptor sus = (Suscriptor) sesion.getAttribute("suscriptor");
 
 		switch (subseccion) {
+		//GUARDAR DATOS MODIFICADOS EN LA BD
 		case "gestionCuenta":
+			try {
+				
+				
+				
+				
+				request.getRequestDispatcher("index.jsp?sec=perfil&sub=gestionCuenta").forward(request, response);
+				
+			} catch (Throwable e1) {
+				
+			}
 			
-			//GUARDAR DATOS MODIFICADOS EN LA BD
-			//ELIMINAR SUs
+		
 			
-			request.getRequestDispatcher("index.jsp?sec=perfil&sub=gestionCuenta").forward(request, response);
+			
+			
+			
+			
 			break;
 
 		// RESERVAS
@@ -59,7 +72,7 @@ public class ServletPerfil extends HttpServlet {
 				
 				
 			} catch (Throwable e1) {
-				
+				System.out.println("No tienes ninguna reserva :(");
 			}
 			break;
 			
