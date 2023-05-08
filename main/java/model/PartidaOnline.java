@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import control.BilboSKP;
 
 public class PartidaOnline extends Partida {
+	public static final int TIMEOUT_SECONDS = 10;
 	public static final String PARTIDA_ORGANIZANDO = "Organizando";
 	public static final String PARTIDA_EN_CURSO = "En Curso";
 	public static final String PARTIDA_FINALIZANDO = "Finalizando";
@@ -173,7 +174,7 @@ public class PartidaOnline extends Partida {
 				}
 			}
 		} else {
-			System.out.println("PO: NO se han guardado los datos en la bd, porque la partida no inició.");
+			System.out.println("PO: NO se han guardado los datos en la bd, porque la partida se ha cancelado.");
 		}
 		// establecer el estado de finalizando partida
 		this.estado = PartidaOnline.PARTIDA_FINALIZANDO;
@@ -280,7 +281,7 @@ public class PartidaOnline extends Partida {
 				if (segundosTranscurridos % 5 == 0) {
 					HttpSession sesionAnfitrion = getSessionJugadorAnfitrion();
 					long tiempoInactivo = System.currentTimeMillis() - sesionAnfitrion.getLastAccessedTime();
-					int tiempoEspera = sesionAnfitrion.getMaxInactiveInterval() * 1000; // convertir a milisegundos
+					int tiempoEspera = TIMEOUT_SECONDS * 1000; // convertir a milisegundos
 					if (tiempoInactivo > tiempoEspera) {
 						// System.out.println("La sesión anfitriona ha expirado. Cancelando la partida
 						// en curso");

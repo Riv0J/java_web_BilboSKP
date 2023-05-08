@@ -227,7 +227,7 @@ i {
 	padding: 2%;
 	padding-left: 5%;
 	padding-right: 5%;
-	border: 0.075em solid var(--text-color);
+	border: 0.075em solid var(--main-color);
 	border-radius: 0.6em;
 	background-color: black;
 	transition: background-color 0.3s ease;

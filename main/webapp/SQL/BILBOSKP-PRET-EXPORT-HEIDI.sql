@@ -29,22 +29,22 @@ CREATE TABLE IF NOT EXISTS `cupon` (
   PRIMARY KEY (`idCupon`) USING BTREE,
   KEY `fk_cupon_suscriptor` (`idSuscriptor`),
   CONSTRAINT `fk_cupon_suscriptor` FOREIGN KEY (`idSuscriptor`) REFERENCES `suscriptor` (`idSuscriptor`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table bilboskpdb.cupon: ~22 rows (approximately)
+-- Dumping data for table bilboskpdb.cupon: ~55 rows (approximately)
 INSERT INTO `cupon` (`idCupon`, `idSuscriptor`, `fechaCaducidad`, `estado`, `reembolsable`) VALUES
 	(1, 2, '2023-04-30 00:00:00', 'Disponible', 1),
-	(2, 1, '2023-02-03 00:00:00', 'Caducado', 1),
-	(3, 3, '2023-04-30 00:00:00', 'Gastado', 1),
+	(2, 1, '2023-02-03 00:00:00', 'Disponible', 1),
+	(3, 3, '2023-04-30 00:00:00', 'Disponible', 1),
 	(5, 8, '2023-06-08 00:00:00', 'Disponible', 1),
 	(6, 8, '2023-06-09 00:00:00', 'Disponible', 1),
-	(7, 12, '2023-06-06 00:00:00', 'Disponible', 0),
+	(7, 12, '2023-06-06 00:00:00', 'En uso', 0),
 	(8, 12, '2023-06-09 00:00:00', 'Disponible', 1),
-	(9, 12, '2023-02-09 00:00:00', 'Caducado', 1),
+	(9, 12, '2023-02-09 00:00:00', 'En uso', 1),
 	(11, 4, '2077-12-31 00:00:00', 'Disponible', 0),
 	(12, 4, '2077-12-31 00:00:00', 'Disponible', 0),
 	(13, 4, '2023-05-18 00:00:00', 'Disponible', 0),
-	(14, 4, '2024-05-18 00:00:00', 'En uso', 0),
+	(14, 4, '2024-05-18 00:00:00', 'Disponible\r\n', 0),
 	(15, 1, '2023-06-04 00:00:00', 'Disponible', 1),
 	(16, 1, '2026-06-04 00:00:00', 'Disponible', 1),
 	(17, 1, '2027-06-04 00:00:00', 'Disponible', 1),
@@ -54,7 +54,54 @@ INSERT INTO `cupon` (`idCupon`, `idSuscriptor`, `fechaCaducidad`, `estado`, `ree
 	(21, 1, '2025-06-04 00:00:00', 'Disponible', 1),
 	(22, 1, '2025-06-04 00:00:00', 'Disponible', 1),
 	(23, 1, '2025-06-04 00:00:00', 'Disponible', 1),
-	(24, 1, '2025-06-04 00:00:00', 'Disponible', 1);
+	(24, 1, '2025-06-04 00:00:00', 'Disponible', 1),
+	(25, 12, '2023-02-09 00:00:00', 'En uso', 1),
+	(26, 12, '2023-02-09 00:00:00', 'En uso', 1),
+	(27, 12, '2023-02-09 00:00:00', 'En uso', 1),
+	(28, 12, '2023-02-09 00:00:00', 'En uso', 1),
+	(29, 12, '2023-06-08 00:00:00', 'Disponible', 1),
+	(30, 12, '2023-06-08 00:00:00', 'Disponible', 1),
+	(31, 12, '2023-06-08 00:00:00', 'Disponible', 1),
+	(32, 12, '2023-06-08 00:00:00', 'Disponible', 1),
+	(33, 12, '2023-06-08 00:00:00', 'Disponible', 1),
+	(34, 12, '2023-06-08 00:00:00', 'Disponible', 1),
+	(35, 12, '2023-06-08 00:00:00', 'Disponible', 1),
+	(36, 12, '2023-06-08 00:00:00', 'Disponible', 1),
+	(37, 12, '2023-06-08 00:00:00', 'Disponible', 1),
+	(38, 12, '2023-06-08 00:00:00', 'Disponible', 1),
+	(39, 12, '2023-06-08 00:00:00', 'Disponible', 1),
+	(40, 12, '2023-06-08 00:00:00', 'Disponible', 1),
+	(41, 12, '2023-06-08 00:00:00', 'Disponible', 1),
+	(42, 12, '2023-06-08 00:00:00', 'Disponible', 1),
+	(43, 12, '2023-06-08 00:00:00', 'Disponible', 1),
+	(44, 12, '2023-06-08 00:00:00', 'Disponible', 1),
+	(45, 12, '2023-06-08 00:00:00', 'Disponible', 1),
+	(46, 12, '2023-06-08 00:00:00', 'En uso', 1),
+	(47, 12, '2023-06-08 00:00:00', 'En uso', 1),
+	(48, 12, '2023-06-08 00:00:00', 'En uso', 1),
+	(49, 12, '2023-06-08 00:00:00', 'En uso', 1),
+	(50, 12, '2023-06-08 00:00:00', 'En uso', 1),
+	(51, 12, '2023-06-08 00:00:00', 'En uso', 1),
+	(52, 12, '2023-06-08 00:00:00', 'En uso', 1),
+	(53, 12, '2023-06-08 00:00:00', 'En uso', 1),
+	(54, 12, '2023-06-08 00:00:00', 'En uso', 1),
+	(55, 12, '2023-06-08 00:00:00', 'En uso', 1),
+	(56, 12, '2023-06-08 00:00:00', 'En uso', 1),
+	(57, 12, '2023-06-08 00:00:00', 'En uso', 1),
+	(58, 12, '2023-06-08 00:00:00', 'Disponible', 1),
+	(59, 12, '2023-06-08 00:00:00', 'Disponible', 1),
+	(60, 12, '2023-06-08 00:00:00', 'Disponible', 1),
+	(61, 12, '2023-06-08 00:00:00', 'Disponible', 1),
+	(62, 12, '2023-06-08 00:00:00', 'Disponible', 1),
+	(63, 12, '2023-06-08 00:00:00', 'En uso', 1),
+	(64, 12, '2023-06-08 00:00:00', 'En uso', 1),
+	(65, 12, '2023-06-08 00:00:00', 'En uso', 1),
+	(66, 12, '2023-06-08 00:00:00', 'En uso', 1),
+	(67, 12, '2023-06-08 00:00:00', 'En uso', 1),
+	(68, 12, '2023-06-08 00:00:00', 'En uso', 1),
+	(69, 12, '2023-06-08 00:00:00', 'En uso', 1),
+	(70, 12, '2023-06-08 00:00:00', 'En uso', 1),
+	(71, 12, '2023-06-08 00:00:00', 'En uso', 1);
 
 -- Dumping structure for table bilboskpdb.escenario
 CREATE TABLE IF NOT EXISTS `escenario` (
@@ -67,26 +114,17 @@ CREATE TABLE IF NOT EXISTS `escenario` (
   CONSTRAINT `escenario_ibfk_1` FOREIGN KEY (`idSala`) REFERENCES `salaonline` (`idSala`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table bilboskpdb.escenario: ~18 rows (approximately)
+-- Dumping data for table bilboskpdb.escenario: ~9 rows (approximately)
 INSERT INTO `escenario` (`nombreEscenario`, `idSala`, `descripcion`, `imagen`) VALUES
-	('AlmacenCajaAbierta', 1, '¿Qué puede haber en esa caja fuerte?', 'almacenCajaAbierta.png'),
-	('AlmacenCajaCerrada', 1, '¿Qué puede haber en esa caja fuerte?', 'almacenCajaCerrada.png'),
-	('CajaFuerte', 1, '¿Eso es una caja fuerte? ¿Se puede abrir con esos botones?', 'cajaFuerte.png'),
-	('CampanarioAbajo', 1, 'Esta es una sala bien espaciosa, hay un campanario ahí arriba.', 'campanarioAbajo.png'),
-	('CampanarioArriba', 1, '¿Podré ver el exterior desde aquí?', 'campanarioArriba.png'),
-	('ConfesionarioAbierto', 1, 'Parece ser el antiguo confesionario de la iglesia', 'confesionarioAbierto.png'),
-	('ConfesionarioCerrado', 1, 'Parece ser el antiguo confesionario de la iglesia', 'confesionarioCerrado.png'),
-	('Cripta', 1, 'Parece ser que los sectarios se reunirán aquí', 'cripta.png'),
-	('CriptaPeriodico', 1, 'Este periódico depicta personas desaparecidas', 'criptaPeriodico.png'),
-	('Cuarto Oscuro', 1, 'Está muy oscuro. Hay una rendija casi al nivel del suelo.', 'cuartoOscuro.png'),
-	('Despacho', 1, '¿¿Cómo?? ¿Como es posible que haya una oficina en estas ruinas? Alguien debe habitar este lugar.', 'Despacho.png'),
-	('Dormitorio', 1, 'Qué hacía yo en un dormitorio?', 'dormitorio.png'),
-	('Entrada', 1, 'Esta sala tiene unas rocas que bloquean la puerta. Talvez pueda moverlas con algo.', 'entrada.png'),
-	('FinBueno', 1, 'Has destruido el lugar sectario y salido ileso del lugar. Aún no sabes que te dejó inconsciente, pero te dispones a llamar a las autoridades.', 'finBueno.png'),
-	('FinMalo', 1, 'Has activado el explosivo y la estructura ha colapsado sobre ti, parece que no has podido salir de esta.', 'finMalo.png'),
-	('Nave', 1, 'Increible pensar que este era un lugar de culto, antes...', 'nave.png'),
-	('Nota', 1, 'Creo que esta nota indica que hoy había una reunión sectaria en este lugar.', 'nota.png'),
-	('Pasillo', 1, 'Alto pasillo bro', 'pasillo.png');
+	('CampanarioAbajo', 1, 'Esta es una sala bien espaciosa, hay un campanario ahí arriba.', 'campanarioAbajo'),
+	('CampanarioArriba', 1, '¿Podré ver el exterior desde aquí?', 'campanarioArriba'),
+	('ComedorNave', 10, 'Comedor de la nave', 'comedor_nave'),
+	('ConfesionarioCerrado', 1, 'Parece ser el antiguo confesionario de la iglesia', 'confesionarioCerrado'),
+	('Dormitorio', 1, 'Qué hacía yo en un dormitorio?', 'dormitorio'),
+	('Entrada', 1, 'Esta sala tiene unas rocas que bloquean la puerta. Talvez pueda moverlas con algo.', 'entrada'),
+	('LobbyNave', 10, 'Lobby de la nave', 'lobby_nave'),
+	('MesaNave', 10, 'inicio de la escape room', 'mesa_nave'),
+	('Nave', 1, 'Increible pensar que este era un lugar de culto, antes...', 'nave');
 
 -- Dumping structure for table bilboskpdb.escenarios_inicio
 CREATE TABLE IF NOT EXISTS `escenarios_inicio` (
@@ -98,9 +136,10 @@ CREATE TABLE IF NOT EXISTS `escenarios_inicio` (
   CONSTRAINT `FK_escenarios_inicio_salaonline` FOREIGN KEY (`idSala`) REFERENCES `salaonline` (`idSala`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table bilboskpdb.escenarios_inicio: ~1 rows (approximately)
+-- Dumping data for table bilboskpdb.escenarios_inicio: ~2 rows (approximately)
 INSERT INTO `escenarios_inicio` (`nombreEscenario`, `idSala`) VALUES
-	('Dormitorio', 1);
+	('Dormitorio', 1),
+	('MesaNave', 10);
 
 -- Dumping structure for table bilboskpdb.escenario_flecha
 CREATE TABLE IF NOT EXISTS `escenario_flecha` (
@@ -120,29 +159,19 @@ CREATE TABLE IF NOT EXISTS `escenario_flecha` (
   CONSTRAINT `FK_escenario_flecha_escenario` FOREIGN KEY (`nombreEscenario`) REFERENCES `escenario` (`nombreEscenario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_escenario_flecha_escenario_2` FOREIGN KEY (`nombreEscenarioDestino`) REFERENCES `escenario` (`nombreEscenario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_escenario_flecha_objeto` FOREIGN KEY (`idObjeto`) REFERENCES `objeto` (`idObjeto`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table bilboskpdb.escenario_flecha: ~19 rows (approximately)
+-- Dumping data for table bilboskpdb.escenario_flecha: ~9 rows (approximately)
 INSERT INTO `escenario_flecha` (`idObjeto`, `nombreEscenario`, `nombreEscenarioDestino`, `imagen`, `posicionX`, `posicionY`, `dimensionX`, `dimensionY`, `comentario`, `mensajeError`) VALUES
 	(0, 'Dormitorio', 'ConfesionarioCerrado', 'izquierda', 5, 50, 5, 10, NULL, NULL),
 	(0, 'ConfesionarioCerrado', 'Dormitorio', 'derecha', 85, 50, 5, 10, NULL, NULL),
 	(0, 'ConfesionarioCerrado', 'Entrada', 'izquierda', 5, 50, 5, 10, NULL, NULL),
 	(0, 'Nave', 'Entrada', 'derecha', 85, 50, 5, 10, NULL, NULL),
-	(0, 'Nave', 'Entrada', 'izquierda', 5, 50, 5, 10, NULL, NULL),
 	(0, 'Entrada', 'Nave', 'izquierda', 5, 50, 5, 10, NULL, NULL),
-	(0, 'Nave', 'Pasillo', 'izquierda', 5, 50, 5, 10, NULL, NULL),
-	(0, 'Pasillo', 'Nave', 'abajo', 30, 30, 10, 5, NULL, NULL),
-	(0, 'Entrada', 'ConfesionarioCerrado', 'derecha', 85, 50, 5, 10, NULL, NULL),
-	(0, 'Pasillo', 'CampanarioAbajo', 'arriba', 40, 45, 10, 5, NULL, NULL),
-	(0, 'Pasillo', 'Cuarto Oscuro', 'derecha', 55, 45, 5, 10, NULL, NULL),
-	(0, 'Pasillo', 'AlmacenCajaCerrada', 'derecha', 70, 45, 5, 10, NULL, NULL),
-	(0, 'Pasillo', 'Despacho', 'derecha', 85, 45, 5, 10, NULL, NULL),
-	(0, 'Despacho', 'Pasillo', 'izquierda', 5, 50, 5, 10, NULL, NULL),
-	(0, 'AlmacenCajaCerrada', 'Pasillo', 'izquierda', 5, 50, 5, 10, NULL, NULL),
-	(0, 'Cuarto Oscuro', 'Pasillo', 'izquierda', 5, 50, 5, 10, NULL, NULL),
-	(0, 'CampanarioAbajo', 'Pasillo', 'derecha', 85, 50, 5, 10, NULL, NULL),
-	(0, 'CampanarioAbajo', 'CampanarioArriba', 'arriba', 50, 60, 10, 5, NULL, NULL),
-	(0, 'CampanarioArriba', 'CampanarioAbajo', 'abajo', 35, 30, 10, 5, NULL, NULL);
+	(1, 'MesaNave', 'ComedorNave', 'derecha', 70, 50, 5, 15, NULL, NULL),
+	(1, 'MesaNave', 'LobbyNave', 'izquierda', 50, 50, 5, 15, NULL, NULL),
+	(1, 'LobbyNave', 'MesaNave', 'izquierda', 50, 50, 5, 15, NULL, NULL),
+	(1, 'ComedorNave', 'MesaNave', 'izquierda', 50, 50, 5, 15, NULL, NULL);
 
 -- Dumping structure for table bilboskpdb.horario
 CREATE TABLE IF NOT EXISTS `horario` (
@@ -199,20 +228,20 @@ CREATE TABLE IF NOT EXISTS `objeto` (
 
 -- Dumping data for table bilboskpdb.objeto: ~14 rows (approximately)
 INSERT INTO `objeto` (`idObjeto`, `nombreEscenario`, `nombre`, `idObjetoADesbloquear`, `descripcion`, `imagen`, `visibleInicio`, `visibleInventario`, `desapareceAlUsar`, `dimensionX`, `dimenxionY`, `posicionX`, `posicionY`) VALUES
-	(1, 'CampanarioAbajo', 'Llave dorada', NULL, 'Esta llave parece vieja, deberían poder abrir una de las antiguas puertas de este lugar', 'llaveDorada.png', 0, 1, 1, 0, 0, 0, 0),
+	(1, 'Dormitorio', 'Llave dorada', NULL, 'Esta llave parece vieja, deberían poder abrir una de las antiguas puertas de este lugar', 'llaveDorada.png', 0, 1, 1, 0, 0, 0, 0),
 	(2, 'Dormitorio', 'Rosa roja', NULL, 'Una bonita rosa, es como si hubiera estado aquí mucho tiempo, pero no parece haberse marchitado', 'rosa.png', 1, 1, 1, 0, 0, 0, 0),
-	(3, 'Despacho', 'Aguja minutero', NULL, 'Un Minutero, esto sin duda debe servir para desbloquear algo…', 'minutero.png', 1, 1, 1, 10, 25, 30, 40),
-	(4, 'Nave', 'Aguja segundero', NULL, 'El Segundero, todo reloj debe tener siempre dos manijas', 'segundero.png', 1, 1, 1, 0, 0, 0, 0),
-	(5, 'Cripta', 'Explosivo', NULL, '¿Esto es una bomba? Estaré loco pero si uso esto, fijo salgo de aquí, vivo o muerto...', 'explosivo.png', 1, 1, 1, 0, 0, 0, 0),
-	(6, 'Despacho', 'Maquina de humo', NULL, 'Una maquina de humo.', 'maquinaHumo.png', 1, 1, 1, 0, 0, 0, 0),
-	(7, 'AlmacenCajaAbierta', 'Llave plateada', NULL, 'Llave plateada casi intacta. Tiene un estilo antiguo particular pero parece moderna.', 'llavePlateada.png', 1, 1, 1, 0, 0, 0, 0),
-	(8, 'ConfesionarioCerrado', 'PuertaConfesionario', NULL, 'Está cerrada.', '\r\n', 1, 0, 0, 0, 0, 0, 0),
+	(3, 'Dormitorio', 'Aguja minutero', NULL, 'Un Minutero, esto sin duda debe servir para desbloquear algo…', 'minutero.png', 1, 1, 1, 10, 25, 30, 40),
+	(4, 'Dormitorio', 'Aguja segundero', NULL, 'El Segundero, todo reloj debe tener siempre dos manijas', 'segundero.png', 1, 1, 1, 0, 0, 0, 0),
+	(5, 'Dormitorio', 'Explosivo', NULL, '¿Esto es una bomba? Estaré loco pero si uso esto, fijo salgo de aquí, vivo o muerto...', 'explosivo.png', 1, 1, 1, 0, 0, 0, 0),
+	(6, 'Dormitorio', 'Maquina de humo', NULL, 'Una maquina de humo.', 'maquinaHumo.png', 1, 1, 1, 0, 0, 0, 0),
+	(7, 'Dormitorio', 'Llave plateada', NULL, 'Llave plateada casi intacta. Tiene un estilo antiguo particular pero parece moderna.', 'llavePlateada.png', 1, 1, 1, 0, 0, 0, 0),
+	(8, 'Dormitorio', 'PuertaConfesionario', NULL, 'Está cerrada.', '\r\n', 1, 0, 0, 0, 0, 0, 0),
 	(9, 'Dormitorio', 'JudasCama', 9, 'Qué extraño muñeco, ¿qué podría hacer aquí?', 'judasCama.png', 1, 0, 1, 0, 0, 15, 20),
-	(10, 'CampanarioAbajo', 'Nota', NULL, 'Una nota vieja. Creo que es sobre una reunión de la secta a esta hora, no dice una fecha específica, pero estoy seguro que debe ser en este lugar.', 'nota.png', 1, 1, 0, 0, 0, 0, 0),
-	(11, 'Cripta', 'Periodico', NULL, 'Vaya, un periodico ¿Que dira?', 'periodico.png', 1, 1, 0, 0, 0, 0, 0),
-	(12, 'CampanarioAbajo', 'CuerdaAbajo', NULL, 'Creo que deberia mirar a donde lleva esta cuerda.', 'cuerdaAbajo.png', 1, 0, 1, 0, 0, 0, 0),
-	(13, 'CampanarioArriba', 'CuerdaArriba', 1, 'Creo que deberia mirar a donde lleva esta cuerda.', 'cuerdaArriba.png', 1, 0, 1, 0, 0, 0, 0),
-	(14, 'CampanarioAbajo', 'CuerdaSuelo', NULL, 'Creo que no me servirá de nada', 'cuerdaSuelo.png', 0, 0, 1, 0, 0, 0, 0);
+	(10, 'Dormitorio', 'Nota', NULL, 'Una nota vieja. Creo que es sobre una reunión de la secta a esta hora, no dice una fecha específica, pero estoy seguro que debe ser en este lugar.', 'nota.png', 1, 1, 0, 0, 0, 0, 0),
+	(11, 'Dormitorio', 'Periodico', NULL, 'Vaya, un periodico ¿Que dira?', 'periodico.png', 1, 1, 0, 0, 0, 0, 0),
+	(12, 'Dormitorio', 'CuerdaAbajo', NULL, 'Creo que deberia mirar a donde lleva esta cuerda.', 'cuerdaAbajo.png', 1, 0, 1, 0, 0, 0, 0),
+	(13, 'Dormitorio', 'CuerdaArriba', 1, 'Creo que deberia mirar a donde lleva esta cuerda.', 'cuerdaArriba.png', 1, 0, 1, 0, 0, 0, 0),
+	(14, 'Dormitorio', 'CuerdaSuelo', NULL, 'Creo que no me servirá de nada', 'cuerdaSuelo.png', 0, 0, 1, 0, 0, 0, 0);
 
 -- Dumping structure for table bilboskpdb.partidafisica
 CREATE TABLE IF NOT EXISTS `partidafisica` (
@@ -253,9 +282,9 @@ CREATE TABLE IF NOT EXISTS `partidaonline` (
   KEY `idAnfitrion` (`idAnfitrion`),
   CONSTRAINT `FK_partidaonline_salaonline` FOREIGN KEY (`idSalaOnline`) REFERENCES `salaonline` (`idSala`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_partidaonline_suscriptor` FOREIGN KEY (`idAnfitrion`) REFERENCES `suscriptor` (`idSuscriptor`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=214 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=314 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table bilboskpdb.partidaonline: ~34 rows (approximately)
+-- Dumping data for table bilboskpdb.partidaonline: ~57 rows (approximately)
 INSERT INTO `partidaonline` (`idPartida`, `idSalaOnline`, `idAnfitrion`, `puntaje`, `numeroJugadores`, `nombreGrupo`, `fechaInicio`, `fechaFin`, `visibleRanking`) VALUES
 	(1, 2, 1, 2000, '6', 'Los mosqueteros', '2023-04-09 22:51:02', '2023-04-09 23:51:04', 1),
 	(2, 1, 1, 1800, '3', 'Los mosqueteros', '2023-04-09 22:51:02', '2023-04-09 23:51:04', 1),
@@ -265,32 +294,57 @@ INSERT INTO `partidaonline` (`idPartida`, `idSalaOnline`, `idAnfitrion`, `puntaj
 	(8, 3, 4, 800, '3', 'Los valientes', '2023-04-11 18:00:00', '2023-04-11 19:45:00', 1),
 	(9, 2, 1, 1200, '6', 'Los caballeros', '2023-04-12 21:00:00', '2023-04-13 00:15:00', 1),
 	(11, 1, 4, 600, '2', 'Los cazadores', '2023-04-13 12:00:00', '2023-04-13 14:30:00', 1),
-	(12, 1, 12, 0, '4', 'PRESTOS', '2023-04-18 00:00:00', '2023-04-18 00:00:00', 1),
-	(13, 1, 12, 0, '4', 'PRESTOS', '2023-04-18 00:00:00', '2023-04-18 00:00:00', 1),
-	(14, 1, 12, 0, '4', 'PRESTOS', '2023-04-18 00:00:00', '2023-04-18 00:00:00', 1),
-	(15, 1, 12, 0, '4', 'PRESTOS', '2023-04-18 00:00:00', '2023-04-18 00:00:00', 1),
-	(16, 1, 12, 0, '4', 'PRESTOS', '2023-04-18 00:00:00', '2023-04-18 00:00:00', 1),
-	(17, 1, 12, 0, '4', 'PRESTOS', '2023-04-18 00:00:00', '2023-04-18 00:00:00', 1),
-	(18, 1, 12, 0, '4', 'PRESTOS', '2023-04-18 00:00:00', '2023-04-18 00:00:00', 1),
-	(19, 1, 12, 0, '4', 'PRESTOS', '2023-04-18 00:00:00', '2023-04-18 00:00:00', 1),
-	(20, 1, 12, 0, '4', 'PRESTOS', '2023-04-18 00:00:00', '2023-04-18 00:00:00', 1),
-	(21, 1, 12, 0, '4', 'PRESTOS', '2023-04-18 00:00:00', '2023-04-18 00:00:00', 1),
-	(22, 1, 12, 0, '4', 'PRESTOS', '2023-04-18 00:00:00', '2023-04-18 00:00:00', 1),
-	(23, 1, 12, 0, '4', 'PRESTOS', '2023-04-18 00:00:00', '2023-04-18 00:00:00', 1),
-	(200, 10, 12, 0, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
-	(201, 10, 12, 0, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
-	(202, 10, 12, 0, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
-	(203, 10, 12, 0, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+	(12, 1, 12, 0, '4', 'PRESTOS', '2023-04-09 22:51:02', '2023-04-18 00:00:00', 1),
+	(13, 1, 12, 0, '4', 'PRESTOS', '2023-04-09 22:51:02', '2023-04-18 00:00:00', 1),
+	(14, 1, 12, 0, '4', 'PRESTOS', '2023-04-09 22:51:02', '2023-04-18 00:00:00', 1),
+	(15, 1, 12, 0, '4', 'PRESTOS', '2023-04-09 22:51:02', '2023-04-18 00:00:00', 1),
+	(16, 1, 12, 0, '4', 'PRESTOS', '2023-04-09 22:51:02', '2023-04-18 00:00:00', 1),
+	(17, 1, 12, 0, '4', 'PRESTOS', '2023-04-09 22:51:02', '2023-04-18 00:00:00', 1),
+	(18, 1, 12, 0, '4', 'PRESTOS', '2023-04-09 22:51:02', '2023-04-18 00:00:00', 1),
+	(19, 1, 12, 0, '4', 'PRESTOS', '2023-04-09 22:51:02', '2023-04-18 00:00:00', 1),
+	(20, 1, 12, 0, '4', 'PRESTOS', '2023-04-09 22:51:02', '2023-04-18 00:00:00', 1),
+	(21, 1, 12, 0, '4', 'PRESTOS', '2023-04-09 22:51:02', '2023-04-18 00:00:00', 1),
+	(22, 1, 12, 0, '4', 'PRESTOS', '2023-04-09 22:51:02', '2023-04-18 00:00:00', 1),
+	(23, 1, 12, 0, '4', 'PRESTOS', '2023-04-09 22:51:02', '2023-04-18 00:00:00', 1),
 	(204, 3, 12, 2700, '8', 'SO3', '2023-05-06 00:00:00', '2023-05-06 00:00:00', 1),
 	(205, 3, 12, 2700, '8', 'SO3', '2023-05-06 00:00:00', '2023-05-06 00:00:00', 1),
 	(206, 1, 12, 2700, '8', 'SO1', '2023-05-06 00:00:00', '2023-05-06 00:00:00', 1),
 	(207, 1, 12, 2700, '8', 'SO1', '2023-05-06 00:00:00', '2023-05-06 00:00:00', 1),
 	(208, 1, 12, 2700, '8', 'SO1', '2023-05-06 00:00:00', '2023-05-06 00:00:00', 1),
 	(209, 1, 12, 2700, '8', 'SO1', '2023-05-06 00:00:00', '2023-05-06 00:00:00', 1),
-	(210, 10, 12, 5400, '8', 'SO10', '2023-05-06 00:00:00', '2023-05-06 00:00:00', 1),
-	(211, 10, 12, 5400, '8', 'SO10', '2023-05-06 00:00:00', '2023-05-06 00:00:00', 1),
 	(212, 2, 12, 3600, '8', 'SO2', '2023-05-06 00:00:00', '2023-05-06 00:00:00', 1),
-	(213, 2, 12, 3600, '8', 'SO2', '2023-05-06 00:00:00', '2023-05-06 00:00:00', 1);
+	(213, 2, 12, 3600, '8', 'SO2', '2023-05-06 00:00:00', '2023-05-06 00:00:00', 1),
+	(214, 3, 12, 2700, '8', 'SO3', '2023-05-07 00:00:00', '2023-05-07 00:00:00', 1),
+	(216, 1, 12, 2700, '8', 'SO1', '2023-05-07 00:00:00', '2023-05-07 00:00:00', 1),
+	(217, 1, 12, 1380, '8', 'SO1', '2023-05-07 00:00:00', '2023-05-07 00:00:00', 1),
+	(218, 1, 12, 2700, '8', 'SO1', '2023-05-08 00:00:00', '2023-05-08 00:00:00', 1),
+	(219, 1, 12, 2700, '8', 'SO1', '2023-05-08 00:00:00', '2023-05-08 00:00:00', 1),
+	(220, 1, 12, 2700, '8', 'SO1', '2023-05-08 00:00:00', '2023-05-08 00:00:00', 1),
+	(221, 1, 12, 2700, '8', 'SO1', '2023-05-08 00:00:00', '2023-05-08 00:00:00', 1),
+	(222, 1, 12, 0, '8', 'SO1', '2023-05-08 00:00:00', '2023-05-08 00:00:00', 1),
+	(223, 1, 12, 0, '8', 'SO1', '2023-05-08 00:00:00', '2023-05-08 00:00:00', 1),
+	(224, 1, 12, 0, '8', 'SO1', '2023-05-08 00:00:00', '2023-05-08 00:00:00', 1),
+	(225, 1, 12, 0, '8', 'SO1', '2023-05-08 00:00:00', '2023-05-08 00:00:00', 1),
+	(226, 1, 12, 0, '8', 'SO1', '2023-05-08 00:00:00', '2023-05-08 00:00:00', 1),
+	(227, 1, 12, 0, '8', 'SO1', '2023-05-08 00:00:00', '2023-05-08 00:00:00', 1),
+	(228, 1, 12, 0, '8', 'SO1', '2023-05-08 00:00:00', '2023-05-08 00:00:00', 1),
+	(229, 1, 12, 0, '8', 'SO1', '2023-05-08 00:00:00', '2023-05-08 00:00:00', 1),
+	(230, 1, 12, 0, '8', 'SO1', '2023-05-08 00:00:00', '2023-05-08 00:00:00', 1),
+	(231, 1, 12, 0, '8', 'SO1', '2023-05-08 00:00:00', '2023-05-08 00:00:00', 1),
+	(300, 10, 4, 2700, '8', 'SO3', '2023-05-07 00:00:00', '2023-05-07 01:00:00', 1),
+	(301, 10, 2, 5400, '8', 'SO3', '2023-05-07 00:00:00', '2023-05-07 00:45:00', 1),
+	(302, 10, 7, 3000, '8', 'SO3', '2023-05-07 00:00:00', '2023-05-07 01:00:00', 1),
+	(303, 10, 5, 3000, '8', 'SO3', '2023-05-07 00:00:00', '2023-05-07 01:30:00', 1),
+	(304, 10, 5, 6000, '8', 'SO3', '2023-05-07 00:00:00', '2023-05-07 00:45:00', 1),
+	(305, 10, 1, 2000, '8', 'SO3', '2023-05-07 00:00:00', '2023-05-07 01:30:00', 1),
+	(306, 3, 12, 2700, '8', 'SO3', '2023-05-07 00:00:00', '2023-05-07 00:30:00', 1),
+	(307, 10, 3, 1500, '8', 'SO3', '2023-05-07 00:00:00', '2023-05-07 01:55:00', 1),
+	(308, 10, 6, 3000, '8', 'SO3', '2023-05-07 00:00:00', '2023-05-07 01:25:00', 1),
+	(309, 10, 6, 7000, '8', 'SO3', '2023-05-07 00:00:00', '2023-05-07 00:10:00', 1),
+	(310, 10, 6, 3500, '8', 'SO3', '2023-05-07 00:00:00', '2023-05-07 00:50:00', 1),
+	(311, 10, 6, 3600, '8', 'SO3', '2023-05-07 00:00:00', '2023-05-07 00:55:00', 1),
+	(312, 10, 12, 0, '8', 'SO10', '2023-05-08 00:00:00', '2023-05-08 00:00:00', 1),
+	(313, 10, 12, 0, '8', 'SO10', '2023-05-08 00:00:00', '2023-05-08 00:00:00', 1);
 
 -- Dumping structure for table bilboskpdb.pista
 CREATE TABLE IF NOT EXISTS `pista` (
@@ -419,12 +473,12 @@ CREATE TABLE IF NOT EXISTS `salaonline` (
 
 -- Dumping data for table bilboskpdb.salaonline: ~7 rows (approximately)
 INSERT INTO `salaonline` (`idSala`, `nombre`, `dificultad`, `tematica`, `descripcion`, `tiempoMax`, `jugadoresMin`, `jugadoresMax`, `edad_recomendada`, `disponible`) VALUES
-	(1, 'Perdidos de la mano de Dios', 'Fácil', 'Terror', 'Vas de camino en medio del bosque, donde eres abducido por un loco perteneciente a una secta. Te das cuenta que ahora estás en un bosque, perdido de la mano de Dios…', 45, 1, 8, 16, 1),
+	(1, 'Perdidos de la mano de Dios', 'Media', 'Terror', 'Vas de camino en medio del bosque, donde eres abducido por un loco perteneciente a una secta. Te das cuenta que ahora estás en un bosque, perdido de la mano de Dios…', 60, 1, 8, 16, 1),
 	(2, 'El Gimnasio Infernal', 'Difícil', 'Suspenso', 'En un gimnasio de élite, un grupo de crossfiteros debe luchar contra una conspiración interna, encontrar al impostor entre ellos y superar pruebas físicas y mentales para escapar antes de que sea muy tarde.', 60, 2, 8, 18, 1),
 	(3, 'Hasta la luz del Alba', 'Media', 'Misterio', 'Un grupo de amigos se encuentran la escena de una cabaña abandonada en el medio del bosque, curiosamente encuentran pistas sobre los que solían habitarla, y la tragedia que les precedió. Terminan siendo víctima de algo más allá de la comprensión humana.', 45, 1, 8, 18, 1),
 	(5, 'El Museo Maldito', 'Difícil', 'Terror', 'Un grupo de investigadores debe resolver el misterio detrás de una serie de extraños sucesos en un museo abandonado. Descubrirán que el lugar está maldito y tendrán que enfrentarse a las fuerzas sobrenaturales para sobrevivir.', 90, 3, 8, 18, 1),
 	(9, 'El Asesino del Ajedrez', 'Media', 'Misterio', 'En un torneo de ajedrez de élite, uno de los jugadores es encontrado muerto en su habitación de hotel. El resto de los participantes deberán resolver el crimen antes de que el asesino ataque de nuevo.', 60, 4, 8, 16, 1),
-	(10, 'Traición en el Espacio', 'Difícil', 'Sci-fi', 'Como tripulante de una nave espacial, tienes la misión de descubrir al impostor que se encuentra entre la tripulación. Resuelve acertijos y tareas mientras tratas de encontrar pistas para descubrir al impostor antes de que sea demasiado tarde.', 90, 4, 8, 16, 1),
+	(10, 'Traición en el Espacio', 'Fácil', 'Sci-fi', 'Como tripulante de una nave espacial, tienes la misión de descubrir al impostor que se encuentra entre la tripulación. Resuelve acertijos y tareas mientras tratas de encontrar pistas para descubrir al impostor antes de que sea demasiado tarde.', 30, 1, 8, 16, 1),
 	(11, 'La sala del terror', 'Facil', 'terrrior', 'Sala de pruebas', 45, 1, 8, 18, 1);
 
 -- Dumping structure for view bilboskpdb.salas_mas_jugadas
@@ -448,7 +502,7 @@ CREATE TABLE IF NOT EXISTS `suscriptor` (
   `idSuscriptor` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(100) NOT NULL DEFAULT '',
   `pass` varchar(64) NOT NULL,
-  `alias` varchar(30) NOT NULL,
+  `alias` varchar(15) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `apellidos` varchar(255) NOT NULL,
   `fech_nac` date NOT NULL,
@@ -462,21 +516,21 @@ CREATE TABLE IF NOT EXISTS `suscriptor` (
 -- Dumping data for table bilboskpdb.suscriptor: ~11 rows (approximately)
 INSERT INTO `suscriptor` (`idSuscriptor`, `email`, `pass`, `alias`, `nombre`, `apellidos`, `fech_nac`, `telefono`, `imagen`, `activo`) VALUES
 	(1, 'JuanjoElCamioneroExtremo@gmail.co.uk', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'JuanjoExtremo', 'Juanjo', 'Perez Agujeros', '1987-10-10', 177565252, 'defaults/1.png', 1),
-	(2, 'aceitunocantero@hotmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Aceitunito', 'Eneko', 'Figeroa Cantero', '1979-04-17', 125265112, 'defaults/1.png', 1),
-	(3, 'rosamargarita@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'RosaMarg', 'Rosa', 'Margarita', '1995-02-28', 987654321, 'defaults/1.png', 1),
-	(4, 'aventurasconpepe@yahoo.es', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'PepeAventuras', 'José', 'González', '1985-07-12', 741258963, 'defaults/1.png', 1),
-	(5, 'exploradoraindigo@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'IndigoExplorer', 'Lucía', 'Gómez', '1998-11-05', 365874123, 'defaults/1.png', 1),
-	(6, 'travesiasalvaje@hotmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'AventureroSalvaje', 'Pedro', 'Ramírez', '1972-09-20', 987654789, 'defaults/1.png', 1),
-	(7, 'aventurasenelamazonas@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'AmazonAdventurer', 'María', 'López', '1988-03-15', 741236985, 'defaults/1.png', 1),
+	(2, 'aceitunocantero@hotmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Aceitunito', 'Eneko', 'Figeroa Cantero', '1979-04-17', 125265112, 'defaults/8.png', 1),
+	(3, 'rosamargarita@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'RosaMarg', 'Rosa', 'Margarita', '1995-02-28', 987654321, 'defaults/7.png', 1),
+	(4, 'aventurasconpepe@yahoo.es', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'PepeAventuras', 'José', 'González', '1985-07-12', 741258963, 'defaults/6.png', 1),
+	(5, 'exploradoraindigo@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'IndigoExplorer', 'Lucía', 'Gómez', '1998-11-05', 365874123, 'defaults/5.png', 1),
+	(6, 'travesiasalvaje@hotmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'AventureroSalva', 'Pedro', 'Ramírez', '1972-09-20', 987654789, 'defaults/4.png', 1),
+	(7, 'aventurasenelamazonas@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'AmazonAdventure', 'María', 'López', '1988-03-15', 741236985, 'defaults/2.png', 1),
 	(8, 'admin@bilboskp.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'admin', 'admin', 'admin', '1999-10-09', 0, 'defaults/1.png', 1),
-	(11, 'mlinares@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'mlinares', 'Mikel', 'Linares', '1983-10-10', NULL, 'defaults/1.png', 1),
+	(11, 'mlinares@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'mlinares', 'Mikel', 'Linares', '1983-10-10', 0, 'defaults/1.png', 1),
 	(12, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'administrador', 'Bilbo', 'SKP', '2023-10-10', 7, 'defaults/1.png', 1),
 	(24, 'admin@google.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'admina', 'admin', 'admine', '2023-05-02', 123, 'defaults/1.png', 1);
 
 -- Dumping structure for view bilboskpdb.suscriptoresenpartida
 -- Creating temporary table to overcome VIEW dependency errors
 CREATE TABLE `suscriptoresenpartida` (
-	`alias` VARCHAR(30) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`alias` VARCHAR(15) NOT NULL COLLATE 'utf8mb4_general_ci',
 	`nombreGrupo` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
 	`nombre` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
 	`fechaInicio` DATETIME NOT NULL
