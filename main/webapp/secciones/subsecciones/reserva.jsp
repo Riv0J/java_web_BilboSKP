@@ -70,7 +70,7 @@
             </section>
             <section id="caja4">
                 <div class="subcaja4">
-                    <input type="button" value="Cancelar reserva" onclick="alert(Tu reserva ha sido cancelada)">
+                    <input type="button" value="Cancelar reserva" onclick="alert(Tu reserva ha sido cancelada, recibirás tu reemboloso en un plazo de 48 horas)">
                 </div>
             </section>
 

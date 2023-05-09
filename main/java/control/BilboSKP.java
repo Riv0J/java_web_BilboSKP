@@ -512,7 +512,7 @@ public class BilboSKP extends DBC {
 			Vector<PartidaOnline> vectorPartidas = new Vector<PartidaOnline>();
 			// hacer sentencia sql para crear el ranking
 			String sentenciaSQL = "SELECT * FROM `partidaonline` where idSalaOnline='" + idSala
-					+ "' order by puntaje desc limit 10;";
+					+ "' and visibleRanking = 1 order by puntaje desc limit 10;";
 			// hacer conexion
 			BilboSKP conexion = new BilboSKP();
 			ResultSet resultado = conexion.SQLQuery(sentenciaSQL);

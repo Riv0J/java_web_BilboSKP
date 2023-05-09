@@ -71,9 +71,10 @@ iframe{
 .social_media{
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	justify-content: right;
-	margin-top:3%;
+	margin:5%;
+}
+.sc_title{
+	margin-bottom:5%;
 }
 .social_media img{
 	width: 6%;
@@ -81,9 +82,10 @@ iframe{
 .sc_box{
 	display:flex;
 	flex-direction:row;
+	margin-bottom:3%;
 }
 .sc_box a{ 
-	width:40%;
+	
 }
 .sc_box p{
 	width:5%;
