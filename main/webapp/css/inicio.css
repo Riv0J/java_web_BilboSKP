@@ -64,7 +64,7 @@ header button {
     display: flex;
     flex-direction: row;
   }
-  .llave{
+ /* .llave{
     width: 30%;
     position: absolute;
     top: 27%;
@@ -87,7 +87,7 @@ header button {
     justify-content: end;
     align-items: end;
     
-  }
+  }*/
 
   @keyframes lampara {
     0% {
