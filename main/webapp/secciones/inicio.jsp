@@ -20,6 +20,7 @@ try {
 	<jsp:include page="../plantillas/unirse.jsp"></jsp:include>
 	<section class="principal">
 		<div id="caja_principal">
+		
 			<h1 class="bilbosk_h1">Experimenta nuestras salas de escape</h1>
 			<p class="bilboskp_p">Sumérgete en una experiencia de juego única
 				sin salir de tu casa con nuestras emocionantes salas de escape
