@@ -24,14 +24,14 @@ sesion.setAttribute("sus", sus);
                             <label for=""><strong>Nombre:</strong></label>
                             <div class="edit">
                                 <input type="text" name="nombre" id="nombre" value="<%=sus.getNombre()%>">
-                                <img src="img_web/icons/edit_icon.png" alt="">
+                              	<%--  <img src="img_web/icons/edit_icon.png" alt="">--%> 
                             </div>
                         </div>
                         <div class="box0">
                             <label for="">Apellido:</label>
                             <div class="edit">
                                 <input type="text" name="apellido" id="apellido" value="<%=sus.getApellidos()%>">
-                            	<img src="img_web/icons/edit_icon.png" alt="">	
+                            	<%--  <img src="img_web/icons/edit_icon.png" alt="">--%> 
                             </div>
                         </div>
                     </div>
@@ -40,7 +40,7 @@ sesion.setAttribute("sus", sus);
                             <label for="">Email:</label>
                             <div class="edit">
                                 <input type="email" name="email" id="email" value="<%=sus.getEmail()%>">
-                                <img src="img_web/icons/edit_icon.png" alt="">
+                                <%--  <img src="img_web/icons/edit_icon.png" alt="">--%> 
                             </div>
                             
                         </div>
@@ -48,7 +48,7 @@ sesion.setAttribute("sus", sus);
                             <label for="">Alias:</label>
                             <div class="edit">
                                 <input type="text" name="alias" id="alias" value="<%=sus.getAlias()%>">
-                               <img src="img_web/icons/edit_icon.png" alt="">
+                              <%--  <img src="img_web/icons/edit_icon.png" alt="">--%> 
                             </div>
                         </div>
                     </div>
@@ -57,14 +57,14 @@ sesion.setAttribute("sus", sus);
                             <label for="">Fecha de nacimiento</label>
                             <div class="edit">
                                 <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="">
-                                <img src="img_web/icons/edit_icon.png" alt="">
+                                <%--  <img src="img_web/icons/edit_icon.png" alt="">--%> 
                             </div>
                         </div>
                         <div class="box0">
                             <label for="">Télefono:</label>
                             <div class="edit">
                                 <input type="text" name="telefono" id="telefono" value="<%=sus.getTelefono()%>">
-                                <img src="img_web/icons/edit_icon.png" alt="">
+                                <%--  <img src="img_web/icons/edit_icon.png" alt="">--%> 
                             </div>
                         </div>
                     </div>
@@ -83,19 +83,11 @@ sesion.setAttribute("sus", sus);
                                 <input type="text" name="" id="">
                                	<img src="img_web/icons/edit_icon.png" alt="">
                             </div>
-                        </div> 
+                        </div>
                         
                     </div>--%>
-                    <div class="form5" >
-                    <label class="switch">
-  						<input type="checkbox">
-  						<span class="slider"></span>
-					</label>
-					<label class="switch">
-  						<input type="checkbox">
-  						<span class="slider round"></span>
-					</label>
-                     <%--<input type="submit" value="Guardar cambios">--%>  
+                   	<div>
+                     	<input type="submit" value="Guardar cambios"> 
                     </div>
                 </form>
                 <!--<form class="caja4">
@@ -117,7 +109,15 @@ sesion.setAttribute("sus", sus);
                     <h2>¿Deseas darte de baja?</h2>
                     <p>Al darte de baja se perderán tus avances y en caso de tener cupones no canjeados
                         se te hará un reembolso</p>
-                    <input type="button" value="Darse de baja"></a>
+                    <div class="form5" >
+                    <label class="switch">
+  						<input type="checkbox">
+  						<span class="slider"></span>
+					</label>
+					<label class="switch">
+  						<input type="checkbox">
+  						<span class="slider round"></span>
+					</label>
                 </div>
 </div>
     
