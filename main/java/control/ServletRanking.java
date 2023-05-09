@@ -52,15 +52,6 @@ public class ServletRanking extends HttpServlet {
 			}
 			System.out.println("ServletRanking: idSala = " + idSala);
 
-			for (Map.Entry<String, Sala> par : mapaSalas.entrySet()) {
-				par.getKey();
-				System.out.println(par.getKey());
-				if (par.getValue() instanceof SalaOnline) {
-					salasAMostrar.put(par.getKey(), (SalaOnline) par.getValue());
-					System.out.println(par.getValue().getNombre());
-				}
-			}
-
 			// sala viendose en este momento
 			Sala salaSeleccionada = Sala.getSalaPorId(idSala);
 			if (salaSeleccionada instanceof SalaFisica) {

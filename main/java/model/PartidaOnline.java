@@ -31,6 +31,7 @@ public class PartidaOnline extends Partida {
 	private static HashMap<Integer, PartidaOnline> partidasEnCurso = new HashMap<Integer, PartidaOnline>();
 	private Vector<MensajeChat> lineasChat;
 	private boolean superada = false;
+	private Cupon cupon;
 
 	// el sistema usara este constructor para el inicio de una nueva partida
 	public PartidaOnline(Sala sala, Suscriptor suscriptorAnfitrion, HttpSession sesionAnfitrion, int numJugadores,
@@ -141,10 +142,13 @@ public class PartidaOnline extends Partida {
 		return false;
 	}
 
-	public void finalizarPartida() {
+	public PartidaOnline finalizarPartida() {
 		// quitar la partida de la coleccion de partidas en organizando
 		partidasOrganizando.remove(codInvitacion);
-
+		
+		// quitar la partida de la coleccion de partidas en curso
+		partidasEnCurso.remove(codInvitacion);
+		
 		// establecer el tiempo de fin de la partida
 		this.fechaFin = new Date();
 
@@ -153,7 +157,7 @@ public class PartidaOnline extends Partida {
 
 		// establecer el puntaje de la partida
 		this.setPuntaje(calcularPuntaje());
-		
+		System.out.println("Puntaje de partida="+this.getPuntaje());
 		// guardar la partida online en la bd si estaba en curso
 		if(getEstado().equals(PartidaOnline.PARTIDA_EN_CURSO)) {
 			BilboSKP.guardarPartidaOnline(this);
@@ -179,6 +183,7 @@ public class PartidaOnline extends Partida {
 		// establecer el estado de finalizando partida
 		this.estado = PartidaOnline.PARTIDA_FINALIZANDO;
 		System.out.println("PO "+this.getCodInvitacion()+": Ha finalizado la partida.");
+		return this;
 	}
 
 	public void cancelarPartida() {
@@ -204,7 +209,9 @@ public class PartidaOnline extends Partida {
 		int penalizacionPistas = calcularPenalizacionPistas();
 		int puntajeBonus = 0;
 		if (superada == true) {
+			System.out.println("SALA SUPERADA!!!");
 			puntajeBonus = calcularPuntajeBonus();
+			puntajeBonus += 5000;
 		}
 		int puntajeTotal = puntajeBase - penalizacionPistas + puntajeBonus;
 		if (puntajeTotal < 0) {
@@ -226,8 +233,8 @@ public class PartidaOnline extends Partida {
 	}
 
 	public int calcularPuntajeBonus() {
-		System.out.println(getSala().getTiempoMax() + " - " + getTiempoMinutos());
-		return (getSala().getTiempoMax() - getTiempoMinutos()) * 60;
+		int puntaje = (getSala().getTiempoMax()*60 - calcularTiempoSegundos());
+		return puntaje;
 	}
 
 	public int getVisibleRanking() {
@@ -413,5 +420,12 @@ public class PartidaOnline extends Partida {
 
 	public void setSuperada(boolean superada) {
 		this.superada = superada;
+	}
+
+	public void setCupon(Cupon cupon) {
+		this.cupon = cupon;
+	}
+	public Cupon getCupon() {
+		return cupon;
 	}
 }

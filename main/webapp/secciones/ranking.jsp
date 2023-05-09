@@ -58,7 +58,6 @@ Vector<PartidaOnline> finalistas = new Vector<PartidaOnline>();
 		<ol>
 			<% for(int i = 0; i<partidas.size(); i++){
 				PartidaOnline partida = partidas.get(i); 
-				System.out.println(partidas.size());
 				double animation_duration = (0.15*i)+0.2;
 				%>
 				<li class="caja_linea_ranking" style="animation-delay: <%=animation_duration%>s; background-color: <%=BilboskpColor.obtenerColorDegradado(i)%>;"> 

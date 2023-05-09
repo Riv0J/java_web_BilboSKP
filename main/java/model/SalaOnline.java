@@ -9,12 +9,14 @@ public class SalaOnline extends Sala{
 	//este hashmap contendrá todas las salas online disponibles
 	private static HashMap<Integer, SalaOnline> salasOnlineCargadas = new HashMap<Integer, SalaOnline>();
 	private Escenario escenarioInicio;
+	private int disponible;
 	private HashMap<String,Escenario> mapaEscenarios = new HashMap<String,Escenario>();
 	public SalaOnline(int idSala, String nombre, String dificultad, String tematica, String descripcion,
-			int tiempoMax, int jugadoresMin, int jugadoresMax, int edad_recomendada, Escenario escenarioInicio, HashMap<String,Escenario> mapaEscenarios) {
+int tiempoMax, int jugadoresMin, int jugadoresMax, int edad_recomendada, Escenario escenarioInicio, HashMap<String,Escenario> mapaEscenarios, int disponible) {
 		super(idSala, nombre, dificultad, tematica, descripcion, tiempoMax, jugadoresMin, jugadoresMax, edad_recomendada);
 		setEscenarioInicio(escenarioInicio);
 		setMapaEscenarios(mapaEscenarios);
+		setDisponible(disponible);
 	}
 	public SalaOnline(int idSala, String nombre, String dificultad, String tematica, String descripcion) {
 		super(idSala,nombre,dificultad,tematica,descripcion);
@@ -60,5 +62,11 @@ public class SalaOnline extends Sala{
 	}
 	public Escenario getEscenarioPorNombre(String nombreEscenario) {
 		return mapaEscenarios.get(nombreEscenario);
+	}
+	public int getDisponible() {
+		return disponible;
+	}
+	public void setDisponible(int disponible) {
+		this.disponible = disponible;
 	}
 }

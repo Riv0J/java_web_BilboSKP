@@ -15,7 +15,7 @@
 	        </div>
 	        <div class="linea_login" id="linea_extras">
 	            <a href="index.jsp?sec=subscribe"> <li class="bilboskp_li" >No estoy suscrito</li></a>
-	            <a href="index.jsp?sec=subscribe"> <li class="bilboskp_li" >Olvidé mi contraseña</li></a>
+	            <!-- <a href="index.jsp?sec=subscribe"> <li class="bilboskp_li" >Olvidé mi contraseña</li></a>-->
 	        </div>
 	    </form>
 </section>

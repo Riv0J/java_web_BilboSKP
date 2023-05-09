@@ -47,6 +47,17 @@ public class Partida {
 	    int tiempoMinutos = (int) TimeUnit.MILLISECONDS.toMinutes(tiempoMillis);
 	    return tiempoMinutos;
 	}
+	public int calcularTiempoSegundos() {
+		return calcularTiempoSegundos(this.fechaInicio, this.fechaFin);
+	}
+	public static int calcularTiempoSegundos(Date fechaInicio, Date fechaFin) {
+		if(fechaInicio==null) {
+			fechaInicio = new Date();
+		}
+	    long tiempoMillis = fechaFin.getTime() - fechaInicio.getTime();
+	    int tiempoSegundos = (int) TimeUnit.MILLISECONDS.toSeconds(tiempoMillis);
+	    return tiempoSegundos;
+	}
 	public int getPuntaje() {
 		return puntaje;
 	}

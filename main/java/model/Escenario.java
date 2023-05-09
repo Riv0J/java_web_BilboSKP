@@ -4,17 +4,19 @@ import java.util.Vector;
 
 public class Escenario {
 	private String nombreEscenario, imagen, descripcion;
+	private int jsp;
 	private Vector<Flecha> flechas;
 	private Vector<Objeto> objetos;
 	private Vector<Puzzle> puzzles;
 	public Escenario(String nombreEscenario, String imagen, String descripcion, Vector<Flecha> vectorFlechas, Vector<Objeto> vectorObjetos,
-			Vector<Puzzle> vectorPuzzle) {
+			Vector<Puzzle> vectorPuzzle, int jsp) {
 		setNombreEscenario(nombreEscenario);
 		setImagen(imagen);
 		setDescripcion(descripcion);
 		setFlechas(vectorFlechas);
 		setObjetos(vectorObjetos);
 		setPuzzles(vectorPuzzle);
+		setJsp(jsp);
 	}
 	//constructor alternativo
 	public Escenario(String nombreEscenario, String imagen, String descripcion) {
@@ -65,5 +67,11 @@ public class Escenario {
 	}
 	public void setNombreEscenario(String nombreEscenario) {
 		this.nombreEscenario = nombreEscenario;
+	}
+	public int getJsp() {
+		return jsp;
+	}
+	public void setJsp(int jsp) {
+		this.jsp = jsp;
 	}
 }

@@ -11,7 +11,7 @@
 	            <input class="bilboskp_submit" type="submit" value="Unirse a partida">
 	        </div>
 	        <div class="linea_unirse" id="linea_extras">
-	            <a href="index.jsp?sec=contacto"> <li class="bilboskp_li" >¿Cómo funciona unirse a una partida?</li></a>
+	            <a href="index.jsp?sec=contacto#question4"> <li class="bilboskp_li" >¿Cómo funciona unirse a una partida?</li></a>
 	        </div>
 	    </form>
 </section>

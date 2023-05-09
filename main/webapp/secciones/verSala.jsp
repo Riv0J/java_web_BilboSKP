@@ -91,12 +91,11 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 						<label for="fecha_reserva">Escoge una fecha:</label> 
 						<select id="fechas" class="bilboskp_select" name="fechaSeleccionada">
 					    <% if(fechaSeleccionada == null) { %>
-						    		<option value="" selected="" >Selecciona una fecha</option>
+						    		 <option value="" selected="" >Selecciona una fecha</option>
 							    	 <% for(LocalDate localDate: fechasAMostrar){
 							                String localDateString = StringHelper.getLocalDateString(localDate);  %>
 							                <option value="<%=localDateString%>"><%=localDateString%></option>
 							         <% } %>
-						    	 
 					      <% } else if (fechaSeleccionada != null){ 
 					    	String fechaSeleccionadaString = StringHelper.getLocalDateString(fechaSeleccionada);
 					          for(LocalDate localDate: fechasAMostrar){
@@ -165,14 +164,35 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 					Podrás invitar a tus amigos cuando estés organizando la partida.</p>
 			</div>
 			<div id="contenedor_boton">
-				<a href=<%=enlaceBoton%>>
-					<button id="boton_reservar_organizar" class="bilboskp_icon_button">
-						<i class="<%=Icon.getIconHTMLClass(modalidad)%>"></i>
-						<div>
-							<%=textoBoton%>
-						</div>
-					</button>
-				</a>
+				<% if (esSalaFisica == false) {
+						if (((SalaOnline) salaAMostrar).getDisponible() == 1){ %>
+							<a href="<%=enlaceBoton%>">
+								<button id="boton_reservar_organizar" class="bilboskp_icon_button">
+									<i class="<%=Icon.getIconHTMLClass(modalidad)%>"></i>
+									<div>
+										<%=textoBoton%>
+									</div>
+								</button>
+							</a>
+						<% } else {%>
+							<a href="./salas">
+								<button id="boton_reservar_organizar" class="bilboskp_icon_button">
+									<div>
+										Esta sala no está disponible actualmente
+									</div>
+								</button>
+							</a>
+						<% } %>
+				<% } else { %>
+					<a href=<%=enlaceBoton%>>
+						<button id="boton_reservar_organizar" class="bilboskp_icon_button">
+							<i class="<%=Icon.getIconHTMLClass(modalidad)%>"></i>
+							<div>
+								<%=textoBoton%>
+							</div>
+						</button>
+					</a>
+				<% } %>
 			</div>
 			<% } %>
 		</div>
@@ -186,7 +206,6 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 				animation-timing-function: ease;
 				opacity: 1;
 			}
-		
 			@keyframes fondo2 {
 			  0% {
 			  opacity: 1;

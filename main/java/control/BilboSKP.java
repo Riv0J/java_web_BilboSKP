@@ -117,12 +117,13 @@ public class BilboSKP extends DBC {
 				int jugadoresMin = resultado.getInt("jugadoresMin");
 				int jugadoresMax = resultado.getInt("jugadoresMax");
 				int edadRecomendada = resultado.getInt("edad_Recomendada");
+				int disponible = resultado.getInt("disponible");
 				// obtener el escenario de inicio de esta sala
 				Escenario escenarioInicio = getEscenarioInicio(idSala);
 				// obtener hashmap de escenarios de esta sala
 				HashMap<String, Escenario> mapaEscenarios = getEscenarios(idSala);
 				SalaOnline sala = new SalaOnline(idSala, nombre, dificultad, tematica, descripcion, tiempoMax,
-						jugadoresMin, jugadoresMax, edadRecomendada, escenarioInicio, mapaEscenarios);
+						jugadoresMin, jugadoresMax, edadRecomendada, escenarioInicio, mapaEscenarios, disponible);
 				// agregar sala al vector
 				vectorSalasOnline.add(sala);
 			}
@@ -146,6 +147,7 @@ public class BilboSKP extends DBC {
 			String nombreEscenario = resultado.getString("nombreEscenario");
 			String descripcion = resultado.getString("descripcion");
 			String imagen = resultado.getString("imagen");
+			int esJsp = resultado.getInt("esJsp");
 			System.out.println("> Obtenido un escenario de inicio:" + nombreEscenario);
 			// obtener las flechas de este escenario
 			Vector<Flecha> vectorFlechas = cargarFlechasEscenario(nombreEscenario);
@@ -153,7 +155,7 @@ public class BilboSKP extends DBC {
 			Vector<Objeto> vectorObjetos = new Vector<Objeto>();
 			// TODO obtener los puzzles de este escenario
 			Vector<Puzzle> vectorPuzzle = new Vector<Puzzle>();
-			return new Escenario(nombreEscenario, imagen, descripcion, vectorFlechas, vectorObjetos, vectorPuzzle);
+			return new Escenario(nombreEscenario, imagen, descripcion, vectorFlechas, vectorObjetos, vectorPuzzle, esJsp);
 		}
 		return null;
 	}
@@ -170,13 +172,14 @@ public class BilboSKP extends DBC {
 				System.out.println(">> Obteniendo escenario de sala " + idSalaOnline + ": " + nombreEscenario);
 				String descripcion = resultado.getString("descripcion");
 				String imagen = resultado.getString("imagen");
+				int esJsp = resultado.getInt("esJsp");
 				// obtener las flechas de este escenario
 				Vector<Flecha> vectorFlechas = cargarFlechasEscenario(nombreEscenario);
 				// TODO obtener los objetos de este escenario
 				Vector<Objeto> vectorObjetos = new Vector<Objeto>();
 				// TODO obtener los puzzles de este escenario
 				Vector<Puzzle> vectorPuzzle = new Vector<Puzzle>();
-				Escenario escenario = new Escenario(nombreEscenario, imagen, descripcion, vectorFlechas, vectorObjetos, vectorPuzzle);
+				Escenario escenario = new Escenario(nombreEscenario, imagen, descripcion, vectorFlechas, vectorObjetos, vectorPuzzle, esJsp);
 				mapaEscenarios.put(nombreEscenario, escenario);
 			}
 			return mapaEscenarios;

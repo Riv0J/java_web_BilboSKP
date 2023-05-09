@@ -59,6 +59,7 @@ public class ServletJugar extends HttpServlet {
 								request.getRequestDispatcher("index.jsp?sec=organizar&codInvitacion="+codInvitacion).forward(request, response);
 								return;
 							}
+							po.setCupon(cupon);
 							// mandar al sus al juego
 							so = (SalaOnline) po.getSala();
 							Escenario escenarioAMostrar = so.getEscenarioInicio();
@@ -72,8 +73,7 @@ public class ServletJugar extends HttpServlet {
 								request.getRequestDispatcher("juego.jsp").forward(request, response);
 							}
 						}
-					} else {
-						
+					} else {	
 					}
 				}
 				break;
@@ -104,6 +104,15 @@ public class ServletJugar extends HttpServlet {
 				request.setAttribute("partidaOnline", po);
 				// redireccionar al juego.jsp
 				request.getRequestDispatcher("juego.jsp").forward(request, response);
+				break;
+			case "finalizar":
+				po= PartidaOnline.getPartidaEnCurso(codInvitacion);
+				po.setSuperada(true);
+				po.finalizarPartida();
+				BilboSKP.cambiarEstadoCupon("Gastado", po.getCupon().getId());
+				request.setAttribute("partidaOnline", po);
+				// redireccionar
+				request.getRequestDispatcher("index.jsp?sec=finalizarPartida").forward(request, response);
 				break;
 			default:
 				response.sendRedirect("./salas");

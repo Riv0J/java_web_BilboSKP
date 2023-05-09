@@ -48,7 +48,6 @@ String tituloPagina = seccion.substring(0, 1).toUpperCase() + seccion.substring(
 			<a id="logo_grande" href="./index.jsp?sec=inicio" class="logo"> <img  src="img_web/logos/logo-bilboskp-es.png"></a>
 			<a id="logo_peque" href="./index.jsp?sec=inicio" class="logo"> <img  src="img_web/logos/500x400-cuadrado-2.png"></a>
 		</div>
-	
 		<ul class="navbar">
 			<a href="./salas?buscar=todas&m=todas&t=todas&d=todas"><li>Salas de escape</li></a>
 			<a href="./ranking"><li>Ranking</li></a>

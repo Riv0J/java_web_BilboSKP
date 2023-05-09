@@ -1,6 +1,6 @@
 <%@ page
-	import="java.util.Vector, java.util.HashMap, java.util.Map, model.Flecha,java.util.Date, model.Escenario, 
-	model.Sala, model.SalaOnline,model.MensajeChat,model.Invitado,model.Anfitrion,model.Jugador,view.StringHelper,view.DateHelper,view.Icon,model.PartidaOnline,model.Suscriptor"%>
+	import="java.util.Vector, java.util.HashMap, java.util.Enumeration, java.util.Map, model.Flecha,java.util.Date, model.Escenario, 
+	model.Sala, model.SalaOnline,model.MensajeChat, java.net.URLEncoder, model.Invitado,model.Anfitrion,model.Jugador,view.StringHelper,view.DateHelper,view.Icon,model.PartidaOnline,model.Suscriptor"%>
 <%
 //obtener datos del request/sesion
 PartidaOnline partidaOnline = (PartidaOnline) request.getAttribute("partidaOnline");
@@ -81,17 +81,16 @@ Vector<Flecha> vectorFlechas = (Vector<Flecha>) request.getAttribute("vectorFlec
 				int posX = flecha.getPosicionX(); int posY = flecha.getPosicionY(); int dimX = flecha.getdimensionX(); int dimY =flecha.getdimensionY();
 				String imagenFlecha = flecha.getImagen(); %>
 				<a href="./jugar?accion=cambioEscenario&codInvitacion=<%=codInvitacion%>&idEscenarioDestino=<%=flecha.getIdEscenarioDestino()%>" class="flecha" style="position: fixed; 
-				bottom: <%=posX%>%; left: <%=posY%>%; /*width: <%=dimX%>%;*/ height:<%=dimY%>%;">
+				bottom: <%=posY%>%; left: <%=posX%>%; /*width: <%=dimX%>%;*/ height:<%=dimY%>%;">
 					<img src="img_salas/flechas/<%=imagenFlecha%>.png">
 				</a>
 			<% } %>
 		</section>
-		<section id="caja_interactibles">
-
-			<div class="objeto">
-				<img src="img_salas/objetos/cuadrado.png">
-			</div>
-		</section>
+		<%if (escenarioAMostrar.getJsp()==1) {
+			String ruta = "plantillas/"+escenarioAMostrar.getImagen()+".jsp";
+		System.out.println(ruta);%>
+		<jsp:include page="<%=ruta%>"></jsp:include>
+		<% } %>
 	</main>
 </body>
 <style>
