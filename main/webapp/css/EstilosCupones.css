@@ -27,9 +27,13 @@ body {
 }
 
 #TextosEncabezado p {
-	font-size: 2em;
+    font-size: 1.5em;
+    padding-right: 12%;
 }
 
+#CuponImagen{
+    margin-left: 29%;
+}
 h1 {
 	font-size: 2em;
 }
