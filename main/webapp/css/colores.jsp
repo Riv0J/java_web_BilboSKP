@@ -9,5 +9,7 @@
 	--text-color: whitesmoke;
 	--text-color-main: #FF7070; /* color acento rojo suave */
 	--outline-color-main: red;
+	--ranking-color-inpar:#414141;
+	--ranking-color-par:#2c2c2c;
 }
 </style>

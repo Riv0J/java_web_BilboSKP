@@ -1,7 +1,7 @@
 <%@page import="control.BilboSKP"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"
-	import="java.util.HashMap,java.util.ArrayList,java.util.Map, java.util.Vector, java.text.SimpleDateFormat, model.Sala, model.PartidaOnline, model.Partida"%>
+	import="java.util.HashMap,java.util.ArrayList,java.util.Map, java.util.Vector, java.text.SimpleDateFormat, model.Sala, model.PartidaOnline, model.Partida, view.BilboskpColor"%>
 
 
 <%
@@ -61,7 +61,7 @@ Vector<PartidaOnline> finalistas = new Vector<PartidaOnline>();
 				System.out.println(partidas.size());
 				double animation_duration = (0.15*i)+0.2;
 				%>
-				<li class="caja_linea_ranking" style="animation-delay: <%=animation_duration%>s"> 
+				<li class="caja_linea_ranking" style="animation-delay: <%=animation_duration%>s; background-color: <%=BilboskpColor.obtenerColorDegradado(i)%>;"> 
 					<div><%="#"+(i+1)%></div>
 					<div><img src="img_suscriptores/<%=partida.getAnfitrion().getImagen()%>"></div>
 					<div><%=partida.getAnfitrion().getAlias()%></div>
