@@ -922,7 +922,7 @@ public class BilboSKP extends DBC {
 		int activo = suscriptor.getActivo();
 		int idSuscriptor = suscriptor.getIdSuscriptor();
 		// hacer sentencia sql select todas las salas
-		String sentenciaSQL = "UPDATE suscriptor SET email = '" + email + "' , pass = '" + pass + "' , alias = '"
+		String sentenciaSQL = "UPDATE suscriptor SET email = '" + email + "', alias = '"
 				+ alias + "' , nombre = '" + nombre + "' , apellidos = '" + apellidos + "' , fech_nac = '" + fechaSQL
 				+ "' , telefono = " + telefono + " , imagen = '" + imagen + "' , activo = " + activo
 				+ " WHERE idSuscriptor = " + idSuscriptor + ";";
