@@ -63,16 +63,22 @@ header button {
   .llave{
     width: 30%;
     position: absolute;
-    top: 8%;
-    right: 0%;
+    top: 27%;
+        right: 0%;
     justify-content: center;
     display: flex;
   }
-
+ @media screen and (max-width: 1075px) {
+		.llave{
+			display:none;
+		}
+	
+	}
   .llave img{
+  
     width: 55%;
     display: block;
-    animation: llave 5s forwards;
+    animation: llave 5s forwards infinite;
     animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
     justify-content: end;
     align-items: end;
@@ -260,3 +266,119 @@ header button {
  	 margin-top:10%;
  	 }
   }
+  
+  /* Estilos para la lampara*/
+.lampara {
+	position: absolute;
+	top: 0;
+	left: 23.5%;
+	transform: translateX(-50%);
+	width: 100px;
+	height: 400px;
+	background-image: url('../img_web/inicio/lamparaCandil.png');
+	background-size: cover;
+	transform-origin: top center;
+	animation: vaiven 2.5s cubic-bezier(0.5, 0, 0.5, 1) infinite alternate;
+}
+
+@keyframes vaiven { 
+0% {
+	transform: translateX(-50%) rotate(-7deg);
+}
+
+100%{
+transform:translateX(-50%) rotate(7deg);
+}
+}
+.luz {
+	position: absolute;
+	top: -5;
+	left: 50%;
+	transform: translateX(-50%);
+	max-width: 150%;
+	width: 130%;
+	min-height: 70em;
+	height: 110%;
+	background: radial-gradient(circle at 23.5% 40%, rgba(0, 0, 0, 0) 0%,
+		rgba(206, 212, 0, 0.1) 15%, rgba(91, 93, 0, 0.3) 25%,
+		rgba(0, 0, 0, 0.705) 35%, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 1) 100%);
+	z-index: 1;
+	overflow: hidden;
+	animation: vaivenLuz 2.5s cubic-bezier(0.5, 0, 0.5, 1) infinite
+		alternate;
+}
+@keyframes vaivenLuz {
+
+0%
+{transform: translateX(-48%);
+}
+100%
+{transform:translateX(-52%);}
+}
+
+
+/* Estilos para la Luz */
+.luz::before {
+	content: '';
+	position: initial;
+	top: -50%;
+	left: -50%;
+	transform: translateX(-50%);
+	width: 140%;
+	height: 110%;
+	background: radial-gradient(circle at 23.5% 40%, rgba(0, 0, 0, 0) 0%,
+		rgba(206, 212, 0, 0.1) 15%, rgba(91, 93, 0, 0.3) 25%,
+		rgba(0, 0, 0, 0.705) 35%, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 1) 100%);
+	opacity: 0.8;
+	z-index: -2;
+	animation: tintineo 2s ease-in-out infinite alternate;
+}
+
+.lamp {
+	position: relative;
+}
+
+@keyframes tintineo {
+	0%, 100% {
+	opacity: 0.8;}
+	25%,75%
+{opacity:0.6;
+}50%
+{opacity:0.4;}
+}
+@keyframes subir { 0% {
+	transform: translateY(0%);
+}
+100%
+{transform:translateY(-100%);
+}
+}
+@keyframes desvanecer { 0%{
+	opacity: 0.5;
+}
+100%
+{
+opacity:0;
+}
+}
+.luz.clicked {
+	display: none;
+	animation: subir 0.5s ease-out forwards, desvanecer 0.5s ease-out
+		forwards;
+}
+
+.lampara.clicked {
+	animation: subir 0.5s ease-out forwards, desvanecer 0.5s ease-out
+		forwards, vaivenLuz 2.5s cubic-bezier(0.5, 0, 0.5, 1) infinite
+		alternate;
+	transform-origin: top center;
+}
+
+@media ( max-width : 800px) {
+	.luz {
+		display: none;
+	}
+	.lampara {
+		display: none;
+	}
+}
