@@ -15,11 +15,11 @@
                     <div class="contacto1">
                         <div class="caja_info">
                             <img src="img_web/icons/telefono.png" alt="">
-                            <p>602435352</p>
+                            <p>902435352</p>
                         </div>
                         <div class="caja_info">
                             <img src="img_web/icons/email.png" alt="">
-                            <p>soporteBilboSKP@gmail.com</p>
+                            <p>bilboskpes@gmail.com</p>
                         </div>
                         <div class="caja_info">
                             <img src="img_web/icons/location.png" alt="">
@@ -27,12 +27,7 @@
                         </div>
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2905.516500422879!2d-2.941988724582918!3d43.26155407767438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4e502842c84087%3A0x539b319a98f8cfbe!2sC.%20del%20Lic.%20Poza%2C%2031%2C%2048011%20Bilbao%2C%20Vizcaya!5e0!3m2!1ses!2ses!4v1683456880238!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                         </iframe>
-                        <div class="social_media">
-                            <img src="img_web/icons/facebook.png" alt="">
-                            <img src="img_web/icons/insta.png" alt="">
-                            <img src="img_web/icons/twitter.png" alt="">
-                            <img src="img_web/icons/whatsap.png" alt="">
-                        </div>
+                  
                     </div>
                 </div>
                 <div id="formulario">
@@ -62,7 +57,7 @@
             <div class="FAQ">
                 <div class="faq">
                 	<h2>Preguntas frequentes</h2>
-                    <img src="img_web/icons/ask.png" alt="">
+                    <img src="img_web/icons/ask1.png" alt="">
                 </div>
                 <div class="container">
                     <div id="question1">
@@ -85,7 +80,29 @@
                         <a href="#question5">5. ¿Cómo se garantiza la seguridad de mis datos personales en su página web?</a>
                         <p>En nuestra página web, nos tomamos muy en serio la seguridad de tus datos personales. Utilizamos medidas de seguridad avanzadas para proteger tu información y cumplimos con las regulaciones de protección de datos en línea.</p>
                     </div>
-                </div>
+                </div>               
             </div>
+             <div class="social_media">
+           		<div class="sc_title">
+           			<h2>Síguenos en nuestras redes:)</h2>
+           		</div>
+             				<div class="sc_box">
+             					<a href="https://www.w3schools.com"> <img src="img_web/icons/facebook1.png" alt=""></a>
+             					<P>BilboSKP</P>
+             				</div>
+             				<div class="sc_box">
+             					<a href="https://www.w3schools.com"><img src="img_web/icons/insta1.png" alt=""></a>
+             					<P>@Bilboskp_es</P>
+             				</div>
+             				<div class="sc_box">
+             					<a href="https://www.w3schools.com"> <img src="img_web/icons/twitter1.png" alt=""></a>
+             					<P>@Bilboskp_es</P>
+             				</div>
+             				<div class="sc_box">
+             					<a href="https://chat.whatsapp.com/IPaleWYDzwPLNyOMBpNr4q"><img src="img_web/icons/what.png" alt=""> </a>
+             					<P>Chatea con nosotros</P>
+             				</div>                   
+	                       
+               </div>
         </section>
     </main>

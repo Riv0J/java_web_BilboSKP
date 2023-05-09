@@ -20,6 +20,8 @@ section{
 	rgb(0, 0, 0, 1) 0%
 	rgb(103, 17, 17,1) 100%,
 	);	
+	display: flex;
+	flex-direction: row;
 }
 .cajatexto1 {
 	/*background-image: url("../img_web/texturas/laberinto.jpg");*/
@@ -68,13 +70,23 @@ iframe{
 }
 .social_media{
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	align-items: center;
 	justify-content: right;
 	margin-top:3%;
 }
 .social_media img{
 	width: 6%;
+}
+.sc_box{
+	display:flex;
+	flex-direction:row;
+}
+.sc_box a{ 
+	width:40%;
+}
+.sc_box p{
+	width:5%;
 }
 .contacto {
 	width:50%;

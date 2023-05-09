@@ -87,7 +87,15 @@ sesion.setAttribute("sus", sus);
                         
                     </div>--%>
                     <div class="form5" >
-                        <input type="submit" value="Guardar cambios"  >
+                    <label class="switch">
+  						<input type="checkbox">
+  						<span class="slider"></span>
+					</label>
+					<label class="switch">
+  						<input type="checkbox">
+  						<span class="slider round"></span>
+					</label>
+                     <%--<input type="submit" value="Guardar cambios">--%>  
                     </div>
                 </form>
                 <!--<form class="caja4">

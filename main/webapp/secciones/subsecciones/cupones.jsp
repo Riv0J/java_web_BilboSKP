@@ -31,7 +31,7 @@
         <% 
         	 int idElminarCupon=cupon.getId();
         
-       		 BilboSKP.eliminarCupon(idElminarCupon);
+       		 //BilboSKP.eliminarCupon(idElminarCupon);
       
 		%></input>
        </div>
