@@ -10,11 +10,11 @@
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
-	height: 101%;
+	height: 75vh;
 	width: 100%;
 }
 
-.formComprar {
+ .formComprar {
 	margin-top: 2%;
 	margin-bottom: 1.5%;
 	display: flex;

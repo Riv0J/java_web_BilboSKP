@@ -69,15 +69,15 @@
 					al que quieras mandarle el regalo.
 				</h4>
 				<input name="email" class="email" type="email"
-					placeholder="Email del destinatario"> <select
-					name="cantidad" id="cantidad" class="bilboskp_select">
+					placeholder="Email del destinatario"> 
+				<select name="cantidad" id="cantidad" class="bilboskp_select">
 					<option value="selecciona">Selecciona oferta</option>
 					<option value="1">1 cupón</option>
 					<option value="3">3 cupones</option>
 					<option value="5">5 cupones</option>
 					<option value="7">7 cupones</option>
 				</select> <br>
-				<button name="regalar" class="botonRegalar" type="submit">Regalar
+				<button class="botonRegalar" type="submit">Regalar
 					cupón</button>
 			</div>
 		</fieldset>

@@ -4,6 +4,7 @@
 	<div id="caja_subscribe">
 		<div id="caja_titulo" class="flex_center">
 			<h2> Regístrate en BilboSKP </h2>
+			<p>Al darte de alta se te cobrará un importe y recibirás un cupón de bienvenida!</p>		
 		</div>
 		<div id="caja_inputs">
 			<div class="bloque">
@@ -20,7 +21,7 @@
 				  	<input type="password" id="pass" name="pass" required>
 				</div>
 				<div class="linea_subscribe">
-					<label for="pass2">Repetir contraseña:</label>
+					<label for="pass2">Número tarjeta:</label>
 			  		<input type="password" id="pass2" name="pass2" required>
 				</div>
 			</div>
@@ -113,5 +114,11 @@
     color: whitesmoke;
     padding: 2%;
     letter-spacing: 0.1em;
+    display:flex;
+    flex-direction:column;
+  }
+  #caja_titulo p{
+  font-size:0.75em;
+  margin-top:2%;
   }
 </style>
