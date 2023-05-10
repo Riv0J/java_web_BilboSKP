@@ -105,12 +105,7 @@ public class ServletPerfil extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		
-		HttpSession sesion = request.getSession();
-		Suscriptor sus = (Suscriptor) sesion.getAttribute("suscriptor");
 
-		
 		System.out.println("Dopost perfil");		
 		String nombreNuevo= request.getParameter("nombre");	
 		System.out.println("El nombre nuevo es " + nombreNuevo);
@@ -127,12 +122,16 @@ public class ServletPerfil extends HttpServlet {
 		String fecha_nacimientoNueva= request.getParameter("fecha_nacimiento");	
 		System.out.println("La fecha de nacimiento nueva es " + fecha_nacimientoNueva);
 		
-		String telefonoNuevo= request.getParameter("telefono");	
+		int telefonoNuevo=Integer.parseInt(request.getParameter("telefono"));	
 		System.out.println("El telefono nuevo es " + telefonoNuevo);
+
+		Suscriptor nuevoSus= new Suscriptor(telefonoNuevo, emailNuevo, aliasNuevo, nombreNuevo, apellidoNuevo, fecha_nacimientoNueva);
 		
+			
 		try {
-			BilboSKP.actualizarSuscripcion(sus);
-			System.out.println(sus.getNombre());
+			BilboSKP.actualizarSuscripcion(emailNuevo, aliasNuevo, nombreNuevo, apellidoNuevo,fecha_nacimientoNueva,telefonoNuevo );
+			//BilboSKP.actualizarSuscripcion(nuevoSus);
+			//String email, String alias, String nombre, String apellido, String fecha_string, int telefono
 		} catch (Throwable e) {
 			
 			e.printStackTrace();

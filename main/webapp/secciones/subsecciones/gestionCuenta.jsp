@@ -56,7 +56,7 @@ sesion.setAttribute("sus", sus);
                         <div class="box0">
                             <label for="">Fecha de nacimiento</label>
                             <div class="edit">
-                                <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="">
+                                <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="<%=sus.getFech_nac()%>">
                                 <%--  <img src="img_web/icons/edit_icon.png" alt="">--%> 
                             </div>
                         </div>
@@ -107,13 +107,16 @@ sesion.setAttribute("sus", sus);
                 </form>-->
                 <div class="caja3">
                     <h2>¿Deseas darte de baja?</h2>
-                    <p>Al darte de baja, pasarás a estado inactivo y no se perderán tus avances y/o cupones</p>
-                  	<div class="switch-button">
-   				   		<!-- Checkbox -->
-    						<input type="checkbox" name="switch-button" id="switch-label" class="switch-button__checkbox">
-   						 <!-- Botón -->
-    						<label for="switch-label" class="switch-button__label"></label>
-					</div>
+                    <p>Al darte de baja, pasarás a estado inactivo y no se perderán tus datos, avances y/o cupones comprados</p>
+                 	<div class="interruptor">
+                 		<p>Activo</p>
+                 		<label class="switch">
+  							<input type="checkbox">
+  							<span class="slider round"></span>
+						</label>
+                 	
+                 	</div>
+                  	
                
 				</div>
     

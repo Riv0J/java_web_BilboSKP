@@ -58,7 +58,7 @@
             <div class="FAQ">
                 <div class="faq">
                 	<h2>Preguntas frequentes</h2>
-                    <img src="img_web/icons/ask1.png" alt="">
+                    <img src="img_web/icons/pregunta.png" alt="">
                 </div>
                 <div class="container">
                     <div id="question1">
@@ -70,8 +70,8 @@
                         <p>Para reservar una sala de escape online, simplemente elige la sala que deseas jugar en nuestra página web, selecciona la fecha y hora en la que deseas jugar, y sigue los pasos del proceso de reserva.</p>
                     </div>
                     <div id="question3">
-                        <a href="#question3">3. ¿Cuál es el precio de las salas de escape online?</a>
-                        <p>Los precios de las salas de escape online varían según la sala que elijas y el número de jugadores que participen. En nuestra página web encontrarás información detallada sobre los precios de cada sala.</p>
+                        <a href="#question3">3. ¿Cuál es el precio de las salas de escape?</a>
+                        <p>BilboSKP tiene un sistema de cupones, los cuales tienen todos el mismo importe y están disponibles en la tienda. Disponemos de bonos los cuales puedes disfutrar.</p>
                     </div>
                     <div id="question4">
                         <a href="#question4">4. ¿Puedo jugar en equipo con amigos que se encuentran en diferentes lugares?</a>
@@ -85,23 +85,23 @@
             </div>
              <div class="social_media">
            		<div class="sc_title">
-           			<h2>Síguenos en nuestras redes:)</h2>
+           			<h2>¡Síguenos en nuestras redes!</h2>
            		</div>
              				<div class="sc_box">
-             					<a href="https://www.w3schools.com"> <img src="img_web/icons/facebook1.png" alt=""></a>
-             					<P>BilboSKP</P>
+             					<a href="https://www.facebook.com/profile.php?id=100092286712706"> <img src="img_web/icons/facebook1.png" alt=""></a>
+             					<P>Bilbo SKP</P>
              				</div>
              				<div class="sc_box">
-             					<a href="https://www.w3schools.com"><img src="img_web/icons/insta1.png" alt=""></a>
-             					<P>@Bilboskp_es</P>
+             					<a href="https://www.instagram.com/bilboskp_es/"><img src="img_web/icons/insta1.png" alt=""></a>
+             					<P>@bilboskp_es</P>
              				</div>
              				<div class="sc_box">
-             					<a href="https://www.w3schools.com"> <img src="img_web/icons/twitter1.png" alt=""></a>
-             					<P>@Bilboskp_es</P>
+             					<a href="https://twitter.com/BilboSkp_es"> <img src="img_web/icons/twitter1.png" alt=""></a>
+             					<P>@BilboSkp_es</P>
              				</div>
              				<div class="sc_box">
              					<a href="https://chat.whatsapp.com/IPaleWYDzwPLNyOMBpNr4q"><img src="img_web/icons/what.png" alt=""> </a>
-             					<P>Chatea con nosotros</P>
+             					<P>Chatea con nosotros :)</P>
              				</div>                   
 	                       
                </div>

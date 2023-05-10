@@ -74,7 +74,7 @@ iframe{
 	margin:5%;
 }
 .sc_title{
-	margin-bottom:5%;
+	margin-bottom:6%;
 }
 .social_media img{
 	width: 6%;
@@ -181,6 +181,7 @@ button:hover {
 	text-align: justify;
 	background-color: #ff4242;
 	transition: all .2s ease-in-out;
+	line-height:normal;
 }
 
 #question1 a,
@@ -192,7 +193,10 @@ button:hover {
 	display: block;
 	text-align: left;
 	padding: 10px;
-	background-color: #111010;
+	background: linear-gradient(0deg, 
+	rgb(103, 17, 17,1) 0%,
+	rgb(0, 0, 0, 1) 100%
+	);	
 	color: #fff;
 }
 

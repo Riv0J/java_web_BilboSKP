@@ -7,6 +7,32 @@ public class Suscriptor {
 	private String email, alias, nombre, apellidos, imagen;
 	private int activo;
 	private Date fech_nac;
+	private String fecha_string;
+	
+	//constructor la fecha es un string
+	public Suscriptor( int telefono, String email, String alias, String nombre,
+			String apellidos, String fech_nac) {
+		super();
+	
+		setTelefono(telefono);
+		setEmail(email);
+		setAlias(alias);
+		setNombre(nombre);
+		setApellidos(apellidos);	
+		setfecha_string(fecha_string);
+		System.out.println(fecha_string);
+	}
+	
+	//Fecha STRING
+	public String getfecha_string() {
+		return fecha_string;
+	}
+
+	public void setfecha_string(String fecha_string) {
+		this.fecha_string= fecha_string;
+	}
+	
+	
 	
 	public Suscriptor(int idSuscriptor, int telefono, String email, String alias, String nombre,
 			String apellidos, String imagen, int activo, Date fech_nac) {

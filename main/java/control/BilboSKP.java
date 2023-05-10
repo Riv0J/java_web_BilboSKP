@@ -917,16 +917,17 @@ public class BilboSKP extends DBC {
 		String alias = suscriptor.getAlias();
 		String nombre = suscriptor.getNombre();
 		String apellidos = suscriptor.getApellidos();
-		Date fech_nac = suscriptor.getFech_nac();
-		java.util.Date fecha_nac_util = fech_nac;
-		java.sql.Date fechaSQL = new java.sql.Date(fecha_nac_util.getTime());
+		String fech_nac = suscriptor.getfecha_string();
+		//java.util.Date fecha_nac_util = fech_nac;
+		System.out.println(fech_nac);
+		//java.sql.Date fechaSQL = new java.sql.Date(fecha_nac_util.getTime());
 		int telefono = suscriptor.getTelefono();
 		String imagen = suscriptor.getImagen();
 		int activo = suscriptor.getActivo();
 		int idSuscriptor = suscriptor.getIdSuscriptor();
 		// hacer sentencia sql select todas las salas
 		String sentenciaSQL = "UPDATE suscriptor SET email = '" + email + "', alias = '"
-				+ alias + "' , nombre = '" + nombre + "' , apellidos = '" + apellidos + "' , fech_nac = '" + fechaSQL
+				+ alias + "' , nombre = '" + nombre + "' , apellidos = '" + apellidos + "' , fech_nac = '" + fech_nac
 				+ "' , telefono = " + telefono + " , imagen = '" + imagen + "' , activo = " + activo
 				+ " WHERE idSuscriptor = " + idSuscriptor + ";";
 		// hacer una conexion
@@ -942,6 +943,28 @@ public class BilboSKP extends DBC {
 			return null;
 		}
 	}
+	// dado un suscriptor, actualizar los datos en la BD @Torni
+		public static Suscriptor actualizarSuscripcion(String email, String alias, String nombre, String apellido, String fecha_string, int telefono) throws Throwable {
+			
+			// hacer sentencia sql select todas las salas
+			String sentenciaSQL = "UPDATE suscriptor SET email = '" + email + "', alias = '"
+					+ alias + "' , nombre = '" + nombre + "' , apellidos = '" + apellido + "' , fech_nac = '" + fecha_string
+					+ "' , telefono = " + telefono + ";";
+			// hacer una conexion
+			BilboSKP conexion = new BilboSKP();
+			// hacer consulta sql con la conexion y se guarda en el resultset resultado
+			int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
+			if (filasAfectadas == 1) {
+				System.out.println("se pudo editar suscriptor");
+
+				return loginSuscriptor(email, pass);
+			} else {
+				System.out.println("no se pudo editar suscriptor");
+				return null;
+			}
+		}
+	
+	
 
 	// darle de baja a un suscriptor @Torni
 	public Suscriptor darBajaSuscripcion(Suscriptor suscriptor) throws Throwable {
