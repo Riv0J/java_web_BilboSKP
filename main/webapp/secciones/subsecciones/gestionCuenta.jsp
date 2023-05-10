@@ -16,6 +16,7 @@ sesion.setAttribute("sus", sus);
                     <p><%=Traductor.get(leng, "GC2")%></p>
                 </div>
                 <form action="./perfil" method="post">
+                <input type="hidden" name="accion" value="editar">
                     <div class="subcaja1">
                    		<img src="img_suscriptores/<%=sus.getImagen()%>" alt="">                   	
                     </div>
@@ -105,20 +106,29 @@ sesion.setAttribute("sus", sus);
                         <input type="password" name="" id="">
                     </div>
                 </form>-->
+<<<<<<< HEAD
                 <div class="caja3">
                     <h2><%=Traductor.get(leng, "GC6")%></h2>
                     <p><%=Traductor.get(leng, "GC7")%></p>
+=======
+                <!--  <form action="./perfil" method="post" class="caja3" id="form_baja">
+                	<input type="hidden" name="accion" value="baja">
+                    <h2>¿Quieres desactivar tu cuenta?</h2>
+                    <p>Al desactivar, pasarás a estado inactivo y no se perderán tus datos, avances y/o cupones comprados</p>
+>>>>>>> 2cac7a92f29eef11e8d74cb7013eaee6a5f81a30
                  	<div class="interruptor">
                  		<p><%=Traductor.get(leng, "GC8")%></p>
                  		<label class="switch">
-  							<input type="checkbox">
+  							<input name="checkbox_activo" id="checkbox_activo" type="checkbox" value="">
   							<span class="slider round"></span>
 						</label>
-                 	
                  	</div>
-                  	
-               
-				</div>
-    
-  
-
+				</form>
+				<script>
+				  const checkbox = document.getElementById("checkbox_activo");
+				  const form = document.getElementById("form_baja");
+				
+				  checkbox.addEventListener("change", () => {
+				    form.submit();
+				  });
+				</script>-->

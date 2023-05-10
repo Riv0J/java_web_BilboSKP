@@ -211,7 +211,7 @@ public class PartidaOnline extends Partida {
 		if (superada == true) {
 			System.out.println("SALA SUPERADA!!!");
 			puntajeBonus = calcularPuntajeBonus();
-			puntajeBonus += 5000;
+			puntajeBonus += 8000;
 		}
 		int puntajeTotal = puntajeBase - penalizacionPistas + puntajeBonus;
 		if (puntajeTotal < 0) {

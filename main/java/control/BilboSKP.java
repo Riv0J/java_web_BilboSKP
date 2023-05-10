@@ -948,7 +948,6 @@ public class BilboSKP extends DBC {
 			return null;
 		}
 	}
-
 	// dado un suscriptor, actualizar los datos en la BD @Torni
 	public static boolean actualizarSuscripcion(String emailViejo, String emailNuevo, String alias, String nombre, String apellido,
 			String fecha_string, int telefono) throws Throwable {
@@ -993,7 +992,7 @@ public class BilboSKP extends DBC {
 		return null;
 	}
 	// darle de baja a un suscriptor @Torni
-	public Suscriptor darBajaSuscripcion(Suscriptor suscriptor) throws Throwable {
+	public static boolean darBajaSuscripcion(Suscriptor suscriptor) throws Throwable {
 		int idSuscriptor = suscriptor.getIdSuscriptor();
 		String sentenciaSQL = "UPDATE suscriptor SET  activo =  0  WHERE idSuscriptor = " + idSuscriptor + ";";
 		BilboSKP conexion = new BilboSKP();
@@ -1002,18 +1001,18 @@ public class BilboSKP extends DBC {
 			System.out.println("Se pudo dar de baja suscriptor");
 			ocultarPartidasRanking(idSuscriptor);
 			suscriptor.setActivo(0);
-			return suscriptor;
+			return true;
 
 		} else {
 			System.out.println("No se pudo dar de baja suscriptor");
-			return null;
+			return false;
 		}
 	}
 
 	// ocultar las partidas de un suscriptor @Torni
-	public boolean ocultarPartidasRanking(int idSuscriptor) throws Throwable {
+	public static boolean ocultarPartidasRanking(int idSuscriptor) throws Throwable {
 		// hacer sentencia sql
-		String sentenciaSQL = "UPDATE partidaonline SET visibleRanking = 0  WHERE idSuscriptor = " + idSuscriptor + ";";
+		String sentenciaSQL = "UPDATE partidaonline SET visibleRanking = 0  WHERE idAnfitrion = " + idSuscriptor + ";";
 		// hacer una conexion
 		BilboSKP conexion = new BilboSKP();
 		// se hace una consulta sql con la conexion y se guarda en el int
