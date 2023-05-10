@@ -65,9 +65,9 @@ String tituloPagina = seccion.substring(0, 1).toUpperCase() + seccion.substring(
 				<a href="index.jsp?sec=subscribe" class="suscribirse">Subscribe</a>
 			<% } %>
 			<form action="./lenguaje" method="POST">
-				<select name="lenguaje">
-				<% for(String lengString: CookieHelper.LENGUAJES_DISPONIBLES) {%>
-						<option value="<%=lengString%>">
+				<select id="lenguaje_select" class="bilboskp_select" name="lenguaje">
+				<% for(String lengString: CookieHelper.getLenguajesDisponibles()) {%>
+						<option value="<%=lengString%>"><%=lengString%></option>
 				<% } %>
 				</select>
 			</form>

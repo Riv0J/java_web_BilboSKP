@@ -2,6 +2,11 @@ body{
 	overflow-x: hidden;
 }
 
+#lenguaje_select{
+	padding: 5%;
+    font-size: 1.5em;
+    border-radius: 0.5em;
+}
 *{
     padding: 0;
     margin: 0;
@@ -195,6 +200,9 @@ header button {
     
   }
   .llave{
+ 	 display:none;
+  }
+  /*.llave{
     width: 30%;
     padding-top: 5%;
     justify-content: center;
@@ -233,7 +241,7 @@ header button {
     100% {
         transform: translateY(-50px);
       }
-  }
+  }*/
 
 /*SLIDER*/
 

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import javax.servlet.http.Cookie;
 
 public class CookieHelper {
-	public static final ArrayList<String> LENGUAJES_DISPONIBLES = null;
-    public static final String DEFAULT_LENGUAJE = "EN";
+	private static ArrayList<String> LENGUAJES_DISPONIBLES = null;
+	public static final String DEFAULT_LENGUAJE = "EN";
     public static final String LENGUAJE_COOKIE_NAME = "BILBOSKP_LENGUAJE";
     
     public static String getLenguajeFromCookies(Cookie[] cookies) {
@@ -22,9 +22,20 @@ public class CookieHelper {
         return lenguaje;
     }
     public static boolean lenguajeDisponible(String lenguaje) {
-    	if(LENGUAJES_DISPONIBLES.contains(lenguaje)) {
+    	if(getLenguajesDisponibles().contains(lenguaje)) {
     		return true;
     	}
     	return false;
     }
+    public static ArrayList<String> getLenguajesDisponibles() {
+    	if(LENGUAJES_DISPONIBLES == null) {
+    		initLenguajesDisponibles();
+    	}
+		return LENGUAJES_DISPONIBLES;
+	}
+	private static void initLenguajesDisponibles() {
+		LENGUAJES_DISPONIBLES = new ArrayList<String>();
+		LENGUAJES_DISPONIBLES.add("ES");
+		LENGUAJES_DISPONIBLES.add("EN");
+	}
 }
