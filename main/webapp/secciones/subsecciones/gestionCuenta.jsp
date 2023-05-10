@@ -1,7 +1,7 @@
 <%@ page
 	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.io.File, java.text.Normalizer, 
 	model.Suscriptor,view.Traductor, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date"%>
-
+ 
 <link rel="stylesheet" href="css/gestionCuenta.css">
 <%
 HttpSession sesion = request.getSession();

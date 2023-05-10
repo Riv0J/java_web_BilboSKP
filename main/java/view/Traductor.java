@@ -12,8 +12,6 @@ public class Traductor {
 		mapaTraducciones=new HashMap<String, String>();
 		/*castellano*/
 		/*HEADER*/
-		mapaTraducciones.put("ES-inicio1", "Experimenta nuestras salas de escape");
-		mapaTraducciones.put("EN-inicio1", "Experience our scape rooms");
 		mapaTraducciones.put("EN-headerSalas", "Escape rooms");
 		mapaTraducciones.put("ES-headerRanking", "Ranking");
 		mapaTraducciones.put("EN-headerRanking", "Ranking");
@@ -22,7 +20,37 @@ public class Traductor {
 		mapaTraducciones.put("ES-headerContacto", "Contacto");
 		mapaTraducciones.put("EN-headerContacto", "Contact us");
 		
-		/* INICIO */
+		/* INICIO ES */
+		mapaTraducciones.put("ES-inicio1", "Experimenta nuestras salas de escape");
+		mapaTraducciones.put("ES-inicio2", "Sumérgete en una experiencia de juego única sin salir de tu casa con nuestras emocionantes salas de escape virtuales. ¿Estás listo para poner a prueba tus habilidades mentales y tu capacidad de resolución de problemas?");
+		mapaTraducciones.put("ES-inicio3", "Jugar ahora");
+		mapaTraducciones.put("ES-inicio4", "Unirse a partida");
+		mapaTraducciones.put("ES-inicio5", "<< ¡Descubre nuestras salas online más jugadas! >>");
+		mapaTraducciones.put("ES-inicio6", "Salas que te harán desafiar tu capacidad mental");
+		mapaTraducciones.put("ES-inicio7", "SOLO O CON AMIGOS");
+		mapaTraducciones.put("ES-inicio8", "Puedes realizar cualquiera de nuestros escapes de forma individual o en grupo. Si no das con la tecla quizás otro/a si lo haga. El precio NO cambia.");
+		mapaTraducciones.put("ES-inicio9", "MÚLTIPLES AVENTURAS");
+		mapaTraducciones.put("ES-inicio10", "Tenemos actualmente varias historias, y estamos trabajando en muchas más. Cada una, tiene tanto una dificultad como un tiempo estimado diferente.");
+		mapaTraducciones.put("ES-inicio11", "¿CÓMO FUNCIONA?");
+		mapaTraducciones.put("ES-inicio12", "Resuelve puzzles y encuentra la solución en tiempo limitado.	Trabaja solo o en equipo y comunícate a través de chat en salas de escape online.");
+
+		
+		
+		/* INICIO EN*/
+		mapaTraducciones.put("EN-inicio1", "Experience our escape rooms");
+		mapaTraducciones.put("EN-inicio2", "Immerse yourself in a unique gaming experience without leaving your home with our thrilling virtual escape rooms. Are you ready to test your mental skills and problem-solving abilities?");
+		mapaTraducciones.put("EN-inicio3", "Play now");
+		mapaTraducciones.put("EN-inicio4", "Join game");
+		mapaTraducciones.put("EN-inicio5", "<< Discover our most played online rooms! >>");
+		mapaTraducciones.put("EN-inicio6", "Rooms that will challenge your mental capacity");
+		mapaTraducciones.put("EN-inicio7", "ALONE OR WITH FRIENDS");
+		mapaTraducciones.put("EN-inicio8", "You can do any of our escapes individually or in a group. If you can't figure it out, maybe someone else can. The price DOES NOT change.");
+		mapaTraducciones.put("EN-inicio9", "MULTIPLE ADVENTURES");
+		mapaTraducciones.put("EN-inicio10", "We currently have several stories, and we are working on many more. Each one has a different difficulty level and estimated time.");
+		mapaTraducciones.put("EN-inicio11", "HOW IT WORKS?");
+		mapaTraducciones.put("EN-inicio12", "Solve puzzles and find the solution within a limited time. Work alone or in a team and communicate through chat in online escape rooms.");
+
+		
 	
 		/*GENERAL ES*/
 		mapaTraducciones.put("ES-todas", "Todas");
