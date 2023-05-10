@@ -24,10 +24,10 @@ public class Traductor {
 		
 		/* INICIO */
 	
-		/*SALAS*/
+		/*SALAS ES*/
 		mapaTraducciones.put("ES-online", "Online");
 		mapaTraducciones.put("ES-reserva", "Reserva");
-		
+
 		mapaTraducciones.put("ES-modalidad", "Modalidad");
 		mapaTraducciones.put("ES-tematica", "Temática");
 		mapaTraducciones.put("ES-dificultad", "Dificultad");
@@ -53,13 +53,19 @@ public class Traductor {
 		mapaTraducciones.put("ES-salas10", "Ver todas las salas");
 		mapaTraducciones.put("ES-salas11", "Ver sala");
 		mapaTraducciones.put("ES-salas12", "");
+		
+		/* SALAS EN*/
 	}
 
 	public static String get(String lenguaje, String claveFrase) {
 		if(mapaTraducciones==null) {
 			initFrases();
 		}
-		return mapaTraducciones.get(lenguaje+"-"+claveFrase);
+		String frase = mapaTraducciones.get(lenguaje+"-"+claveFrase);
+		if (frase==null) {
+			System.out.println("Traductor: No he podido encontrar '"+lenguaje+"-"+claveFrase+"' en el hashmap.");
+		}
+		return frase;
 	}
 
 }

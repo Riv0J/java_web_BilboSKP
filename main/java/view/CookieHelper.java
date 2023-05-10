@@ -6,7 +6,7 @@ import javax.servlet.http.Cookie;
 
 public class CookieHelper {
 	private static ArrayList<String> LENGUAJES_DISPONIBLES = null;
-	public static final String DEFAULT_LENGUAJE = "EN";
+	public static final String DEFAULT_LENGUAJE = "ES";
     public static final String LENGUAJE_COOKIE_NAME = "BILBOSKP_LENGUAJE";
     
     public static String getLenguajeFromCookies(Cookie[] cookies) {

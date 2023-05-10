@@ -1,6 +1,7 @@
     <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="view.CookieHelper, view.Mensaje, view.Icon, model.Suscriptor"%>
 <%
+String leng = CookieHelper.getLenguajeFromCookies(request.getCookies());
 String seccion = request.getParameter("sec");
 Object mensaje = (Object) session.getAttribute("mensaje");
 Object mostrarLogin = (Object) session.getAttribute("mostrarLogin");
@@ -64,10 +65,10 @@ String tituloPagina = seccion.substring(0, 1).toUpperCase() + seccion.substring(
 				<a class="user" id="botonPerfil"><i class="ri-user-fill"></i>Sign in</a> 
 				<a href="index.jsp?sec=subscribe" class="suscribirse">Subscribe</a>
 			<% } %>
-			<form action="./lenguaje" method="POST">
+			<form id="form_lenguaje" action="./lenguaje" method="POST">
 				<select id="lenguaje_select" class="bilboskp_select" name="lenguaje">
 				<% for(String lengString: CookieHelper.getLenguajesDisponibles()) {%>
-						<option value="<%=lengString%>"><%=lengString%></option>
+						<option value="<%=lengString%>" <% if(leng.equals(lengString)){ %> selected <% } %>><%=lengString%></option>
 				<% } %>
 				</select>
 			</form>
@@ -142,6 +143,13 @@ String tituloPagina = seccion.substring(0, 1).toUpperCase() + seccion.substring(
 	}
 	botonPerfil.addEventListener("click", toggleLogin);
 	botonCerrarLogin.addEventListener("click", toggleLogin);
+	
+	
+	const lenguaje_select = document.getElementById("lenguaje_select");
+
+	lenguaje_select.addEventListener("change", () => {
+	    document.getElementById("form_lenguaje").submit();
+	  });
 </script>
 <% } %>
 </html>

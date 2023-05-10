@@ -3,6 +3,7 @@
 	model.Sala,view.Traductor,model.SalaOnline,model.SalaFisica,view.AppConfig,view.StringHelper, view.Traductor, view.CookieHelper"%>
 <%
 String leng = CookieHelper.getLenguajeFromCookies(request.getCookies());
+System.out.println("EL LENGUAJE CAPTADO ES: "+leng);
 HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("mapaSalas");
 ArrayList<String> tematicasDisponibles = (ArrayList<String>) request.getAttribute("tematicasDisponibles");
 ArrayList<String> dificultadesDisponibles = (ArrayList<String>) request.getAttribute("dificultadesDisponibles");
