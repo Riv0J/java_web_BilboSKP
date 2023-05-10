@@ -1,11 +1,12 @@
 <%@ page
 	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.io.File, java.text.Normalizer, 
-	model.Suscriptor,view.Traductor, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date"%>
+	model.Suscriptor,view.Traductor, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date, view.CookieHelper"%>
 <link rel="stylesheet" href="css/contacto.css">
-
+ <%String leng = CookieHelper.getLenguajeFromCookies(request.getCookies()); %>
+ 
 <main>
         <div class="cajatexto1">
-            <h1>Aquí nos tienes ¿Hablamos?</h1>
+            <h1><%=Traductor.get(leng,"Ch1")%></h1>
         </div>
         <section id="sec_1">
             <div class="cajagrande">
@@ -32,12 +33,12 @@
                     </div>
                 </div>
                 <div id="formulario">
-                    <h2>Cuéntanos...</h2>
-                    <p>¿Tienes alguna duda? Escríbenos y te responderemos la más antes posible.</p>
+                    <h2><%=Traductor.get(leng,"Ch2")%></h2>
+                    <p><%=Traductor.get(leng,"Cp1")%></p>
                     <form class="form">
                         <div class="box_form">
                             <div class="box">
-                                <label for="Nombre">Nombre:</label>
+                                <label for="Nombre"><%=Traductor.get(leng,"Cnombre")%></label>
                                 <p type="Nombre:"><input type="text" ></input></p>
                             </div>
                             <div class="box">
@@ -46,10 +47,10 @@
                             </div>
                         </div>
                        <div class=box_form1>
-                            <label for="">Mensaje:</label> 
+                            <label for=""><%=Traductor.get(leng,"Cmensaje")%></label> 
                             <textarea name="" id="" cols="5" rows="5"></textarea>
                        </div>
-                       <button>Enviar mensaje</button>
+                       <button><%=Traductor.get(leng,"Cenviar")%></button>
                     </form>
                 </div>
             </div>
@@ -57,35 +58,35 @@
         <section id="sec2">
             <div class="FAQ">
                 <div class="faq">
-                	<h2>Preguntas frequentes</h2>
+                	<h2><%=Traductor.get(leng,"Cpreguntas")%></h2>
                     <img src="img_web/icons/pregunta.png" alt="">
                 </div>
                 <div class="container">
                     <div id="question1">
-                        <a href="#question1">1. ¿Qué es una sala de escape online?</a>
-                        <p>Una sala de escape online es un juego en el que los jugadores resuelven acertijos y enigmas para poder salir de una habitación virtual. Se juega en línea desde cualquier lugar del mundo. </p>
+                        <a href="#question1"><%=Traductor.get(leng,"Cfaq1")%></a>
+                        <p><%=Traductor.get(leng,"Cfaq1r")%></p>
                     </div>
                     <div id="question2">
-                        <a href="#question2">2. ¿Cómo puedo reservar una sala de escape online en su página web?</a>
-                        <p>Para reservar una sala de escape online, simplemente elige la sala que deseas jugar en nuestra página web, selecciona la fecha y hora en la que deseas jugar, y sigue los pasos del proceso de reserva.</p>
+                        <a href="#question2"><%=Traductor.get(leng,"Cfaq2")%></a>
+                        <p><%=Traductor.get(leng,"Cfaq2r")%></p>
                     </div>
                     <div id="question3">
-                        <a href="#question3">3. ¿Cuál es el precio de las salas de escape?</a>
-                        <p>BilboSKP tiene un sistema de cupones, los cuales tienen todos el mismo importe y están disponibles en la tienda. Disponemos de bonos los cuales puedes disfutrar.</p>
+                        <a href="#question3"><%=Traductor.get(leng,"Cfaq3")%></a>
+                        <p><%=Traductor.get(leng,"Cfaq3r")%></p>
                     </div>
                     <div id="question4">
-                        <a href="#question4">4. ¿Puedo jugar en equipo con amigos que se encuentran en diferentes lugares?</a>
-                        <p>Sí, puedes jugar en equipo con amigos que se encuentren en diferentes lugares. Solo necesitas compartir el enlace de la sala de escape online con ellos para que se unan al juego.</p>
+                        <a href="#question4"><%=Traductor.get(leng,"Cfaq4")%></a>
+                        <p><%=Traductor.get(leng,"Cfaq4r")%></p>
                     </div>
                     <div id="question5">
-                        <a href="#question5">5. ¿Cómo se garantiza la seguridad de mis datos personales en su página web?</a>
-                        <p>En nuestra página web, nos tomamos muy en serio la seguridad de tus datos personales. Utilizamos medidas de seguridad avanzadas para proteger tu información y cumplimos con las regulaciones de protección de datos en línea.</p>
+                        <a href="#question5"><%=Traductor.get(leng,"Cfaq5")%></a>
+                        <p><%=Traductor.get(leng,"Cfaq5r")%></p>
                     </div>
                 </div>               
             </div>
              <div class="social_media">
            		<div class="sc_title">
-           			<h2>¡Síguenos en nuestras redes!</h2>
+           			<h2><%=Traductor.get(leng,"Csiguenos")%></h2>
            		</div>
              				<div class="sc_box">
              					<a href="https://www.facebook.com/profile.php?id=100092286712706"> <img src="img_web/icons/facebook1.png" alt=""></a>
@@ -101,7 +102,7 @@
              				</div>
              				<div class="sc_box">
              					<a href="https://chat.whatsapp.com/IPaleWYDzwPLNyOMBpNr4q"><img src="img_web/icons/what.png" alt=""> </a>
-             					<P>Chatea con nosotros :)</P>
+             					<P><%=Traductor.get(leng,"Cchatea")%></P>
              				</div>                   
 	                       
                </div>
