@@ -62,9 +62,9 @@ public class Cupon {
         	System.out.println("No es rembolsable");
         	return Rembolsabilidad;
         } else {
-        	String Rembolsabilidad=" Rembolsable";
+        	String Rembolsabilidad="Reembolsable";
 
-        	System.out.println("Es rembolsable");
+        	System.out.println("Es reembolsable");
         	return Rembolsabilidad;
         }
         }

@@ -11,7 +11,7 @@
 		<h1>Administrar cupones</h1>
 		<br>
 		<p>
-			Aqui podras encontrar nuestro propio sistema economico, los cupones.
+			Aquí podrás encontrar nuestro propio sistema económico, los cupones.
 			Con un cupón puedes organizar una partida y jugar con tus amigos las
 			aventuras que hemos creado para ti. <a id="MisCuponesTitulo">Mis
 				cupones</a>
@@ -36,7 +36,7 @@
 				Fecha caducidad:<br>
 				<%=cupon.getFechaCaducidad()%></p>
 			<p><%=cupon.getRembolsable()%></p>
-			<input id="botonRembolso" type="button" value="Rembolsar"
+			<input id="botonRembolso" type="button" value="Reembolsar"
 				onclick="alert('Tu cupón ha sido devuelto, espera un plazo maximo de una semana para recibir el importe en tu cuenta' )">
 			<%
 			int idElminarCupon = cupon.getId();

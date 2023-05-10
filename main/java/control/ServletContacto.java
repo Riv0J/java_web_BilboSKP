@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Suscriptor;
+
 
 @WebServlet("/contacto")
 public class ServletContacto extends HttpServlet {
@@ -15,6 +17,10 @@ public class ServletContacto extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		
+		
+		
+		
 		System.out.println("Doget contacto");
 		String urlPrevia = "./Contacto";
 		System.out.println("ServletContacto urlprevia establecida = " + urlPrevia);
