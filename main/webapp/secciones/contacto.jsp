@@ -1,10 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page
+	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.io.File, java.text.Normalizer, 
+	model.Suscriptor, view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date"%>
 <link rel="stylesheet" href="css/contacto.css">
+
 <main>
         <div class="cajatexto1">
-            <h1>AquÃ­ nos tienes Â¿Hablamos?</h1>
+            <h1>Aquí nos tienes ¿Hablamos?</h1>
         </div>
         <section id="sec_1">
             <div class="cajagrande">
@@ -31,8 +32,8 @@
                     </div>
                 </div>
                 <div id="formulario">
-                    <h2>CuÃ©ntanos...</h2>
-                    <p>Â¿Tienes alguna duda? EscrÃ­benos y te responderemos la mÃ¡s antes posible.</p>
+                    <h2>Cuéntanos...</h2>
+                    <p>¿Tienes alguna duda? Escríbenos y te responderemos la más antes posible.</p>
                     <form class="form">
                         <div class="box_form">
                             <div class="box">
@@ -41,7 +42,7 @@
                             </div>
                             <div class="box">
                                <label for="">Email:</label> 
-                               <p type="Email:"><input type="email"></input></p>
+                               <p type="Email:"><input type="email" ></input></p>
                             </div>
                         </div>
                        <div class=box_form1>
@@ -61,30 +62,30 @@
                 </div>
                 <div class="container">
                     <div id="question1">
-                        <a href="#question1">1. Â¿QuÃ© es una sala de escape online?</a>
-                        <p>Una sala de escape online es un juego en el que los jugadores resuelven acertijos y enigmas para poder salir de una habitaciÃ³n virtual. Se juega en lÃ­nea desde cualquier lugar del mundo. </p>
+                        <a href="#question1">1. ¿Qué es una sala de escape online?</a>
+                        <p>Una sala de escape online es un juego en el que los jugadores resuelven acertijos y enigmas para poder salir de una habitación virtual. Se juega en línea desde cualquier lugar del mundo. </p>
                     </div>
                     <div id="question2">
-                        <a href="#question2">2. Â¿CÃ³mo puedo reservar una sala de escape online en su pÃ¡gina web?</a>
-                        <p>Para reservar una sala de escape online, simplemente elige la sala que deseas jugar en nuestra pÃ¡gina web, selecciona la fecha y hora en la que deseas jugar, y sigue los pasos del proceso de reserva.</p>
+                        <a href="#question2">2. ¿Cómo puedo reservar una sala de escape online en su página web?</a>
+                        <p>Para reservar una sala de escape online, simplemente elige la sala que deseas jugar en nuestra página web, selecciona la fecha y hora en la que deseas jugar, y sigue los pasos del proceso de reserva.</p>
                     </div>
                     <div id="question3">
-                        <a href="#question3">3. Â¿CuÃ¡l es el precio de las salas de escape online?</a>
-                        <p>Los precios de las salas de escape online varÃ­an segÃºn la sala que elijas y el nÃºmero de jugadores que participen. En nuestra pÃ¡gina web encontrarÃ¡s informaciÃ³n detallada sobre los precios de cada sala.</p>
+                        <a href="#question3">3. ¿Cuál es el precio de las salas de escape online?</a>
+                        <p>Los precios de las salas de escape online varían según la sala que elijas y el número de jugadores que participen. En nuestra página web encontrarás información detallada sobre los precios de cada sala.</p>
                     </div>
                     <div id="question4">
-                        <a href="#question4">4. Â¿Puedo jugar en equipo con amigos que se encuentran en diferentes lugares?</a>
-                        <p>SÃ­, puedes jugar en equipo con amigos que se encuentren en diferentes lugares. Solo necesitas compartir el enlace de la sala de escape online con ellos para que se unan al juego.</p>
+                        <a href="#question4">4. ¿Puedo jugar en equipo con amigos que se encuentran en diferentes lugares?</a>
+                        <p>Sí, puedes jugar en equipo con amigos que se encuentren en diferentes lugares. Solo necesitas compartir el enlace de la sala de escape online con ellos para que se unan al juego.</p>
                     </div>
                     <div id="question5">
-                        <a href="#question5">5. Â¿CÃ³mo se garantiza la seguridad de mis datos personales en su pÃ¡gina web?</a>
-                        <p>En nuestra pÃ¡gina web, nos tomamos muy en serio la seguridad de tus datos personales. Utilizamos medidas de seguridad avanzadas para proteger tu informaciÃ³n y cumplimos con las regulaciones de protecciÃ³n de datos en lÃ­nea.</p>
+                        <a href="#question5">5. ¿Cómo se garantiza la seguridad de mis datos personales en su página web?</a>
+                        <p>En nuestra página web, nos tomamos muy en serio la seguridad de tus datos personales. Utilizamos medidas de seguridad avanzadas para proteger tu información y cumplimos con las regulaciones de protección de datos en línea.</p>
                     </div>
                 </div>               
             </div>
              <div class="social_media">
            		<div class="sc_title">
-           			<h2>SÃ­guenos en nuestras redes:)</h2>
+           			<h2>Síguenos en nuestras redes:)</h2>
            		</div>
              				<div class="sc_box">
              					<a href="https://www.w3schools.com"> <img src="img_web/icons/facebook1.png" alt=""></a>

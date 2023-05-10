@@ -86,7 +86,7 @@ sesion.setAttribute("sus", sus);
                         </div>
                         
                     </div>--%>
-                   	<div>
+                   	<div class="form5">
                      	<input type="submit" value="Guardar cambios"> 
                     </div>
                 </form>
@@ -107,19 +107,15 @@ sesion.setAttribute("sus", sus);
                 </form>-->
                 <div class="caja3">
                     <h2>¿Deseas darte de baja?</h2>
-                    <p>Al darte de baja se perderán tus avances y en caso de tener cupones no canjeados
-                        se te hará un reembolso</p>
-                    <div class="form5" >
-                    <label class="switch">
-  						<input type="checkbox">
-  						<span class="slider"></span>
-					</label>
-					<label class="switch">
-  						<input type="checkbox">
-  						<span class="slider round"></span>
-					</label>
-                </div>
-</div>
+                    <p>Al darte de baja, pasarás a estado inactivo y no se perderán tus avances y/o cupones</p>
+                  	<div class="switch-button">
+   				   		<!-- Checkbox -->
+    						<input type="checkbox" name="switch-button" id="switch-label" class="switch-button__checkbox">
+   						 <!-- Botón -->
+    						<label for="switch-label" class="switch-button__label"></label>
+					</div>
+               
+				</div>
     
   
 

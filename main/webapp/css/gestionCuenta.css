@@ -83,6 +83,11 @@ h1{
     border:#C60C02;
 	transition: all 0.5s;
 }
+.form5 input:hover{
+	background: rgb(0, 0, 0);
+	border:#C60C02;
+	color:#C60C02;
+}
 /*BOTON GUARDAR CAMBIOS*/
 .form5 input{
 	padding:1.5%;
@@ -99,24 +104,7 @@ h1{
 	padding:4%;
 	border-radius:0.35em;
 }
-.boton_modificar{
-	margin-top:5%;
-	border-radius: 2em;
-    width: 20%;
-}
-.modificar::before{
-	content:'Modificar';
-	color: white;
-	background-color:#C60C02;
-	padding:5%;
-	border-radius: 0.35em ;
-	cursor:pointer;
-	-webkit-user-select: none;	
-}
 
-.modificar::-webkit-file-upload-button{
-	visibility:hidden;
-}
 /*FIN BOTONES*/
 .box0{
     width: 50%;
@@ -124,6 +112,39 @@ h1{
     flex-direction: column;
     margin-right: 5%;
 }
+.switch-button {
+    display: inline-block;
+}
+.switch-button .switch-button__checkbox {
+    display: none;
+}
+.switch-button .switch-button__label {
+    background-color: var(--color-red);
+    width: 5rem;
+    height: 3rem;
+    border-radius: 3rem;
+    display: inline-block;
+    position: relative;
+}
+.switch-button .switch-button__label:before {
+    transition: .2s;
+    display: block;
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--color-button);
+    content: '';
+    border-radius: 50%;
+    box-shadow: inset 0px 0px 0px 1px var(--color-black);
+}
+.switch-button .switch-button__checkbox:checked + .switch-button__label {
+    background-color: var(--color-green);
+}
+.switch-button .switch-button__checkbox:checked + .switch-button__label:before {
+    transform: translateX(2rem);
+}
+
+
 
 @media screen and(max-width:480px){
 	.caja2{
