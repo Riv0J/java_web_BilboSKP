@@ -11,15 +11,26 @@ public class Traductor {
 	public static void initFrases() {
 		mapaTraducciones=new HashMap<String, String>();
 		/*castellano*/
-		/*HEADER*/
+		/*INDEX*/
+		mapaTraducciones.put("ES-headerSalas", "Salas de escape");
 		mapaTraducciones.put("EN-headerSalas", "Escape rooms");
 		mapaTraducciones.put("ES-headerRanking", "Ranking");
 		mapaTraducciones.put("EN-headerRanking", "Ranking");
+		mapaTraducciones.put("ES-headerTienda", "Tienda");
+		mapaTraducciones.put("EN-headerTienda", "Store");
 		mapaTraducciones.put("ES-headerUnirse", "Unirse a partida");
 		mapaTraducciones.put("EN-headerUnirse", "Join a game");
 		mapaTraducciones.put("ES-headerContacto", "Contacto");
 		mapaTraducciones.put("EN-headerContacto", "Contact us");
-		
+		mapaTraducciones.put("ES-headerSuscribirse", "Suscribirse");
+		mapaTraducciones.put("EN-headerSuscribirse", "Suscribe");
+		mapaTraducciones.put("ES-footerPriv", "Privacidad");
+		mapaTraducciones.put("ES-footerContactanos", "Contáctanos");
+		mapaTraducciones.put("ES-footerRedes", "Redes");
+		mapaTraducciones.put("EN-footerPriv", "Privacy");
+		mapaTraducciones.put("EN-footerContactanos", "Contact us");
+		mapaTraducciones.put("EN-footerRedes", "Social media");
+
 		/* INICIO ES */
 		mapaTraducciones.put("ES-inicio1", "Experimenta nuestras salas de escape");
 		mapaTraducciones.put("ES-inicio2", "Sumérgete en una experiencia de juego única sin salir de tu casa con nuestras emocionantes salas de escape virtuales. ¿Estás listo para poner a prueba tus habilidades mentales y tu capacidad de resolución de problemas?");

@@ -1,5 +1,5 @@
     <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="view.CookieHelper, view.Mensaje, view.Icon, model.Suscriptor"%>
+	pageEncoding="ISO-8859-1" import="view.CookieHelper, view.Mensaje, view.Icon, model.Suscriptor, view.Traductor"%>
 <%
 String leng = CookieHelper.getLenguajeFromCookies(request.getCookies());
 String seccion = request.getParameter("sec");
@@ -50,11 +50,11 @@ String tituloPagina = seccion.substring(0, 1).toUpperCase() + seccion.substring(
 			<a id="logo_peque" href="./index.jsp?sec=inicio" class="logo"> <img  src="img_web/logos/500x400-cuadrado-2.png"></a>
 		</div>
 		<ul class="navbar">
-			<a href="./salas?buscar=todas&m=todas&t=todas&d=todas"><li>Salas de escape</li></a>
-			<a href="./ranking"><li>Ranking</li></a>
-			<a href="./index.jsp?sec=tienda"><li>Tienda</li></a>
+			<a href="./salas?buscar=todas&m=todas&t=todas&d=todas"><li><%=Traductor.get(leng, "headerSalas")%></li></a>
+			<a href="./ranking"><li><%=Traductor.get(leng, "headerRanking")%></li></a>
+			<a href="./index.jsp?sec=tienda"><li><%=Traductor.get(leng, "headerTienda")%></li></a>
 			<!--  <a href="./salas"><li>Unirse a partida</li></a>-->
-			<a href="./index.jsp?sec=contacto"><li>Contacto</li></a>
+			<a href="./index.jsp?sec=contacto"><li><%=Traductor.get(leng, "headerContacto")%></li></a>
 		</ul>
 		<div class="main">
 			<% if(sus instanceof Suscriptor){ Suscriptor suscriptor = (Suscriptor) sus; %>
@@ -63,7 +63,7 @@ String tituloPagina = seccion.substring(0, 1).toUpperCase() + seccion.substring(
 							
 			<% } else { %>
 				<a class="user" id="botonPerfil"><i class="ri-user-fill"></i>Sign in</a> 
-				<a href="index.jsp?sec=subscribe" class="suscribirse">Subscribe</a>
+				<a href="index.jsp?sec=subscribe" class="suscribirse"><%=Traductor.get(leng, "headerSuscribirse")%></a>
 			<% } %>
 			<form id="form_lenguaje" action="./lenguaje" method="POST">
 				<select id="lenguaje_select" class="bilboskp_select" name="lenguaje">
@@ -91,7 +91,7 @@ String tituloPagina = seccion.substring(0, 1).toUpperCase() + seccion.substring(
             <div class="box">
                 <ul>
                     <li> <a href="">Site map</a></li>
-                    <li> <a href="">Privacidad</a></li>
+                    <li> <a href=""><%=Traductor.get(leng, "footerPriv")%></a></li>
                     <li> <a href="">Cookies</a></li>
                 </ul>
             </div>
@@ -101,8 +101,8 @@ String tituloPagina = seccion.substring(0, 1).toUpperCase() + seccion.substring(
 			</div>
             <div class="box">
                 <ul>
-                    <li><a href="">Contáctanos</a></li>
-                    <li><a href="">Redes</a></li>
+                    <li><a href=""><%=Traductor.get(leng, "footerContactanos")%></a></li>
+                    <li><a href=""><%=Traductor.get(leng, "footerRedes")%></a></li>
                     <li><a href="">FAQ</a></li>
                 </ul>
             </div>
