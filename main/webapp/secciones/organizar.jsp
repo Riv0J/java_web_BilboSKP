@@ -1,11 +1,12 @@
 <%@ page
 	import="java.util.Vector, java.util.HashMap, java.util.Map, java.util.Locale,java.util.Date, java.time.LocalDate, 
-	model.Sala, model.SalaOnline, control.BilboSKP, model.Invitado, model.Anfitrion, model.Jugador, view.StringHelper, view.DateHelper, view.Icon, model.PartidaOnline, model.Suscriptor"%>
+	model.Sala, model.SalaOnline, control.BilboSKP, model.Invitado, model.Anfitrion, model.Jugador, view.StringHelper, view.DateHelper, view.Icon, model.PartidaOnline, model.Suscriptor, view.Traductor, view.CookieHelper"%>
 <%
+String leng = CookieHelper.getLenguajeFromCookies(request.getCookies());
 PartidaOnline partidaOnline = (PartidaOnline) request.getAttribute("partidaOnline");
 if(partidaOnline==null){
 	response.sendRedirect("index.jsp");
-	return;
+	return; 
 }
 Sala salaPartida = partidaOnline.getSala();
 int codInvitacion = partidaOnline.getCodInvitacion();
@@ -65,14 +66,14 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaPartida.getTematic
 			</div>
 			<div id="caja_invitaciones" class="flex_center">
 				<div onclick="copyToClipboard('<%=codInvitacion%>')" id="caja_invitacion">
-					<h2 class="bilboskp_h2"> Invitar con código </h2>
+					<h2 class="bilboskp_h2"> <%=Traductor.get(leng, "OR1")%> </h2>
 					<div id="caja_codigo" class="flex_center">
 						<div><%=codInvitacion%></div>
 						<i class="<%=Icon.getIconHTMLClass("copy")%>"></i>
 					</div>
 				</div>
 				<div onclick="copyToClipboard('<%=enlaceInvitacion%>')" id="caja_invitacion">
-					<h2 class="bilboskp_h2"> Invitar con enlace </h2>
+					<h2 class="bilboskp_h2"> <%=Traductor.get(leng, "OR2")%> </h2>
 					<div id="caja_codigo" class="flex_center">
 						<div id = "caja_enlace"><%=enlaceInvitacion%></div>
 						<i class="<%=Icon.getIconHTMLClass("copy")%>"></i>
@@ -81,7 +82,7 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaPartida.getTematic
 			</div>
 		</div>
 		<div id="caja_organizar">
-			<h2 id="caja_subtitulo_organizar" class="bilboskp_h2"> Jugadores en espera</h2>
+			<h2 id="caja_subtitulo_organizar" class="bilboskp_h2"> <%=Traductor.get(leng, "OR3")%></h2>
 			<div id="caja_jugadores"> 
 				<%for(HttpSession sesion: partidaOnline.getJugadores()){
 					//for(int i =0; i<8; i++){
@@ -114,7 +115,7 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaPartida.getTematic
 					<button class="bilboskp_icon_button <%if(!(jugador instanceof Anfitrion)){%>disabled"<%}%>>
 						<i class="<%=Icon.getIconHTMLClass("online")%>"></i>
 						<div>
-							Iniciar partida
+							<%=Traductor.get(leng, "OR4")%>
 						</div>
 					</button>
 				</a>

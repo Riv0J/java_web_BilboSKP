@@ -1,21 +1,26 @@
+<%@ page 
+	import="view.Traductor,view.CookieHelper"%>
+<%
+String leng = CookieHelper.getLenguajeFromCookies(request.getCookies());
+%>
 <section id="caja_login">
 		<form action="./login" method="post">
 	        <div class="linea_login" id="linea_logo">
-	            <h2>Iniciar sesión</h2>
+	            <h2><%=Traductor.get(leng, "LO1")%></h2>
 	            <button id="boton_cerrar_login" type="button" >&times;</button>
 	        </div>
 	        <div class="linea_login">
-	            <input type="text" name="email" placeholder="Correo electrónico" required>
+	            <input type="text" name="email" placeholder="<%=Traductor.get(leng, "LO2")%>" required>
 	        </div>
 	        <div class="linea_login">
-	            <input type="password" name="pass" placeholder="Contraseña" required>
+	            <input type="password" name="pass" placeholder="<%=Traductor.get(leng, "LO3")%>" required>
 	        </div>
 	        <div class="linea_login" id="linea_login_boton_submit">
-	            <input class="bilboskp_submit" type="submit" value="Iniciar sesión">
+	            <input class="bilboskp_submit" type="submit" value="<%=Traductor.get(leng, "LO4")%>">
 	        </div>
 	        <div class="linea_login" id="linea_extras">
-	            <a href="index.jsp?sec=subscribe"> <li class="bilboskp_li" >No estoy suscrito</li></a>
-	            <!-- <a href="index.jsp?sec=subscribe"> <li class="bilboskp_li" >Olvidé mi contraseña</li></a>-->
+	            <a href="index.jsp?sec=subscribe"> <li class="bilboskp_li" ><%=Traductor.get(leng, "LO5")%></li></a>
+	            <!-- <a href="index.jsp?sec=subscribe"> <li class="bilboskp_li" ><%=Traductor.get(leng, "LO6")%></li></a>-->
 	        </div>
 	    </form>
 </section>

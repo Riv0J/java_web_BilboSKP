@@ -1,9 +1,10 @@
 <%@ page
 	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.io.File, java.text.Normalizer, 
-	model.Suscriptor,view.Traductor, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date"%>
- 
+	model.Suscriptor,view.Traductor,view.CookieHelper, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date"%>
+
 <link rel="stylesheet" href="css/gestionCuenta.css">
 <%
+String leng = CookieHelper.getLenguajeFromCookies(request.getCookies());
 HttpSession sesion = request.getSession();
 Suscriptor sus= (Suscriptor) sesion.getAttribute("suscriptor");
 sesion.setAttribute("sus", sus);
@@ -11,9 +12,8 @@ sesion.setAttribute("sus", sus);
 
 <div class="caja2">
                 <div class="parte1">
-                    <h2>Gestión de la cuenta</h2>
-                    <p>Modifica aquí tus datos personales. Recuerda que tanto como el alias, nombre y apellidos
-                    pertenecen a tu perfil público.</p>
+                    <h2><%=Traductor.get(leng, "GC1")%></h2>
+                    <p><%=Traductor.get(leng, "GC2")%></p>
                 </div>
                 <form action="./perfil" method="post">
                     <div class="subcaja1">
@@ -21,14 +21,14 @@ sesion.setAttribute("sus", sus);
                     </div>
                     <div class="form1">
                         <div class="box0">
-                            <label for=""><strong>Nombre:</strong></label>
+                            <label for=""><strong><%=Traductor.get(leng, "GC3")%></strong></label>
                             <div class="edit">
                                 <input type="text" name="nombre" id="nombre" value="<%=sus.getNombre()%>">
                               	<%--  <img src="img_web/icons/edit_icon.png" alt="">--%> 
                             </div>
                         </div>
                         <div class="box0">
-                            <label for="">Apellido:</label>
+                            <label for=""><%=Traductor.get(leng, "GC4")%></label>
                             <div class="edit">
                                 <input type="text" name="apellido" id="apellido" value="<%=sus.getApellidos()%>">
                             	<%--  <img src="img_web/icons/edit_icon.png" alt="">--%> 
@@ -54,14 +54,14 @@ sesion.setAttribute("sus", sus);
                     </div>
                     <div class="form3">
                         <div class="box0">
-                            <label for="">Fecha de nacimiento</label>
+                            <label for=""><%=Traductor.get(leng, "GC9")%></label>
                             <div class="edit">
                                 <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="<%=sus.getFech_nac()%>">
                                 <%--  <img src="img_web/icons/edit_icon.png" alt="">--%> 
                             </div>
                         </div>
                         <div class="box0">
-                            <label for="">Télefono:</label>
+                            <label for=""><%=Traductor.get(leng, "GC5")%></label>
                             <div class="edit">
                                 <input type="text" name="telefono" id="telefono" value="<%=sus.getTelefono()%>">
                                 <%--  <img src="img_web/icons/edit_icon.png" alt="">--%> 
@@ -106,10 +106,10 @@ sesion.setAttribute("sus", sus);
                     </div>
                 </form>-->
                 <div class="caja3">
-                    <h2>¿Deseas darte de baja?</h2>
-                    <p>Al darte de baja, pasarás a estado inactivo y no se perderán tus datos, avances y/o cupones comprados</p>
+                    <h2><%=Traductor.get(leng, "GC6")%></h2>
+                    <p><%=Traductor.get(leng, "GC7")%></p>
                  	<div class="interruptor">
-                 		<p>Activo</p>
+                 		<p><%=Traductor.get(leng, "GC8")%></p>
                  		<label class="switch">
   							<input type="checkbox">
   							<span class="slider round"></span>

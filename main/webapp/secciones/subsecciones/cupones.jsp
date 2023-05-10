@@ -1,20 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page
-	import="model.Suscriptor,  model.SalaOnline, java.time.*, model.Cupon, java.util.Vector, control.BilboSKP"%>
+	import="model.Suscriptor,  model.SalaOnline, java.time.*, model.Cupon, java.util.Vector, control.BilboSKP, view.Traductor, view.CookieHelper"%>
 <link rel="stylesheet" href="css/EstilosCupones.css">
 <%
-
+String leng = CookieHelper.getLenguajeFromCookies(request.getCookies());
 %>
 <div id=cajaSubseccion>
 	<div id="TextosEncabezado">
-		<h1>Administrar cupones</h1>
+		<h1><%=Traductor.get(leng, "CU1")%></h1>
 		<br>
-		<p>
-			Aquí podrás encontrar nuestro propio sistema económico, los cupones.
-			Con un cupón puedes organizar una partida y jugar con tus amigos las
-			aventuras que hemos creado para ti. <a id="MisCuponesTitulo">Mis
-				cupones</a>
+		<p><%=Traductor.get(leng, "CU2")%> <a id="MisCuponesTitulo">
+			<%=Traductor.get(leng, "CU3")%></a>
 	</div>
 	<form id="Cupones">
 
@@ -29,11 +26,11 @@
 
 			<img id="CuponImagen" src="./img_web/icons/couponWhite.png" width="40%" height="100px">
 			<p class="CodigoCupon">
-				Estado:
+				<%=Traductor.get(leng, "CU4")%>
 				<%=cupon.getEstado()%>
 			</p>
 			<p>
-				Fecha caducidad:<br>
+				<%=Traductor.get(leng, "CU5")%><br>
 				<%=cupon.getFechaCaducidad()%></p>
 			<p><%=cupon.getRembolsable()%></p>
 			<input id="botonRembolso" type="button" value="Reembolsar"

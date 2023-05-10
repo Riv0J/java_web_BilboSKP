@@ -123,7 +123,7 @@ public class Traductor {
 		mapaTraducciones.put("ES-TcomprarYa", "Comprar ya");
 		mapaTraducciones.put("ES-Tcupon5", "5 cupones");
 		mapaTraducciones.put("ES-Tdescuento5", "17% de descuento");
-		mapaTraducciones.put("ES-Tcupon7", "1 cupón");
+		mapaTraducciones.put("ES-Tcupon7", "7 cupón");
 		mapaTraducciones.put("ES-Tdescuento7", "25% de descuento");
 		mapaTraducciones.put("ES-Tregalar", "Regalar cupones");
 		mapaTraducciones.put("ES-TregalarText", "Quieres regalar un cupón? Introduce los datos del <em><strong>suscriptor</strong></em> al que quieras mandarle el regalo.");
@@ -194,6 +194,146 @@ public class Traductor {
 		mapaTraducciones.put("EN-Cfaq5r", "On our website, we take the security of your personal data very seriously. We use advanced security measures to protect your information and comply with online data protection regulations.");
 		mapaTraducciones.put("EN-Csiguenos", "Follow us on our social media!");
 		mapaTraducciones.put("EN-Cchatea", "Chat with us :)");
+		
+		/*Cupones ES*/
+		mapaTraducciones.put("ES-CU1", "Administrar cupones");
+		mapaTraducciones.put("ES-CU2", "Aquí podrás encontrar nuestro propio sistema económico, los cupones. Con un cupón puedes organizar una partida y jugar con tus amigos las aventuras que hemos creado para ti.");
+		mapaTraducciones.put("ES-CU3", "Mis cupones");
+		mapaTraducciones.put("ES-CU4", "Estado:");
+		mapaTraducciones.put("ES-CU5", "Fecha caducidad:");
+		/*Cupones EN*/
+		mapaTraducciones.put("EN-CU1", "Manage coupons");
+		mapaTraducciones.put("EN-CU2", "Here you can find our own economic system, the coupons. With a coupon, you can organize a game and play with your friends the adventures we have created for you.");
+		mapaTraducciones.put("EN-CU3", "My coupons");
+		mapaTraducciones.put("EN-CU4", "Status:");
+		mapaTraducciones.put("EN-CU5", "Expiration date:");
+
+		/*Gestion Cuenta ES*/
+		mapaTraducciones.put("ES-GC1", "Gestión de la cuenta");
+		mapaTraducciones.put("ES-GC2", "Modifica aquí tus datos personales. Recuerda que tanto como el alias, nombre y apellidos pertenecen a tu perfil público.");
+		mapaTraducciones.put("ES-GC3", "Nombre:");
+		mapaTraducciones.put("ES-GC4", "Apellido:");
+		mapaTraducciones.put("ES-GC5", "Télefono:");
+		mapaTraducciones.put("ES-GC6", "¿Deseas darte de baja?");
+		mapaTraducciones.put("ES-GC7", "Al darte de baja, pasarás a estado inactivo y no se perderán tus datos, avances y/o cupones comprados");
+		mapaTraducciones.put("ES-GC8", "Activo:");
+		mapaTraducciones.put("ES-GC9", "Fecha de nacimiento:");
+		mapaTraducciones.put("ES-GC10", "Guardar cambios");
+
+		/*Gestion cuenta EN*/
+		mapaTraducciones.put("EN-GC1", "Account Management");
+		mapaTraducciones.put("EN-GC2", "Modify your personal data here. Remember that both the alias, name, and surname belong to your public profile.");
+		mapaTraducciones.put("EN-GC3", "Name:");
+		mapaTraducciones.put("EN-GC4", "Surname:");
+		mapaTraducciones.put("EN-GC5", "Phone number:");
+		mapaTraducciones.put("EN-GC6", "Do you want to unsubscribe?");
+		mapaTraducciones.put("EN-GC7", "By unsubscribing, you will become inactive, and your data, progress, and/or purchased coupons will not be lost.");
+		mapaTraducciones.put("EN-GC8", "Active:");
+		mapaTraducciones.put("EN-GC9", "Date of birth:");
+		mapaTraducciones.put("EN-GC8", "Save changes");
+
+		/*Suscribirse ES*/
+		mapaTraducciones.put("ES-SU1", "Regístrate en BilboSKP");
+		mapaTraducciones.put("ES-SU2", "Al darte de alta se te cobrará un importe y recibirás un cupón de bienvenida!");
+		mapaTraducciones.put("ES-SU3", "Contraseña:");
+		mapaTraducciones.put("ES-SU4", "Número tarjeta:");
+		mapaTraducciones.put("ES-SU5", "Nombre:");
+		mapaTraducciones.put("ES-SU6", "Apellidos:");
+		mapaTraducciones.put("ES-SU7", "Fecha de nacimiento:");
+		mapaTraducciones.put("ES-SU8", "Teléfono:");
+		mapaTraducciones.put("ES-SU9", "Enviar");
+		/*Suscribirse EN*/
+		mapaTraducciones.put("EN-SU1", "Sign up for BilboSKP");
+		mapaTraducciones.put("EN-SU2", "By signing up, you will be charged an amount and receive a welcome coupon!");
+		mapaTraducciones.put("EN-SU3", "Password:");
+		mapaTraducciones.put("EN-SU4", "Card number:");
+		mapaTraducciones.put("EN-SU5", "First name:");
+		mapaTraducciones.put("EN-SU6", "Last name:");
+		mapaTraducciones.put("EN-SU7", "Date of birth:");
+		mapaTraducciones.put("EN-SU8", "Phone:");
+		mapaTraducciones.put("EN-SU9", "Submit");
+
+		/*Perfil ES*/
+		mapaTraducciones.put("ES-PE1", "Mi perfil");
+		mapaTraducciones.put("ES-PE1", "Gestión de la cuenta");
+		mapaTraducciones.put("ES-PE1", "Mis reservas");
+		mapaTraducciones.put("ES-PE1", "Mis cupones");
+		mapaTraducciones.put("ES-PE1", "Cerrar sesión");
+		/*Perfil EN*/
+		mapaTraducciones.put("EN-PE1", "My profile");
+		mapaTraducciones.put("EN-PE2", "Account management");
+		mapaTraducciones.put("EN-PE3", "My bookings");
+		mapaTraducciones.put("EN-PE4", "My coupons");
+		mapaTraducciones.put("EN-PE5", "Log out");
+		/*Caja login ES*/
+		mapaTraducciones.put("ES-LO1", "Iniciar sesión");
+		mapaTraducciones.put("ES-LO2", "Correo electrónico");
+		mapaTraducciones.put("ES-LO3", "Contraseña");
+		mapaTraducciones.put("ES-LO4", "Iniciar sesión");
+		mapaTraducciones.put("ES-LO5", "No estoy suscrito");
+		mapaTraducciones.put("ES-LO6", "Olvidé mi contraseña");
+		/*Caja login EN*/
+		mapaTraducciones.put("EN-LO1", "Log in");
+		mapaTraducciones.put("EN-LO2", "Email");
+		mapaTraducciones.put("EN-LO3", "Password");
+		mapaTraducciones.put("EN-LO4", "Log in");
+		mapaTraducciones.put("EN-LO5", "Not subscribed");
+		mapaTraducciones.put("EN-LO6", "Forgot my password");
+		/*Unirse ES*/
+		mapaTraducciones.put("ES-UN1", "Introduce un código de partida");
+		mapaTraducciones.put("ES-UN2", "Código de partida online");
+		mapaTraducciones.put("ES-UN3", "Unirse a partida");
+		mapaTraducciones.put("ES-UN4", "¿Cómo funciona unirse a una partida?");
+		/*Unirse EN*/
+		mapaTraducciones.put("EN-UN1", "Enter a game code");
+		mapaTraducciones.put("EN-UN2", "Online game code");
+		mapaTraducciones.put("EN-UN3", "Join game");
+		mapaTraducciones.put("EN-UN4", "How does joining a game work?");
+		/*Reservas ES*/
+		mapaTraducciones.put("ES-RE1", "Administra tus reservas");
+		mapaTraducciones.put("ES-RE2", "Puedes ver o cancelar tus reservas para las salas de escape físicas.Ten en cuenta que tus reservas se mostrarán por orden de fecha de caducidad más cercana.");
+		/*Reservas EN*/
+		mapaTraducciones.put("EN-RE1", "Manage your bookings");
+		mapaTraducciones.put("EN-RE2", "You can view or cancel your bookings for physical escape rooms. Please note that your bookings will be displayed in order of closest expiration date.");
+		/*Organizar ES*/
+		mapaTraducciones.put("ES-OR1", "Invitar con código");
+		mapaTraducciones.put("ES-OR2", "Invitar con enlace");
+		mapaTraducciones.put("ES-OR3", "Jugadores en espera");
+		mapaTraducciones.put("ES-OR4", "Iniciar partida");
+		/*Organizar EN*/
+		mapaTraducciones.put("EN-OR1", "Invite with code");
+		mapaTraducciones.put("EN-OR2", "Invite with link");
+		mapaTraducciones.put("EN-OR3", "Players in waiting");
+		mapaTraducciones.put("EN-OR4", "Start game");
+
+		/*Ver sala ES*/
+		mapaTraducciones.put("ES-VS1", "Esta es una sala física, por lo que funciona por medio de una reserva. ¡Puedes seleccionar entre horarios disponibles y seleccionar la cantidad de participantes que acudirán a la sala!");
+		mapaTraducciones.put("ES-VS2", "No quedan fechas libres para reservar en esta sala, ¡por favor echa un vistazo más tarde!");
+		mapaTraducciones.put("ES-VS3", "Escoge una fecha:");
+		mapaTraducciones.put("ES-VS4", "Selecciona una fecha");
+		mapaTraducciones.put("ES-VS5", "Número de jugadores que participarán:");
+		mapaTraducciones.put("ES-VS6", "No hay horarios disponibles para esa fecha, ¡Echa un ojo en un rato!");
+		mapaTraducciones.put("ES-VS7", "¡Seleciona una fecha disponible para poder ver los horarios!");
+		mapaTraducciones.put("ES-VS8", "Esta es una sala online, por lo que puedes acceder a ella en	cualquier momento, pero eso sí, asegúrate de traer a tus amigos	para vencerla rápido, y por supuesto pasar unas buenas risas. Podrás invitar a tus amigos cuando estés organizando la partida.");
+		mapaTraducciones.put("ES-VS9", "Esta sala no está disponible actualmente");
+		mapaTraducciones.put("ES-VS10", "Horarios disponibles");
+		mapaTraducciones.put("ES-VS11", "Reservar sala");
+		mapaTraducciones.put("ES-VS12", "Organizar partida");
+		/*Ver sala EN*/
+		mapaTraducciones.put("EN-VS1", "This is a physical room, so it works through a booking. You can choose from available time slots and select the number of participants attending the room!");
+		mapaTraducciones.put("EN-VS2", "There are no available dates to book in this room. Please check back later!");
+		mapaTraducciones.put("EN-VS3", "Choose a date:");
+		mapaTraducciones.put("EN-VS4", "Select a date");
+		mapaTraducciones.put("EN-VS5", "Number of players participating:");
+		mapaTraducciones.put("EN-VS6", "There are no available time slots for that date. Please check back later!");
+		mapaTraducciones.put("EN-VS7", "Select an available date to view the time slots!");
+		mapaTraducciones.put("EN-VS8", "This is an online room, so you can access it at any time. However, make sure to bring your friends to beat it quickly and, of course, have a good laugh. You can invite your friends when you're organizing the game.");
+		mapaTraducciones.put("EN-VS9", "This room is currently unavailable.");
+		mapaTraducciones.put("EN-VS10", "Available time slots");
+		mapaTraducciones.put("EN-VS11", "Book room");
+		mapaTraducciones.put("EN-VS12", "Organize game");
+
+		
 		
 		
 	}

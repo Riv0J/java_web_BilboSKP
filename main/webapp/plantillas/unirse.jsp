@@ -1,17 +1,22 @@
+<%@ page 
+	import="view.Traductor,view.CookieHelper"%>
+<%
+String leng = CookieHelper.getLenguajeFromCookies(request.getCookies());
+%>
 <section id="caja_unirse">
 		<form action="./unirse" method="get">
 	        <div class="linea_unirse" id="linea_logo">
-	            <h2>Introduce un código de partida</h2>
+	            <h2><%=Traductor.get(leng, "UN1")%></h2>
 	            <button id="boton_cerrar_unirse" type="button" >&times;</button>
 	        </div>
 	        <div class="linea_unirse">
-	            <input type="text" min="1000" max="9999" maxlength="4" name="codInvitacion" placeholder="Código de partida online" required>
+	            <input type="text" min="1000" max="9999" maxlength="4" name="codInvitacion" placeholder="<%=Traductor.get(leng, "UN2")%>" required>
 	        </div>
 	        <div class="linea_unirse" id="linea_unirse_boton_submit">
-	            <input class="bilboskp_submit" type="submit" value="Unirse a partida">
+	            <input class="bilboskp_submit" type="submit" value="<%=Traductor.get(leng, "UN3")%>">
 	        </div>
 	        <div class="linea_unirse" id="linea_extras">
-	            <a href="index.jsp?sec=contacto#question4"> <li class="bilboskp_li" >¿Cómo funciona unirse a una partida?</li></a>
+	            <a href="index.jsp?sec=contacto#question4"> <li class="bilboskp_li" ><%=Traductor.get(leng, "UN4")%></li></a>
 	        </div>
 	    </form>
 </section>

@@ -1,7 +1,8 @@
 <%@ page
 	import="java.util.Vector, java.util.HashMap, java.util.Map, java.util.Locale,java.util.Date, java.time.LocalDate, java.io.File, java.text.Normalizer, 
-	model.Sala, model.SalaOnline, model.SalaFisica, model.Horario, model.Suscriptor, view.StringHelper, view.DateHelper, view.Icon"%>
+	model.Sala, model.SalaOnline, model.SalaFisica, model.Horario, model.Suscriptor, view.StringHelper, view.DateHelper, view.Icon, view.Traductor, view.CookieHelper"%>
 <%
+String leng = CookieHelper.getLenguajeFromCookies(request.getCookies());
 Object sus = (Object) session.getAttribute("suscriptor");
 Sala salaAMostrar = (Sala) request.getAttribute("salaAMostrar");
 String idSala = (String) request.getParameter("idSala");
@@ -11,7 +12,7 @@ if (salaAMostrar == null) {
 }
 
 String modalidad = "Online";
-String textoBoton = "Organizar partida";
+String textoBoton = Traductor.get(leng, "VS12");
 String enlaceBoton = "./organizar?idSala="+idSala;
 String direccion = null;
 LocalDate fechaSeleccionada = (LocalDate) request.getAttribute("fechaSeleccionada");
@@ -20,7 +21,7 @@ Vector<Horario> horariosAMostrar = null;
 
 if (esSalaFisica == true) {
 	modalidad = "Reserva";
-	textoBoton = "Reservar sala";
+	textoBoton = Traductor.get(leng, "VS11");
 	enlaceBoton = "./reservar?idSala="+idSala;
 	direccion = ((SalaFisica)salaAMostrar).getDireccion();
 	fechasAMostrar = (Vector<LocalDate>) request.getAttribute("fechasAMostrar");
@@ -76,22 +77,20 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 			
 			<% if (esSalaFisica == true) { %>
 				<div id="caja_jugabilidad">
-					<p>Esta es una sala física, por lo que funciona por medio de una
-						reserva. ¡Puedes seleccionar entre horarios disponibles y
-						seleccionar la cantidad de participantes que acudirán a la sala!</p>
+					<p><%=Traductor.get(leng, "VS1")%></p>
 				</div>
 				<div id="caja_reserva">
 				<% if(fechasAMostrar==null || fechasAMostrar.size()==0){ %>
 						<div class="caja_mensaje">
-							<i class="<%=Icon.getIconHTMLClass("reserva")%>"></i><div>No quedan fechas libres para reservar en esta sala, ¡por favor echa un vistazo más tarde!</div>
+							<i class="<%=Icon.getIconHTMLClass("reserva")%>"></i><div><%=Traductor.get(leng, "VS2")%></div>
 						</div>
 				<% } else { %>
 					<form action="./verSala" method="GET" id="caja_fecha" class="linea_form">
 						<input type="hidden" name="idSala" value="<%=idSala%>">
-						<label for="fecha_reserva">Escoge una fecha:</label> 
+						<label for="fecha_reserva"><%=Traductor.get(leng, "VS3")%></label> 
 						<select id="fechas" class="bilboskp_select" name="fechaSeleccionada">
 					    <% if(fechaSeleccionada == null) { %>
-						    		 <option value="" selected="" >Selecciona una fecha</option>
+						    		 <option value="" selected="" ><%=Traductor.get(leng, "VS4")%></option>
 							    	 <% for(LocalDate localDate: fechasAMostrar){
 							                String localDateString = StringHelper.getLocalDateString(localDate);  %>
 							                <option value="<%=localDateString%>"><%=localDateString%></option>
@@ -112,7 +111,7 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 						<form action="./reservar" method="POST">
 						<input type="hidden" name="idSala" value="<%=idSala%>">
 							<div id="caja_horarios" class="linea_form">
-								<label for="horarios">Horarios disponibles:</label>
+								<label for="horarios"><%=Traductor.get(leng, "VS10")%></label>
 								<select id="horarios" class="bilboskp_select" name="horarios">
 									<%for(Horario horario: horariosAMostrar){
 										if(horario.isDisponible()==false){ continue; }
@@ -126,7 +125,7 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 								</select>
 							</div>
 							<div id="caja_numero_jugadores" class="linea_form">
-								<label for="num_jugadores">Número de jugadores que participarán:</label> 
+								<label for="num_jugadores"><%=Traductor.get(leng, "VS5")%></label> 
 								<select id="num_jugadores" class="bilboskp_select" name="num_jugadores" >
 									<% 
 									int minJugadores = salaAMostrar.getJugadoresMin();
@@ -149,19 +148,16 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 							</div>
 						</form>
 						<% } else { %>
-						<div>No hay horarios disponibles para esa fecha, ¡Echa un ojo en un rato!</div>
+						<div><%=Traductor.get(leng, "VS6")%></div>
 						<% } %>
 				<% }  else if (fechaSeleccionada==null){ %>
-				<div>¡Seleciona una fecha disponible para poder ver los horarios!</div>
+				<div><%=Traductor.get(leng, "VS7")%></div>
 				<% } %>
 			</div>
 				<% } %>
 			<% } else { %>
 			<div id="caja_jugabilidad">
-				<p>Esta es una sala online, por lo que puedes acceder a ella en
-					cualquier momento, pero eso sí, asegúrate de traer a tus amigos
-					para vencerla rápido, y por supuesto pasar unas buenas risas.
-					Podrás invitar a tus amigos cuando estés organizando la partida.</p>
+				<p><%=Traductor.get(leng, "VS8")%></p>
 			</div>
 			<div id="contenedor_boton">
 				<% if (esSalaFisica == false) {
@@ -178,7 +174,7 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 							<a href="./salas">
 								<button id="boton_reservar_organizar" class="bilboskp_icon_button">
 									<div>
-										Esta sala no está disponible actualmente
+										<%=Traductor.get(leng, "VS9")%>
 									</div>
 								</button>
 							</a>

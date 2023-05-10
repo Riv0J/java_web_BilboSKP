@@ -1,15 +1,15 @@
-<%@page import="jdk.internal.misc.FileSystemOption"%>
 <%@ page
 	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.io.File, java.text.Normalizer, 
-	model.Reserva, model.Sala,view.Traductor, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date, java.util.Vector "%>  
-	
+	model.Reserva, model.Sala,view.Traductor,view.CookieHelper, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date, java.util.Vector "%>  
+	<%
+String leng = CookieHelper.getLenguajeFromCookies(request.getCookies());
+%>
 <link rel="stylesheet" href="css/reserva.css">	
 	
 <div class="caja2">
 			<section id="cajita1">
-                <h1>Administra tus reservas</h1>
-                <p>Puedes ver o cancelar tus reservas para las salas de escape físicas.Ten en cuenta que tus reservas se mostrarán por orden
-                de fecha de caducidad más cercana.</p>
+                <h1><%=Traductor.get(leng, "RE1")%></h1>
+                <p><%=Traductor.get(leng, "RE2")%></p>
                 
                 
             </section>
