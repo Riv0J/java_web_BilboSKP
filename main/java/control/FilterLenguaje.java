@@ -8,6 +8,9 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @WebFilter("/*")
 public class FilterLenguaje implements Filter {
@@ -19,9 +22,31 @@ public class FilterLenguaje implements Filter {
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		chain.doFilter(request, response);
+	    HttpServletRequest req = (HttpServletRequest) request;
+	    HttpServletResponse res = (HttpServletResponse) response;
+	    
+	    // Verificar si la cookie existe
+	    boolean found = false;
+	    Cookie[] cookies = req.getCookies();
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if (cookie.getName().equals("BILBOSKP_LENGUAJE")) {
+	                found = true;
+	                break;
+	            }
+	        }
+	    }
+	    
+	    // Si la cookie no existe, agregarla con valor predeterminado "ES"
+	    if (!found) {
+	        Cookie cookie = new Cookie("BILBOSKP_LENGUAJE", "ES");
+	        cookie.setMaxAge(3600 * 24 * 365); // 1 año de duración
+	        cookie.setPath("/");
+	        res.addCookie(cookie);
+	    }
+	    
+	    chain.doFilter(request, response);
 	}
-
 	public void init(FilterConfig fConfig) throws ServletException {
 	}
 
