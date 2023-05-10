@@ -12,12 +12,24 @@ String m = request.getParameter("m");
 String d = request.getParameter("d");
 String t = request.getParameter("t");
 String paramBuscar = request.getParameter("buscar");
-
+if(paramBuscar.equals("todas")){
+	paramBuscar = Traductor.get(leng, "todas");
+}
+if(m.equals("todas")){
+	m = Traductor.get(leng, "todas");
+}
+if(d.equals("todas")){
+	d = Traductor.get(leng, "todas");
+}
+if(t.equals("todas")){
+	t = Traductor.get(leng, "todas");
+}
 if (dificultadesDisponibles != null && tematicasDisponibles != null) {
 %>
 <link rel="stylesheet" href="css/salas.css">
 <section id="contenedor_buscador">
 	<form>
+	<% %>
 		<div id="wrapper_buscador">
 			<div id="caja_buscador">
 				<img alt="" src="img_web/iconos_salas/lupa.svg"> <input
@@ -43,7 +55,7 @@ if (dificultadesDisponibles != null && tematicasDisponibles != null) {
 						<option value="todas"><%=Traductor.get(leng,"salas5")%></option>
 						<%
 						for (String tematica : tematicasDisponibles) {
-											String tematicaNormalizada = StringHelper.normalizarTexto(tematica);
+							String tematicaNormalizada = StringHelper.normalizarTexto(tematica);
 						%>
 						<option <%if (t.equals(tematicaNormalizada)) {%> selected <%}%>
 							value="<%=tematicaNormalizada%>"><%=Traductor.get(leng,tematicaNormalizada)%></option>
