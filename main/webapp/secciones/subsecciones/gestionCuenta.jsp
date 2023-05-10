@@ -16,6 +16,7 @@ sesion.setAttribute("sus", sus);
                     pertenecen a tu perfil público.</p>
                 </div>
                 <form action="./perfil" method="post">
+                <input type="hidden" name="accion" value="editar">
                     <div class="subcaja1">
                    		<img src="img_suscriptores/<%=sus.getImagen()%>" alt="">                   	
                     </div>
@@ -105,20 +106,23 @@ sesion.setAttribute("sus", sus);
                         <input type="password" name="" id="">
                     </div>
                 </form>-->
-                <div class="caja3">
-                    <h2>¿Deseas darte de baja?</h2>
-                    <p>Al darte de baja, pasarás a estado inactivo y no se perderán tus datos, avances y/o cupones comprados</p>
+                <!--  <form action="./perfil" method="post" class="caja3" id="form_baja">
+                	<input type="hidden" name="accion" value="baja">
+                    <h2>¿Quieres desactivar tu cuenta?</h2>
+                    <p>Al desactivar, pasarás a estado inactivo y no se perderán tus datos, avances y/o cupones comprados</p>
                  	<div class="interruptor">
                  		<p>Activo</p>
                  		<label class="switch">
-  							<input type="checkbox">
+  							<input name="checkbox_activo" id="checkbox_activo" type="checkbox" value="">
   							<span class="slider round"></span>
 						</label>
-                 	
                  	</div>
-                  	
-               
-				</div>
-    
-  
-
+				</form>
+				<script>
+				  const checkbox = document.getElementById("checkbox_activo");
+				  const form = document.getElementById("form_baja");
+				
+				  checkbox.addEventListener("change", () => {
+				    form.submit();
+				  });
+				</script>-->

@@ -65,6 +65,11 @@ section .principal {
 	width: 50%;
 	display: flex;
 	margin-left: 10%;
+	width: 50%;
+    display: flex;
+    margin-left: 10%;
+    flex-direction: column;
+    gap: 3em;
 }
 
 footer {

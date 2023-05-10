@@ -92,33 +92,68 @@ public class ServletPerfil extends HttpServlet {
 		}*/
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		System.out.println("Dopost perfil");		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Dopost perfil");
 		HttpSession sesion = request.getSession();
 		Object sus = sesion.getAttribute("suscriptor");
-		if (sus instanceof Suscriptor) {
-			String emailViejo = ((Suscriptor) sus).getEmail();
-			String nombreNuevo= request.getParameter("nombre");	
-			String apellidoNuevo= request.getParameter("apellido");	
-			String aliasNuevo= request.getParameter("alias");	
-			String emailNuevo= request.getParameter("email");
-			String fecha_nacimientoNueva= request.getParameter("fecha_nacimiento");	
-			int telefonoNuevo=Integer.parseInt(request.getParameter("telefono"));
-			try {
-				//usar el metodo de actualizar suscripcion
-				boolean sePudoEditar = BilboSKP.actualizarSuscripcion(emailViejo, emailNuevo, aliasNuevo, nombreNuevo, apellidoNuevo,fecha_nacimientoNueva, telefonoNuevo);
-				if(sePudoEditar == true) {
-					//otro metodo de obtener suscriptor por el email
-					Suscriptor susNuevo = BilboSKP.getSuscriptor(emailNuevo);
-					//meter al sus en la sesion
-					sesion.setAttribute("suscriptor", susNuevo);
-				} else {
-					System.out.println("ServletPerfil: Error obteniendo email con "+emailViejo);
+		String accion = (String) request.getParameter("accion");
+		System.out.println("accion");
+		if(!(sus instanceof Suscriptor)) {
+			request.getRequestDispatcher("index.jsp?sec=perfil&sub=gestionCuenta").forward(request, response);
+			return;
+		}
+		switch (accion) {
+		case "editar":
+			if (sus instanceof Suscriptor) {
+				String emailViejo = ((Suscriptor) sus).getEmail();
+				String nombreNuevo= request.getParameter("nombre");	
+				String apellidoNuevo= request.getParameter("apellido");	
+				String aliasNuevo= request.getParameter("alias");	
+				String emailNuevo= request.getParameter("email");
+				String fecha_nacimientoNueva= request.getParameter("fecha_nacimiento");	
+				int telefonoNuevo=Integer.parseInt(request.getParameter("telefono"));
+				try {
+					//usar el metodo de actualizar suscripcion
+					boolean sePudoEditar = BilboSKP.actualizarSuscripcion(emailViejo, emailNuevo, aliasNuevo, nombreNuevo, apellidoNuevo,fecha_nacimientoNueva, telefonoNuevo);
+					if(sePudoEditar == true) {
+						//otro metodo de obtener suscriptor por el email
+						Suscriptor susNuevo = BilboSKP.getSuscriptor(emailNuevo);
+						//meter al sus en la sesion
+						sesion.setAttribute("suscriptor", susNuevo);
+					} else {
+						System.out.println("ServletPerfil: Error obteniendo email con "+emailViejo);
+					}
+				} catch (Throwable e) {
+					e.printStackTrace();
 				}
-			} catch (Throwable e) {
-				e.printStackTrace();
 			}
+			break;
+		case "baja":
+			String checkbox_activo = (String) request.getParameter("checkbox_activo");
+			int activo = 0;
+			switch (checkbox_activo) {
+			case "on":
+				activo = 1;
+				break;
+			case "off":
+				try {
+					boolean exitoso = BilboSKP.darBajaSuscripcion(((Suscriptor)sus));
+					if(exitoso==true) {
+						Suscriptor nuevoSus = BilboSKP.getSuscriptor(((Suscriptor)sus).getEmail());
+						sesion.setAttribute("suscriptor", nuevoSus);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+				break;
+			default:
+				break;
+			}
+			break;
+		default:
+			break;
 		}
 		request.getRequestDispatcher("index.jsp?sec=perfil&sub=gestionCuenta").forward(request, response);
 	}

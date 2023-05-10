@@ -27,6 +27,11 @@ if(partidaOnline.getTiempoMinutos() == 0){
 			<p class="bilboskp_p">Pistas usadas: Habeis usado <%=partidaOnline.getVectorpistasUtilizadas().size()%> pistas</p>
 		</div>
 		<div id="Botones">
+			<div>
+				<video width="400" controls>
+				  <source src="img_web/videos/outro.mp4" type="video/mp4">
+				</video>
+			</div>
 			<div class="flex_center">
 				<a class="flex_center"  href="./salas">
 				<button class="bilboskp_icon_button" id="SalaBoton">Ver salas</button></a> 
