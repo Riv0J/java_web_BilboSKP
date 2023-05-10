@@ -1,15 +1,15 @@
 package view;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
 import javax.servlet.http.Cookie;
 
 public class CookieHelper {
-
-    private static final String DEFAULT_LENGUAJE = "ES";
-    private static final String LENGUAJE_COOKIE_NAME = "BILBOSKP_LENGUAJE";
+	public static final ArrayList<String> LENGUAJES_DISPONIBLES = null;
+    public static final String DEFAULT_LENGUAJE = "EN";
+    public static final String LENGUAJE_COOKIE_NAME = "BILBOSKP_LENGUAJE";
     
-    public static String getLenguajeFromCookies(Collection<Cookie> cookies) {
+    public static String getLenguajeFromCookies(Cookie[] cookies) {
         String lenguaje = DEFAULT_LENGUAJE;
         if (cookies != null) {
             for (Cookie cookie : cookies) {
@@ -20,5 +20,11 @@ public class CookieHelper {
             }
         }
         return lenguaje;
+    }
+    public static boolean lenguajeDisponible(String lenguaje) {
+    	if(LENGUAJES_DISPONIBLES.contains(lenguaje)) {
+    		return true;
+    	}
+    	return false;
     }
 }

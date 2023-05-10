@@ -12,6 +12,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import view.CookieHelper;
+import view.Traductor;
+
 @WebFilter("/*")
 public class FilterLenguaje implements Filter {
 
@@ -30,17 +33,16 @@ public class FilterLenguaje implements Filter {
 	    Cookie[] cookies = req.getCookies();
 	    if (cookies != null) {
 	        for (Cookie cookie : cookies) {
-	            if (cookie.getName().equals("BILBOSKP_LENGUAJE")) {
+	            if (cookie.getName().equals(CookieHelper.LENGUAJE_COOKIE_NAME)) {
 	                found = true;
 	                break;
 	            }
 	        }
 	    }
-	    
-	    // Si la cookie no existe, agregarla con valor predeterminado "ES"
+	    // Si la cookie no existe, agregarla con valor predeterminado
 	    if (!found) {
-	        Cookie cookie = new Cookie("BILBOSKP_LENGUAJE", "ES");
-	        cookie.setMaxAge(3600 * 24 * 365); // 1 año de duración
+	        Cookie cookie = new Cookie(CookieHelper.LENGUAJE_COOKIE_NAME, CookieHelper.DEFAULT_LENGUAJE);
+	        cookie.setMaxAge(3600 * 24 * 365);
 	        cookie.setPath("/");
 	        res.addCookie(cookie);
 	    }

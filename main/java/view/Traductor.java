@@ -10,8 +10,10 @@ public class Traductor {
 
 	public static void initFrases() {
 		mapaTraducciones=new HashMap<String, String>();
+		/*castellano*/
 		/*HEADER*/
-		mapaTraducciones.put("ES-headerSalas", "Salas de escape");
+		mapaTraducciones.put("ES-inicio1", "Experimenta nuestras salas de escape");
+		mapaTraducciones.put("EN-inicio1", "Experience our scape rooms");
 		mapaTraducciones.put("EN-headerSalas", "Escape rooms");
 		mapaTraducciones.put("ES-headerRanking", "Ranking");
 		mapaTraducciones.put("EN-headerRanking", "Ranking");
@@ -21,47 +23,43 @@ public class Traductor {
 		mapaTraducciones.put("EN-headerContacto", "Contact us");
 		
 		/* INICIO */
-		
-		
-		/*FAQ+Contacto*/
-		mapaTraducciones.put("ES-Contactocontacto", "Contacto");
-		mapaTraducciones.put("EN-Contactocontacto", "Contact");
-		mapaTraducciones.put("ES-ContactoDireccion", "Dirección");
-		mapaTraducciones.put("EN-ContactoDireccion", "Address");
-		mapaTraducciones.put("ES-ContactoBotonCerrar", "Cerrar mapa");
-		mapaTraducciones.put("EN-ContactoBotonCerrar", "Close map");
-		mapaTraducciones.put("ES-ContactoTelefono", "Telefono");
-		mapaTraducciones.put("EN-ContactoTelefono", "Phone number");
-		mapaTraducciones.put("ES-ContactoRedes", "Redes Sociales");
-		mapaTraducciones.put("EN-ContactoRedes", "Social Media");
-		mapaTraducciones.put("ES-ContactoFAQ", "Preguntas frecuentes");
-		mapaTraducciones.put("EN-ContactoFAQ", "FAQ");
-		mapaTraducciones.put("ES-ContactoMetro", "¿Las paradas de Metro mas cercanas? ");
-		mapaTraducciones.put("EN-ContactoMetro", "The nearest subway stations?");
-		mapaTraducciones.put("ES-ContactoOtraConsulta", "¿Tienes alguna otra consulta que hacernos?");
-		mapaTraducciones.put("EN-ContactoOtraConsulta", "Do you have any other question to ask us?");
-		mapaTraducciones.put("ES-ContactoTextarea", "Escribe aqui tu pregunta");
-		mapaTraducciones.put("EN-ContactoTextarea", "Write your question here");
-		mapaTraducciones.put("ES-ContactoEnviar", "Enviar");
-		mapaTraducciones.put("EN-ContactoEnviar", "Send");
-		mapaTraducciones.put("ES-ContactoBorrar", "Borrar");
-		mapaTraducciones.put("EN-ContactoBorrar", "Erase");
+	
 		/*SALAS*/
-		mapaTraducciones.put("ES-SalasBuscar", "Buscar salas de escape por nombre");
-		mapaTraducciones.put("EN-SalasBuscar", "Search escape rooms by name");
-		mapaTraducciones.put("ES-SalasModalidades", "Todas las modalidades");
-		mapaTraducciones.put("EN-SalasModalidades", "All the modes");
-		mapaTraducciones.put("ES-SalasOnline", "Salas Online");
-		mapaTraducciones.put("EN-SalasOnline", "Online Rooms");
-		mapaTraducciones.put("ES-SalasFisicas", "Salas Fisicas");
+		mapaTraducciones.put("ES-online", "Online");
+		mapaTraducciones.put("ES-reserva", "Reserva");
 		
+		mapaTraducciones.put("ES-modalidad", "Modalidad");
+		mapaTraducciones.put("ES-tematica", "Temática");
+		mapaTraducciones.put("ES-dificultad", "Dificultad");
+		
+		mapaTraducciones.put("ES-terror", "Terror");
+		mapaTraducciones.put("ES-suspenso", "Suspenso");
+		mapaTraducciones.put("ES-misterio", "Misterio");
+		mapaTraducciones.put("ES-sci-fi", "Sci-Fi");
+		
+		mapaTraducciones.put("ES-facil", "Fácil");
+		mapaTraducciones.put("ES-media", "Media");
+		mapaTraducciones.put("ES-dificil", "Dificil");
+		
+		mapaTraducciones.put("ES-salas1", "Buscar salas de escape por nombre");
+		mapaTraducciones.put("ES-salas2", "Todas las modalidades");
+		mapaTraducciones.put("ES-salas3", "Online");
+		mapaTraducciones.put("ES-salas4", "Físicas");
+		mapaTraducciones.put("ES-salas5", "Todas las temáticas");
+		mapaTraducciones.put("ES-salas6", "Todas las dificultades");
+		mapaTraducciones.put("ES-salas7", "Mostrando");
+		mapaTraducciones.put("ES-salas8", "Resultados");
+		mapaTraducciones.put("ES-salas9", "No se encontraron salas");
+		mapaTraducciones.put("ES-salas10", "Ver todas las salas");
+		mapaTraducciones.put("ES-salas11", "Ver sala");
+		mapaTraducciones.put("ES-salas12", "");
 	}
 
-	public static String getFrase(String claveFrase) {
+	public static String get(String lenguaje, String claveFrase) {
 		if(mapaTraducciones==null) {
 			initFrases();
 		}
-		return mapaTraducciones.get(claveFrase);
+		return mapaTraducciones.get(lenguaje+"-"+claveFrase);
 	}
 
 }

@@ -1,7 +1,8 @@
 <%@ page
 	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.io.File, java.text.Normalizer, 
-	model.Sala,view.Traductor,model.SalaOnline,model.SalaFisica,view.AppConfig,view.StringHelper"%>
+	model.Sala,view.Traductor,model.SalaOnline,model.SalaFisica,view.AppConfig,view.StringHelper, view.Traductor, view.CookieHelper"%>
 <%
+String leng = CookieHelper.getLenguajeFromCookies(request.getCookies());
 HashMap<String, Sala> mapaSalas = (HashMap<String, Sala>) request.getAttribute("mapaSalas");
 ArrayList<String> tematicasDisponibles = (ArrayList<String>) request.getAttribute("tematicasDisponibles");
 ArrayList<String> dificultadesDisponibles = (ArrayList<String>) request.getAttribute("dificultadesDisponibles");
@@ -20,31 +21,31 @@ if (dificultadesDisponibles != null && tematicasDisponibles != null) {
 			<div id="caja_buscador">
 				<img alt="" src="img_web/iconos_salas/lupa.svg"> <input
 					type="text" id="buscar" name="buscar" value="<%=paramBuscar%>"
-					placeholder="<%=Traductor.getFrase("ESSalasBuscar")%>">
+					placeholder="<%=Traductor.get(leng,"salas1")%>">
 			</div>
 		</div>
 		<div id="wrapper_filtros">
 			<div id="caja_filtros">
 				<div class="caja_select">
 					<select name="m">
-						<option <%if (m.equals("todas")) {%> selected <%}%> value="todas"><%=Traductor.getFrase("ESSalasModalidades")%></option>
+						<option <%if (m.equals("todas")) {%> selected <%}%> value="todas"><%=Traductor.get(leng,"salas2")%></option>
 
 						<option <%if (m.equals("online")) {%> selected <%}%>
-							value="online"><%=Traductor.getFrase("ESSalasOnline")%></option>
+							value="online"><%=Traductor.get(leng,"salas3")%></option>
 						<option <%if (m.equals("fisicas")) {%> selected <%}%>
-							value="fisicas"><%=Traductor.getFrase("ESSalasFisicas")%></option>
+							value="fisicas"><%=Traductor.get(leng,"salas4")%></option>
 
 					</select>
 				</div>
 				<div class="caja_select">
 					<select name="t">
-						<option value="todas"><%=Traductor.getFrase("ESSalasTematicas")%></option>
+						<option value="todas"><%=Traductor.get(leng,"salas5")%></option>
 						<%
 						for (String tematica : tematicasDisponibles) {
 											String tematicaNormalizada = StringHelper.normalizarTexto(tematica);
 						%>
 						<option <%if (t.equals(tematicaNormalizada)) {%> selected <%}%>
-							value="<%=tematicaNormalizada%>"><%=tematica%></option>
+							value="<%=tematicaNormalizada%>"><%=Traductor.get(leng,tematicaNormalizada)%></option>
 
 						<%
 						}
@@ -54,13 +55,13 @@ if (dificultadesDisponibles != null && tematicasDisponibles != null) {
 				</div>
 				<div class="caja_select">
 					<select name="d">
-						<option value="todas"><%=Traductor.getFrase("ESSalasDificultad")%></option>
+						<option value="todas"><%=Traductor.get(leng,"salas6")%></option>
 						<%
 						for (String dificultad : dificultadesDisponibles) {
 											String dificultadNormalizada = StringHelper.normalizarTexto(dificultad);
 						%>
 						<option <%if (d.equals(dificultadNormalizada)) {%> selected <%}%>
-							value="<%=dificultadNormalizada%>"><%=dificultad%></option>
+							value="<%=dificultadNormalizada%>"><%=Traductor.get(leng,dificultadNormalizada)%></option>
 						<%
 						}
 						%>
@@ -80,12 +81,10 @@ numeroResultados = mapaSalas.size();
 <section id="contenedor_salas">
 	<div id="caja_titulo_resultados">
 	<h2>
-		<%=Traductor.getFrase("ESSalasResultado")%>
-		<%=numeroResultados%>
-		<%=Traductor.getFrase("ESSalasResultado1")%>: "<%=paramBuscar%>",
-		<%=Traductor.getFrase("ESSalasResultado2")%>: <%=m%>,
-		<%=Traductor.getFrase("ESSalasResultado3")%>: <%=t%>,
-		<%=Traductor.getFrase("ESSalasResultado4")%>: <%=d%>
+		<%=Traductor.get(leng,"salas7")%> <%=numeroResultados%> <%=Traductor.get(leng,"salas8")%>: "<%=paramBuscar%>",
+		<%=Traductor.get(leng,"modalidad")%>: <%=m%>,
+		<%=Traductor.get(leng,"tematica")%>: <%=t%>,
+		<%=Traductor.get(leng,"dificultad")%>: <%=d%>
 	</h2>
 </div>
 	<div id=contenedor_salas_wrapper>
@@ -102,12 +101,12 @@ numeroResultados = mapaSalas.size();
 
 			</div>
 			<div class="caja_titulo">
-				<h2><%=Traductor.getFrase("ESSalasNoFound")%></h2>
+				<h2><%=Traductor.get(leng,"salas9")%></h2>
 			</div>
 			<div class="caja_boton" id="caja_boton_error">
 				<a href=<%=enlaceBoton%>>
 					<button>
-						<span><%=Traductor.getFrase("ESSalasBuscarTodas")%></span>
+						<span><%=Traductor.get(leng,"salas10")%></span>
 					</button>
 				</a>
 			</div>
@@ -119,6 +118,7 @@ numeroResultados = mapaSalas.size();
 			double tiempoAnim = contadorSalas*0.8;
 			Sala sala = par.getValue();
 			String idSala = par.getKey();
+			
 			String nombreSala = sala.getNombre();
 			String textoBoton = "Organizar partida";
 			String enlaceBoton = "./verSala?idSala=" + idSala;
@@ -126,6 +126,8 @@ numeroResultados = mapaSalas.size();
 			if(sala instanceof SalaFisica){
 				modalidad = "Reserva";
 			}
+			String modalidadNormalizada = StringHelper.normalizarTexto(modalidad);
+			String tematicaNormalizada = StringHelper.normalizarTexto(sala.getTematica());
 			//si la tematica de la sala es suspenso, le agregamos una clase
 			String rutaIconoTematica = "img_web/iconos_salas/" + StringHelper.normalizarTexto(sala.getTematica()) + ".svg";
 			File archivoImagen = new File(getServletContext().getRealPath("/") + rutaIconoTematica);
@@ -153,8 +155,7 @@ numeroResultados = mapaSalas.size();
 				<p><%=sala.getDescripcion()%></p>
 			</div>
 			<div class="caja_etiquetas">
-				<div class="etiqueta jugadores"
-					title="<%=Traductor.getFrase("ESSalasBuscarTodas")%>">
+				<div class="etiqueta jugadores" title="Jugadores">
 					<div class="caja_icon">
 						<img class="icon" src="img_web/iconos_salas/user.svg"
 							alt="Jugadores:">
@@ -180,27 +181,26 @@ numeroResultados = mapaSalas.size();
 					</div>
 				</div>
 
-				<div class="etiqueta tematica <%=StringHelper.normalizarTexto(sala.getTematica())%>" title="Temática de la sala">
+				<div class="etiqueta tematica <%=tematicaNormalizada%>" title="Temática de la sala">
 					<div class="caja_icon">
 						<img class="icon" src="<%=rutaIconoTematica%>" alt="Tematica:">
 					</div>
-
-					<div class="caja_text"><%=sala.getTematica()%></div>
+					<div class="caja_text"><%=Traductor.get(leng,tematicaNormalizada)%></div>
 				</div>
 				<div class="etiqueta modalidad" title="Modo de acceso a la sala">
 					<div class="caja_icon">
 						<img class="icon"
-							src="img_web/iconos_salas/<%=StringHelper.normalizarTexto(modalidad)%>.svg"
+							src="img_web/iconos_salas/<%=modalidadNormalizada%>.svg"
 							alt="Modo">
 					</div>
 
-					<div class="caja_text"><%=modalidad%></div>
+					<div class="caja_text"><%=Traductor.get(leng, modalidadNormalizada)%></div>
 				</div>
 			</div>
 			<div class="caja_boton" id="caja_boton_ver">
 				<a href=<%=enlaceBoton%>>
 					<button>
-						<span>Ver sala</span>
+						<span><%=Traductor.get(leng,"salas11")%></span>
 					</button>
 				</a>
 			</div>
