@@ -83,15 +83,9 @@ public class ServletReservar extends HttpServlet {
 					response.sendRedirect("./perfil?sub=reservas");
 				
 				} catch (Throwable e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-			} 
-			
-			
-			
+			} 	
 		}
 	}
-
 }

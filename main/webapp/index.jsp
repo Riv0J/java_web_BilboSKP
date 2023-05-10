@@ -122,8 +122,8 @@ String tituloPagina = seccion.substring(0, 1).toUpperCase() + seccion.substring(
 		}
 	</style>
 <% } %>
-<% if (!(sus instanceof Suscriptor)){ %>
 <script>
+	<% if (!(sus instanceof Suscriptor)){ %>
 	var cajaLogin = document.querySelector("#caja_login");
 	var botonPerfil = document.getElementById("botonPerfil");
 	var botonCerrarLogin = document.getElementById("boton_cerrar_login");
@@ -144,12 +144,12 @@ String tituloPagina = seccion.substring(0, 1).toUpperCase() + seccion.substring(
 	botonPerfil.addEventListener("click", toggleLogin);
 	botonCerrarLogin.addEventListener("click", toggleLogin);
 	
-	
+	<% } %>
 	const lenguaje_select = document.getElementById("lenguaje_select");
 
 	lenguaje_select.addEventListener("change", () => {
 	    document.getElementById("form_lenguaje").submit();
 	  });
 </script>
-<% } %>
+
 </html>
