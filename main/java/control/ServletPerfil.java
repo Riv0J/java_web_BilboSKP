@@ -47,13 +47,7 @@ public class ServletPerfil extends HttpServlet {
 			} catch (Throwable e1) {
 				
 			}
-			
-		
 		//Darse de baja	
-			
-			
-			
-			
 			break;
 
 		// RESERVAS
@@ -66,8 +60,6 @@ public class ServletPerfil extends HttpServlet {
 					System.out.println("UPSI PUES VA A SER ESTO");
 				}
 				request.getRequestDispatcher("index.jsp?sec=perfil&sub=reserva").forward(request, response);				
-				
-				
 			} catch (Throwable e1) {
 				System.out.println("No tienes ninguna reserva :(");
 			}
@@ -91,8 +83,6 @@ public class ServletPerfil extends HttpServlet {
 			break;
 		default:
 		}
-
-		
 		/*//ELIMINAR UNA RESERVA
 		if (request.getParameter("borrar") != null) {
 			int idReserva = Integer.parseInt(request.getParameter("borrar"));
@@ -100,47 +90,36 @@ public class ServletPerfil extends HttpServlet {
 			Mensaje m = new Mensaje("Tu reserva ha sido eliminda", Mensaje.MENSAJE_EXITO);
 			request.setAttribute("mensaje", m);
 		}*/
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		System.out.println("Dopost perfil");		
-		String nombreNuevo= request.getParameter("nombre");	
-		System.out.println("El nombre nuevo es " + nombreNuevo);
-		
-		String apellidoNuevo= request.getParameter("apellido");	
-		System.out.println("El apellido nuevo es " + apellidoNuevo);
-		
-		String aliasNuevo= request.getParameter("alias");	
-		System.out.println("El alias nuevo es " + aliasNuevo);
-		
-		String emailNuevo= request.getParameter("email");	
-		System.out.println("El email nuevo es " + emailNuevo);
-		
-		String fecha_nacimientoNueva= request.getParameter("fecha_nacimiento");	
-		System.out.println("La fecha de nacimiento nueva es " + fecha_nacimientoNueva);
-		
-		int telefonoNuevo=Integer.parseInt(request.getParameter("telefono"));	
-		System.out.println("El telefono nuevo es " + telefonoNuevo);
-
-		Suscriptor nuevoSus= new Suscriptor(telefonoNuevo, emailNuevo, aliasNuevo, nombreNuevo, apellidoNuevo, fecha_nacimientoNueva);
-		
-			
-		try {
-			BilboSKP.actualizarSuscripcion(emailNuevo, aliasNuevo, nombreNuevo, apellidoNuevo,fecha_nacimientoNueva,telefonoNuevo );
-			//BilboSKP.actualizarSuscripcion(nuevoSus);
-			//String email, String alias, String nombre, String apellido, String fecha_string, int telefono
-		} catch (Throwable e) {
-			
-			e.printStackTrace();
+		HttpSession sesion = request.getSession();
+		Object sus = sesion.getAttribute("suscriptor");
+		if (sus instanceof Suscriptor) {
+			String emailViejo = ((Suscriptor) sus).getEmail();
+			String nombreNuevo= request.getParameter("nombre");	
+			String apellidoNuevo= request.getParameter("apellido");	
+			String aliasNuevo= request.getParameter("alias");	
+			String emailNuevo= request.getParameter("email");
+			String fecha_nacimientoNueva= request.getParameter("fecha_nacimiento");	
+			int telefonoNuevo=Integer.parseInt(request.getParameter("telefono"));
+			try {
+				//usar el metodo de actualizar suscripcion
+				boolean sePudoEditar = BilboSKP.actualizarSuscripcion(emailViejo, emailNuevo, aliasNuevo, nombreNuevo, apellidoNuevo,fecha_nacimientoNueva, telefonoNuevo);
+				if(sePudoEditar == true) {
+					//otro metodo de obtener suscriptor por el email
+					Suscriptor susNuevo = BilboSKP.getSuscriptor(emailNuevo);
+					//meter al sus en la sesion
+					sesion.setAttribute("suscriptor", susNuevo);
+				} else {
+					System.out.println("ServletPerfil: Error obteniendo email con "+emailViejo);
+				}
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
 		}
-		
-		
 		request.getRequestDispatcher("index.jsp?sec=perfil&sub=gestionCuenta").forward(request, response);
-		
-		
 	}
-
 }

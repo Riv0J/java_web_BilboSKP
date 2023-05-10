@@ -72,6 +72,7 @@ public class Traductor {
 		mapaTraducciones.put("EN-facil", "Easy");
 		mapaTraducciones.put("EN-media", "Medium");
 		mapaTraducciones.put("EN-dificil", "Hard");
+		
 		/* SALAS EN*/
 		mapaTraducciones.put("EN-salas1", "Search escape rooms by name");
 		mapaTraducciones.put("EN-salas2", "All modes");
@@ -84,6 +85,9 @@ public class Traductor {
 		mapaTraducciones.put("EN-salas9", "No escape rooms found!");
 		mapaTraducciones.put("EN-salas10", "View all rooms");
 		mapaTraducciones.put("EN-salas11", "View");
+		
+		/* SALA 1 EN ESPAÑOL */
+		mapaTraducciones.put("ES-SO1", "Peridosos....");
 	}
 
 	public static String get(String lenguaje, String claveFrase) {

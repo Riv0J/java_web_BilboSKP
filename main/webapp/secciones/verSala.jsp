@@ -257,8 +257,8 @@ String tematicaNormalizada = StringHelper.normalizarTexto(salaAMostrar.getTemati
 	background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(<%=rutaImagenPortadaLarga%>);
 	background-size: cover;
 	color: var(--text-color);
-	animation: fondo 30s infinite;
-	animation-timing-function: ease;
+	/*animation: fondo 30s infinite;
+	animation-timing-function: ease;*/
 }
 #wrapper_ver_sala p{
 	line-height: 1.2;
@@ -659,6 +659,7 @@ i{
 	}
 	#caja_reserva{
 		font-size: 1.75em;
+		text-shadow: 1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
 	}
 	#caja_fecha{
 		margin-bottom: 2%;
@@ -704,10 +705,6 @@ i{
 			line-height: 1.1;
 		    text-align: justify;
 		    font-size: 1.75em;
-		}
-		#caja_ver_sala{
-		}
-		#caja_img{
 		}
 		#caja_info{
 			gap: 1%;
@@ -798,9 +795,6 @@ i{
 		    font-size: 1.5em;
 		}
 		#caja_ver_sala{
-		}
-		#caja_img{
-			display:none;
 		}
 		#caja_info{
 			width: 70%;

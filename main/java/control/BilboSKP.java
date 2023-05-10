@@ -155,7 +155,8 @@ public class BilboSKP extends DBC {
 			Vector<Objeto> vectorObjetos = new Vector<Objeto>();
 			// TODO obtener los puzzles de este escenario
 			Vector<Puzzle> vectorPuzzle = new Vector<Puzzle>();
-			return new Escenario(nombreEscenario, imagen, descripcion, vectorFlechas, vectorObjetos, vectorPuzzle, esJsp);
+			return new Escenario(nombreEscenario, imagen, descripcion, vectorFlechas, vectorObjetos, vectorPuzzle,
+					esJsp);
 		}
 		return null;
 	}
@@ -179,7 +180,8 @@ public class BilboSKP extends DBC {
 				Vector<Objeto> vectorObjetos = new Vector<Objeto>();
 				// TODO obtener los puzzles de este escenario
 				Vector<Puzzle> vectorPuzzle = new Vector<Puzzle>();
-				Escenario escenario = new Escenario(nombreEscenario, imagen, descripcion, vectorFlechas, vectorObjetos, vectorPuzzle, esJsp);
+				Escenario escenario = new Escenario(nombreEscenario, imagen, descripcion, vectorFlechas, vectorObjetos,
+						vectorPuzzle, esJsp);
 				mapaEscenarios.put(nombreEscenario, escenario);
 			}
 			return mapaEscenarios;
@@ -190,9 +192,10 @@ public class BilboSKP extends DBC {
 		}
 		return null;
 	}
-	//obtener las flechas de un escenario concreto @Rivo
+
+	// obtener las flechas de un escenario concreto @Rivo
 	public static Vector<Flecha> cargarFlechasEscenario(String nombreEscenario) throws Throwable {
-		Vector<Flecha> vectorFlechas= new Vector<Flecha>();
+		Vector<Flecha> vectorFlechas = new Vector<Flecha>();
 		try {
 			String sentenciaSQL = "select * from escenario_flecha where nombreEscenario ='" + nombreEscenario + "';";
 			BilboSKP conexion = new BilboSKP();
@@ -204,11 +207,13 @@ public class BilboSKP extends DBC {
 				int dimensionY = resultado.getInt("dimensionY");
 				int posicionX = resultado.getInt("posicionX");
 				int posicionY = resultado.getInt("posicionY");
-				System.out.println(">>> Obtenido flecha de escenario " + nombreEscenario + " hacia " + nombreEscenarioDestino);
-				Flecha flecha = new Flecha(nombreEscenarioDestino, imagen, dimensionX, dimensionY, posicionX, posicionY);
+				System.out.println(
+						">>> Obtenido flecha de escenario " + nombreEscenario + " hacia " + nombreEscenarioDestino);
+				Flecha flecha = new Flecha(nombreEscenarioDestino, imagen, dimensionX, dimensionY, posicionX,
+						posicionY);
 				vectorFlechas.add(flecha);
 			}
-			System.out.println("--- Tamaño del vector de flechas: "+vectorFlechas.size());
+			System.out.println("--- Tamaño del vector de flechas: " + vectorFlechas.size());
 			return vectorFlechas;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -500,11 +505,11 @@ public class BilboSKP extends DBC {
 		conexion = new BilboSKP();
 		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
 		if (resultado.next()) {
-	        int idSuscriptor = resultado.getInt("idSuscriptor");
-	        return idSuscriptor;
-	    } else {
-	        System.out.println("suscriptor no existe");
-	        return 0; 
+			int idSuscriptor = resultado.getInt("idSuscriptor");
+			return idSuscriptor;
+		} else {
+			System.out.println("suscriptor no existe");
+			return 0;
 		}
 	}
 
@@ -917,55 +922,76 @@ public class BilboSKP extends DBC {
 		String alias = suscriptor.getAlias();
 		String nombre = suscriptor.getNombre();
 		String apellidos = suscriptor.getApellidos();
-		String fech_nac = suscriptor.getfecha_string();
-		//java.util.Date fecha_nac_util = fech_nac;
-		System.out.println(fech_nac);
-		//java.sql.Date fechaSQL = new java.sql.Date(fecha_nac_util.getTime());
+		Date fech_nac = suscriptor.getFech_nac();
+		System.out.println(fech_nac.toString());
+		java.util.Date fecha_nac_util = fech_nac;
+		java.sql.Date fechaSQL = new java.sql.Date(fecha_nac_util.getTime());
 		int telefono = suscriptor.getTelefono();
 		String imagen = suscriptor.getImagen();
 		int activo = suscriptor.getActivo();
 		int idSuscriptor = suscriptor.getIdSuscriptor();
 		// hacer sentencia sql select todas las salas
-		String sentenciaSQL = "UPDATE suscriptor SET email = '" + email + "', alias = '"
-				+ alias + "' , nombre = '" + nombre + "' , apellidos = '" + apellidos + "' , fech_nac = '" + fech_nac
-				+ "' , telefono = " + telefono + " , imagen = '" + imagen + "' , activo = " + activo
-				+ " WHERE idSuscriptor = " + idSuscriptor + ";";
+		String sentenciaSQL = "UPDATE suscriptor SET email = '" + email + "', alias = '" + alias + "' , nombre = '"
+				+ nombre + "' , apellidos = '" + apellidos + "' , fech_nac = '" + fechaSQL + "' , telefono = "
+				+ telefono + " , imagen = '" + imagen + "' , activo = " + activo + " WHERE idSuscriptor = "
+				+ idSuscriptor + ";";
 		// hacer una conexion
 		BilboSKP conexion = new BilboSKP();
 		// hacer consulta sql con la conexion y se guarda en el resultset resultado
 		int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
 		if (filasAfectadas == 1) {
-			System.out.println("se pudo editar suscriptor");
+			System.out.println("BilboSKP: se pudo editar suscriptor");
 
 			return loginSuscriptor(email, pass);
 		} else {
-			System.out.println("no se pudo editar suscriptor");
+			System.out.println("BilboSKP: no se pudo editar suscriptor");
 			return null;
 		}
 	}
+
 	// dado un suscriptor, actualizar los datos en la BD @Torni
-		public static Suscriptor actualizarSuscripcion(String email, String alias, String nombre, String apellido, String fecha_string, int telefono) throws Throwable {
-			
-			// hacer sentencia sql select todas las salas
-			String sentenciaSQL = "UPDATE suscriptor SET email = '" + email + "', alias = '"
-					+ alias + "' , nombre = '" + nombre + "' , apellidos = '" + apellido + "' , fech_nac = '" + fecha_string
-					+ "' , telefono = " + telefono + ";";
-			// hacer una conexion
-			BilboSKP conexion = new BilboSKP();
-			// hacer consulta sql con la conexion y se guarda en el resultset resultado
-			int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
-			if (filasAfectadas == 1) {
-				System.out.println("se pudo editar suscriptor");
+	public static boolean actualizarSuscripcion(String emailViejo, String emailNuevo, String alias, String nombre, String apellido,
+			String fecha_string, int telefono) throws Throwable {
 
-				return loginSuscriptor(email, pass);
-			} else {
-				System.out.println("no se pudo editar suscriptor");
-				return null;
-			}
+		// hacer sentencia sql select todas las salas
+		String sentenciaSQL = "UPDATE suscriptor SET email = '" + emailNuevo + "', alias = '" + alias + "' , nombre = '"
+				+ nombre + "' , apellidos = '" + apellido + "' , fech_nac = '" + fecha_string + "' , telefono = "
+				+ telefono + " where email = '" + emailViejo + "' ;";
+		// hacer una conexion
+		BilboSKP conexion = new BilboSKP();
+		// hacer consulta sql con la conexion y se guarda en el resultset resultado
+		int filasAfectadas = conexion.SQLUpdate(sentenciaSQL);
+		if (filasAfectadas == 1) {
+			System.out.println("BilboSKP: se pudo editar suscriptor");
+			return true;
+		} else {
+			System.out.println("BilboSKP: no se pudo editar suscriptor");
+			return false;
 		}
-	
-	
+	}
+	public static Suscriptor getSuscriptor(String email) throws Throwable {
+		String sentenciaSQL = "select * from suscriptor where email='"+email+"';";
+		// hacer una conexion
+		BilboSKP conexion = new BilboSKP();
+		// hacer consulta sql con la conexion y se guarda en el resultset resultado
+		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
+		if (resultado.next()) {
+			int telefono = resultado.getInt("telefono");
+			String alias = resultado.getString("alias");
+			String nombre = resultado.getString("nombre");
+			String apellidos = resultado.getString("apellidos");
+			String imagen = resultado.getString("imagen");
+			int activo = resultado.getInt("activo");
+			Date fech_nac = resultado.getDate("fech_nac");
+			int idSuscriptor = resultado.getInt("idSuscriptor");
 
+			Suscriptor suscriptor = new Suscriptor(idSuscriptor, telefono, email, alias, nombre, apellidos, imagen, activo, fech_nac);
+			return suscriptor;
+		} else {
+			System.out.println("BilboSKP: NO HAY SUSCRIPTOR CON ESE EMAIL");
+		}
+		return null;
+	}
 	// darle de baja a un suscriptor @Torni
 	public Suscriptor darBajaSuscripcion(Suscriptor suscriptor) throws Throwable {
 		int idSuscriptor = suscriptor.getIdSuscriptor();
@@ -1008,11 +1034,11 @@ public class BilboSKP extends DBC {
 
 	// obtener las reservas de un suscriptor de la bd @Paula
 	public static Vector<Reserva> obtenerReserva(int idSuscriptor) throws Throwable {
-		//creamos un vector de reservas 
+		// creamos un vector de reservas
 		Vector<Reserva> reservas = new Vector<Reserva>();
-		//setencia
+		// setencia
 		String sentenciaSQL = "SELECT * FROM reserva WHERE idSuscriptor=" + idSuscriptor + " order by fechaHora ";
-		//Conexion
+		// Conexion
 		BilboSKP conexion = new BilboSKP();
 		ResultSet resultado = conexion.SQLQuery(sentenciaSQL);
 		// por cada fila, crear un objeto reserva
@@ -1027,15 +1053,12 @@ public class BilboSKP extends DBC {
 			reservas.add(reserva);
 		}
 		/*
-		if (reservas.size() > 0) {
-			for (int i = 0; i < reservas.size(); i++) {
-				Reserva r = reservas.get(i);
-				System.out.println(r.getIdReserva());
-			}
-			return reservas;
-		} else {
-
-		}*/
+		 * if (reservas.size() > 0) { for (int i = 0; i < reservas.size(); i++) {
+		 * Reserva r = reservas.get(i); System.out.println(r.getIdReserva()); } return
+		 * reservas; } else {
+		 * 
+		 * }
+		 */
 		return reservas;
 	}
 
