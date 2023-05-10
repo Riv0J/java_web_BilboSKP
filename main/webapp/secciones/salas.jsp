@@ -126,14 +126,13 @@ numeroResultados = mapaSalas.size();
 		</article>
 		<%
 		} else {
-				int contadorSalas = 1;
-				for (Map.Entry<String, Sala> par : mapaSalas.entrySet()) {
+			int contadorSalas = 1;
+			for (Map.Entry<String, Sala> par : mapaSalas.entrySet()) {
 			double tiempoAnim = contadorSalas*0.8;
 			Sala sala = par.getValue();
 			String idSala = par.getKey();
 			
 			String nombreSala = sala.getNombre();
-			String textoBoton = "Organizar partida";
 			String enlaceBoton = "./verSala?idSala=" + idSala;
 			String modalidad = "Online";
 			if(sala instanceof SalaFisica){
@@ -141,6 +140,7 @@ numeroResultados = mapaSalas.size();
 			}
 			String modalidadNormalizada = StringHelper.normalizarTexto(modalidad);
 			String tematicaNormalizada = StringHelper.normalizarTexto(sala.getTematica());
+			String dificultadNormalizada = StringHelper.normalizarTexto(sala.getDificultad());
 			//si la tematica de la sala es suspenso, le agregamos una clase
 			String rutaIconoTematica = "img_web/iconos_salas/" + StringHelper.normalizarTexto(sala.getTematica()) + ".svg";
 			File archivoImagen = new File(getServletContext().getRealPath("/") + rutaIconoTematica);
@@ -182,7 +182,7 @@ numeroResultados = mapaSalas.size();
 							alt="Dificultad:">
 					</div>
 
-					<div class="caja_text"><%=sala.getDificultad()%></div>
+					<div class="caja_text"><%=Traductor.get(leng, dificultadNormalizada)%></div>
 				</div>
 				<div class="etiqueta tiempo" title="Tiempo máximo de la sala">
 					<div class="caja_icon">
