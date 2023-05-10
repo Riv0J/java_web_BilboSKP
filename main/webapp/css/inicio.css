@@ -39,6 +39,7 @@ main{
 	font-size: 1.3em;
 }
 .principal button{
+	z-index: 10;
 	width: 100%;
     font-size: 1.5em;
     padding: 5%;
@@ -274,8 +275,8 @@ header button {
   /* Estilos para la lampara*/
 .lampara {
 	position: absolute;
-	top: 0;
-	left: 23.5%;
+	top: 2vh;
+    left: 18vw;
 	transform: translateX(-50%);
 	width: 100px;
 	height: 400px;
@@ -284,43 +285,44 @@ header button {
 	transform-origin: top center;
 	animation: vaiven 2.5s cubic-bezier(0.5, 0, 0.5, 1) infinite alternate;
 }
+.lamp {
+  
+  /*animation-delay: 1s, 1.5s; /* subir tendrá un delay de 2 segundos, desvanecer tendrá un delay de 3 segundos */
+}
+.lampara{
+	z-index: 0;
+	/*animation: subir 10s ease-out forwards, desvanecer 10s ease-out forwards;*/
+}
 
 @keyframes vaiven { 
 0% {
-	transform: translateX(-50%) rotate(-7deg);
+	transform: translateX(-30%) rotate(-4deg);
 }
 
 100%{
-transform:translateX(-50%) rotate(7deg);
+	transform:translateX(-30%) rotate(4deg);
 }
 }
 .luz {
-	position: absolute;
-	top: -5;
-	left: 50%;
-	transform: translateX(-50%);
-	max-width: 150%;
-	width: 130%;
-	min-height: 70em;
-	height: 110%;
-	background: radial-gradient(circle at 23.5% 40%, rgba(0, 0, 0, 0) 0%,
-		rgba(206, 212, 0, 0.1) 15%, rgba(91, 93, 0, 0.3) 25%,
-		rgba(0, 0, 0, 0.705) 35%, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 1) 100%);
-	z-index: 1;
-	overflow: hidden;
-	animation: vaivenLuz 2.5s cubic-bezier(0.5, 0, 0.5, 1) infinite
-		alternate;
+	z-index: -1;
+    position: absolute;
+    left: 50vw;
+    transform: translateX(-50%);
+    max-width: 120vw;
+    width: 120vw;
+    height: 90vh;
+    background: radial-gradient(circle at 23.5% 40%, rgba(0, 0, 0, 0) 0%, rgba(206, 212, 0, 0.1) 15%, rgba(91, 93, 0, 0.1) 25%, rgba(0, 0, 0, 0.2) 35%, rgba(0, 0, 0, 0.1) 90%, rgba(0, 0, 0, 1) 100%);
+    z-index: 1;
+    overflow: hidden;
+    animation: vaivenLuz 2.5s cubic-bezier(0.5, 0, 0.5, 1) infinite alternate;
 }
 @keyframes vaivenLuz {
-
 0%
 {transform: translateX(-48%);
 }
 100%
 {transform:translateX(-52%);}
 }
-
-
 /* Estilos para la Luz */
 .luz::before {
 	content: '';
@@ -339,9 +341,11 @@ transform:translateX(-50%) rotate(7deg);
 }
 
 .lamp {
-	position: relative;
-}
 
+}
+.lampara{
+	
+}
 @keyframes tintineo {
 	0%, 100% {
 	opacity: 0.8;}
@@ -354,10 +358,11 @@ transform:translateX(-50%) rotate(7deg);
 	transform: translateY(0%);
 }
 100%
-{transform:translateY(-100%);
+{transform:translateY(-50%);
 }
 }
-@keyframes desvanecer { 0%{
+@keyframes desvanecer { 
+	0%{
 	opacity: 0.5;
 }
 100%
@@ -365,6 +370,7 @@ transform:translateX(-50%) rotate(7deg);
 opacity:0;
 }
 }
+
 .luz.clicked {
 	display: none;
 	animation: subir 0.5s ease-out forwards, desvanecer 0.5s ease-out
@@ -377,6 +383,11 @@ opacity:0;
 		alternate;
 	transform-origin: top center;
 }
+@media ( max-width : 1500px) {
+	.lampara {
+		top: -22vh;
+	}
+}
 
 @media ( max-width : 800px) {
 	.luz {
@@ -384,5 +395,6 @@ opacity:0;
 	}
 	.lampara {
 		display: none;
+		top: -22vh;
 	}
 }

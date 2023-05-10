@@ -68,6 +68,7 @@ if(partidaOnline == null){
     box-shadow: inset 0 0px 0 var(--color-3), 0 25px 0 var(--color-2);
     border: 0.2em solid rgb(36, 36, 36);
     background: linear-gradient(to top right, #620000, var(--color-1));
+    z-index: 1;
 }
 
 .button a.active {
@@ -95,24 +96,25 @@ if(partidaOnline == null){
 }
 
 .button:after{
-  content:"";
-  height:100%;
-  width:100%;
-  padding:4px;
-  position: absolute;
-  bottom:-15px;
-  left:-4px;
-  z-index:-1;
-  background-color:#151515;
-  border-radius: 50%;
+	content: "";
+    height: 90%;
+    width: 100%;
+    padding: 4px;
+    position: absolute;
+    bottom: -2vw;
+    z-index: 0;
+    background-color: #000000;
+    border-radius: 50%;
 }
 @media (max-width: 2000px) {
-	.panel{
-	}
+	main {
+    	font-size: 2.5em;
+    }
 }
-@media (max-width: 1200px) {
-	.panel{
-	}
+@media (max-width: 1400px) {
+	main {
+    	font-size: 2em;
+    }
 }
 </style>
 <script>
@@ -125,7 +127,7 @@ if(partidaOnline == null){
         button.classList.add('active');
         setTimeout(() => {
             window.location.href = './jugar?accion=finalizar&codInvitacion=<%=partidaOnline.getCodInvitacion()%>';
-          }, 1500);
+          }, 1000);
     }
     });
 </script>

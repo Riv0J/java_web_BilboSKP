@@ -1,33 +1,32 @@
-<%@ page language="java" import="view.Frases, java.util.HashMap"%>
+<%@ page language="java" import="view.Traductor,java.util.HashMap"%>
 <%
-Frases frase=new Frases();
-
+Traductor frase=new Traductor();
 %>
 
 <div class="cajagrande">
 	<div class="caja contacto">
-		<h2><%=Frases.getFrase("ESContactocontacto") %></h2>
+		<h2><%=Traductor.getFrase("ESContactocontacto")%></h2>
 		<ul>
 			<li><img src="../img_web/icons/directions.png" alt=""><span><a
 					href='#'
 					onclick="document.getElementById('mapa').style.display='block'">
-						<%=Frases.getFrase("ESContactoDireccion")%></a></span>
+						<%=Traductor.getFrase("ESContactoDireccion")%></a></span>
 				<div id="mapa" style="display: none;">
 					<iframe
 						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d863.815857621014!2d-2.9399132027993353!3d43.261511918187765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4e502873b41fd5%3A0x1ab0ace3022b6ab9!2sCentro%20San%20Luis%20-%20Formaci%C3%B3n%20Profesional%20y%20Bachillerato!5e0!3m2!1ses!2ses!4v1681988811679!5m2!1ses!2ses"
 						width="600" height="450" style="border: 0;" allowfullscreen=""
 						loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 					<button
-						onclick="document.getElementById('mapa').style.display='none'"><%=Frases.getFrase("ESContactoBotonCerrar")%>
+						onclick="document.getElementById('mapa').style.display='none'"><%=Traductor.getFrase("ESContactoBotonCerrar")%>
 						</button>
 				</div></li>
-			<li><img src="../img_web/icons/llamada-telefonica.png" alt=""><%=Frases.getFrase("ESContactoTelefono")%>:
+			<li><img src="../img_web/icons/llamada-telefonica.png" alt=""><%=Traductor.getFrase("ESContactoTelefono")%>:
 				944BS7831</li>
 
 		</ul>
 	</div>
 	<div class="caja redesSociales">
-		<h2><%=Frases.getFrase("ESContactoRedes")%></h2>
+		<h2><%=Traductor.getFrase("ESContactoRedes")%></h2>
 		<ul>
 			<li><img src="../img_web/icons/twitter.png" alt=""><a
 				href="https://twitter.com" target="_blank">Twitter</a></li>
@@ -43,37 +42,37 @@ Frases frase=new Frases();
 </div>
 <div class="cajagrande">
 	<div class="caja FAQ">
-		<h2><%=Frases.getFrase("ESContactoFAQ")%></h2>
+		<h2><%=Traductor.getFrase("ESContactoFAQ")%></h2>
 		<ul class="acordeon">
-			<li><a href='#'><%=Frases.getFrase("ESContactoFAQ1")%></a>
+			<li><a href='#'><%=Traductor.getFrase("ESContactoFAQ1")%></a>
 				<ul>
-					<li><%=Frases.getFrase("ESContactoFAQ1R")%></li>
+					<li><%=Traductor.getFrase("ESContactoFAQ1R")%></li>
 				</ul></li>
-			<li><a href='#'><%=Frases.getFrase("ESContactoFAQ2")%></a>
+			<li><a href='#'><%=Traductor.getFrase("ESContactoFAQ2")%></a>
 				<ul>
-					<li><%=Frases.getFrase("ESContactoFAQ2R")%></li>
+					<li><%=Traductor.getFrase("ESContactoFAQ2R")%></li>
 				</ul></li>
-			<li><a href='#'><%=Frases.getFrase("ESContactoFAQ3")%></a>
+			<li><a href='#'><%=Traductor.getFrase("ESContactoFAQ3")%></a>
 				<ul>
-					<li><%=Frases.getFrase("ESContactoFAQ3R")%></li>
+					<li><%=Traductor.getFrase("ESContactoFAQ3R")%></li>
 				</ul></li>
-			<li><a href='#'><%=Frases.getFrase("ESContactoFAQ4")%></a>
+			<li><a href='#'><%=Traductor.getFrase("ESContactoFAQ4")%></a>
 				<ul>
-					<li><%=Frases.getFrase("ESContactoFAQ4R")%></li>
+					<li><%=Traductor.getFrase("ESContactoFAQ4R")%></li>
 				</ul></li>
-			<li><a href='#'><%=Frases.getFrase("ESContactoFAQ5")%></a>
+			<li><a href='#'><%=Traductor.getFrase("ESContactoFAQ5")%></a>
 				<ul>
-					<li><%=Frases.getFrase("ESContactoFAQ5R")%></li>
+					<li><%=Traductor.getFrase("ESContactoFAQ5R")%></li>
 
 				</ul></li>
 		</ul>
 	</div>
 	<div class="caja otrasConsultas">
-		<h2><%=Frases.getFrase("ESContactoOtras")%></h2>
+		<h2><%=Traductor.getFrase("ESContactoOtras")%></h2>
 		<ul>
 			<li><p>
 					<img src="../img_web/icons/parking.png" alt=""><span><a href="#"
-						onclick="document.getElementById('mapaParking').style.display='block'"><%=Frases.getFrase("ESContactoParking")%></a></span>
+						onclick="document.getElementById('mapaParking').style.display='block'"><%=Traductor.getFrase("ESContactoParking")%></a></span>
 				</p>
 				<div id="mapaParking" style="display: none">
 					<iframe
@@ -81,31 +80,31 @@ Frases frase=new Frases();
 						width="600" height="450" style="border: 0;" allowfullscreen=""
 						loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 					<button
-						onclick="document.getElementById('mapaParking').style.display='none'"><%=Frases.getFrase("ESContactoBotonCerrar")%></button>
+						onclick="document.getElementById('mapaParking').style.display='none'"><%=Traductor.getFrase("ESContactoBotonCerrar")%></button>
 
 				</div></li>
 			<li><img src="../img_web/icons/metro.png" alt=""><span> <a href='#'
-					onclick="document.getElementById('mapaMetro').style.display='block'"><%=Frases.getFrase("ESContactoMetro")%></a></span>
+					onclick="document.getElementById('mapaMetro').style.display='block'"><%=Traductor.getFrase("ESContactoMetro")%></a></span>
 				<div id="mapaMetro" style="display: none;">
 					<iframe
 						src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d9494.583303045854!2d-2.943192228933983!3d43.26253759019211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1smetro!5e0!3m2!1ses!2ses!4v1681988362771!5m2!1ses!2ses"
 						width="600" height="450" style="border: 0;" allowfullscreen=""
 						loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 					<button
-						onclick="document.getElementById('mapaMetro').style.display='none'"><%=Frases.getFrase("ESContactoBotonCerrar")%></button>
+						onclick="document.getElementById('mapaMetro').style.display='none'"><%=Traductor.getFrase("ESContactoBotonCerrar")%></button>
 				</div></li>
 		</ul>
 	</div>
 </div>
 <div id="formulario">
 	<h2>
-		<%=Frases.getFrase("ESContactoOtraConsulta")%><br>
+		<%=Traductor.getFrase("ESContactoOtraConsulta")%><br>
 	</h2>
 	<form method="get">
-		<textarea cols="60" rows="5" placeholder="<%=Frases.getFrase("ESContactoTextarea")%>"></textarea>
+		<textarea cols="60" rows="5" placeholder="<%=Traductor.getFrase("ESContactoTextarea")%>"></textarea>
 		<br>
-		<button name="submit" type="submit"><%=Frases.getFrase("ESContactoEnviar")%></button>
-		<button type="reset"><%=Frases.getFrase("ESContactoBorrar")%></button>
+		<button name="submit" type="submit"><%=Traductor.getFrase("ESContactoEnviar")%></button>
+		<button type="reset"><%=Traductor.getFrase("ESContactoBorrar")%></button>
 
 
 

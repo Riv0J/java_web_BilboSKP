@@ -8,43 +8,48 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet Filter implementation class FilterIdioma
- */
-@WebFilter("/FilterIdioma")
+import view.CookieHelper;
+import view.Traductor;
+
+@WebFilter("/*")
 public class FilterLenguaje implements Filter {
 
-    /**
-     * Default constructor. 
-     */
     public FilterLenguaje() {
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see Filter#destroy()
-	 */
 	public void destroy() {
-		// TODO Auto-generated method stub
 	}
 
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
-
-		// pass the request along the filter chain
-		chain.doFilter(request, response);
+	    HttpServletRequest req = (HttpServletRequest) request;
+	    HttpServletResponse res = (HttpServletResponse) response;
+	    
+	    // Verificar si la cookie existe
+	    boolean found = false;
+	    Cookie[] cookies = req.getCookies();
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if (cookie.getName().equals(CookieHelper.LENGUAJE_COOKIE_NAME)) {
+	                found = true;
+	                break;
+	            }
+	        }
+	    }
+	    // Si la cookie no existe, agregarla con valor predeterminado
+	    if (!found) {
+	        Cookie cookie = new Cookie(CookieHelper.LENGUAJE_COOKIE_NAME, CookieHelper.DEFAULT_LENGUAJE);
+	        cookie.setMaxAge(3600 * 24 * 365);
+	        cookie.setPath("/");
+	        res.addCookie(cookie);
+	    }
+	    
+	    chain.doFilter(request, response);
 	}
-
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
 	}
 
 }

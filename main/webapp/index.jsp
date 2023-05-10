@@ -1,5 +1,5 @@
     <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="view.Mensaje, view.Icon, model.Suscriptor"%>
+	pageEncoding="ISO-8859-1" import="view.CookieHelper, view.Mensaje, view.Icon, model.Suscriptor"%>
 <%
 String seccion = request.getParameter("sec");
 Object mensaje = (Object) session.getAttribute("mensaje");
@@ -64,6 +64,14 @@ String tituloPagina = seccion.substring(0, 1).toUpperCase() + seccion.substring(
 				<a class="user" id="botonPerfil"><i class="ri-user-fill"></i>Sign in</a> 
 				<a href="index.jsp?sec=subscribe" class="suscribirse">Subscribe</a>
 			<% } %>
+			<form action="./lenguaje" method="POST">
+				<select name="lenguaje">
+				<% for(String lengString: CookieHelper.LENGUAJES_DISPONIBLES) {%>
+						<option value="<%=lengString%>">
+				<% } %>
+				</select>
+			</form>
+			
 			<div class="bx bx-menu" id="menu-icon"></div>
 		</div>
 		<script type="text/javascript" src="js/script.js"></script>

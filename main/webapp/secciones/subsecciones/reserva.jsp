@@ -1,7 +1,7 @@
 <%@page import="jdk.internal.misc.FileSystemOption"%>
 <%@ page
 	import="java.util.HashMap, java.util.Map, java.util.ArrayList, java.io.File, java.text.Normalizer, 
-	model.Reserva, model.Sala,  view.Frases, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date, java.util.Vector "%>  
+	model.Reserva, model.Sala,view.Traductor, model.SalaOnline, model.SalaFisica, view.AppConfig, java.util.Date, java.util.Vector "%>  
 	
 <link rel="stylesheet" href="css/reserva.css">	
 	

@@ -1,7 +1,8 @@
 
 <%@ page
-	import="model.Suscriptor, model.SalaOnline, control.BilboSKP, view.Mensaje, java.util.Vector, java.io.File"%>
+	import="view.Traductor, model.Suscriptor, model.SalaOnline, control.BilboSKP, view.Mensaje, java.util.Vector, java.io.File, view.CookieHelper"%>
 <%
+String leng = CookieHelper.getLenguajeFromCookies(request.getCookies());
 session.setAttribute("urlPrevia", "index.jsp");
 //System.out.println("JSP Inicio establecida url previa = index.jsp");
 Vector<SalaOnline> vectorSalasMasJugadas = new Vector<SalaOnline>();
@@ -21,7 +22,7 @@ try {
 	<section class="principal">
 		<div id="caja_principal">
 		
-			<h1 class="bilbosk_h1">Experimenta nuestras salas de escape</h1>
+			<h1 class="bilbosk_h1"><%=Traductor.get(leng, "inicio1")%></h1>
 			<p class="bilboskp_p">Sumérgete en una experiencia de juego única
 				sin salir de tu casa con nuestras emocionantes salas de escape
 				virtuales. ¿Estás listo para poner a prueba tus habilidades mentales

@@ -12,7 +12,19 @@ if (partidaOnline == null) {
 }
 //obtener mas datos de los objetos
 int codInvitacion = partidaOnline.getCodInvitacion();
+int segundosActuales = partidaOnline.getSegundosTranscurridos();
+int segundosObjetivo = partidaOnline.getSegundosObjetivo();
+int segundosRestantes = segundosObjetivo - segundosActuales;
+int minutos = segundosRestantes / 60;
+int segundos = segundosRestantes % 60;
 
+String contenidoTemporizador;
+if (segundos < 10) {
+    contenidoTemporizador = minutos + ":0" + segundos;
+} else {
+    contenidoTemporizador = minutos + ":" + segundos;
+}
+contenidoTemporizador = minutos + ":" + segundos;
 Vector<MensajeChat> vectorLineasChat = partidaOnline.getLineasChat();
 //obtener el vec de flechas
 Vector<Flecha> vectorFlechas = escenarioAMostrar.getFlechas();
@@ -45,7 +57,7 @@ Vector<Flecha> vectorFlechas = (Vector<Flecha>) request.getAttribute("vectorFlec
 		</section>
 		<section id=interfaz>
 			<div id="menu_arriba" class="menu background-image_cuero">
-				<h1 id="temporizador">00:00</h1>
+				<h1 id="temporizador"><%=contenidoTemporizador %></h1>
 				<!--<a id="Ajustes" href="#"><i class="ri-settings-4-line"></i></a>-->
 				<a id="salir" href="./jugar?accion=salir&codInvitacion=<%=codInvitacion%>" title="Quit/Salir"><i class="ri-logout-box-r-line"></i></a>
 			</div>
@@ -81,8 +93,10 @@ Vector<Flecha> vectorFlechas = (Vector<Flecha>) request.getAttribute("vectorFlec
 				int posX = flecha.getPosicionX(); int posY = flecha.getPosicionY(); int dimX = flecha.getdimensionX(); int dimY =flecha.getdimensionY();
 				String imagenFlecha = flecha.getImagen(); %>
 				<a href="./jugar?accion=cambioEscenario&codInvitacion=<%=codInvitacion%>&idEscenarioDestino=<%=flecha.getIdEscenarioDestino()%>" class="flecha" style="position: fixed; 
-				bottom: <%=posY%>%; left: <%=posX%>%; /*width: <%=dimX%>%;*/ height:<%=dimY%>%;">
-					<img src="img_salas/flechas/<%=imagenFlecha%>.png">
+				bottom: <%=posY%>%; left: <%=posX%>%; width: <%=dimX%>vw; height:<%=dimY%>vw;">
+					<% 	 if(!imagenFlecha.equals("") && imagenFlecha != null){%>
+						<img src="img_salas/flechas/<%=imagenFlecha%>.png">
+					<% } %> 
 				</a>
 			<% } %>
 		</section>
@@ -139,7 +153,7 @@ body {
 	height: 100vh;
 }
 
-#escenario, #caja_interactibles{
+#escenario{
 	background-image: url(img_salas/escenarios/<%=escenarioAMostrar.getImagen()%>.png);
 	background-size: cover;
 	height: 100%;
@@ -380,4 +394,23 @@ i {
 	display: flex;
 }
 </style>
+	<script>
+	  var segundosActuales = <%=segundosActuales%>;
+	  var segundosObjetivo = <%=segundosObjetivo%>;
+	  var startSeconds = segundosObjetivo - segundosActuales;
+	  var timer = setInterval(function() {
+	    var minutes = Math.floor(startSeconds / 60);
+	    var remainingSeconds = startSeconds % 60;
+	    if (remainingSeconds < 10) {
+	      remainingSeconds = "0" + remainingSeconds;
+	    }
+	    document.getElementById("temporizador").innerHTML = minutes + ":" + remainingSeconds;
+	    if (startSeconds == 0) {
+	      clearInterval(timer);
+	      window.location.href = "index.jsp?sec=finalizarPartida";
+	    } else {
+	      startSeconds--;
+	    }
+	  }, 1000);
+	</script>
 </html>
