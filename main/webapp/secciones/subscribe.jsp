@@ -118,7 +118,9 @@ label {
 	color: var(- -text-color);
 	font-size: 1 -5em;
 }
-
+.linea_subscribe input{
+	color: black;
+}
 #caja_boton {
 	padding-top: 5%;
 	width: 100%;
