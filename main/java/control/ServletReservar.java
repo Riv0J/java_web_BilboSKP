@@ -52,8 +52,6 @@ public class ServletReservar extends HttpServlet {
 				String idSala = request.getParameter("idSala");
 				int longitudDelIdSala= idSala.length();
 				int idSalaSinLetras = Integer.parseInt(idSala.substring(2,longitudDelIdSala)); // Extrae los caracteres desde el índice 3 hasta el 6 (sin incluirlo)
-				
-				
 				//obtener id suscriptor
 				int idSuscriptor = ((Suscriptor) sus).getIdSuscriptor();
 				//obtener num jugadores
@@ -80,7 +78,7 @@ public class ServletReservar extends HttpServlet {
 					//hacer otra consulta de update para poner en no disponible osea 0, ese horario
 					BilboSKP.ocultarHoraReservada(idSalaSinLetras, fechaSQL);
 					//request.getRequestDispatcher("./perfil?sub=reservas").forward(request, response);
-					response.sendRedirect("./perfil?sub=reservas");
+					response.sendRedirect("./perfil?sub=reserva");
 				
 				} catch (Throwable e) {
 					e.printStackTrace();
