@@ -111,6 +111,7 @@ String leng = CookieHelper.getLenguajeFromCookies(request.getCookies());
 	width: 80%;
 	padding: 2%;
 	border-radius: 0.5em;
+	color: whitesmoke;
 }
 
 label {

@@ -54,17 +54,11 @@ public class Cupon {
 	}
 
 	public String getRembolsable() {
-    	System.out.println("Entramos en el metodo");
         if (Rembolsable == 0) {
-        	
-        	System.out.println("Entramos en el if");
-        	String Rembolsabilidad="No rembolsable";
-        	System.out.println("No es rembolsable");
+        	String Rembolsabilidad="No reembolsable";
         	return Rembolsabilidad;
         } else {
         	String Rembolsabilidad="Reembolsable";
-
-        	System.out.println("Es reembolsable");
         	return Rembolsabilidad;
         }
         }

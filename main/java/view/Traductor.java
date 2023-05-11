@@ -266,10 +266,10 @@ public class Traductor {
 
 		/*Perfil ES*/
 		mapaTraducciones.put("ES-PE1", "Mi perfil");
-		mapaTraducciones.put("ES-PE1", "Gestión de la cuenta");
-		mapaTraducciones.put("ES-PE1", "Mis reservas");
-		mapaTraducciones.put("ES-PE1", "Mis cupones");
-		mapaTraducciones.put("ES-PE1", "Cerrar sesión");
+		mapaTraducciones.put("ES-PE2", "Gestión de la cuenta");
+		mapaTraducciones.put("ES-PE3", "Mis reservas");
+		mapaTraducciones.put("ES-PE4", "Mis cupones");
+		mapaTraducciones.put("ES-PE5", "Cerrar sesión");
 		/*Perfil EN*/
 		mapaTraducciones.put("EN-PE1", "My profile");
 		mapaTraducciones.put("EN-PE2", "Account management");

@@ -106,18 +106,13 @@ sesion.setAttribute("sus", sus);
                         <input type="password" name="" id="">
                     </div>
                 </form>-->
-<<<<<<< HEAD
-                <div class="caja3">
-                    <h2><%=Traductor.get(leng, "GC6")%></h2>
-                    <p><%=Traductor.get(leng, "GC7")%></p>
-=======
                 <!--  <form action="./perfil" method="post" class="caja3" id="form_baja">
                 	<input type="hidden" name="accion" value="baja">
                     <h2>¿Quieres desactivar tu cuenta?</h2>
                     <p>Al desactivar, pasarás a estado inactivo y no se perderán tus datos, avances y/o cupones comprados</p>
 >>>>>>> 2cac7a92f29eef11e8d74cb7013eaee6a5f81a30
                  	<div class="interruptor">
-                 		<p><%=Traductor.get(leng, "GC8")%></p>
+                 		<p>></p>
                  		<label class="switch">
   							<input name="checkbox_activo" id="checkbox_activo" type="checkbox" value="">
   							<span class="slider round"></span>

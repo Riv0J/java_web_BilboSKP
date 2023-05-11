@@ -33,22 +33,17 @@ String leng = CookieHelper.getLenguajeFromCookies(request.getCookies());
 				<%=Traductor.get(leng, "CU5")%><br>
 				<%=cupon.getFechaCaducidad()%></p>
 			<p><%=cupon.getRembolsable()%></p>
+			<% if(cupon.getRembolsable().equals("Reembolsable")){ %>
 			<input id="botonRembolso" type="button" value="Reembolsar"
-				onclick="alert('Tu cupón ha sido devuelto, espera un plazo maximo de una semana para recibir el importe en tu cuenta' )">
+				onclick="alert('Tu cupón ha sido devuelto, espera un plazo maximo de una semana para recibir el importe en tu cuenta' )"></input>
+			<% } %>
+			
 			<%
-			int idElminarCupon = cupon.getId();
-
-			//BilboSKP.eliminarCupon(idElminarCupon);
-			%></input>
+			%>
 		</div>
-
-
-
 		<%
 		}
 		%>
-
-
 	</form>
 </div>
 

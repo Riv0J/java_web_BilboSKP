@@ -10,8 +10,8 @@ if(partidaOnline==null){
 }
 Sala salaPartida = partidaOnline.getSala();
 int codInvitacion = partidaOnline.getCodInvitacion();
-//String ipPort = "172.26.22.1:8080";
-String ipPort = "localhost:8080";
+String ipPort = "172.26.22.1:8080";
+//String ipPort = "localhost:8080";
 String enlaceInvitacion = "http://"+ipPort+"/PRET/unirse?codInvitacion="+codInvitacion;
 Suscriptor anfitrion = partidaOnline.getAnfitrion();
 
