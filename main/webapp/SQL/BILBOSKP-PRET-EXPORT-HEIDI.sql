@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         10.4.19-MariaDB - mariadb.org binary distribution
--- SO del servidor:              Win64
--- HeidiSQL Versión:             12.4.0.6659
+-- Server version:               8.0.31 - MySQL Community Server - GPL
+-- Server OS:                    Win64
+-- HeidiSQL Version:             12.3.0.6589
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -15,38 +15,44 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Volcando estructura de base de datos para bilboskpdb
-CREATE DATABASE IF NOT EXISTS `bilboskpdb` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+-- Dumping database structure for bilboskpdb
+DROP DATABASE IF EXISTS `bilboskpdb`;
+CREATE DATABASE IF NOT EXISTS `bilboskpdb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `bilboskpdb`;
 
--- Volcando estructura para tabla bilboskpdb.cupon
+-- Dumping structure for table bilboskpdb.cupon
+DROP TABLE IF EXISTS `cupon`;
 CREATE TABLE IF NOT EXISTS `cupon` (
-  `idCupon` int(11) NOT NULL AUTO_INCREMENT,
-  `idSuscriptor` int(11) NOT NULL,
+  `idCupon` int NOT NULL AUTO_INCREMENT,
+  `idSuscriptor` int NOT NULL,
   `fechaCaducidad` datetime NOT NULL,
   `estado` varchar(20) NOT NULL DEFAULT 'Disponible',
-  `reembolsable` tinyint(1) NOT NULL DEFAULT 1,
+  `reembolsable` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`idCupon`) USING BTREE,
   KEY `fk_cupon_suscriptor` (`idSuscriptor`),
-  CONSTRAINT `fk_cupon_suscriptor` FOREIGN KEY (`idSuscriptor`) REFERENCES `suscriptor` (`idSuscriptor`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `fk_cupon_suscriptor` FOREIGN KEY (`idSuscriptor`) REFERENCES `suscriptor` (`idSuscriptor`)
+) ENGINE=InnoDB AUTO_INCREMENT=186 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla bilboskpdb.cupon: ~0 rows (aproximadamente)
+-- Dumping data for table bilboskpdb.cupon: ~0 rows (approximately)
 DELETE FROM `cupon`;
+INSERT INTO `cupon` (`idCupon`, `idSuscriptor`, `fechaCaducidad`, `estado`, `reembolsable`) VALUES
+	(184, 34, '2077-12-31 00:00:00', 'Disponible', 0),
+	(185, 36, '2077-12-31 00:00:00', 'Disponible', 0);
 
--- Volcando estructura para tabla bilboskpdb.escenario
+-- Dumping structure for table bilboskpdb.escenario
+DROP TABLE IF EXISTS `escenario`;
 CREATE TABLE IF NOT EXISTS `escenario` (
   `nombreEscenario` varchar(50) NOT NULL,
-  `idSala` int(11) NOT NULL DEFAULT 0,
+  `idSala` int NOT NULL DEFAULT '0',
   `descripcion` varchar(255) DEFAULT NULL,
   `imagen` varchar(255) NOT NULL,
-  `esJsp` tinyint(1) NOT NULL DEFAULT 0,
+  `esJsp` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`nombreEscenario`) USING BTREE,
   KEY `idSala` (`idSala`),
   CONSTRAINT `escenario_ibfk_1` FOREIGN KEY (`idSala`) REFERENCES `salaonline` (`idSala`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla bilboskpdb.escenario: ~7 rows (aproximadamente)
+-- Dumping data for table bilboskpdb.escenario: ~7 rows (approximately)
 DELETE FROM `escenario`;
 INSERT INTO `escenario` (`nombreEscenario`, `idSala`, `descripcion`, `imagen`, `esJsp`) VALUES
 	('ComedorNave', 10, 'Comedor de la nave', 'comedor_nave', 0),
@@ -57,38 +63,40 @@ INSERT INTO `escenario` (`nombreEscenario`, `idSala`, `descripcion`, `imagen`, `
 	('Nave', 1, 'Increible pensar que este era un lugar de culto, antes...', 'nave', 0),
 	('PanelCodigo', 10, 'Panel codigo', 'panel_codigo', 1);
 
--- Volcando estructura para tabla bilboskpdb.escenarios_inicio
+-- Dumping structure for table bilboskpdb.escenarios_inicio
+DROP TABLE IF EXISTS `escenarios_inicio`;
 CREATE TABLE IF NOT EXISTS `escenarios_inicio` (
   `nombreEscenario` varchar(50) NOT NULL DEFAULT '',
-  `idSala` int(11) DEFAULT NULL,
+  `idSala` int DEFAULT NULL,
   PRIMARY KEY (`nombreEscenario`),
   KEY `idSala` (`idSala`),
-  CONSTRAINT `FK_escenarios_inicio_escenario` FOREIGN KEY (`nombreEscenario`) REFERENCES `escenario` (`nombreEscenario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_escenarios_inicio_salaonline` FOREIGN KEY (`idSala`) REFERENCES `salaonline` (`idSala`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `FK_escenarios_inicio_escenario` FOREIGN KEY (`nombreEscenario`) REFERENCES `escenario` (`nombreEscenario`),
+  CONSTRAINT `FK_escenarios_inicio_salaonline` FOREIGN KEY (`idSala`) REFERENCES `salaonline` (`idSala`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla bilboskpdb.escenarios_inicio: ~2 rows (aproximadamente)
+-- Dumping data for table bilboskpdb.escenarios_inicio: ~2 rows (approximately)
 DELETE FROM `escenarios_inicio`;
 INSERT INTO `escenarios_inicio` (`nombreEscenario`, `idSala`) VALUES
 	('Dormitorio', 1),
 	('MesaNave', 10);
 
--- Volcando estructura para tabla bilboskpdb.escenario_flecha
+-- Dumping structure for table bilboskpdb.escenario_flecha
+DROP TABLE IF EXISTS `escenario_flecha`;
 CREATE TABLE IF NOT EXISTS `escenario_flecha` (
   `nombreEscenario` varchar(50) DEFAULT NULL,
   `nombreEscenarioDestino` varchar(50) DEFAULT NULL,
   `imagen` varchar(50) DEFAULT NULL,
-  `posicionX` int(3) unsigned NOT NULL COMMENT '%',
-  `posicionY` int(3) unsigned NOT NULL COMMENT '%',
-  `dimensionX` int(3) unsigned NOT NULL COMMENT '%',
-  `dimensionY` int(3) unsigned NOT NULL COMMENT '%',
+  `posicionX` int unsigned NOT NULL COMMENT '%',
+  `posicionY` int unsigned NOT NULL COMMENT '%',
+  `dimensionX` int unsigned NOT NULL COMMENT '%',
+  `dimensionY` int unsigned NOT NULL COMMENT '%',
   KEY `escenario` (`nombreEscenario`) USING BTREE,
   KEY `escenarioDestino` (`nombreEscenarioDestino`) USING BTREE,
-  CONSTRAINT `FK_escenario_flecha_escenario` FOREIGN KEY (`nombreEscenario`) REFERENCES `escenario` (`nombreEscenario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_escenario_flecha_escenario_2` FOREIGN KEY (`nombreEscenarioDestino`) REFERENCES `escenario` (`nombreEscenario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `FK_escenario_flecha_escenario` FOREIGN KEY (`nombreEscenario`) REFERENCES `escenario` (`nombreEscenario`),
+  CONSTRAINT `FK_escenario_flecha_escenario_2` FOREIGN KEY (`nombreEscenarioDestino`) REFERENCES `escenario` (`nombreEscenario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla bilboskpdb.escenario_flecha: ~6 rows (aproximadamente)
+-- Dumping data for table bilboskpdb.escenario_flecha: ~6 rows (approximately)
 DELETE FROM `escenario_flecha`;
 INSERT INTO `escenario_flecha` (`nombreEscenario`, `nombreEscenarioDestino`, `imagen`, `posicionX`, `posicionY`, `dimensionX`, `dimensionY`) VALUES
 	('MesaNave', 'ComedorNave', 'derecha', 90, 40, 4, 8),
@@ -98,16 +106,17 @@ INSERT INTO `escenario_flecha` (`nombreEscenario`, `nombreEscenarioDestino`, `im
 	('MesaNave', 'PanelCodigo', '', 58, 35, 20, 20),
 	('PanelCodigo', 'MesaNave', 'izquierda', 10, 40, 4, 8);
 
--- Volcando estructura para tabla bilboskpdb.horario
+-- Dumping structure for table bilboskpdb.horario
+DROP TABLE IF EXISTS `horario`;
 CREATE TABLE IF NOT EXISTS `horario` (
-  `idSalaFisica` int(6) NOT NULL,
+  `idSalaFisica` int NOT NULL,
   `fechaHora` datetime NOT NULL,
-  `disponible` tinyint(4) NOT NULL DEFAULT 1,
+  `disponible` tinyint NOT NULL DEFAULT '1',
   KEY `idSalaFisica` (`idSalaFisica`),
-  CONSTRAINT `FK__salafisica` FOREIGN KEY (`idSalaFisica`) REFERENCES `salafisica` (`idSala`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `FK__salafisica` FOREIGN KEY (`idSalaFisica`) REFERENCES `salafisica` (`idSala`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla bilboskpdb.horario: ~18 rows (aproximadamente)
+-- Dumping data for table bilboskpdb.horario: ~18 rows (approximately)
 DELETE FROM `horario`;
 INSERT INTO `horario` (`idSalaFisica`, `fechaHora`, `disponible`) VALUES
 	(1, '2023-05-14 10:00:00', 1),
@@ -129,30 +138,31 @@ INSERT INTO `horario` (`idSalaFisica`, `fechaHora`, `disponible`) VALUES
 	(1, '2023-05-19 12:00:00', 1),
 	(1, '2023-05-19 14:00:00', 1);
 
--- Volcando estructura para tabla bilboskpdb.objeto
+-- Dumping structure for table bilboskpdb.objeto
+DROP TABLE IF EXISTS `objeto`;
 CREATE TABLE IF NOT EXISTS `objeto` (
-  `idObjeto` int(11) NOT NULL AUTO_INCREMENT,
+  `idObjeto` int NOT NULL AUTO_INCREMENT,
   `nombreEscenario` varchar(50) DEFAULT NULL,
   `nombre` varchar(30) NOT NULL,
-  `idObjetoADesbloquear` int(11) DEFAULT NULL,
+  `idObjetoADesbloquear` int DEFAULT NULL,
   `descripcion` varchar(255) NOT NULL,
   `imagen` varchar(255) DEFAULT NULL,
-  `visibleInicio` tinyint(1) NOT NULL DEFAULT 1 COMMENT 'boolean 1-0',
-  `visibleInventario` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'booleano si se agrega al inventario el objeto',
-  `desapareceAlUsar` tinyint(1) NOT NULL DEFAULT 1 COMMENT 'boolean 1-0',
-  `dimensionX` int(3) NOT NULL COMMENT '%',
-  `dimenxionY` int(3) NOT NULL COMMENT '%',
-  `posicionX` int(3) NOT NULL COMMENT '%',
-  `posicionY` int(3) NOT NULL COMMENT '%',
+  `visibleInicio` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'boolean 1-0',
+  `visibleInventario` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'booleano si se agrega al inventario el objeto',
+  `desapareceAlUsar` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'boolean 1-0',
+  `dimensionX` int NOT NULL COMMENT '%',
+  `dimenxionY` int NOT NULL COMMENT '%',
+  `posicionX` int NOT NULL COMMENT '%',
+  `posicionY` int NOT NULL COMMENT '%',
   PRIMARY KEY (`idObjeto`) USING BTREE,
   UNIQUE KEY `nombre` (`nombre`),
   KEY `idObjetoDesbloquea` (`idObjetoADesbloquear`) USING BTREE,
   KEY `nombreEscenario` (`nombreEscenario`),
-  CONSTRAINT `FK_objeto_escenario` FOREIGN KEY (`nombreEscenario`) REFERENCES `escenario` (`nombreEscenario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_objeto_escenario` FOREIGN KEY (`nombreEscenario`) REFERENCES `escenario` (`nombreEscenario`),
   CONSTRAINT `objeto_ibfk_2` FOREIGN KEY (`idObjetoADesbloquear`) REFERENCES `objeto` (`idObjeto`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla bilboskpdb.objeto: ~14 rows (aproximadamente)
+-- Dumping data for table bilboskpdb.objeto: ~14 rows (approximately)
 DELETE FROM `objeto`;
 INSERT INTO `objeto` (`idObjeto`, `nombreEscenario`, `nombre`, `idObjetoADesbloquear`, `descripcion`, `imagen`, `visibleInicio`, `visibleInventario`, `desapareceAlUsar`, `dimensionX`, `dimenxionY`, `posicionX`, `posicionY`) VALUES
 	(1, 'Dormitorio', 'Llave dorada', NULL, 'Esta llave parece vieja, deberían poder abrir una de las antiguas puertas de este lugar', 'llaveDorada.png', 0, 1, 1, 0, 0, 0, 0),
@@ -170,12 +180,13 @@ INSERT INTO `objeto` (`idObjeto`, `nombreEscenario`, `nombre`, `idObjetoADesbloq
 	(13, 'Dormitorio', 'CuerdaArriba', 1, 'Creo que deberia mirar a donde lleva esta cuerda.', 'cuerdaArriba.png', 1, 0, 1, 0, 0, 0, 0),
 	(14, 'Dormitorio', 'CuerdaSuelo', NULL, 'Creo que no me servirá de nada', 'cuerdaSuelo.png', 0, 0, 1, 0, 0, 0, 0);
 
--- Volcando estructura para tabla bilboskpdb.partidafisica
+-- Dumping structure for table bilboskpdb.partidafisica
+DROP TABLE IF EXISTS `partidafisica`;
 CREATE TABLE IF NOT EXISTS `partidafisica` (
-  `idPartida` int(11) NOT NULL AUTO_INCREMENT,
-  `idReserva` int(11) DEFAULT NULL,
-  `idSalaFisica` int(11) NOT NULL DEFAULT 0,
-  `puntaje` int(11) NOT NULL,
+  `idPartida` int NOT NULL AUTO_INCREMENT,
+  `idReserva` int DEFAULT NULL,
+  `idSalaFisica` int NOT NULL DEFAULT '0',
+  `puntaje` int NOT NULL,
   `numeroJugadores` varchar(3) NOT NULL,
   `nombreGrupo` varchar(255) NOT NULL,
   `fechaInicio` datetime NOT NULL,
@@ -183,36 +194,37 @@ CREATE TABLE IF NOT EXISTS `partidafisica` (
   PRIMARY KEY (`idPartida`) USING BTREE,
   KEY `idSalaFisica` (`idSalaFisica`),
   KEY `idReserva` (`idReserva`),
-  CONSTRAINT `FK_partidafisica_reserva` FOREIGN KEY (`idReserva`) REFERENCES `reserva` (`idReserva`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_partidafisica_salafisica` FOREIGN KEY (`idSalaFisica`) REFERENCES `salafisica` (`idSala`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `FK_partidafisica_reserva` FOREIGN KEY (`idReserva`) REFERENCES `reserva` (`idReserva`),
+  CONSTRAINT `FK_partidafisica_salafisica` FOREIGN KEY (`idSalaFisica`) REFERENCES `salafisica` (`idSala`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla bilboskpdb.partidafisica: ~3 rows (aproximadamente)
+-- Dumping data for table bilboskpdb.partidafisica: ~3 rows (approximately)
 DELETE FROM `partidafisica`;
 INSERT INTO `partidafisica` (`idPartida`, `idReserva`, `idSalaFisica`, `puntaje`, `numeroJugadores`, `nombreGrupo`, `fechaInicio`, `fechaFin`) VALUES
 	(1, 1, 1, 2000, '6', 'Los exploradores', '2023-04-09 10:00:00', '2023-04-09 09:25:00'),
 	(2, 2, 1, 1000, '8', 'Los Mosqueteros', '2023-04-10 14:59:00', '2023-04-09 13:37:00'),
 	(3, 3, 1, 1500, '4', 'La banda', '2023-04-14 15:00:00', '2023-04-09 14:25:00');
 
--- Volcando estructura para tabla bilboskpdb.partidaonline
+-- Dumping structure for table bilboskpdb.partidaonline
+DROP TABLE IF EXISTS `partidaonline`;
 CREATE TABLE IF NOT EXISTS `partidaonline` (
-  `idPartida` int(11) NOT NULL AUTO_INCREMENT,
-  `idSalaOnline` int(11) NOT NULL DEFAULT 0,
-  `idAnfitrion` int(11) NOT NULL,
-  `puntaje` int(11) NOT NULL,
+  `idPartida` int NOT NULL AUTO_INCREMENT,
+  `idSalaOnline` int NOT NULL DEFAULT '0',
+  `idAnfitrion` int NOT NULL,
+  `puntaje` int NOT NULL,
   `numeroJugadores` varchar(3) NOT NULL,
   `nombreGrupo` varchar(255) NOT NULL,
   `fechaInicio` datetime NOT NULL,
   `fechaFin` datetime NOT NULL,
-  `visibleRanking` tinyint(4) DEFAULT 1 COMMENT '1 visible 0 invisible',
+  `visibleRanking` tinyint DEFAULT '1' COMMENT '1 visible 0 invisible',
   PRIMARY KEY (`idPartida`) USING BTREE,
   KEY `idSalaOnline` (`idSalaOnline`),
   KEY `idAnfitrion` (`idAnfitrion`),
-  CONSTRAINT `FK_partidaonline_salaonline` FOREIGN KEY (`idSalaOnline`) REFERENCES `salaonline` (`idSala`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_partidaonline_suscriptor` FOREIGN KEY (`idAnfitrion`) REFERENCES `suscriptor` (`idSuscriptor`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=387 DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `FK_partidaonline_salaonline` FOREIGN KEY (`idSalaOnline`) REFERENCES `salaonline` (`idSala`),
+  CONSTRAINT `FK_partidaonline_suscriptor` FOREIGN KEY (`idAnfitrion`) REFERENCES `suscriptor` (`idSuscriptor`)
+) ENGINE=InnoDB AUTO_INCREMENT=387 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla bilboskpdb.partidaonline: ~88 rows (aproximadamente)
+-- Dumping data for table bilboskpdb.partidaonline: ~88 rows (approximately)
 DELETE FROM `partidaonline`;
 INSERT INTO `partidaonline` (`idPartida`, `idSalaOnline`, `idAnfitrion`, `puntaje`, `numeroJugadores`, `nombreGrupo`, `fechaInicio`, `fechaFin`, `visibleRanking`) VALUES
 	(1, 2, 1, 2000, '6', 'Los mosqueteros', '2023-04-09 22:51:02', '2023-04-09 23:51:04', 1),
@@ -304,61 +316,65 @@ INSERT INTO `partidaonline` (`idPartida`, `idSalaOnline`, `idAnfitrion`, `puntaj
 	(385, 10, 8, 6796, '8', 'SO10', '2023-05-10 00:00:00', '2023-05-10 00:00:00', 1),
 	(386, 10, 8, 6777, '8', 'SO10', '2023-05-10 00:00:00', '2023-05-10 00:00:00', 1);
 
--- Volcando estructura para tabla bilboskpdb.pista
+-- Dumping structure for table bilboskpdb.pista
+DROP TABLE IF EXISTS `pista`;
 CREATE TABLE IF NOT EXISTS `pista` (
-  `idPista` int(11) NOT NULL AUTO_INCREMENT,
-  `idPuzzle` int(11) NOT NULL DEFAULT 0,
+  `idPista` int NOT NULL AUTO_INCREMENT,
+  `idPuzzle` int NOT NULL DEFAULT '0',
   `descripcion` varchar(255) NOT NULL,
-  `penalizacion` int(4) DEFAULT NULL,
+  `penalizacion` int DEFAULT NULL,
   PRIMARY KEY (`idPista`),
   KEY `Índice 2` (`idPuzzle`),
-  CONSTRAINT `FK_pista_puzzle` FOREIGN KEY (`idPuzzle`) REFERENCES `puzzle` (`idPuzzle`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `FK_pista_puzzle` FOREIGN KEY (`idPuzzle`) REFERENCES `puzzle` (`idPuzzle`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla bilboskpdb.pista: ~0 rows (aproximadamente)
+-- Dumping data for table bilboskpdb.pista: ~0 rows (approximately)
 DELETE FROM `pista`;
 
--- Volcando estructura para tabla bilboskpdb.puzzle
+-- Dumping structure for table bilboskpdb.puzzle
+DROP TABLE IF EXISTS `puzzle`;
 CREATE TABLE IF NOT EXISTS `puzzle` (
-  `idPuzzle` int(11) NOT NULL AUTO_INCREMENT,
+  `idPuzzle` int NOT NULL AUTO_INCREMENT,
   `nombreEscenario` varchar(50) NOT NULL,
-  `idTipoPuzzle` int(11) NOT NULL,
+  `idTipoPuzzle` int NOT NULL,
   `descripcion` varchar(255) NOT NULL,
-  `puntuacion` int(4) NOT NULL,
+  `puntuacion` int NOT NULL,
   PRIMARY KEY (`idPuzzle`),
   KEY `nombreEscenario` (`nombreEscenario`),
   KEY `idTipo` (`idTipoPuzzle`) USING BTREE,
-  CONSTRAINT `FK_puzzle_escenario` FOREIGN KEY (`nombreEscenario`) REFERENCES `escenario` (`nombreEscenario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_puzzle_puzzle_tipos` FOREIGN KEY (`idTipoPuzzle`) REFERENCES `puzzle_tipos` (`idTipo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `FK_puzzle_escenario` FOREIGN KEY (`nombreEscenario`) REFERENCES `escenario` (`nombreEscenario`),
+  CONSTRAINT `FK_puzzle_puzzle_tipos` FOREIGN KEY (`idTipoPuzzle`) REFERENCES `puzzle_tipos` (`idTipo`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla bilboskpdb.puzzle: ~1 rows (aproximadamente)
+-- Dumping data for table bilboskpdb.puzzle: ~0 rows (approximately)
 DELETE FROM `puzzle`;
 INSERT INTO `puzzle` (`idPuzzle`, `nombreEscenario`, `idTipoPuzzle`, `descripcion`, `puntuacion`) VALUES
 	(1, 'MesaNave', 4, '1826', 1826);
 
--- Volcando estructura para tabla bilboskpdb.puzzle_objeto
+-- Dumping structure for table bilboskpdb.puzzle_objeto
+DROP TABLE IF EXISTS `puzzle_objeto`;
 CREATE TABLE IF NOT EXISTS `puzzle_objeto` (
-  `idPuzzle` int(11) NOT NULL DEFAULT 0,
-  `idObjeto` int(11) NOT NULL DEFAULT 0,
+  `idPuzzle` int NOT NULL DEFAULT '0',
+  `idObjeto` int NOT NULL DEFAULT '0',
   KEY `FK_requerimiento_objeto` (`idObjeto`),
   KEY `FK_requerimiento_puzzle` (`idPuzzle`),
-  CONSTRAINT `FK_requerimiento_objeto` FOREIGN KEY (`idObjeto`) REFERENCES `objeto` (`idObjeto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_requerimiento_puzzle` FOREIGN KEY (`idPuzzle`) REFERENCES `puzzle` (`idPuzzle`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `FK_requerimiento_objeto` FOREIGN KEY (`idObjeto`) REFERENCES `objeto` (`idObjeto`),
+  CONSTRAINT `FK_requerimiento_puzzle` FOREIGN KEY (`idPuzzle`) REFERENCES `puzzle` (`idPuzzle`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla bilboskpdb.puzzle_objeto: ~0 rows (aproximadamente)
+-- Dumping data for table bilboskpdb.puzzle_objeto: ~0 rows (approximately)
 DELETE FROM `puzzle_objeto`;
 
--- Volcando estructura para tabla bilboskpdb.puzzle_tipos
+-- Dumping structure for table bilboskpdb.puzzle_tipos
+DROP TABLE IF EXISTS `puzzle_tipos`;
 CREATE TABLE IF NOT EXISTS `puzzle_tipos` (
-  `idTipo` int(11) NOT NULL AUTO_INCREMENT,
+  `idTipo` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
   PRIMARY KEY (`idTipo`),
   UNIQUE KEY `nombre` (`nombre`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla bilboskpdb.puzzle_tipos: ~4 rows (aproximadamente)
+-- Dumping data for table bilboskpdb.puzzle_tipos: ~4 rows (approximately)
 DELETE FROM `puzzle_tipos`;
 INSERT INTO `puzzle_tipos` (`idTipo`, `nombre`) VALUES
 	(2, 'Abrir puerta'),
@@ -366,90 +382,93 @@ INSERT INTO `puzzle_tipos` (`idTipo`, `nombre`) VALUES
 	(3, 'Click objeto'),
 	(1, 'Usar Objeto');
 
--- Volcando estructura para vista bilboskpdb.rankingfisico
--- Creando tabla temporal para superar errores de dependencia de VIEW
+-- Dumping structure for view bilboskpdb.rankingfisico
+DROP VIEW IF EXISTS `rankingfisico`;
+-- Creating temporary table to overcome VIEW dependency errors
 CREATE TABLE `rankingfisico` (
-	`idSala` INT(11) NOT NULL,
-	`‘sala’` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`nombreGrupo` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`puntaje` INT(11) NOT NULL,
+	`idSala` INT(10) NOT NULL,
+	`‘sala’` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_0900_ai_ci',
+	`nombreGrupo` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_0900_ai_ci',
+	`puntaje` INT(10) NOT NULL,
 	`‘fecha’` DATETIME NOT NULL
 ) ENGINE=MyISAM;
 
--- Volcando estructura para vista bilboskpdb.rankingonline
--- Creando tabla temporal para superar errores de dependencia de VIEW
+-- Dumping structure for view bilboskpdb.rankingonline
+DROP VIEW IF EXISTS `rankingonline`;
+-- Creating temporary table to overcome VIEW dependency errors
 CREATE TABLE `rankingonline` (
-	`idSala` INT(11) NOT NULL,
-	`sala jugada` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`nombreGrupo` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`puntaje` INT(11) NOT NULL,
+	`idSala` INT(10) NOT NULL,
+	`sala jugada` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_0900_ai_ci',
+	`nombreGrupo` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_0900_ai_ci',
+	`puntaje` INT(10) NOT NULL,
 	`fecha` DATETIME NOT NULL
 ) ENGINE=MyISAM;
 
--- Volcando estructura para tabla bilboskpdb.reserva
+-- Dumping structure for table bilboskpdb.reserva
+DROP TABLE IF EXISTS `reserva`;
 CREATE TABLE IF NOT EXISTS `reserva` (
-  `idReserva` int(11) NOT NULL AUTO_INCREMENT,
-  `idSuscriptor` int(11) DEFAULT NULL,
-  `idSalaFisica` int(11) DEFAULT NULL,
-  `numJugadores` int(1) NOT NULL,
+  `idReserva` int NOT NULL AUTO_INCREMENT,
+  `idSuscriptor` int DEFAULT NULL,
+  `idSalaFisica` int DEFAULT NULL,
+  `numJugadores` int NOT NULL,
   `fechaHora` datetime NOT NULL,
-  `estado` tinyint(4) DEFAULT 1,
+  `estado` tinyint DEFAULT '1',
   PRIMARY KEY (`idReserva`),
   KEY `idSuscriptor` (`idSuscriptor`),
   KEY `idSalaFisica` (`idSalaFisica`),
-  CONSTRAINT `FK_reserva_salafisica` FOREIGN KEY (`idSalaFisica`) REFERENCES `salafisica` (`idSala`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_reserva_suscriptor` FOREIGN KEY (`idSuscriptor`) REFERENCES `suscriptor` (`idSuscriptor`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `FK_reserva_salafisica` FOREIGN KEY (`idSalaFisica`) REFERENCES `salafisica` (`idSala`),
+  CONSTRAINT `FK_reserva_suscriptor` FOREIGN KEY (`idSuscriptor`) REFERENCES `suscriptor` (`idSuscriptor`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla bilboskpdb.reserva: ~3 rows (aproximadamente)
+-- Dumping data for table bilboskpdb.reserva: ~3 rows (approximately)
 DELETE FROM `reserva`;
 INSERT INTO `reserva` (`idReserva`, `idSuscriptor`, `idSalaFisica`, `numJugadores`, `fechaHora`, `estado`) VALUES
 	(1, 11, 1, 6, '2023-05-30 10:00:00', 1),
 	(2, 8, 1, 8, '2023-05-30 12:00:00', 1),
 	(3, 1, 1, 6, '2023-06-03 15:00:00', 1);
 
--- Volcando estructura para tabla bilboskpdb.salafisica
+-- Dumping structure for table bilboskpdb.salafisica
+DROP TABLE IF EXISTS `salafisica`;
 CREATE TABLE IF NOT EXISTS `salafisica` (
-  `idSala` int(11) NOT NULL AUTO_INCREMENT,
+  `idSala` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL,
   `dificultad` varchar(255) NOT NULL,
   `tematica` varchar(30) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
-  `tiempoMax` int(3) unsigned NOT NULL COMMENT 'Minutos',
-  `jugadoresMin` int(2) unsigned NOT NULL DEFAULT 1,
-  `jugadoresMax` int(2) unsigned NOT NULL DEFAULT 8,
-  `edad_recomendada` int(2) unsigned NOT NULL DEFAULT 18,
+  `tiempoMax` int unsigned NOT NULL COMMENT 'Minutos',
+  `jugadoresMin` int unsigned NOT NULL DEFAULT '1',
+  `jugadoresMax` int unsigned NOT NULL DEFAULT '8',
+  `edad_recomendada` int unsigned NOT NULL DEFAULT '18',
   `direccion` varchar(255) NOT NULL,
-  `telefono` int(9) unsigned NOT NULL,
+  `telefono` int unsigned NOT NULL,
   PRIMARY KEY (`idSala`) USING BTREE,
-  CONSTRAINT `jugadoresMax` CHECK (`jugadoresMax` >= 1),
-  CONSTRAINT `jugadoresMin` CHECK (`jugadoresMin` <= `jugadoresMax` and `jugadoresMin` >= 1)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `jugadoresMax` CHECK ((`jugadoresMax` >= 1)),
+  CONSTRAINT `jugadoresMin` CHECK (((`jugadoresMin` <= `jugadoresMax`) and (`jugadoresMin` >= 1)))
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla bilboskpdb.salafisica: ~2 rows (aproximadamente)
+-- Dumping data for table bilboskpdb.salafisica: ~2 rows (approximately)
 DELETE FROM `salafisica`;
 INSERT INTO `salafisica` (`idSala`, `nombre`, `dificultad`, `tematica`, `descripcion`, `tiempoMax`, `jugadoresMin`, `jugadoresMax`, `edad_recomendada`, `direccion`, `telefono`) VALUES
 	(1, 'Misterio en la mansión', 'Media', 'Misterio', 'Investiga una mansión abandonada y resuelve los enigmas que esconde su oscuro pasado.', 60, 6, 8, 18, 'Calle Mayor 25', 987654321),
 	(2, 'Escape de ciudad 17', 'Difícil', 'Suspenso', 'Te has despertado encerrado en una prisión de máxima seguridad sin recordar cómo llegaste allí. Deberás trabajar en equipo para encontrar la forma de escapar antes de que los guardias descubran tu plan.', 90, 6, 8, 18, 'Avenida de la Libertad 10', 123456789);
 
--- Volcando estructura para tabla bilboskpdb.salaonline
+-- Dumping structure for table bilboskpdb.salaonline
+DROP TABLE IF EXISTS `salaonline`;
 CREATE TABLE IF NOT EXISTS `salaonline` (
-  `idSala` int(11) NOT NULL AUTO_INCREMENT,
+  `idSala` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL,
   `dificultad` varchar(255) NOT NULL,
   `tematica` varchar(30) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
-  `tiempoMax` int(3) unsigned NOT NULL COMMENT 'Minutos',
-  `jugadoresMin` int(2) unsigned NOT NULL DEFAULT 1,
-  `jugadoresMax` int(2) unsigned NOT NULL DEFAULT 8,
-  `edad_recomendada` int(2) unsigned NOT NULL DEFAULT 18,
-  `disponible` tinyint(1) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`idSala`) USING BTREE,
-  CONSTRAINT `jugadoresMax` CHECK (`jugadoresMax` >= 1),
-  CONSTRAINT `jugadoresMin` CHECK (`jugadoresMin` <= `jugadoresMax` and `jugadoresMin` >= 1)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+  `tiempoMax` int unsigned NOT NULL COMMENT 'Minutos',
+  `jugadoresMin` int unsigned NOT NULL DEFAULT '1',
+  `jugadoresMax` int unsigned NOT NULL DEFAULT '8',
+  `edad_recomendada` int unsigned NOT NULL DEFAULT '18',
+  `disponible` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`idSala`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla bilboskpdb.salaonline: ~6 rows (aproximadamente)
+-- Dumping data for table bilboskpdb.salaonline: ~6 rows (approximately)
 DELETE FROM `salaonline`;
 INSERT INTO `salaonline` (`idSala`, `nombre`, `dificultad`, `tematica`, `descripcion`, `tiempoMax`, `jugadoresMin`, `jugadoresMax`, `edad_recomendada`, `disponible`) VALUES
 	(1, 'Perdidos de la mano de Dios', 'Media', 'Terror', 'Vas de camino en medio del bosque, donde eres abducido por un loco perteneciente a una secta. Te das cuenta que ahora estás en un bosque, perdido de la mano de Dios…', 60, 1, 8, 16, 0),
@@ -459,39 +478,41 @@ INSERT INTO `salaonline` (`idSala`, `nombre`, `dificultad`, `tematica`, `descrip
 	(9, 'El Asesino del Ajedrez', 'Media', 'Misterio', 'En un torneo de ajedrez de élite, uno de los jugadores es encontrado muerto en su habitación de hotel. El resto de los participantes deberán resolver el crimen antes de que el asesino ataque de nuevo.', 60, 4, 8, 16, 0),
 	(10, 'Traición en el Espacio', 'Fácil', 'Sci-fi', 'Como tripulante de una nave espacial, tienes la misión de descubrir al impostor que se encuentra entre la tripulación. Resuelve acertijos y tareas mientras tratas de encontrar pistas para descubrir al impostor antes de que sea demasiado tarde.', 30, 1, 8, 16, 1);
 
--- Volcando estructura para vista bilboskpdb.salas_mas_jugadas
--- Creando tabla temporal para superar errores de dependencia de VIEW
+-- Dumping structure for view bilboskpdb.salas_mas_jugadas
+DROP VIEW IF EXISTS `salas_mas_jugadas`;
+-- Creating temporary table to overcome VIEW dependency errors
 CREATE TABLE `salas_mas_jugadas` (
-	`idSala` INT(11) NOT NULL,
-	`nombre` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`dificultad` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`tematica` VARCHAR(30) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`descripcion` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`tiempoMax` INT(3) UNSIGNED NOT NULL COMMENT 'Minutos',
-	`jugadoresMin` INT(2) UNSIGNED NOT NULL,
-	`jugadoresMax` INT(2) UNSIGNED NOT NULL,
-	`edad_recomendada` INT(2) UNSIGNED NOT NULL,
+	`idSala` INT(10) NOT NULL,
+	`nombre` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_0900_ai_ci',
+	`dificultad` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_0900_ai_ci',
+	`tematica` VARCHAR(30) NOT NULL COLLATE 'utf8mb4_0900_ai_ci',
+	`descripcion` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_0900_ai_ci',
+	`tiempoMax` INT(10) UNSIGNED NOT NULL COMMENT 'Minutos',
+	`jugadoresMin` INT(10) UNSIGNED NOT NULL,
+	`jugadoresMax` INT(10) UNSIGNED NOT NULL,
+	`edad_recomendada` INT(10) UNSIGNED NOT NULL,
 	`disponible` TINYINT(1) NOT NULL,
-	`cantidad_partidas_jugadas` BIGINT(21) NOT NULL
+	`cantidad_partidas_jugadas` BIGINT(19) NOT NULL
 ) ENGINE=MyISAM;
 
--- Volcando estructura para tabla bilboskpdb.suscriptor
+-- Dumping structure for table bilboskpdb.suscriptor
+DROP TABLE IF EXISTS `suscriptor`;
 CREATE TABLE IF NOT EXISTS `suscriptor` (
-  `idSuscriptor` int(11) NOT NULL AUTO_INCREMENT,
+  `idSuscriptor` int NOT NULL AUTO_INCREMENT,
   `email` varchar(100) NOT NULL DEFAULT '',
   `pass` varchar(64) NOT NULL,
   `alias` varchar(15) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `apellidos` varchar(255) NOT NULL,
   `fech_nac` date NOT NULL,
-  `telefono` int(9) unsigned DEFAULT NULL,
+  `telefono` int unsigned DEFAULT NULL,
   `imagen` varchar(255) NOT NULL DEFAULT 'defaults/1.png',
-  `activo` tinyint(1) unsigned NOT NULL DEFAULT 1,
+  `activo` tinyint unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`idSuscriptor`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla bilboskpdb.suscriptor: ~13 rows (aproximadamente)
+-- Dumping data for table bilboskpdb.suscriptor: ~13 rows (approximately)
 DELETE FROM `suscriptor`;
 INSERT INTO `suscriptor` (`idSuscriptor`, `email`, `pass`, `alias`, `nombre`, `apellidos`, `fech_nac`, `telefono`, `imagen`, `activo`) VALUES
 	(1, 'JuanjoElCamioneroExtremo@gmail.co.uk', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'Juanjo', 'Juanjo', 'Perez Agujeros', '1987-10-10', 177565252, 'defaults/1.png', 1),
@@ -506,59 +527,57 @@ INSERT INTO `suscriptor` (`idSuscriptor`, `email`, `pass`, `alias`, `nombre`, `a
 	(12, 'joseManuel@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'José', 'José', 'Muñoz', '2023-10-10', 0, 'defaults/1.png', 1),
 	(24, 'juanca@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'juan carlos', 'juan carlos', 'juan carlos', '2023-05-02', 123, 'defaults/6.png', 1),
 	(26, 'pret@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'pret', 'pret', 'pret', '2023-05-08', 1234567, 'defaults/7.png', 1),
-	(33, 'marco@gmail.com', '7c8ccc86c11654af029457d90fdd9d013ce6fb011ee8fdb1374832268cc8d967', 'marco', 'marco', 'marco', '2023-02-08', 6000000, 'defaults/6.png', 1);
+	(33, 'marco@gmail.com', '7c8ccc86c11654af029457d90fdd9d013ce6fb011ee8fdb1374832268cc8d967', 'marco', 'marco', 'marco', '2023-02-08', 6000000, 'defaults/6.png', 1),
+	(34, 'rivo@gmail.com', 'd80c09f66b238f53ca02632b5b1809bde7f2e6baeb426bfe65ef5649c65524aa', 'Rivito', 'Rivo José', 'Molina', '2023-10-09', 686252782, 'defaults/7.png', 1),
+	(36, 'rivitoy@gmail.com', 'd80c09f66b238f53ca02632b5b1809bde7f2e6baeb426bfe65ef5649c65524aa', 'rivito', 'Rivo José', 'Molina', '2023-10-10', 686252782, 'defaults/8.png', 1);
 
--- Volcando estructura para vista bilboskpdb.suscriptoresenpartida
--- Creando tabla temporal para superar errores de dependencia de VIEW
+-- Dumping structure for view bilboskpdb.suscriptoresenpartida
+DROP VIEW IF EXISTS `suscriptoresenpartida`;
+-- Creating temporary table to overcome VIEW dependency errors
 CREATE TABLE `suscriptoresenpartida` (
-	`alias` VARCHAR(15) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`nombreGrupo` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`nombre` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`alias` VARCHAR(15) NOT NULL COLLATE 'utf8mb4_0900_ai_ci',
+	`nombreGrupo` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_0900_ai_ci',
+	`nombre` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_0900_ai_ci',
 	`fechaInicio` DATETIME NOT NULL
 ) ENGINE=MyISAM;
 
--- Volcando estructura para tabla bilboskpdb.suscriptor_partidaonline
+-- Dumping structure for table bilboskpdb.suscriptor_partidaonline
+DROP TABLE IF EXISTS `suscriptor_partidaonline`;
 CREATE TABLE IF NOT EXISTS `suscriptor_partidaonline` (
-  `idSuscriptor` int(11) NOT NULL,
-  `idPartidaonline` int(11) NOT NULL,
+  `idSuscriptor` int NOT NULL,
+  `idPartidaonline` int NOT NULL,
   KEY `idPartida` (`idPartidaonline`) USING BTREE,
   KEY `idSuscriptor` (`idSuscriptor`),
-  CONSTRAINT `FK_suscriptor_partidaonline_partidaonline` FOREIGN KEY (`idPartidaonline`) REFERENCES `partidaonline` (`idPartida`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_suscriptor_partidaonline_suscriptor` FOREIGN KEY (`idSuscriptor`) REFERENCES `suscriptor` (`idSuscriptor`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `FK_suscriptor_partidaonline_partidaonline` FOREIGN KEY (`idPartidaonline`) REFERENCES `partidaonline` (`idPartida`),
+  CONSTRAINT `FK_suscriptor_partidaonline_suscriptor` FOREIGN KEY (`idSuscriptor`) REFERENCES `suscriptor` (`idSuscriptor`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla bilboskpdb.suscriptor_partidaonline: ~0 rows (aproximadamente)
+-- Dumping data for table bilboskpdb.suscriptor_partidaonline: ~0 rows (approximately)
 DELETE FROM `suscriptor_partidaonline`;
 
--- Volcando estructura para vista bilboskpdb.rankingfisico
--- Eliminando tabla temporal y crear estructura final de VIEW
+-- Dumping structure for view bilboskpdb.rankingfisico
+DROP VIEW IF EXISTS `rankingfisico`;
+-- Removing temporary table and create final VIEW structure
 DROP TABLE IF EXISTS `rankingfisico`;
-CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `rankingfisico` AS (
-	select idSala, sf.nombre as ‘sala’, nombreGrupo, puntaje, fechaInicio as  ‘fecha’ 
-from partidafisica pf, salafisica sf
-where pf.idSalaFisica=sf.idSala) ;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `rankingfisico` AS select `sf`.`idSala` AS `idSala`,`sf`.`nombre` AS `‘sala’`,`pf`.`nombreGrupo` AS `nombreGrupo`,`pf`.`puntaje` AS `puntaje`,`pf`.`fechaInicio` AS `‘fecha’` from (`partidafisica` `pf` join `salafisica` `sf`) where (`pf`.`idSalaFisica` = `sf`.`idSala`);
 
--- Volcando estructura para vista bilboskpdb.rankingonline
--- Eliminando tabla temporal y crear estructura final de VIEW
+-- Dumping structure for view bilboskpdb.rankingonline
+DROP VIEW IF EXISTS `rankingonline`;
+-- Removing temporary table and create final VIEW structure
 DROP TABLE IF EXISTS `rankingonline`;
-CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `rankingonline` AS (
-    SELECT idSala, so.nombre as 'sala jugada', nombreGrupo, puntaje , fechaInicio AS 'fecha'
-    from partidaonline pao, salaonline so
-    where  pao.idSalaOnline=so.idSala AND pao.visibleRanking=1 ORDER BY puntaje desc
-	 ) ;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `rankingonline` AS select `so`.`idSala` AS `idSala`,`so`.`nombre` AS `sala jugada`,`pao`.`nombreGrupo` AS `nombreGrupo`,`pao`.`puntaje` AS `puntaje`,`pao`.`fechaInicio` AS `fecha` from (`partidaonline` `pao` join `salaonline` `so`) where ((`pao`.`idSalaOnline` = `so`.`idSala`) and (`pao`.`visibleRanking` = 1)) order by `pao`.`puntaje` desc;
 
--- Volcando estructura para vista bilboskpdb.salas_mas_jugadas
--- Eliminando tabla temporal y crear estructura final de VIEW
+-- Dumping structure for view bilboskpdb.salas_mas_jugadas
+DROP VIEW IF EXISTS `salas_mas_jugadas`;
+-- Removing temporary table and create final VIEW structure
 DROP TABLE IF EXISTS `salas_mas_jugadas`;
-CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `salas_mas_jugadas` AS SELECT s.*, COUNT(p.idPartida) AS cantidad_partidas_jugadas FROM salaonline s LEFT JOIN partidaonline p ON s.idSala = p.idSalaOnline GROUP BY s.idSala ORDER BY cantidad_partidas_jugadas DESC ;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `salas_mas_jugadas` AS select `s`.`idSala` AS `idSala`,`s`.`nombre` AS `nombre`,`s`.`dificultad` AS `dificultad`,`s`.`tematica` AS `tematica`,`s`.`descripcion` AS `descripcion`,`s`.`tiempoMax` AS `tiempoMax`,`s`.`jugadoresMin` AS `jugadoresMin`,`s`.`jugadoresMax` AS `jugadoresMax`,`s`.`edad_recomendada` AS `edad_recomendada`,`s`.`disponible` AS `disponible`,count(`p`.`idPartida`) AS `cantidad_partidas_jugadas` from (`salaonline` `s` left join `partidaonline` `p` on((`s`.`idSala` = `p`.`idSalaOnline`))) group by `s`.`idSala` order by `cantidad_partidas_jugadas` desc;
 
--- Volcando estructura para vista bilboskpdb.suscriptoresenpartida
--- Eliminando tabla temporal y crear estructura final de VIEW
+-- Dumping structure for view bilboskpdb.suscriptoresenpartida
+DROP VIEW IF EXISTS `suscriptoresenpartida`;
+-- Removing temporary table and create final VIEW structure
 DROP TABLE IF EXISTS `suscriptoresenpartida`;
-CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `suscriptoresenpartida` AS (
-	select alias, nombreGrupo, so.nombre, fechaInicio
-	from suscriptor_partidaonline supao, suscriptor su, salaonline so, partidaonline po
-    where supao.idSuscriptor=su.idSuscriptor and supao.idPartidaonline=po.idPartida and po.idSalaOnline=so.idSala) ;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `suscriptoresenpartida` AS select `su`.`alias` AS `alias`,`po`.`nombreGrupo` AS `nombreGrupo`,`so`.`nombre` AS `nombre`,`po`.`fechaInicio` AS `fechaInicio` from (((`suscriptor_partidaonline` `supao` join `suscriptor` `su`) join `salaonline` `so`) join `partidaonline` `po`) where ((`supao`.`idSuscriptor` = `su`.`idSuscriptor`) and (`supao`.`idPartidaonline` = `po`.`idPartida`) and (`po`.`idSalaOnline` = `so`.`idSala`));
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

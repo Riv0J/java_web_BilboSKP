@@ -35,9 +35,9 @@ import model.SalaOnline;
 import model.Suscriptor;
 
 public class BilboSKP extends DBC {
-	private static final String dbUrl = "localhost:3306/bilboskpdb";
-	private static final String user = "root";
-	private static final String pass = "";
+	private static final String dbUrl = "localhost:3306/bilboskpdb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	private static final String user = "admin_animales";
+	private static final String pass = "admin_animales";
 	private static boolean estadoRanking = true;
 
 	public BilboSKP() throws Throwable {
